@@ -1,0 +1,106 @@
+.crossButton {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    font-size: 29px;
+}
+
+// .imageSize {
+//     width: 60px !important;
+//     height: 20px !important;
+//     border-radius: 8px !important;
+// }
+
+
+.user_pro_img {
+        width: 163px;
+        height: 160px;
+        border-radius: 8px;
+        margin: 0 auto;
+        cursor: pointer;
+        // border: 2px solid #199c50;
+        margin-bottom: 15px;
+        position: relative;
+}
+
+.borderTop {
+    border-top : 1px solid rgb(0, 0, 0) !important;
+    padding-top: 30px;
+}
+
+.borderBottom {
+    border-bottom : 1px solid rgb(0, 0, 0) !important;
+    padding-bottom : 10px;
+}
+
+
+.float-right {
+    float: right;
+}
+
+#mat-dialog-title {
+    margin: 0 0 0 0;
+    display: block;
+    font-family: Sarabun !important;
+}
+
+
+
+// .w70{
+//     width: 67%;
+//     mat-button-toggle {
+//         padding-left: 3% !important;
+//         padding-right: 3% !important;
+//     }
+// }
+
+.mat-button-toggle-checked {
+    border: 1px solid #c5c0c7;
+    background-color: #e1dde5; 
+ }
+
+ .dropdown {
+    padding: 10px !important;
+    background: white !important;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.12), 0 0px 3px rgba(0, 0, 0, 0.24);
+    width: 207px;
+    // height: 50px;
+    border-radius: 3px;
+} 
+
+::ng-deep .noline .mat-form-field-underline {
+    display: none
+}
+
+.mb13 {
+    margin-bottom: 13%;
+}
+
+.fontSmall {
+    font-size : small;
+}
+
+.fontMedium {
+    font-size: medium;
+}
+
+.mb0 {
+    margin-bottom: 0 !important;
+}
+
+.example-full-width {
+    width : 120% !important;
+}
+
+.border-image {
+    border-radius: 6px;
+    border-width: 1px;
+    border-style: dashed;
+    border-color: darkgrey;
+    /* width: 100%; */
+    margin: 2px 2px 2px 2px;
+}
+
+.phoneBox {
+    width : 255px !important;
+}

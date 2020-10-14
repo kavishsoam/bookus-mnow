@@ -1,0 +1,68 @@
+<div class="dialog-pad">
+    <p-toast></p-toast>
+    <div>
+        <form [formGroup]="resource" (ngSubmit)="onSubmit(resource)">
+            <div fxLayout="column" class="header" fxLayoutAlign="start center">
+                <div fxLayout="row">
+                    <h2 mat-dialog-title>{{Modaldata.header}}</h2>
+                </div>
+            </div>
+            <mat-dialog-content class="content">
+                <mat-tab-group>
+                    <mat-tab label="DETAILS">
+                        <div fxLayout="row" class="pt-20" fxLayoutAlign="space-around center">
+                            <div fxLayout="column" fxFlex="100">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>RESOURCE NAME</mat-label>
+                                    <input matInput placeholder="RESOURCE NAME" formControlName="name">
+                                </mat-form-field>
+                                <div *ngIf="submitted && f.name.errors" class="invalid">
+                                    <div *ngIf="f.name.errors.required">Resource name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-around center">
+                            <div fxLayout="column" fxFlex="100">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>DESCRIPTION</mat-label>
+                                    <input matInput placeholder="DESCRIPTION" formControlName="description">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-around center">
+                            <div fxLayout="column" fxFlex="100">
+                                <mat-form-field appearance="outline">
+                                    <mat-select class="" formControlName="location">
+                                        <mat-option disabled value="">
+                                            Select the location
+                                        </mat-option>
+                                        <mat-option *ngFor="let item of locList" [value]="item._id">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="SERVICES">
+                        <div class="note-service">
+                            <h5>
+                                Below are services that can be booked with this resource. you can set which
+                                services are assigned
+                                on
+                                your services page.
+                            </h5>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </mat-dialog-content>
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+                <button mat-raised-button color="warn" *ngIf="Modaldata.header == 'Edit Resource'" type="button"
+                    (click)="delete()">Delete</button>
+                <div fxLayout="row" fxFlex="1 1 auto"></div>
+                <button mat-raised-button type="button" mat-dialog-close>Cancel</button>
+                <button style="margin-left: 10px" mat-raised-button color="primary" type="submit">Save </button>
+            </div>
+        </form>
+    </div>
+</div>

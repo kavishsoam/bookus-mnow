@@ -1,0 +1,554 @@
+@import "src/@fuse/scss/fuse";
+@import '~@angular/cdk/overlay-prebuilt.css';
+
+.staffDate {
+  margin-right: 10px;
+  margin-top: 10px;
+
+  @include media-breakpoint-down('xs') {
+    width: 85vw;
+  }
+}
+
+:host /deep/.mat-tab-body-content {
+  @include media-breakpoint-down('xs') {
+    overflow-x: hidden;
+  }
+}
+
+.newStaffButton {
+  color: #fff !important;
+  background-color: #24334a !important;
+  margin-right: 10px;
+  margin-left: 10px;
+
+  @include media-breakpoint-down('xs') {
+    width: 90vw;
+    margin-bottom: 15px;
+  }
+}
+
+.cur {
+  cursor: pointer !important;
+}
+
+.cur:hover {
+  background: #E7E7E7
+}
+
+.cur2 {
+  opacity: 0.7;
+  pointer-events: none !important;
+}
+
+.cur2:hover {
+  cursor: not-allowed;
+}
+
+.emptyicons {
+  text-align: center;
+  margin-top: 5%;
+  color: #616161 !important;
+  font-size: 100px;
+
+  p {
+    font-size: 15px;
+  }
+
+  h1 {
+    margin: -22px 0 5px 0;
+  }
+}
+
+.disable-action {
+  pointer-events: none !important;
+  background: grey;
+}
+
+@media (min-width: 480px) {
+  :host /deep/ .overlay-bg .loader-own {
+    right: 40% !important;
+  }
+}
+
+@media (min-width: 1235px) {
+  :host /deep/ .overlay-bg .loader-own {
+    right: 45% !important;
+  }
+}
+
+.mat-tables {
+  display: block;
+  background: white;
+  border: 1px solid #cbcbcb;
+  margin: 10px;
+}
+
+.dropdown {
+  margin-left: 10px;
+  padding: 10px !important;
+  background: white !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+  @include media-breakpoint-down('xs') {
+    margin-left: 0px;
+    width: 90vw;
+  }
+}
+
+.labelText {
+  margin-top: 6px;
+  font-family: Sarabun;
+}
+
+
+
+.dropdown1 {
+  margin-left: 10px;
+  padding: 10px !important;
+  background: rgb(238, 238, 238) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  width: 200px;
+
+  @include media-breakpoint-down('xs') {
+    margin-left: 0px;
+    width: 90vw;
+  }
+}
+
+
+
+::ng-deep .noline .mat-form-field-underline {
+  display: none
+}
+
+.mat-header-rows {
+  text-align: center;
+}
+
+.mat-rows,
+.mat-header-rows {
+  display: flex;
+  border-bottom: 1px solid #A3A3A3;
+  align-items: center;
+  min-height: 48px;
+  padding: 0px;
+}
+
+.mat-header-cells {
+  border-left: 1px solid #cbcbcb;
+}
+
+.mat-cells,
+.mat-header-cells {
+  flex: 1;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.mat-header-cells {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+}
+
+.mat-rows .mat-cells {
+  border-left: 1px solid #cbcbcb;
+  align-items: center !important;
+  padding: 0px 50px !important;
+}
+
+.mat-cells {
+  font-size: 14px;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  font-size: 1em;
+  width: 121px;
+  display: inline-block;
+  opacity: 0;
+  position: relative;
+  text-align: center;
+  padding: 0.5em;
+  transition: all 0.90s;
+  padding: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  font-size: 22px;
+  opacity: 1;
+  // cursor: pointer;
+}
+
+.plusSign {
+  margin-left: 6px;
+  margin-right: 11px;
+}
+
+.app-data:hover {
+  background: #b4dff2;
+  // cursor: pointer;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+.button {
+  background-color: #24334A !important;
+  color: white !important;
+  line-height: 18px !important;
+  padding: 8px 16px !important;
+  min-height: 44px !important;
+  white-space: nowrap !important;
+  min-width: 128px !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+}
+
+// -------------Responsive--------------
+
+table {
+  width: 96%;
+  margin-left: 20px;
+
+
+}
+
+.salaryTable {
+  // width: inherit;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.pointer {
+  cursor: pointer !important;
+}
+
+.not-pointer {
+  cursor: not-allowed !important;
+}
+
+.card {
+  // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  font-size: 14px;
+}
+
+.makeBorder {
+  border-left-width: 1px !important;
+  border-style: outset;
+  border-top: hidden;
+  border-bottom: hidden;
+  border-right: hidden;
+}
+
+.floatR {
+  float: right !important;
+}
+
+.pad-right {
+  padding-right: 4% !important;
+}
+
+.pad-top-left {
+  padding-top: 5%;
+  padding-left: 5%;
+}
+
+.size-33 {
+  font-size: 33px !important;
+}
+
+.colorRed {
+  color: rgb(255, 51, 51);
+  font-size: 40px;
+}
+
+.colorBlack {
+  color: rgb(20, 19, 19);
+  font-size: 40px;
+}
+
+.cardStyle {
+  margin-top: 4% !important;
+  margin-left: 5% !important;
+  margin-bottom: 1% !important;
+}
+
+.button-div {
+  display: inline-block;
+  color: #fff;
+  border: 0px solid #CCC;
+  background: #3c465f;
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  vertical-align: middle;
+  max-width: 180px;
+  width: 15%;
+  text-align: center;
+  float: right;
+  margin-right: 1%;
+  margin-top: 1%;
+  border-radius: 2px;
+}
+
+.button-div {
+  p {
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+}
+
+.button-div p :active {
+  color: red;
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.6);
+}
+
+.button-div p :hover {
+  color: rgb(201, 201, 201);
+  background-color: rgb(0, 0, 0);
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.6);
+}
+
+.mat-group {
+  margin-top: 1% !important;
+}
+
+::ng-deep .mat-tab-label-active {
+  opacity: 1;
+}
+
+
+//! *************************************************CUSTOM CHECKBOX*********************************************//
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"]+label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 20px;
+  /*   font: 14px/20px 'Open Sans', Arial, sans-serif; */
+  /*   color: #ddd; */
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* input[type="checkbox"] + label:last-child { margin-bottom: 0; } */
+
+input[type="checkbox"]+label:before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #0a4b66;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: .6;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+input[type="checkbox"]:checked+label:before {
+  width: 10px;
+  top: -5px;
+  left: 5px;
+  border-radius: 0;
+  opacity: 1;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  /*   -webkit-transform: rotate(45deg); */
+  transform: rotate(45deg);
+}
+
+
+// ! ***********************************CUSTOM CHECKBOX ENDS ***********************************************//
+
+
+.positionRel {
+  position: absolute;
+}
+
+.margin0 {
+  margin: 0px 0px 0px 0px;
+}
+
+.padd-left {
+  margin-left: 36%;
+}
+
+.iconSize {
+  font-size: 220px;
+  color: #464a55;
+  cursor: crosshair !important;
+}
+
+
+// !---------------------------fuse card-------------------------------------------------//
+
+.marginClass {
+  margin-top: 5px !important;
+  margin-left: 10px !important;
+}
+
+@import "src/@fuse/scss/fuse";
+
+body {
+  background-color: white !important
+}
+
+.h3 {
+  font-size: 18px;
+  font-weight: 500;
+  font-family: Sarabun;
+}
+
+@include media-breakpoint-up('md') {
+  .left {
+    margin-right: -32px;
+  }
+}
+
+.fuse-card {
+  transition: all .25s linear;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+.fuse-card:hover {
+  -webkit-box-shadow: 9px 9px 22px -9px rgba(71, 60, 71, 1);
+  -moz-box-shadow: 9px 9px 22px -9px rgba(71, 60, 71, 1);
+  box-shadow: 9px 9px 22px -9px rgba(71, 60, 71, 1);
+}
+
+// p {
+//   // font-size: 16px;
+//   // color: #67768C;
+// }
+
+a {
+  font-size: 16px;
+  color: #2B72BD !important;
+}
+
+.p-16 {
+  padding: 26px !important;
+}
+
+.align-end {
+  text-align: end !important;
+}
+
+:host /deep/ .mat-cell,
+.mat-footer-cell {
+  font-size: 16px;
+  color: #616161 !important;
+}
+
+:host /deep/ th.mat-header-cell {
+  color: black;
+  font-size: 15px;
+}
+
+#dashboard-analytics {
+  table {
+    width: 100%;
+  }
+
+  .box {
+    min-width: 100%;
+    width: 60%;
+    padding: 40px auto;
+
+    hr {
+      border-top: 1px solid #E0E0E0;
+    }
+  }
+
+  .main-widget {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content {
+    display: flex;
+    flex: 1 1 auto;
+    padding: 32px;
+    min-width: 0;
+    cursor: crosshair !important;
+
+    @include media-breakpoint-down('md') {
+      flex-direction: column;
+
+    }
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      min-width: 0;
+
+      .widget {
+        flex: 1 1 auto;
+        min-width: 0;
+        cursor: crosshair !important;
+      }
+    }
+
+    .right {
+      display: flex;
+      flex: 0 0 auto;
+      width: 320px;
+      min-width: 320px;
+      max-width: 320px;
+
+      @include media-breakpoint-down('md') {
+        flex: 1 0 100%;
+        margin-top: 32px;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+      }
+
+      .fuse-card {
+        @include media-breakpoint-down('md') {
+          width: 100%;
+          min-width: 0;
+          max-width: none;
+        }
+      }
+    }
+  }
+}
+
+.pr-36per {
+  padding-right: 36%;
+}
+
+.dropdown {
+  padding: 10px !important;
+  background: white !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  width: 200px;
+}
+
+::ng-deep .noline .mat-form-field-underline {
+  height: 0px !important;
+  display: none !important;
+}

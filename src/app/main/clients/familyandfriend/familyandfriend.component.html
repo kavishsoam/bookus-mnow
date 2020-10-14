@@ -1,0 +1,100 @@
+<form name="familyAndfriendsForm" [formGroup]="familyAndFriendsForm" (ngSubmit)="familyAndFriendsFormSubmit(familyAndFriendsForm)">
+<div fxLayout="column" fxLayoutAlign="space-evenly stretch">
+  <div fxLayout="column" class="header" fxLayoutAlign="start center">
+    <div fxLayout="row">
+        <h2 mat-dialog-title class="fontMedium mb0">Family and Friends Sharing</h2>
+    </div>
+</div>
+      <div class="fontSmall">
+        <p>
+          Relationship to client:
+        </p>
+        <mat-button-toggle-group class="w70" name="fontStyle" aria-label="Font Style" formControlName="relationship">
+          <mat-button-toggle  value="parent">Parent</mat-button-toggle>
+          <mat-button-toggle value="spouse">Spouse</mat-button-toggle>
+          <mat-button-toggle value="child">Child</mat-button-toggle>
+          <mat-button-toggle value="sibling">Sibling</mat-button-toggle>
+          <mat-button-toggle value="pet">Pet</mat-button-toggle>
+          <mat-button-toggle value="friend">Friend</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    
+    <div></div>
+      <div fxLayout="row" fxLayoutAlign="space-around start" class="fontSmall" >
+        <div fxLayout="column" fxFlex="20"  >
+          <p>Profile Photo:</p>
+          <div  class="border-image">
+            <ngx-image-uploader [options]="imageOptions" #imageUploader></ngx-image-uploader>
+          </div>
+          <!-- <button class="w88" mat-raised-button color="primary" (click)="uploadImage(imageUploader)">Upload</button> -->
+        </div>
+        <div fxFlex="70" class="fontSmall">
+          <div fxLayout="column" fxLayoutAlign="space-around center">
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+              <div fxFlex="40">
+                <mat-label>Email</mat-label>
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <input formControlName="email" matInput placeholder="Enter Email Address" >
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="40">
+                <mat-label>Primary Phone:</mat-label>
+                <!-- <mat-form-field appearance="outline" class="example-full-width">
+                  <input formControlName="phone" matInput placeholder="Enter Primary Phone Number" >
+                </mat-form-field> -->
+                <mat-form-field appearance="outline" class="phoneBox">
+                  <input #telInput matInput type="text" (keydown)="telInputChange($event)" ng2TelInput
+                      [(ngModel)]="phoneNumber" [ng2TelInputOptions]="{initialCountry: countryStr}"
+                      value="+{{countryCode}} " (hasError)="hasError($event)"
+                      (ng2TelOutput)="getNumber($event)" (intlTelInputObject)="telInputObject($event)"
+                      (countryChange)="onCountryChange($event)"
+                      [ngModelOptions]="{standalone: true}" />
+              </mat-form-field>
+              <div *ngIf="
+                                !phone_invalid" class="error-handle">Enter valid phone number</div>
+              </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-around center">
+            <div fxFlex="40">
+              <mat-label>First Name:</mat-label>
+              <mat-form-field appearance="outline" class="example-full-width">
+                <input formControlName="firstName" matInput placeholder="Enter First Name" >
+              </mat-form-field>
+            </div>
+            <div fxFlex="40">
+              <mat-label>Last Name:</mat-label>
+              <mat-form-field appearance="outline" class="example-full-width">
+                <input formControlName="lastName" matInput placeholder="Enter Last Name">
+              </mat-form-field>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex="40">
+              <mat-label>Gender:</mat-label>
+              <mat-form-field  class="noline">
+                <mat-select class="dropdown" formControlName="gender">
+                  <mat-option *ngFor="let gen of gender" [value]="gen.value">
+                    {{gen.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field> 
+            </div>
+            <div fxFlex="40">
+
+            </div>
+          </div>
+          </div>
+        </div>
+        </div>
+      <div fxLayout="row" fxLayoutAlign="end center" >
+        <div>
+          <button mat-raised-button type="button" (click)="closeModal()">Close</button>
+        </div>
+        <div>
+          <button mat-raised-button color="primary"  type="submit" [disabled]="familyAndFriendsForm.invalid " >Save</button>
+        </div>
+      </div>
+    </div>
+   </form>
+

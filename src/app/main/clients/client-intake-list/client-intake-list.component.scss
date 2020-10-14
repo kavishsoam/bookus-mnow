@@ -1,0 +1,43 @@
+.intakeItem:hover {
+    background-color: #eaeaea;
+}
+.mat-dialog-content {
+    padding: 0px;
+    max-height: 75vh !important;
+}
+::ng-deep .mat-dialog-container {
+    overflow-x: hidden;
+}
+.overflow .mat-dialog-content {
+    overflow: unset !important;
+}
+.button {
+    background-color: #24334A;
+    color: white;
+    line-height: 18px !important;
+    padding: 8px 16px !important;
+    min-height: 44px !important;
+    white-space: nowrap !important;
+    min-width: 128px !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+}
+.intakeItem {
+    border-bottom: 1px solid #DEE3E7;
+    cursor: pointer;
+}
+h2 {
+    text-align: center;
+}
+.emptyicons {
+    text-align: center;
+    margin-top: 5%;
+    color: #616161 !important;
+    font-size: 100px;
+    p {
+        font-size: 15px;
+    }
+    h1 {
+        margin: -22px 0 5px 0;
+    }
+}

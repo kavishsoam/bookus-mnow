@@ -1,0 +1,24 @@
+.breadcrumb {
+    a {
+        color: #626262 !important;
+        opacity: .7;
+        cursor: pointer;
+        align-self: flex-end;
+        font-size: 24px;
+        font-weight: 300;
+    }
+    a:hover {
+        color: black !important;
+    }
+}
+.page {
+    align-self: flex-end;
+    font-size: 24px;
+    font-weight: 300;
+}
+@mixin toolbar-theme($theme) {
+    $foreground: map-get($theme, foreground);
+    .toolbar-separator {
+        background: map-get($foreground, divider);
+    }
+}

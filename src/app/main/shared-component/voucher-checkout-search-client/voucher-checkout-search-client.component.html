@@ -1,0 +1,9 @@
+<div>
+  <div fxLayout="column" class="client" fxFlex="100">
+    <mat-form-field appearance="outline">
+      <mat-icon matPrefix>search</mat-icon>
+      <input autocomplete="off" (input)="onClientSearch($event)" (click)="showMenu($event)" matInput
+        placeholder="Search Client" fxAlign="right">
+    </mat-form-field>
+  </div>
+</div>

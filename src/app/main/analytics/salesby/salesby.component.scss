@@ -1,0 +1,223 @@
+@import "src/@fuse/scss/fuse";
+
+// :host /deep/.mat-tab-body-content {
+//     width: 80vw;
+//     padding-left: 30px;
+//     padding-right: 30px;
+// }
+::ng-deep .langSelect div.mat-select-arrow-wrapper {
+  display: none;
+}
+
+.page-layout {
+  font-family: Sarabun !important;
+  }
+
+::ng-deep .langSelect.mat-select {
+  display: inline;
+}
+
+th {
+  text-align: left;
+}
+
+:host /deep/ .mat-elevation-z8 {
+  width: 98%;
+  margin-left: 19px;
+}
+
+:host /deep/.mat-tab-body-content {
+  float: left;
+}
+
+.filters {
+  padding-right: 10px;
+}
+
+.mat-icon {
+  align-items: flex-end;
+}
+
+.example-form {
+  min-width: 100px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+:host /deep/ .widget {
+  margin-right: -15px;
+}
+
+:host /deep/ .mat-footer-cell {
+  font-size: 14px;
+}
+
+.host /deep/ .mat-form-field {
+  align-content: flex-end;
+}
+
+.align-end {
+  text-align: end !important;
+}
+
+th {
+  font-size: 14px;
+  text-align: left;
+}
+
+:host /deep/th:first-child {
+  padding-left: 24px;
+  text-align: initial;
+}
+
+:host /deep/th:last-child {
+  padding-right: 24px;
+  text-align: left;
+}
+
+table {
+  width: 100%;
+}
+
+.box {
+  min-width: 100%;
+  padding: 40px auto;
+}
+
+#status {
+  color: green;
+}
+
+.fab-button {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
+
+.dropdown {
+  padding: 10px !important;
+  background: white !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+::ng-deep .noline .mat-form-field-underline {
+  display: none
+}
+
+.emptyicons {
+  text-align: center;
+  color: #616161 !important;
+  font-size: 70px;
+  margin: 0;
+
+  p {
+    font-size: 15px;
+  }
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0px;
+}
+
+.one {
+  text-align: right !important;
+}
+
+.two {
+  text-align: right !important;
+}
+
+.three {
+  text-align: center !important;
+}
+
+@media (min-width: 480px) {
+  :host /deep/ .overlay-bg .loader-own {
+    right: 40% !important;
+  }
+}
+
+@media (min-width: 1235px) {
+  :host /deep/ .overlay-bg .loader-own {
+    right: 45% !important;
+  }
+}
+
+.delete-button {
+  color: #fff !important;
+  background-color: #f55753 !important;
+  border-color: #f55753 !important;
+  height: 40px;
+}
+
+.close-button {
+  height: 40px;
+  color: #626262 !important;
+  background-color: #fff !important;
+  border-color: #c2c2c2 !important;
+  border: 1px solid;
+}
+
+.headingStyle {
+  display: block;
+  font-family: Sarabun, sans-serif;
+  font-weight: 300;
+  color: #2c2c2c;
+  font-size: 18px;
+  // line-height: 33.88px;
+  text-align: center;
+}
+
+.p-class {
+  color: lightseagreen;
+  font-size: small;
+  margin: 0px !important;
+}
+
+.h1-class {
+  font-size: larger;
+  margin: 0px !important;
+}
+
+
+::ng-deep .hello .mat-form-field-empty.mat-form-field-label {
+  padding-top: 11px;
+  padding-left: 10px;
+}
+
+::ng-deep.owl-dt-popup-container {
+  width: 24rem !important;
+}
+
+::ng-deep.owl-dt-calendar {
+  height: 15em !important;
+  font-size: 18px !important;
+}
+
+::ng-deep.owl-dt-container-row:last-child {
+  font-size: 20px !important;
+}
+
+
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+
+.noData {
+  margin-top: 40px;
+  text-align: center;
+}
+
+
+.margin-item {
+  margin-top: 20px !important;
+}

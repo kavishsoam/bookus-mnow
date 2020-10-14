@@ -1,0 +1,207 @@
+<p-toast></p-toast>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+<div class="page-layout blank" *ngIf="(data.header == 'New Tax') || (data.header == 'Edit Tax') ">
+  <div *ngIf="!isDeletePrompt">
+    <!-- <form name="addTax" [formGroup]="addTax" (ngSubmit)="Tax(addTax)"> -->
+    <form name="addTax" [formGroup]="addTax" (ngSubmit)="Tax(addTax)">
+      <div fxLayout="column" class="header" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>{{data.header}}</h2>
+          <button mat-button mat-dialog-close class="crossButton">
+            <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-dialog-content class="content">
+        <div fxLayout="column" class="innerbody m-8">
+          <div fxLayout="row" class="text"> Set the tax name and percentage rate. To
+            apply this to your products and
+            services,
+            adjust your tax
+            defaults
+            settings.</div>
+          <div fxLayout="row" fxLayoutAlign="space-around center">
+            <mat-form-field appearance="outline">
+              <mat-label>Tax name</mat-label>
+              <input matInput formControlName="name">
+              <mat-error>Tax name is required </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <span matPrefix>% &nbsp;</span>
+              <mat-label>Tax rate</mat-label>
+              <input matInput formControlName="taxRate">
+              <mat-error>Tax rate is required </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-dialog-content>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+        <button *ngIf="data.header == 'Edit Tax'" mat-raised-button color="warn" type="button"
+          (click)="deleteTax()">DELETE</button>
+        <div fxLayout="row" fxFlex="1 1 auto"></div>
+        <button mat-raised-button color="primary" type="submit">SAVE
+        </button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="isDeletePrompt">
+    
+  </div>
+</div>
+<div class="page-layout blank" *ngIf="(data.header == 'New Tax Group') || (data.header == 'Edit Tax Group')">
+  <div>
+    <form name="addTaxGroup" [formGroup]="addTaxGroup" (ngSubmit)="TaxGroup(addTaxGroup)">
+      <div fxLayout="column" class="header" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>{{data.header}}</h2>
+          <button mat-button mat-dialog-close class="crossButton">
+            <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-dialog-content class="content">
+        <div fxLayout="column" class="innerbody m-8">
+          <div fxLayout="row" class="text">
+            Combine multiple taxes into a group, each tax still shows individually on invoices and reports. To apply
+            this group to your products and services, adjust your tax default settings.</div>
+          <div fxLayout="row" fxLayoutAlign="space-around center">
+            <mat-form-field class="group" appearance="outline">
+              <mat-label>Tax group name</mat-label>
+              <input matInput formControlName="name">
+              <mat-error>Tax group name is required </mat-error>
+            </mat-form-field>
+          </div>
+          <div formArrayName="taxGroup">
+            <div fxLayout="row" #taxDropdown fxLayoutAlign="space-around center" *ngFor="let group of
+          addTaxGroup.controls.taxGroup.controls; let i = index" [formGroupName]="i">
+              <mat-form-field class="test" class="group" appearance="outline">
+                <!-- <span class="dropdownReset" (click)="dropdownReset(i)">
+                  <mat-icon>close</mat-icon>
+                </span> -->
+                <mat-label>Tax {{i+1}}</mat-label>
+                <mat-select [compareWith]="compareObjects" (selectionChange)="taxDropUpdate($event, i)"
+                  placeholder="Select Tax" formControlName="tax">
+                  <mat-option>None</mat-option>
+                  <mat-option [disabled]="item.disabled" *ngFor="let item of data.taxesList" [value]="item">
+                    {{item.taxName || item.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error>Tax rate is required</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-content>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+        <button mat-raised-button color="warn" type="button" *ngIf="data.header == 'Edit Tax Group'"
+          (click)="deleteTax()">DELETE</button>
+        <div fxLayout="row" fxFlex="1 1 auto"></div>
+        <button mat-raised-button color="primary" type="submit">SAVE
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="page-layout blank" *ngIf="data.header == 'Change Tax Calculation'">
+  <div>
+    <form name="chooseTaxCalculation" [formGroup]="chooseTaxCalculation"
+      (ngSubmit)="TaxCalculation(chooseTaxCalculation)">
+      <div fxLayout="column" class="header" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>{{data.header}}</h2>
+          <button mat-dialog-close mat-button class="crossButton">
+            <mat-icon class="crossButton">close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-dialog-content class="content">
+        <div fxLayout="column" class="innerbody m-8">
+          <div fxLayout="row" class="text2">
+            This change will have a big impact on your sales. Make sure you understand all implications <mat-icon>
+              wb_incandescent</mat-icon>
+          </div>
+          <mat-radio-group formControlName="priceIncludetax">
+            <div class="box" fxLayout="row">
+              <mat-radio-button [value]="false">
+                <div fxLayout="column">
+                  <div fxLayout="row" class="boxText1">
+                    Retail Prices Excluding Tax
+                  </div>
+                  <div fxLayout="row" class="boxText2">
+                    If selected, all taxes will be calculated using <br> this formula:
+                  </div>
+                  <div fxLayout="row" class="boxText3">
+                    Tax = Retail * Tax </div>
+                  <div fxLayout="row" class="boxText4">
+                    For example: 20% tax on a $10.00 item comes <br> to $2.00 </div>
+                </div>
+              </mat-radio-button>
+            </div>
+            <div class="box" fxLayout="row">
+              <mat-radio-button [value]="true">
+                <div fxLayout="column">
+                  <div fxLayout="row" class="boxText1">
+                    Retail Prices Including Tax
+                  </div>
+                  <div fxLayout="row" class="boxText2">
+                    If selected, all taxes will be calculated using <br> this formula:
+                  </div>
+                  <div fxLayout="row" class="boxText3">
+                    Tax = (Tax Rate * Retail Price) / (1 + Tax <br> Rate) </div>
+                  <div fxLayout="row" class="boxText4">
+                    For example: 20% tax on a $10.00 item <br> comes to $1.67 </div>
+                </div>
+              </mat-radio-button>
+            </div>
+          </mat-radio-group>
+        </div>
+      </mat-dialog-content>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-raised-button color="primary" type="submit" class="buttonsTaxCalculation">SAVE
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="page-layout blank" *ngIf="data.header == 'Edit Tax Defaults'">
+  <div>
+    <form name="editTaxDefaults" [formGroup]="editTaxDefaults" (ngSubmit)="TaxDefaults(editTaxDefaults)">
+      <div fxLayout="column" class="header" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>{{data.header}}</h2>
+          <button mat-button mat-dialog-close class="crossButton">
+            <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-dialog-content class="content">
+        <div fxLayout="column" class="innerbody m-8">
+          <div fxLayout="row" class="text"> Once saved, changes will automatically apply to all products and services
+            which are already assigned to default taxes</div>
+            <div fxLayout="row"  fxLayoutAlign="space-between center">
+                <div fxLayout="column" [fxFlexOffset]="3" fxLayoutAlign="space-around center" style="font-size: 12px;color:#67768C">
+                    {{data.location.name}}
+                  </div>           
+            </div>
+          <div fxLayout="row" fxLayoutAlign="space-around center">
+            <mat-form-field appearance="outline" class="taxDefaults">
+              <mat-label> Service Default Tax </mat-label>
+              <mat-select placeholder="" formControlName="defaultServiceTax">
+                <mat-option [value]="noTax">
+                  No tax </mat-option>
+                <mat-option [value]="item._id" *ngFor="let item of data.taxesList">
+                  {{item.name}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-dialog-content>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+        <div fxLayout="column" fxFlex="100">
+          <button mat-raised-button color="primary" type="submit">SAVE
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

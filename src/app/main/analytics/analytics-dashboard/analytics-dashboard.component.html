@@ -1,0 +1,161 @@
+<div  class="page-layout blank p-8">
+  <div class="content">
+    <div class="left">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+        <div class="widget" fxFlex="100" fxFlex.gt-sm="50">
+          <div class="fuse-card auto-width mb-32 marginClass" [ngClass.gt-sm]="'mb-0 mr-32 '">
+            <div class="p-16 pb-15" fxLayout="row wrap" fxLayoutAlign="start end">
+
+
+              <div class="box ">
+                <div class="h3 ">{{'Sale' | translate}}
+                </div>
+                <app-analytics-line-chart></app-analytics-line-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- !! -->
+
+        <div class="widget" fxFlex="100" fxFlex.gt-sm="50">
+          <div class="fuse-card auto-width mb-32 marginClass" [ngClass.gt-sm]="'mb-0 mr-32 '">
+            <div class="p-16 pb-15" fxLayout="row wrap" fxLayoutAlign="start end">
+              <div class="box ">
+                <div class="h3 ">{{'Sales By' | translate}}
+                </div>
+                <app-analytics-pie-chart></app-analytics-pie-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <!-- TODO -->
+
+    <div class="left">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+        <div class="widget" fxFlex="100" fxFlex.gt-sm="16.7">
+          <div class="fuse-card auto-width mb-32 marginClass" [ngClass.gt-sm]="'mb-0 mr-32 '">
+            <div class="p-16 pb-15" fxLayout="row wrap" fxLayoutAlign="center center">
+              <div class="box text-center center-text-box">
+                <div class="h2 ">12,696
+                </div>
+                <div class="h4">Company
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- !! -->
+
+        <div class="widget" fxFlex="100" fxFlex.gt-sm="16.7">
+          <div class="fuse-card auto-width mb-32 marginClass" [ngClass.gt-sm]="'mb-0 mr-32 '">
+            <div class="p-16 pb-15" fxLayout="row wrap" fxLayoutAlign="center center">
+              <div class="box text-center center-text-box">
+                <div class="h2 ">51.12%
+                </div>
+                <div class="h4">Service
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget" fxFlex="100" fxFlex.gt-sm="16.7">
+          <div class="fuse-card auto-width mb-32 marginClass" [ngClass.gt-sm]="'mb-0 mr-32 '">
+            <div class="p-16 pb-15" fxLayout="row wrap" fxLayoutAlign="center center">
+              <div class="box text-center center-text-box">
+                <div class="h2 ">2,256
+                </div>
+                <div class="h4">Client
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget" fxFlex="100" fxFlex.gt-sm="16.7">
+          <div class="fuse-card auto-width mb-32 marginClass" [ngClass.gt-sm]="'mb-0 mr-32 '">
+            <div class="p-16 pb-15" fxLayout="row wrap" fxLayoutAlign="center center">
+              <div class="box text-center center-text-box">
+                <div class="h2 ">67.56%
+                </div>
+                <div class="h4">Staff
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget" fxFlex="100" fxFlex.gt-sm="16.7">
+          <div class="fuse-card auto-width mb-32 marginClass" [ngClass.gt-sm]="'mb-0 mr-32 '">
+            <div class="p-16 pb-15" fxLayout="row wrap" fxLayoutAlign="center center">
+              <div class="box text-center center-text-box">
+                <div class="h2 ">49%
+                </div>
+                <div class="h4">Location
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget" fxFlex="100" fxFlex.gt-sm="16.7">
+          <div class="fuse-card auto-width mb-32 marginClass" [ngClass.gt-sm]="'mb-0 mr-32 '">
+            <div class="p-16 pb-15" fxLayout="row wrap" fxLayoutAlign="center center">
+              <div class="box text-center center-text-box">
+                <div class="h2 ">146
+                </div>
+                <div class="h4">Inventory
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="left">
+      <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+        <div class="widget" fxFlex="100" fxFlex.gt-sm="100">
+          <div class="fuse-card auto-width mb-32 marginClass" [ngClass.gt-sm]="'mb-0 mr-32 '">
+            <div class="p-16 pb-15" fxLayout="row wrap" fxLayoutAlign="start end">
+              <div class="box" style="width: 100%;">
+                <div>
+                  <table mat-table [dataSource]="
+                                                dataSource" class="" style="width:100%">
+                    <ng-container matColumnDef="topClients" >
+                      <th class="table-head table" mat-header-cell *matHeaderCellDef> {{'TOP CLIENTS' | translate}} </th>
+                      <td mat-cell *matCellDef="let element"> {{element?.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="thismonth">
+                      <th class="align-end table-head table" mat-header-cell *matHeaderCellDef> {{'THIS MONTH' | translate}} </th>
+                      <td class="align-end" mat-cell *matCellDef="let element">
+                        {{element?.thismonthCount}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="lastmonth">
+                      <th class="align-end table-head table" mat-header-cell *matHeaderCellDef> {{'LAST MONTH' | translate }} </th>
+                      <td class="align-end" mat-cell *matCellDef="let element">
+                        {{element?.count}} </td>{{'count' | translate}}
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+    <!-- ! - -->
+  </div>
+</div>

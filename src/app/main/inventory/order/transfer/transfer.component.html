@@ -1,0 +1,71 @@
+<div class="page-layout blank">
+
+    <div fxLayout="column" class="header border-bottom" fxLayoutAlign="start center">
+        <div fxLayout="row">
+            <h2 mat-dialog-title>{{header}}</h2>
+            <button mat-button mat-dialog-close class="crossButton">
+                <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <!-- selection location -->
+    <div *ngIf="label == 'location'">
+    <!-- select first -->
+    <div *ngIf="isFirstList" fxLayout="row" fxLayoutAlign="space-around center">
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+            <div fxLayout="row" class="border-bottom row-loc" fxLayoutAlign="space-between center" *ngFor="let item of location" (click)="selectLocFirst(item)">
+                <div fxLayoutAlign="start" fxFlex="70">{{item.name}}</div>
+                <div fxFlex="30" fxLayoutAlign="end"> 
+                    <button mat-icon-button>
+                        <mat-icon>chevron_right</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- select second -->
+    <div *ngIf="!isFirstList" fxLayout="row" fxLayoutAlign="space-around center">
+            <div fxLayout="column" fxLayoutAlign="space-around center">
+                <div fxLayout="row" class="border-bottom row-loc" fxLayoutAlign="space-between center" *ngFor="let item of location" (click)="selectLocSecond(item)">
+                    <div fxLayoutAlign="start" fxFlex="70" *ngIf="!item.selectedFirst">{{item.name}}</div>
+                    <div fxFlex="30" fxLayoutAlign="end" *ngIf="!item.selectedFirst"> 
+                        <button mat-icon-button>
+                            <mat-icon>chevron_right</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="label=='slip'">
+            <div fxLayout="row" fxLayoutAlign="space-around center" class="address-slip">
+                    <div fxLayout="column" fxLayoutAlign="space-around center" >
+                            <div fxLayout="row" fxLayoutAlign="space-around center" >
+                                dwarka sector 4
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="space-around center" >
+                                 delhi flyover 
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="space-around center" >
+                                 K-123, flat:234
+                                </div>
+                        </div>
+
+
+                        <div fxLayout="column" fxLayoutAlign="space-around center" >
+                            <div fxLayout="row" fxLayoutAlign="space-around center" >
+                                dwarka sector 4
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="space-around center" >
+                                 delhi flyover 
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="space-around center" >
+                                 K-123, flat:234
+                                </div>
+                        </div>
+                </div>
+    </div>
+
+</div>

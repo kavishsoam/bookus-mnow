@@ -1,0 +1,49 @@
+<div class="page-layout blank">
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+  <div fxLayout="row" fxLayoutAlign="center" class="">
+    <div fxLayout="column" fxLayoutAlign="center">
+      <mat-form-field class="noline">
+        <mat-select class="dropdown" [(ngModel)]="selectedLoc" (selectionChange)="locSelectedListener($event.value)">
+          <mat-option selected value="">All location</mat-option>
+          <mat-option *ngFor="let item of locList" [value]="item._id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center" fxFlex="80">
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center">
+      <button mat-raised-button color="primary" (click)="addNewResource()">New Resource</button>
+    </div>
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="space-around stretch">
+    <table mat-table [dataSource]="resourceData" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> RESOURCE NAME</th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> DESCRIPTION </th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+      <!-- <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef> LOCATION </th>
+        <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+      </ng-container> -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="resourceEdit(row)"></tr>
+    </table>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="resourceData.length == 0">
+    <ng-container class="text-center py-3 p-4">
+      <div class="emptyicons">
+        <mat-icon [inline]='true'>search
+        </mat-icon>
+        <h1>No Resources Here</h1>
+        <p>This location has no resources yet, use the button above to add new resources here.</p>
+      </div>
+    </ng-container>
+  </div>
+</div>

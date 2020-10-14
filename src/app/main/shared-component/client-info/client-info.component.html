@@ -1,0 +1,477 @@
+<div *ngIf="isView">
+  <div fxLayout="row" fxLayoutAlign="center center" class="form rippleWorld" [ngClass]="!clientData?.walk-in"
+    >
+    <div fxLayout="column" fxFlex="25">
+      <avatar [size]="60"
+        [name]="apt && apt.client && apt.client.firstName ? apt.client.firstName : (isInvoice && clientData ? clientData.firstName:'Walk' ) "
+        [displayType]="'circle'"></avatar>
+    </div>
+    <div  class="heading3" fxFlexAlign="center" fxLayout="column" fxFlex="60" (click)="viewProfile()">
+      {{!isInvoice && apt && apt.client && apt.client.firstName ?
+      apt.client.firstName :(isInvoice && clientData ? clientData.firstName:'Walk-In') }}
+      {{!isInvoice && apt && apt.client && apt.client.lastName ? apt.client.lastName :(isInvoice && clientData ?
+      clientData.lastName :'')}}
+      <div class="email-select">{{(clientData && clientData.phone1) ? (clientData.phone1) : '' }}</div>
+    </div>
+    <div fxLayout="column" fxFlex="10">
+
+    </div>
+    <div fxLayout="column" fxFlex="5" fxFlexAlign="center" *ngIf="!isViewAppointment">
+      <button type="button" *ngIf="apt && ((isInvoice && clientData)||apt.client)" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button type="button" mat-menu-item (click)="clientOption('Edit Client Details')">
+          <mat-icon>edit</mat-icon>
+          <span>Edit Client Details</span>
+        </button>
+        <!-- <button type="button" mat-menu-item (click)="clientOption('Block Client')">
+          <mat-icon>block</mat-icon>
+          <span>Block Client</span>
+        </button>
+        <button type="button" mat-menu-item (click)="clientOption('Remove From Appointment')">
+          <mat-icon>delete</mat-icon>
+          <span>Remove From Appointment</span>
+        </button> -->
+      </mat-menu>
+    </div>
+    <!-- <div fxLayout="column" fxFlex="15">
+      <button *ngIf="apt && ((isInvoice && clientData)||apt.client)" tabindex="-1" mat-icon-button type="button"
+        (click)="viewProfile()">
+        <mat-icon *ngIf="!profile">chevron_right</mat-icon>
+        <mat-icon *ngIf="profile">chevron_left</mat-icon>
+      </button>
+    </div> -->
+  </div>
+  <div *ngIf="!isInvoice && !apt?.walkIn && !checkout && IsClientInTakeFormExist" fxLayout="row"
+    fxLayoutAlign="center center">
+    <a style="cursor:pointer" (click)="getIntakeByIntakeId()">View Intake Form</a>
+  </div>
+  <div class="line"></div>
+  <div *ngIf="!profile && checkout" [@animate]="{value:'*',params:{duration:'300ms',x:'100px'}}">
+    <div *ngIf="!isPayMode" class="pl-20">
+      <div class="pay-design" fxLayout="row" fxLayoutAlign="center center">
+        <span>Pay</span>
+      </div>
+      <div class="" fxLayout="row" class="price-display" fxLayoutAlign="center center">
+        <div class="price-design">
+          <span class="symbol">{{currCode}}</span>
+          <input style="width: 2ch;" min="0" class="amountInput" #myInput2 (input)="restrict($event.target.value)"
+            (keydown)="keyPress($event)" type="number" value="{{grandAmount}}" appTwoDigitDecimaNumber>
+        </div>
+      </div>
+      <!-- <div *ngIf="errorPrice" class="error-handle ">Enter the valid amount</div> -->
+      <br />
+      <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
+        <div fxLayout="column" fxFlex="50"> <button class="box-size hand" type="button" (click)="paymentMode('CASH')"
+             >CASH</button></div>
+        <div fxLayout="column" fxFlex="50"> <button class="box-size hand" type="button" (click)="paymentMode('OTHER')"
+             >OTHER</button></div>
+      </div>
+      <br />
+      <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
+        <div fxLayout="column" fxFlex="50"> <button class="box-size hand" type="button" (click)="paymentMode('CARD')"
+             >CARD</button></div>
+        <div fxLayout="column" fxFlex="50"> <button class="box-size hand" type="button" (click)="voucher()"
+             >VOUCHER</button></div>
+      </div>
+      <br>
+      <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
+        <div fxLayout="column" fxFlex="50"> <button class="box-size hand" type="button" (click)="paymentMode('IOU')"
+          >IOU</button></div>
+      </div>
+      <br />
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+        <div fxLayout="column">
+          <button mat-raised-button [matMenuTriggerFor]="menu">More Option</button>
+          <mat-menu #menu="matMenu">
+            <!-- <button mat-menu-item (click)="onMoreOptionSelected($event.currentTarget.value)" value="Save Unpaid"> Save
+              Unpaid</button> -->
+            <button mat-menu-item (click)="onMoreOptionSelected($event.currentTarget.value)"
+              value="Invoice Details">Invoice Details</button>
+          </mat-menu>
+        </div>
+        <!-- </mat-form-field> -->
+      </div>
+    </div>
+    <div *ngIf="isPayMode">
+      <div class="text-center py-3 p-4">
+        <div class="emptyicons">
+          <mat-icon [inline]='true'>payment
+          </mat-icon>
+          <p>Full payment has been added</p>
+        </div>
+        <button class="button" mat-raised-button color="primary" (click)="completeSale()" [disabled]="!completeSaleClick" >COMPLETE SALE</button>
+        <br /> <br />
+        <button class="button backpay hand" (click)="backToPayment(apt)">back to payment</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!isInvoice && apt && apt.checkout && isView && !profile" class="pt-80" fxLayout="row"
+    fxLayoutAlign="center center">
+    <div fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
+      <mat-icon class="search">mobile_friendly</mat-icon>
+      <p> Appointment Completed</p>
+    </div>
+  </div>
+  <div *ngIf="isInvoice && isView && !profile" class="pt-80" fxLayout="row" fxLayoutAlign="center center">
+    <div fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
+      <mat-icon class="search">mobile_friendly</mat-icon>
+      <p> Full payment received on {{invoiceDate |date:'fullDate'}} </p>
+    </div>
+  </div>
+  <div *ngIf=" isInvoice && !profile && !historyAppointment" style="text-align: center;">
+    <app-invoice-email [invoiceData]="invoiceData"></app-invoice-email>
+</div>
+  <div [@animate]="{value:'*',params:{duration:'300ms',x:'100px'}}">
+    <div *ngIf=" !isInvoice && apt && !apt.checkout && !profile && !checkout && apt.status != 'no show'" class="newapp"
+      fxLayout="row" fxLayoutAlign="center center">
+      <mat-form-field>
+        <mat-label>Appointment status</mat-label>
+        <mat-select placeholder="Appointment status" [(ngModel)]="status" name="status"
+          (selectionChange)="changeStatus($event.value)">
+          <mat-option value="new">New appointment</mat-option>
+          <mat-option value="confirmed">Confirmed</mat-option>
+          <mat-option value="arrived">Arrived</mat-option>
+          <mat-option value="started">Started</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="!isInvoice && apt && !apt.checkout && !profile && !checkout && apt.status == 'no show'" class="newapp"
+      fxLayout="row" fxLayoutAlign="center center">
+      <span class="mt-8"><img src="../../../../assets/icons/cross.png" alt=""></span>
+      <span class="noShow">No show</span>
+    </div>
+    <div *ngIf="!isInvoice && apt && !apt.checkout && !checkout && !profile" fxLayout="row"
+      fxLayoutAlign="center center">
+      <div fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
+        <mat-icon *ngIf="clientData && clientData.notes && !clientData.notes.text" class="search">list_alt</mat-icon>
+        <p *ngIf="clientData && clientData.notes && !clientData.notes.text">No invoice issued yet</p>
+        <p style="padding : 0px 0px 0px 10px !important" *ngIf="clientData && clientData.notes && clientData.notes.text">{{clientData.notes.text}}</p>
+      </div>
+    </div>
+    <div fxLayout="row" class="buttonAlign" fxLayoutAlign="space-between center">
+      <div class="ml-20" *ngIf="!isInvoice && apt && !profile && !apt.checkout && !checkout && !historyAppointment">
+        <button mat-raised-button [matMenuTriggerFor]="menu">More Option</button>
+        <mat-menu #menu="matMenu">
+          <button *ngIf="apt.status != 'no show'" mat-menu-item
+            (click)="onMoreOptionSelected($event.currentTarget.value)" value="No Show"> No Show</button>
+          <button *ngIf="apt.status == 'no show'" mat-menu-item
+            (click)="onMoreOptionSelected($event.currentTarget.value)" value="Undo No Show">Undo No Show</button>
+          <button *ngIf="apt.status != 'no show'" mat-menu-item
+            (click)="onMoreOptionSelected($event.currentTarget.value)" value="Reschedule">Reschedule</button>
+          <button mat-menu-item (click)="onMoreOptionSelected($event.currentTarget.value)"
+            value="Cancel">Cancel</button>
+          <button *ngIf="apt.status == 'no show'" value="Rebook" mat-menu-item
+            (click)="onMoreOptionSelected($event.currentTarget.value) " value="Rebook">Rebook</button>
+          <button value="Edit Appointment" mat-menu-item (click)="onMoreOptionSelected($event.currentTarget.value)">Edit
+            Appointment</button>
+
+        </mat-menu>
+      </div>
+      <div class="ml-20" *ngIf="!isInvoice && apt && !profile && apt.checkout && !historyAppointment">
+        <button mat-raised-button [matMenuTriggerFor]="menu">More Option</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onMoreOptionSelected($event.currentTarget.value)" value="Rebook">
+            Rebook</button>
+          <button mat-menu-item (click)="onMoreOptionSelected($event.currentTarget.value)" value="Edit Notes">Edit
+            Notes</button>
+          <!-- <button mat-menu-item *ngIf="!apt?.walkIn" (click)="onMoreOptionSelected($event.currentTarget.value)"
+            value="email">Send Invoice as
+            email</button> -->
+        </mat-menu>
+      </div>
+      <div class="ml-20" *ngIf=" isInvoice && !profile && !historyAppointment">
+        <button mat-raised-button [matMenuTriggerFor]="menu">More Option</button>
+        <mat-menu #menu="matMenu">
+          <!-- <button mat-menu-item (click)="onMoreOptionSelected($event.currentTarget.value)" value="Rebook">
+            Rebook</button>
+          <button mat-menu-item (click)="onMoreOptionSelected($event.currentTarget.value)" value="Edit Notes">Edit
+            Notes</button> -->
+            <!-- commented by kavish on issue of options coming in view appointments and view-invoice -->
+          <!-- <button mat-menu-item *ngIf="!apt?.walkIn" (click)="onMoreOptionSelected($event.currentTarget.value)"
+            value="email">Send Invoice</button> -->
+            <button mat-menu-item *ngIf="!apt?.walkIn" style="text-align: center;" >Download</button>
+            <button mat-menu-item *ngIf="!apt?.walkIn" style="text-align: center;">Print</button>
+            <button mat-menu-item *ngIf="!apt?.walkIn"  style="color:#ff69b4; text-align:center" >Refund</button>
+            <button mat-menu-item *ngIf="!apt?.walkIn"  style="color:#ff69b4; text-align:center">Void</button>
+        </mat-menu>
+      </div>
+      <button *ngIf=" !isInvoice && apt && !apt.checkout && !profile && !checkout && !historyAppointment" mat-raised-button
+        class="check-out-button" type="button" style="margin-right:20px" (click)="checkOut()">Checkout</button>
+      <button *ngIf="!isInvoice && apt && apt.checkout && !profile && !checkout && !historyAppointment" mat-raised-button
+        class="check-out-button" type="button" (click)="viewInvoice()">Invoice</button>
+      <button *ngIf="isInvoice && !profile" mat-raised-button class="check-out-button" type="button"
+        mat-dialog-close>Close</button>
+    </div>
+  </div>
+</div>
+<!--  -->
+<div *ngIf="!isView">
+  <div fxLayout="column" class="client" fxFlex="100" *ngIf="select_Client ==''">
+    <mat-form-field appearance="outline">
+      <mat-icon matPrefix>search </mat-icon>
+      <input autocomplete="off" [(ngModel)]="searchClient" (input)="onClientSearch($event.target.value)"
+        [ngModelOptions]="{standalone: true}" (click)="showMenu($event)" matInput placeholder="Search Client"
+        fxAlign="right">
+    </mat-form-field>
+  </div>
+  <div fxLayout="column" fxFlex="100" *ngIf="select_Client !=''">
+    <div fxLayout="row" fxLayoutAlign="space-around center" class="form">
+      <div fxLayout="column" fxFlex="10" class="modifysize" fxFlexOffset="2">
+        <mat-icon class="size-icon modifysize">person</mat-icon>
+      </div>
+      <div fxLayout="column" fxFlex="80" fxLayoutAlign="start" fxFlexOffset="4">
+        {{ searchClient != '' ? searchClient: '' }} <br />
+        <div class="phone-select"  *ngIf="searchClientPhone != 'undefined' && searchClientPhone != ''">
+          {{searchClientPhone }}
+        </div>
+        <!-- <div class="email-select" *ngIf="searchClientEmail != 'undefined'">
+          {{searchClientEmail}}
+        </div> -->
+        
+
+      </div>
+      <div fxLayout="column" fxFlex="10" fxFlexAlign="start">
+        <button type="button" mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button type="button" mat-menu-item (click)="clientOption('Edit Client Details')">
+            <mat-icon>edit</mat-icon>
+            <span>Edit Client Details</span>
+          </button>
+          <button type="button" mat-menu-item (click)="clientOption('Block Client')">
+            <mat-icon>block</mat-icon>
+            <span>Block Client</span>
+          </button>
+          <button type="button" mat-menu-item (click)="clientOption('Remove From Appointment')">
+            <mat-icon>delete</mat-icon>
+            <span>Remove From Appointment</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="select_Client == '' && !isView && !list_View " class="right" fxLayout="row">
+  <div fxLayout="column" fxFlex="100">
+    <mat-icon class="search">assignment</mat-icon>
+    <p>Use the search to add a client, or keep empty to save as walk-in.</p>
+  </div>
+</div>
+<div *ngIf="(ifClicked && !isView) || list_View" fxLayout="row">
+  <div fxLayout="column" fxFlex="100%">
+    <div fxLayout=" row" fxLayoutAlign="center center">
+      <div *ngIf="select_Client == '' && list_View" class="newclient" fxLayout="column" fxFlex="100">
+        <a style="cursor:pointer" (click)="createNewClient()">Create new client</a>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayout.sm="column" fxLayoutWrap>
+      <div fxFlex="100%">
+        <div class="clientList" *ngIf="select_Client == '' && list_View">
+          <mat-list>
+            <mat-list-item (click)="selectClient(item)" *ngFor="let item of filterClient">
+              <mat-icon mat-list-icon>face</mat-icon>
+              <h4 mat-line>{{item.firstName}} {{item.lastName}}</h4>
+              <h6 mat-line>{{item.phone1}}</h6>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="profile || (select_Client !='' && !isView)" [@animate]="{value:'*',params:{duration:'300ms',x:'100px'}}">
+  <div fxLayout=" row" fxLayoutAlign="center center">
+    <div *ngIf="!intakeId && data && data.Header != 'Edit Appointment'" class="newclient" fxLayout="column"
+      fxFlex="100">
+      <a [ngClass]="{'intakeFormClosed': intakeFormClosed}" class="link" style="cursor:pointer"
+        (click)="getIntakeByClientId()">Fill
+        Intake form</a>
+    </div>
+    <div *ngIf="intakeId && data && data.Header != 'Edit Appointment'" fxLayout="row" fxLayoutAlign="center center">
+      <a style="cursor:pointer" (click)="getIntakeByIntakeId()">View Client Intake Form</a>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxLayout="column">
+      <div class="value-data">{{clientDetails?clientDetails.allBookings:0}}</div>
+      <div class="header-data">Total Bookings</div>
+    </div>
+    <div fxLayout="column">
+      <div class="value-data">{{clientDetails?
+        (clientDetails.totalSales|currency:currencyCode : 'symbol-narrow'):(0|currency:currencyCode : 'symbol-narrow')}}</div>
+      <div class="header-data">Total Sales</div>
+    </div>
+  </div>
+  <mat-tab-group>
+    <mat-tab label="APPOINTMENTS">
+      <mat-list role="list">
+        <div *ngFor="let apt of appointment">
+          <ng-container *ngIf="apt._id == 'past'">
+            <p>Past({{apt.count}})</p>
+            <mat-list-item *ngFor="let data of apt.appointments.slice().reverse()">
+              <!-- [matTooltip]="data.notes.text" -->
+              <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between end" [matTooltip]=" data && data.notes"
+                fxLayoutGap="16px grid" [ngStyle]="{'color':getColor(data.status)}">
+                <div fxFlex="30" fxFlexAlign="center" fxLayout="column" (click)="appointmentSelected(data)">
+                  <div style="font-size: 13px !important;">
+                    <tr>{{data.day | date:'MMM d, y'}}</tr>
+                    <tr>{{data.startTime | date:'shortTime'}}</tr>
+                  </div>
+                </div>
+                <div fxFlex="45" fxLayout="column" (click)="viewAppointment(data)" >
+                  <div style="font-size: 13px !important;">
+                    <tr  [matTooltip]="data.service.name">{{data.service.name | truncate}}</tr>
+                    <!-- service name -->
+                    <tr>{{data.startTime | durationCal : data.endTime }} with
+                      {{data.staff.firstName | smallTruncate}} </tr>
+                  </div>
+                </div>
+                <div fxFlex="15" fxLayout="column">
+                  <div style="font-size: 13px !important;">
+                    <tr>{{data.special_price ? (data.special_price | currency:currencyCode : 'symbol-narrow') : (data.price |
+                      currency:currencyCode : 'symbol-narrow')}}</tr>
+                    <tr>{{data.status}}</tr>
+                    <tr *ngIf="data.status == null">cancelled</tr>
+                  </div>
+                </div>
+                <div *ngIf="data.status == 'completed'" fxFlex="1" (click)="viewInvoice(data)">
+                  <mat-icon aria-label="description" style="font-size:13px !important; padding-bottom:20px !important" class="iconClass">
+                    description</mat-icon>
+                </div>
+                <div *ngIf="data.status != 'completed'" fxFlex="1" (click)="viewInvoice(data)">
+                  <mat-icon  style="font-size:13px !important" class="iconClass">
+                    </mat-icon>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </ng-container>
+          <ng-container *ngIf="apt._id == 'upcoming'">
+            <p>Upcoming({{apt.count}})</p>
+
+            <mat-list-item *ngFor="let data of apt.appointments.slice().reverse()">
+              <!-- [matTooltip]="data.notes.text" -->
+              <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between end" [matTooltip]=" data && data.notes"
+                fxLayoutGap="16px grid" [ngStyle]="{'color':getColor(data.status)}">
+                <div fxFlex="30" fxFlexAlign="center" fxLayout="column" (click)="appointmentSelected(data)">
+                  <div style="font-size: 13px !important;">
+                    <tr>{{data.day | date:'MMM d, y'}}</tr>
+                    <tr>{{data.startTime | date:'shortTime'}}</tr>
+                  </div>
+                </div>
+                <div fxFlex="45" fxLayout="column" (click)="viewAppointment(data)" >
+                  <div style="font-size: 13px !important;">
+                    <tr  [matTooltip]="data.service.name">{{data.service.name | truncate}}</tr>
+                    <!-- service name -->
+                    <tr>{{data.startTime | durationCal : data.endTime }} with
+                      {{data.staff.firstName | smallTruncate}} </tr>
+                  </div>
+                </div>
+                <div fxFlex="15" fxLayout="column">
+                  <div style="font-size: 13px !important;">
+                    <tr>{{data.special_price ? (data.special_price | currency:currencyCode : 'symbol-narrow') : (data.price |
+                      currency:currencyCode : 'symbol-narrow')}}</tr>
+                    <tr>{{data.status}}</tr>
+                    <tr *ngIf="data.status == null">cancelled</tr>
+                  </div>
+                </div>
+                <div *ngIf="data.status == 'completed'" fxFlex="1" (click)="viewInvoice(data)">
+                  <mat-icon aria-label="description" style="font-size:13px !important; padding-bottom:20px !important" class="iconClass">
+                    description</mat-icon>
+                </div>
+                <div *ngIf="data.status != 'completed'" fxFlex="1" (click)="viewInvoice(data)">
+                  <mat-icon  style="font-size:13px !important" class="iconClass">
+                    </mat-icon>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+            <!-- <mat-list-item style="padding-bottom: 60px;" *ngFor="let data of apt.appointments">
+              <div fxLayout="row " fxFlex="100" fxLayoutAlign="space-around end" fxLayoutGap="10">
+                <div fxFlex="20" fxLayout="column">
+                  {{data.day | date:'d MMM'}}
+                </div>
+                <div fxFlex="60" fxLayout="column">
+                  <div style="font-size: 1rem;">
+                    <tr>{{data.startTime | date:'shortTime'}}</tr>
+                    <tr> {{data.service.name}}</tr> 
+                    <tr>1h with {{data.staff.firstName}} </tr>
+                  </div>
+                </div>
+                <div fxFlex="20" fxLayout="column">
+                  {{data.special_price ? (data.special_price | currency:currencyCode : 'symbol-narrow') : (data.price |
+                  currency:currencyCode : 'symbol-narrow')}}
+                </div>
+              </div>
+            </mat-list-item> -->
+          </ng-container>
+        </div>
+      </mat-list>
+    </mat-tab>
+    <mat-tab label="INVOICES">
+      <div *ngFor="let client_in of clientInvoices" class="padding-bottom: 60px;" class="contentdata" fxLayout="row"
+        fxLayoutAlign="start center">
+        <div fxLayout="column" fxFlex="70" fxLayoutAlign="start start">
+          <div fxLayout="row" class="invoiceContent1" fxLayoutAlign="start start"> {{client_in?.createdAt
+            |date: 'EEEE, MMM d'}}
+            <!-- <span [ngStyle]="{'color': client_in?.status_color}">{{client_in?.status}}</span> -->
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start start" class="invoiceContent2"> {{client_in?.invoice}}</div>
+          <div fxLayout="row" class="invoiceContent1" fxLayoutAlign="start start"> {{client_in?.location}}</div>
+        </div>
+        <div fxLayout="column" fxFlex="30" fxLayoutAlign="end center" class="invoiceContent2"> {{client_in?.totalAmount
+          |currency:currencyCode : 'symbol-narrow'}}</div>
+      </div>
+    </mat-tab>
+    <mat-tab label="INFO">
+      <div class="line"></div>
+      <div *ngIf="clientData && clientData.phone1">
+        <div class="heading2 pb-4" fxLayout="row wrap" fxLayoutAlign="start center">
+          Mobile </div>
+        <div class="contentdata" fxLayout="row wrap" fxLayoutAlign="start center">
+          +{{clientData.countryCode}} {{clientData.phone1}} </div>
+      </div>
+      <div *ngIf="clientData && clientData.phone2">
+        <div class="heading2" fxLayout="row wrap" fxLayoutAlign="start center">
+          Telephone </div>
+        <div class="contentdata" fxLayout="row wrap" fxLayoutAlign="start center">
+          {{clientData.phone2}} </div>
+      </div>
+      <div *ngIf="clientData && clientData.email">
+        <div class="heading2" fxLayout="row wrap" fxLayoutAlign="start center">
+          Email </div>
+        <div class="contentdata" fxLayout="row wrap" fxLayoutAlign="start center">
+          {{clientData.email}}
+        </div>
+      </div>
+      <div *ngIf="clientData && clientData.address && clientData.address.length == 1">
+        <div class="heading2" fxLayout="row wrap" fxLayoutAlign="start center">
+          Address </div>
+        <div class="contentdata" fxLayout="row wrap" fxLayoutAlign="start center">
+          {{clientData.address.area}}<br>
+          {{clientData.address.street}}<br>
+          {{clientData.address.city}}<br>
+          {{clientData.address.state}}<br>
+          {{clientData.address.country}}<br>
+          {{clientData.address.zip}}
+        </div>
+      </div>
+      <div *ngIf="clientData && clientData.dob">
+        <div class="heading2" fxLayout="row wrap" fxLayoutAlign="start center">
+          Date of Birth
+        </div>
+        <div class="contentdata" fxLayout="row wrap" fxLayoutAlign="start center">
+          {{ clientData.dob | date}} </div>
+      </div>
+      <div *ngIf="clientData && clientData.gender">
+        <div class="heading2" fxLayout="row wrap" fxLayoutAlign="start center">
+          Gender </div>
+        <div class="contentdata pb-20" fxLayout="row wrap" fxLayoutAlign="start center">
+          {{clientData.gender}} </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

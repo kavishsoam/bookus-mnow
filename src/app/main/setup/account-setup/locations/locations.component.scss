@@ -1,0 +1,26 @@
+table {
+    width: 100%;
+}
+
+.fab-button {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+}
+.select {
+    cursor: pointer;
+}
+.page-layout {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+th:first-child {
+    width: 30% !important;
+}
+td:first-child {
+    width: 30% !important;
+}
+::ng-deep .mat-dialog-container {
+  }

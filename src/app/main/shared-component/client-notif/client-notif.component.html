@@ -1,0 +1,71 @@
+<!-- <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner> -->
+<p-toast [style]="{marginTop: '50px'}"></p-toast>
+<mat-card>
+  <form [formGroup]="notify" (ngSubmit)="onSubmitNotify(notify)">
+    <div fxLayout="row" fxLayoutAlign="start center" class="pb-16">
+      <div fxLayout="column" fxLayoutAlign="start start" fxFill="100">
+        <mat-checkbox formControlName="enableReminder">Enable {{tabLabel | titlecase}} Messages</mat-checkbox>
+      </div>
+    </div>
+    <div *ngIf="notify.controls.enableReminder.value">
+      <div *ngIf="isDisableField" fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="column" fxLayoutAlign="space-around center" fxFill="100">
+          <mat-form-field appearance="outline" fxFill="90">
+            <mat-label>SEND BY</mat-label>
+            <mat-select value="email" formControlName="sendBy">
+              <mat-option value="email">Email</mat-option>
+              <mat-option value="sms">SMS</mat-option>
+              <mat-option value="emailsms">Email and SMS</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div *ngIf="isDisableField" fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="column" fxLayoutAlign="space-around center" fxFill="100">
+          <mat-form-field appearance="outline" fxFill="90">
+            <mat-label>{{tabLabel}} ADVANCE NOTICE</mat-label>
+            <mat-select value="2" formControlName="remiderAdvance">
+              <mat-option value="2">2 hour</mat-option>
+              <mat-option value="3">3 hour</mat-option>
+              <mat-option value="24">24 hour</mat-option>
+              <mat-option value="48">48 hour</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="column" fxLayoutAlign="space-around center" fxFill="100">
+          <mat-form-field appearance="outline" fxFill="90">
+            <mat-label>EMAIL SUBJECT</mat-label>
+            <input matInput formControlName="emailSubject">
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="column" fxLayoutAlign="space-around center" fxFill="100">
+          <mat-form-field appearance="outline" fxFill="90">
+            <mat-label>EMAIL TEMPLATE</mat-label>
+            <textarea matInput formControlName="emailTemplate" matTextareaAutosize matAutosizeMinRows=10
+              matAutosizeMaxRows=50></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+          <button type="button" (click)="previousMsg()" mat-raised-button color="primary" class="buttonstyle">Previous
+            message</button>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+          <button type="button" mat-raised-button color="primary" class="buttonstyle">Reset to
+            default</button>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div fxLayout="column" fxLayoutAlign="space-around center">
+        <button class="buttonstyle" type="submit" style="margin-top:10px" mat-raised-button color="primary">Save
+          Changes</button>
+      </div>
+    </div>
+  </form>
+</mat-card>

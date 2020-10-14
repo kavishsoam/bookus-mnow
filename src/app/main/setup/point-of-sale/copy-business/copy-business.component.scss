@@ -1,0 +1,59 @@
+mat-dialog-content {
+    text-align: center;
+}
+.form {
+    width: 80%;
+}
+//layout start
+h2 {
+    text-align: center;
+    color: rgb(223, 223, 223);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0px 0px 0px 0px;
+    line-height: 30px;
+    font-size: 29px;
+    font-weight: 300;
+    margin: 0;
+    font-family: Sarabun, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+.innerbody {
+    // border-bottom: 1px solid #dee3e6;
+    // border-top: 1px solid #dee3e6;
+}
+
+.buttons {
+    padding: 24px;
+}
+
+::ng-deep .mat-tab-body {
+    min-height: 78vh;
+}
+.content {
+    max-height: 80vh;
+}
+/* ::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+} */
+.header {
+    padding: 20px;
+    margin-bottom: -20px;
+}
+.buttons .mat-raised-button {
+    min-height: 42px !important;
+    text-transform: uppercase;
+    min-width: 128px;
+    letter-spacing: 0.3pt;
+    font-weight: 400;
+}
+//layout end
+
+.pad-top {
+    padding-top: 5%;
+}
+
+.floatCenter {
+    float: center !important;
+}

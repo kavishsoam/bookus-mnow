@@ -1,0 +1,341 @@
+<div class="page-layout blank">
+  <p-toast [style]="{marginTop: '50px'}"></p-toast>
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+  <mat-tab-group [(selectedIndex)]="selectedIndex">
+    <mat-tab label="{{'SALES DATA' | translate }}">
+      <div class="content">
+        <div class="filters2" fxLayout="row" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+          fxLayoutAlign.gt-xs="space-between center">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <div fxFlexAlign="start" fxLayout="column">
+              <mat-form-field class="noline">
+                <mat-select [(value)]="selectedLoc" class="dropdown">
+                  <mat-option value="" disabled>{{'Select' | translate}}  {{'location' | translate}}</mat-option>
+                  <mat-option value="">{{'Select all' | translate}} {{'locations' | translate}}</mat-option>
+                  <mat-option *ngFor="let item of locList" [value]="item._id">{{item.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxFlexAlign="start" fxLayout="column">
+              <mat-form-field class="noline hello" [floatLabel]="'never'" style="width: 200px;">
+                <input class="dropdown" autocomplete="off" matInput placeholder="Select date range"
+                  [(ngModel)]="saleDateTimeRange" [selectMode]="'range'" [owlDateTimeTrigger]="dtRange2"
+                  [owlDateTime]="dtRange2">
+                <owl-date-time style="widows: 20px !important" [pickerType]="'calendar'" #dtRange2>
+                </owl-date-time>
+              </mat-form-field>
+            </div>
+            <div fxFlexAlign="start" fxLayout="column">
+              <div style="padding-top: 21px;">
+                <button mat-stroked-button color="primary" (click)="getSalesByld()">{{'View'| translate}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+        <div class="widget" fxFlex="100" fxFlex. gt-sm="66">
+          <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+            <div class="pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+              <div class="box">
+                <table mat-table [dataSource]="saleData">
+                  <ng-container matColumnDef="item_type">
+                    <th mat-header-cell *matHeaderCellDef>{{'ITEM TYPE' | translate}} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.item_type | translate }} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="count">
+                    <th mat-header-cell *matHeaderCellDef>{{'SALES QTY' | translate}} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.count}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef>{{'TOTAL' | translate}} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.amount |   currency:currencyCode : 'symbol-narrow' }} </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <div class="pb-2" style="    margin: 15px;
+                text-align: center;" *ngIf="saleData.length == 0"> {{'loading' | translate}}...</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{'INVOICES' | translate}}">
+        <!-- <a  [href]="csvDownload()">CSV export</a> -->
+        <!-- <button (click)="csvDownload()">dddd</button> -->
+      <owl-date-time style="widows: 20px !important;" [pickerType]="'calendar'" #dtRange11></owl-date-time>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <div fxFlexAlign="start" fxLayout="column">
+              <mat-form-field class="noline">
+                <mat-select value="today" [(value)]="selectedLoc" (selectionChange)="locSelectedListener($event.value)"
+                  class="dropdown">
+                  <mat-option *ngFor="let item of locList" [value]="item._id">{{item.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxFlexAlign="start" fxLayout="column">
+              <mat-form-field class="noline hello" [floatLabel]="'never'" style="width: 200px;">
+                <input class="dropdown" autocomplete="off" matInput placeholder="Select date range"
+                  [(ngModel)]="dateTimeRange" [selectMode]="'range'" [owlDateTimeTrigger]="dtRange1"
+                  [owlDateTime]="dtRange1">
+                <owl-date-time style="widows: 20px !important" [pickerType]="'calendar'" #dtRange1></owl-date-time>
+              </mat-form-field>
+            </div>
+            <div fxFlexAlign="start" fxLayout="column">
+              <div style="padding-top: 21px;">
+                <button mat-stroked-button color="primary" (click)="getInvoiceByloc()">{{'View' | translate}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div fxLayout="row"  fxLayoutAlign="end center" fxLayoutGap="10px">
+            <div fxFlexAlign="start" >
+              <mat-form-field style="padding-top: 13px;" class="outline"
+                (keyup)="applyFilterInvoice($event.target.value)">
+                <input matInput placeholder="{{'search' | translate}}" autocomplete="off">
+              </mat-form-field>
+            </div>
+            <div fxFlexAlign="end"  >
+                <div class="">
+                <button mat-raised-button class="newStaffButton" [matMenuTriggerFor]="menu" [disabled]="!invoice.length">{{'Export' | translate}}</button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item value="CSV"
+                  (click)="onOptionSelected($event.currentTarget.value,'invoice')">{{'CSV' | translate}}</button>
+                  <button mat-menu-item value="Excel"
+                  (click)="onOptionSelected($event.currentTarget.value,'invoice')">{{'Excel' | translate}</button>
+                  <button mat-menu-item value="Pdf"
+                  (click)="onOptionSelected($event.currentTarget.value,'invoice')">{{'Pdf' | translate}}</button>
+                </mat-menu>
+                </div>             
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-layout blank pt-8" *ngIf="!!invoice.length">
+        
+        <table mat-table [dataSource]="invoiceFilter" class="mat-elevation-z8">
+          <ng-container matColumnDef="invoice">
+            <th mat-header-cell *matHeaderCellDef>{{'Invoice' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.invoice}} </td>
+          </ng-container>
+          <ng-container matColumnDef="client">
+            <th mat-header-cell *matHeaderCellDef> {{'Client' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.client}} </td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> {{'Status' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+          </ng-container>
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef> {{'Invoice' | translate}} {{'Date' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.createdAt | date}} </td>
+          </ng-container>
+          <ng-container matColumnDef="location">
+            <th mat-header-cell *matHeaderCellDef> {{'Location' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+          </ng-container>
+          <ng-container matColumnDef="totalAmount">
+            <th mat-header-cell *matHeaderCellDef> {{'Gross Total' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.totalAmount |currency:currencyCode : 'symbol-narrow'}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="invoiceColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: invoiceColumns;"></tr>
+        </table>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" style="padding-top: 13px;" *ngIf="!invoice.length">
+        <ng-container class="text-center py-3 p-4">
+          <div class="emptyicons">
+            <mat-icon [inline]='true'>receipt
+            </mat-icon>
+            <h1>{{'No Result Found' | translate}}</h1>
+            <p>{{'Try using different filter options to find what you are looking for.' | translate}}</p>
+            <button class="button" mat-raised-button (click)="getInvoiceByloc()">{{'Invoice' | translate}}</button> 
+          
+          </div>
+        </ng-container>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{'VOUCHERS' | translate }}">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10">
+            <div fxFlexAlign="start" fxLayout="column">
+              <mat-form-field class="noline">
+                <mat-select [(value)]="voucherStatus" (selectionChange)="voucherStatusChanged($event)" class="dropdown">
+                  <mat-option value="all_statuses">{{'All statuses' | translate}}</mat-option>
+                  <mat-option value="unpaid">{{'Unpaid' | translate}}</mat-option>
+                  <mat-option value="valid">{{'Valid' | translate}}</mat-option>
+                  <mat-option value="expired">{{'Expired' | translate}}</mat-option>
+                  <mat-option value="redeemed">{{'Redeemed' | translate}}</mat-option>
+                  <mat-option value="refunded_invoice">{{'Refunded Invoice' | translate}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+            <div fxFlexAlign="start" fxLayout="column">
+              <mat-form-field style="padding-top: 13px;" class="outline" (keyup)="applyFilter($event.target.value)">
+                <input matInput placeholder="{{'search' | translate}}" autocomplete="off">
+              </mat-form-field>
+            </div>
+            <!-- <div fxFlexAlign="end" fxLayout="column">
+              <mat-form-field class="noline">
+                <mat-select [(value)]="selected2" class="dropdown">
+                  <mat-option value="Options">Options</mat-option>
+                  <mat-option value="Download Excel">Download Excel</mat-option>
+                  <mat-option value="Download CSV">Download CSV</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div> -->
+            <div fxFlexAlign="end" >
+              <div class="">
+              <button mat-raised-button class="newStaffButton" [matMenuTriggerFor]="menu" [disabled]="!voucher.length">{{'Export' | translate}}</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item value="CSV"
+                (click)="onOptionSelected($event.currentTarget.value,'voucher')">{{'CSV' | translate}}</button>
+                <button mat-menu-item value="Excel"
+                (click)="onOptionSelected($event.currentTarget.value,'voucher')">{{'Excel' | translate}}</button>
+                <button mat-menu-item value="Pdf"
+                (click)="onOptionSelected($event.currentTarget.value,'voucher')">{{'Pdf' | translate}}</button>
+              </mat-menu>
+              </div>             
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-layout blank pt-8">
+        <table mat-table [dataSource]="voucherfilter" *ngIf="!!voucher.length" class="mat-elevation-z8">
+          <ng-container matColumnDef="issueDate">
+            <th mat-header-cell *matHeaderCellDef> Issue Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.issueDate | date}} </td>
+          </ng-container>
+          <ng-container matColumnDef="expiryDate">
+            <th mat-header-cell *matHeaderCellDef> Expiry Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.expiryDate | date}} </td>
+          </ng-container>
+          <ng-container matColumnDef="invoiceNo">
+            <th mat-header-cell *matHeaderCellDef> Invoice No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.invoiceNo}} </td>
+          </ng-container>
+          <ng-container matColumnDef="_type">
+            <th mat-header-cell *matHeaderCellDef> Type </th>
+            <td mat-cell *matCellDef="let element"> {{element._type}} </td>
+          </ng-container>
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef> Code </th>
+            <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+          </ng-container>
+          <ng-container matColumnDef="remainingAmount">
+            <th mat-header-cell *matHeaderCellDef> Remaining Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element.remainingAmount |currency:currencyCode : 'symbol-narrow'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="redeemAmount">
+            <th mat-header-cell *matHeaderCellDef> Redeem Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element.redeemAmount |currency:currencyCode : 'symbol-narrow'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>
+              {{'Status' | translate}}
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="status"
+                [ngClass]="{'statusValid': element.status == 'valid', 'statusExpired' : element.status == 'expired', 'statusRedeemed': element.status == 'redeemed' }">
+                {{element.status}}
+              </div>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="voucherColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: voucherColumns;"></tr>
+        </table>
+        <div fxLayout="row" fxLayoutAlign="center center" style="padding-top: 13px;" *ngIf="voucher.length == 0">
+          <ng-container class="text-center py-3 p-4">
+            <div class="emptyicons">
+              <mat-icon [inline]='true'>search
+              </mat-icon>
+              <h1>{{'No Voucher Found' | translate}}</h1>
+              <p>{{'Try using different filter options to find what you are looking for.' | translate}}</p>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+
+
+
+
+<!-- 
+<div id="printDiv" style="display: none;"><h1>hello world</h1></div>
+<table  id="my-table" style="display: none;">
+<thead>
+    <tr>
+      <th>ID</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>Country</th>
+      <th>IP-address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="right">1</td>
+      <td>Donna</td>
+      <td>Moore</td>
+      <td>dmoore0@furl.net</td>
+      <td>China</td>
+      <td>211.56.242.221</td>
+    </tr>
+    <tr>
+      <td align="right">2</td>
+      <td>Janice</td>
+      <td>Henry</td>
+      <td>jhenry1@theatlantic.com</td>
+      <td>Ukraine</td>
+      <td>38.36.7.199</td>
+    </tr>
+    <tr>
+      <td align="right">3</td>
+      <td>Ruth</td>
+      <td>Wells</td>
+      <td>rwells2@constantcontact.com</td>
+      <td>Trinidad and Tobago</td>
+      <td>19.162.133.184</td>
+    </tr>
+    <tr>
+      <td align="right">4</td>
+      <td>Jason</td>
+      <td>Ray</td>
+      <td>jray3@psu.edu</td>
+      <td>Brazil</td>
+      <td>10.68.11.42</td>
+    </tr>
+    <tr>
+      <td align="right">5</td>
+      <td>Jane</td>
+      <td>Stephens</td>
+      <td>jstephens4@go.com</td>
+      <td>United States</td>
+      <td>47.32.129.71</td>
+    </tr>
+    <tr>
+      <td align="right">6</td>
+      <td>Adam</td>
+      <td>Nichols</td>
+      <td>anichols5@com.com</td>
+      <td>Canada</td>
+      <td>18.186.38.37</td>
+    </tr>
+  </tbody>
+</table> -->

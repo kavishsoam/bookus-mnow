@@ -1,0 +1,147 @@
+<div class="page-layout blank">
+  <p-toast></p-toast>
+  <div>
+    <form>
+      <div fxLayout="column" class="header" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>{{data.Header}}</h2>
+          <button mat-button mat-dialog-close class="crossButton">
+            <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+          </button>
+          <button mat-button class="backButton" (click)="goBack()" *ngIf="data.Header != 'Vouchers'">
+            <mat-icon class="backButton">chevron_left</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-dialog-content class="content">
+        <div *ngIf="!giftVoucherClicked && !serviceVoucherClicked && !serviceGroupClicked">
+          <div fxLayout="row" class="innerbody" fxLayoutAlign="space-around" (click)="giftVoucher()">
+            <div fxLayout="column" fxFlex="90">
+              <div fxLayout="row" fxLayoutAlign="start start">
+                Gift Voucher
+              </div>
+            </div>
+            <div fxLayout="column" fxFlex="10">
+              <mat-icon>chevron_right</mat-icon>
+            </div>
+          </div>
+          <div fxLayout="row" class="innerbody" fxLayoutAlign="space-around" (click)="serviceGroupList()">
+            <div fxLayout="column" fxFlex="90">
+              <div fxLayout="row" fxLayoutAlign="start start">
+                Service Vouchers
+              </div>
+            </div>
+            <div fxLayout="column" fxFlex="10">
+              <mat-icon>chevron_right</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="giftVoucherClicked" fxLayoutAlign="center center">
+          <form class="form2" (ngSubmit)="f.form.valid && checkoutDialog()" #f="ngForm">
+            <div fxLayout="row" fxLayoutAlign="space-around" class="centered">
+              <div fxLayout="column" fxFlex="100">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Voucher Value</mat-label>
+                    <input type="number" matInput placeholder="" [(ngModel)]="voucherValue" #voucherValuex="ngModel"
+                      [ngModelOptions]="{standalone: true}" required>
+                  </mat-form-field>
+                </div>
+                <div *ngIf="f.submitted && voucherValuex.invalid" class="invalid-feedback">
+                  <div style="margin-left: 15px;" *ngIf="voucherValuex.errors.required">Voucher Value is required</div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Voucher Code</mat-label>
+                    <input type="text" matInput placeholder="" [(ngModel)]="voucherCode" #voucherValuex="ngModel"
+                      [ngModelOptions]="{standalone: true}">
+                  </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Expiry Period </mat-label>
+                    <mat-select name="expiry" [(ngModel)]="expiry" [ngModelOptions]="{standalone: true}"
+                      #expiryX="ngModel" required>
+                      <mat-option *ngFor="let item of expiryPeriod" [value]="item.value">
+                        {{item.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center" *ngIf="expiry == 'custom'">
+                  <!-- <div fxLayout="column">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Start Date</mat-label>
+                      <input matInput [matDatepicker]="picker1" [min]="startDate" [(ngModel)]="startDate"
+                        #startValue="ngModel" placeholder="" [ngModelOptions]="{standalone: true}">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1 (selectedChanged)="onDate($event)"></mat-datepicker>
+                    </mat-form-field>
+                  </div> -->
+                  <div fxLayout="column">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Expiry Date</mat-label>
+                      <input matInput [matDatepicker]="picker" [min]="startDate" [(ngModel)]="endTime"
+                        #endValue="ngModel" placeholder="" [ngModelOptions]="{standalone: true}">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker touchUi #picker (selectedChange)="endDate($event)"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center" *ngIf="expiry == 'custom'">
+                </div>
+                <div *ngIf="f.submitted && expiryX.invalid" class="invalid-feedback">
+                  <div style="margin-left: 15px;" *ngIf="expiryX.errors.required">Expiry Period is required</div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center" class="centered">
+                  <button mat-raised-button type="submit" color="primary">Add Gift Voucher</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="loader" *ngIf="serviceGroupLoader || serviceLoader"></div>
+        <div *ngIf="(!serviceGroupLoader || !serviceLoader) && (serviceVoucherClicked && !serviceGroupClicked)">
+          <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 3%">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label> Service Voucher Code</mat-label>
+              <input type="text" matInput placeholder="" [(ngModel)]="voucherCode" #voucherValuex="ngModel"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" class="innerbody" fxLayoutAlign="space-around" (click)="serviceList(item)"
+            *ngFor="let item of serviceGroupLists">
+            <div fxLayout="column" fxFlex="90">
+              <div fxLayout="row" fxLayoutAlign="start start">
+                {{item.name}} </div>
+            </div>
+            <div fxLayout="column" fxFlex="10">
+              <mat-icon>chevron_right</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="serviceGroupClicked">
+          <div class="loader" *ngIf="serviceLists.length == 0"></div>
+          <div fxLayout="column" fxLayoutAlign="space-around" *ngFor="let item of serviceLists">
+            <div *ngFor="let list of item.pricing_option" class="innerbody" (click)="checkoutDialog(item, list)">
+              <div fxLayout="column" fxFlex="80">
+                <div fxLayout="row" fxLayoutAlign="start start">
+                  {{item?.name}}</div>
+                <div fxLayout="row" class="listText" fxLayoutAlign="start start">
+                  {{list?.duration}} </div>
+              </div>
+              <div fxLayout="column" fxFlex="20">
+                <div fxLayout="row"> {{list?.specialPrice ? (list.specialPrice|currency:currencyCode : 'symbol-narrow') :
+                  (list.price|currency:currencyCode : 'symbol-narrow')}}</div>
+                <div fxLayout="row" class="listText2"> {{list?.specialPrice ? (list.price|currency:currencyCode : 'symbol-narrow') : ''}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-content>
+    </form>
+  </div>
+</div>

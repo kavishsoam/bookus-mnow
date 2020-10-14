@@ -1,0 +1,353 @@
+<p-toast [style]="{marginTop: '50px'}"></p-toast>
+  <div class="mat-tabgroup">
+    <p class="text-center margRemove">CREATE  JOB</p>
+    <!-- <form [formGroup]="jobCreateForm" name="jobCreateform" (ngSubmit)="submitJobForm(jobCreateForm)" > -->
+  <mat-tab-group (selectedTabChange)="tabClick($event)" [selectedIndex]="selectedIndex">
+    <mat-tab label="General Details">
+      <form [formGroup]="generalDetailsForm" name="generalDetailsForm" (ngSubmit)="submitGeneralDetails(generalDetailsForm)"  >
+      <div fxLayout="column" class="marg-top pad" fxLayoutAlign="space-around stretch">
+        <div>
+          <mat-label class="">Job Title</mat-label>
+          <mat-form-field class="example-full-width" appearance="outline"> 
+            <input matInput formControlName="jobTitle" placeholder="Enter Job Title">
+          </mat-form-field>
+        </div>
+      
+        <div >
+          <h4 class="">Category</h4>
+          <mat-form-field class="  example-full-width" appearance="outline">
+            <mat-label class="">Select Category</mat-label>
+            <mat-select  formControlName="categoryId"  >
+              <mat-option *ngFor="let category of categoryData" [value]="category.id">
+                {{category.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div >
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxFlex="75">
+          </div>
+          <div fxFlex="10">
+            <button mat-raised-button (click)="closeClicked()" class="close-btn " >Close</button>
+          </div>
+          <div fxFlex="5">
+          </div>
+          <div fxFlex="10">
+            <button mat-raised-button class="flat-button " color="primary" type="submit" [disabled]="generalDetailsForm.invalid" >{{changeButtonText}}</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    </mat-tab>
+    <mat-tab label="Details of work">
+      <form [formGroup]="workDetailsForm" name="workDetailsForm" (submit)="submitWorkDetailsForm(workDetailsForm)">
+      <div>
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxFlex="20">
+            <p class="">Select Location</p>
+          </div>
+          <div fxFlex="50">
+            <mat-form-field class="noline example-full-width">
+              <!-- <mat-label class="">Select Location</mat-label> -->
+              <mat-select class="dropdown" formControlName="locationId">
+                <mat-option *ngFor="let location of locationList" [value]="location._id">
+                  {{location.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="" >Working Days</p>
+        <div  fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxFlex="2"></div>
+          <div fxFlex="14" *ngFor="let days of workingdays">
+            <mat-checkbox    [checked]="days.checked"  (change)="workingDaysChecked($event,days)" class="">{{days.name}}</mat-checkbox>
+          </div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px" class=" pl-20 timepicker" *ngFor="let item of workingdays | workingTime" [@enter]>
+          <div fxLayout="column" fxFlex="45"  >
+            <ejs-timepicker (change)="startHourChanged($event,'start',item)" [allowEdit]="false"  name="time" placeholder='{{item.name}} Start Hour' floatLabelType='Always'>
+            </ejs-timepicker>
+          </div>
+          <div fxLayout="column" fxFlex="45"  >
+            <ejs-timepicker (change)="endHourChanged($event,'end',item)" [allowEdit]="false" name="time" placeholder='{{item.name}} End Hour' floatLabelType='Always'>
+            </ejs-timepicker>
+          </div>
+        </div>
+</div>
+
+<div>
+  <mat-checkbox formControlName="allowWorkForOther">Allow therapist to work for other business.</mat-checkbox>
+</div>
+
+<div >
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxFlex="75">
+    </div>
+    <div fxFlex="10">
+      <button mat-raised-button (click)="closeClicked()" class="close-btn " >Close</button>
+    </div>
+    <div fxFlex="5">
+    </div>
+    <div fxFlex="10">
+      <button mat-raised-button class="flat-button " color="primary" type="submit" [disabled]="(workDetailsForm.invalid || generalDetailsForm.invalid)" >{{changeButtonText}}</button>
+    </div>
+  </div>
+</div>
+
+</form>
+    </mat-tab>
+    <mat-tab label="Salary">
+      <div class="marg-top">
+        <form  [formGroup]="salaryForm" name="salaryForm" (ngSubmit)="submitSalaryForm(salaryForm)">
+      <div  fxLayout="row" fxLayoutAlign="space-around center" >
+        <div fxFlex="50">
+          <mat-checkbox (change)="serviceComCheck($event)" class="">Service Commission </mat-checkbox>
+          <!-- <mat-label>Service Commission</mat-label> -->
+            <mat-form-field class="example-full-width" appearance="outline">
+              <input readonly formControlName="serviceCommission" [readOnly]="servCom" matInput placeholder="% 0.00">
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+          <mat-checkbox (change)="hourlyComCheck($event)" class="">Hourly Commission </mat-checkbox>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <input formControlName="hourlyCommission" readonly [readOnly]="hourCom"  matInput placeholder="% 0.00">
+            </mat-form-field>
+        </div>
+      </div>
+
+      <div  fxLayout="row" fxLayoutAlign="space-around center">
+        <div fxFlex="50">
+          <mat-checkbox (change)="hourlyPayCheck($event)" class="">Hourly Pay</mat-checkbox>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <input formControlName="hourlyPay" readonly [readOnly]="hourPay"  matInput placeholder="0.00" >
+          </mat-form-field>
+        </div>
+        <div fxFlex="50">
+          <mat-checkbox (change)="guaranteeCheck($event)" class="">Guarantee Money</mat-checkbox>
+          <mat-form-field class="example-full-width noline">
+            <mat-label class="mat-label-pad">Select Type</mat-label>
+            <mat-select class="dropdown2" formControlName="guaranteeType" >
+              <mat-option *ngFor="let item of guarantee" [value]="item.value">
+                {{item.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="column" class="marg-top" fxLayoutAlign="space-around stretch">
+        <div *ngIf="guaranteeRead">
+        <div fxLayout="row" fxLayoutAlign="space-evenly center" >
+          <div fxflex="20" class="">
+            <p class="margRemove">You will have to work</p>
+           </div>
+           <div fxFlex="8">
+            <input formControlName="workDuration" class="fillBlanks" type="text" placeholder="15">
+           </div>
+           <div fxFlex="20">
+            <mat-form-field class="example-full-width noline">
+              <mat-select class="dropdown" formControlName="work">
+                <mat-option *ngFor="let item of workingType" [value]="item.value">
+                  {{item.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+           </div>
+           <div fxFlex="28" class="">
+             <p class="margRemove">to get Guarantee money</p>
+           </div>
+           <div fxFlex="12" style="float: left;" >
+            <input formControlName="guaranteeMoney" class="fillBlanks" type="text" placeholder="35$">
+           </div>
+        </div>
+      </div>
+          <div *ngIf="false">
+            <div  fxLayout="row" fxLayoutAlign="space-evenly center">
+              <div fxflex="20" class="">
+                <p class="margRemove">You will be paying</p>
+              </div>
+              <div fxFlex="18">
+                <input formControlName="payedByOwner" class="fillBlanks2" type="text" placeholder="15">
+               </div>
+               <div fxFlex="10" class="">
+                  $
+               </div>
+               <div fxFlex="40">
+
+               </div>
+            </div>
+          </div>
+          <div>
+            <p class=" margRemove2">Job Type</p>
+            <mat-form-field class="example-full-width"  appearance="outline">
+              <mat-label class="mat-label-pad " >Select Type</mat-label>
+              <mat-select  formControlName="jobType" >
+                <mat-option *ngFor="let job of typesOfJob" [value]="job.value">
+                  {{job.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+      </div>
+
+      <div >
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxFlex="75">
+          </div>
+          <div fxFlex="10">
+            <button mat-raised-button (click)="closeClicked()" class="close-btn " >Close</button>
+          </div>
+          <div fxFlex="5">
+          </div>
+          <div fxFlex="10">
+            <button mat-raised-button class="flat-button " color="primary" type="submit" [disabled]="(salaryForm.invalid || workDetailsForm.invalid || generalDetailsForm.invalid)" >{{changeButtonText}}</button>
+          </div>
+        </div>
+      </div>
+
+    </form >
+     </div>
+
+
+    </mat-tab>
+    <mat-tab label="Who Can Apply">
+      <div class="marg-top">
+        <form  [formGroup]="whoCanApplyForm" name="whoCanApplyForm" (ngSubmit)="submitWhoCanApplyForm(whoCanApplyForm)">
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxFlex="50">
+            <mat-checkbox formControlName="numberABN" class="">ABN Number</mat-checkbox>
+          </div>
+          <div fxFlex="50">
+            <mat-checkbox formControlName="numberTFN" class="">TFN number</mat-checkbox>
+          </div>
+        </div>
+        <div>
+          <p class="margRemove2">Gender</p>
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+
+          <div fxFlex="45">
+          <mat-radio-group #rGroup formControlName="gender" >
+              <mat-radio-button style="width:32% !important" value="Male" class="" radioGroup="rGroup">Male</mat-radio-button>
+              <mat-radio-button style="width:38% !important" value="Female" class="" radioGroup="rGroup">Female</mat-radio-button>
+              <mat-radio-button style="width:30% !important"  value="Unknown" class="" radioGroup="rGroup">Any</mat-radio-button>
+       </mat-radio-group>
+      </div>
+           <div fxFlex="55">
+            <p class="fontStyle">(if you choose one specific gender then all other gender will not be able to view this ad.)</p>
+           </div>
+        </div>
+        </div>
+        <div fxLayout="column" fxlayoutAlign="space-around start">
+          <div>
+            <mat-checkbox formControlName="verified" class="">Only Verified therapist can apply</mat-checkbox>
+          </div>
+          <div>
+            <div fxLayout="row" fxLaypoutAlign="space-around center">
+              <div class="mt2 pr-10">
+                <mat-checkbox formControlName="certificateRequired" class="pr-10">Require</mat-checkbox>
+              </div>
+              <div>
+                <mat-form-field class="example-full-width noline pl-5 "  >
+                  <!-- <mat-label class="mat-label-pad ">certificate</mat-label> -->
+                  <mat-select class="dropdown" formControlName="certificateType">
+                    <mat-option *ngFor="let cert of certificates" [value]="cert.value">
+                      {{cert.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div>
+                <p class="pl-5">Certificate.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div fxLayout="row" fxLayoutAlign="start">
+              <div fxFlex="60">
+                <p class="">For how long the therapist need to work for your business</p>
+              </div>
+              <div fxFlex="8">
+                <input style="padding-top: 23% !important" formControlName="timePeriodValue" class="fillBlanks" type="text" placeholder="1">
+              </div>
+              <div fxFlex="28" class="pl-10">
+                <mat-form-field class="example-full-width noline" style="bottom:15% !important">
+                  <mat-label class="mat-label-pad ">time period</mat-label>
+                  <mat-select class="dropdown" formControlName="timePeriod">
+                    <mat-option *ngFor="let job of timeperiod" [value]="job.value">
+                      {{job.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              
+            </div>
+          </div>
+          <div>
+            <div fxLayout="row" fxLayoutAlign="space-around start">
+              <div fxFlex="20">
+                <p class="">Min Experience</p>
+              </div>
+              <div fxFlex="20">
+                <mat-form-field class="example-full-width noline"  >
+                  <mat-label class="mat-label-pad ">Years</mat-label>
+                  <mat-select class="dropdown" formControlName="experienceYears">
+                    <mat-option *ngFor="let exper of experienceYearsDrop" [value]="exper.value">
+                      {{exper.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div fxFlex="20">
+                <mat-form-field class="example-full-width noline"  >
+                  <mat-label class="mat-label-pad  ">months</mat-label>
+                  <mat-select class="dropdown" formControlName="experienceMonths">
+                    <mat-option *ngFor="let month of experienceMonthsDrop" [value]="month.value">
+                      {{month.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div fxFlex="50">
+
+              </div>
+            </div>
+          </div>
+          <!-- owner message -->
+          <div>
+            <mat-label class="">Owner's Message</mat-label>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <input formControlName="ownerMessage" matInput placeholder="Enter Message here" >
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-checkbox class="" formControlName="showIncome">Show Average Income of a therapist to the applicant</mat-checkbox>
+          </div>
+        </div>
+
+        <div >
+          <div fxLayout="row" fxLayoutAlign="space-around center">
+            <div fxFlex="75">
+            </div>
+            <div fxFlex="10">
+              <button mat-raised-button (click)="closeClicked()" class="close-btn " type="button" >Close</button>
+            </div>
+            <div fxFlex="5">
+            </div>
+            <div fxFlex="10">
+              <button mat-raised-button class="flat-button " color="primary" type="submit" [disabled]="(whoCanApplyForm.invalid || salaryForm.invalid || workDetailsForm.invalid || generalDetailsForm.invalid)" >{{changeButtonText}}</button>
+            </div>
+          </div>
+        </div>
+  
+      </form>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <!-- </form> -->
+</div>
+

@@ -1,0 +1,136 @@
+<div class="full-width bg-white">
+  <mat-tab-group >
+    <mat-tab label="Reviews From Customer">
+      <div class="pr-20 pl-20" fxLayout="row" fxLayoutAlign="start" fxFlex.xs="100">
+        <div fxLayout="column" fxFlex="25">
+          <!-- <mat-form-field class="mr-20 ml-20">
+            <mat-label>Start date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field> -->
+          <mat-form-field class="noline hello" [floatLabel]="'never'" style="width: 230px;">
+            <input class="dropdown" autocomplete="off" matInput placeholder="Select date range"
+              [(ngModel)]="saleDateTimeRange" [selectMode]="'range'" [owlDateTimeTrigger]="dtRange2"
+              [owlDateTime]="dtRange2">
+            <owl-date-time style="widows: 20px !important" [pickerType]="'calendar'" #dtRange2>
+            </owl-date-time>
+          </mat-form-field>
+        </div>
+        <!-- <div fxLayout="column" fxFlex="20" fxFlex.xs="100">
+          <mat-form-field>
+            <mat-label>End date</mat-label>
+            <input matInput [matDatepicker]="endpicker">
+            <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
+            <mat-datepicker #endpicker></mat-datepicker>
+          </mat-form-field>
+        </div> -->
+      </div>
+      <div class="p20" fxLayout="column" fxLayoutAlign="start stretch">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element?.ratedTo}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="rating">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Rate </th>
+            <td mat-cell *matCellDef="let element">
+                <span class="material-icons" [ngClass]=" element.star > 2 ? 'ratedStar' : 'nonRatedStar'  ">
+                  grade
+                </span>
+                <span class="material-icons"  [ngClass]=" element.star > 3 ? 'ratedStar' : 'nonRatedStar'  ">
+                  grade
+                </span>
+                <span class="material-icons"  [ngClass]=" element.star > 4 ? 'ratedStar' : 'nonRatedStar'  ">
+                  grade
+                </span>
+                <span class="material-icons"  [ngClass]=" element.star > 5 ? 'ratedStar' : 'nonRatedStar'  ">
+                  grade
+                </span>
+                <span class="material-icons"  [ngClass]=" element.star > 6 ? 'ratedStar' : 'nonRatedStar'  ">
+                  grade
+                </span>
+
+<!-- 
+              <span class="material-icons">
+                grade
+              </span>
+              <span class="material-icons">
+                star_border
+              </span> -->
+            </td>
+          </ng-container>
+          name
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="review">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Review </th>
+            <td mat-cell *matCellDef="let element">
+              <span>{{element?.review | slice:0:50}}...</span>
+              <em (click)="viewReviewModal(element)">Read More..</em>
+
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+      </div>
+    </mat-tab>
+
+
+    <mat-tab label="Reviews From Therapist">
+
+    </mat-tab>
+
+    <mat-tab label="Unreplied">
+
+    </mat-tab>
+
+    <mat-tab label="Waiting/Approval">
+
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<ng-template #ReviewTemplateModal>
+  <div class="mat-dialog-header border-bottom text-center ">
+    <h2 mat-dialog-title class="mb-0 fs17">Review</h2>
+    <div>
+                <span class="material-icons fs17 " [ngClass]=" reviewDataForModal.star > 2 ? 'ratedStar' : 'nonRatedStar'  ">
+                  grade
+                </span>
+                <span class="material-icons fs17"  [ngClass]=" reviewDataForModal.star > 3 ? 'ratedStar' : 'nonRatedStar'  ">
+                  grade
+                </span>
+                <span class="material-icons fs17"  [ngClass]=" reviewDataForModal.star > 4 ? 'ratedStar' : 'nonRatedStar'  ">
+                  grade
+                </span>
+                <span class="material-icons fs17"  [ngClass]=" reviewDataForModal.star > 5 ? 'ratedStar' : 'nonRatedStar'  ">
+                  grade
+                </span>
+                <span class="material-icons fs17"  [ngClass]=" reviewDataForModal.star > 6 ? 'ratedStar' : 'nonRatedStar'  ">
+                  grade
+                </span>
+    </div>
+    <div class="fs17">
+      {{reviewDataForModal?.ratedTo | titlecase}}
+    </div>
+  </div>
+  <mat-dialog-content>
+    <div style="border:1px solid grey;" class="pr-20 pl-20 pt-20 pb-20">
+      <div class="fs17">
+        {{reviewDataForModal?.review}}
+      </div>
+    </div>
+
+    <div class="w-100-p mt-12" style="text-align: right;">
+      <button type="button" (click)="closePrescriptionModal()" class="mat-accent mat-raised-button" mat-dialog-close
+        style="background: #199C50; margin-left:15px; color:#fff!important;">Cancel</button>
+    </div>
+  </mat-dialog-content>
+</ng-template>

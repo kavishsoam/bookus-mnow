@@ -1,0 +1,158 @@
+<div id="register" fxLayout="column">
+    <p-toast></p-toast>
+    <div id="register-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+        <div id="register-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+            <div class="logo">
+                <img src="../../../assets/images/logos/massagenowblack.jpg">
+            </div>
+            <div>
+                <p style="font-size: 20px;font-weight: 500;"> Massagenow </p>
+            </div>
+            <div class="title">CREATE AN ACCOUNT</div>
+            <form name="registerForm" [formGroup]="registerForm" (ngSubmit)="register(registerForm)" novalidate>
+                <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="15px">
+                    <div fxLayout="column" fxFlex="50">
+                        <mat-form-field appearance="outline">
+                            <mat-label>First name</mat-label>
+                            <input type="text" matInput formControlName="firstName" placeholder="e.g. John" alphabetsOnly>
+                            <mat-error>
+                                First Name is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxFlex="50">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Last name</mat-label>
+                            <input type="text" matInput formControlName="lastName" placeholder="e.g. Doe" alphabetsOnly>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" placeholder="e.g. john.doe@gmail.com">
+                    <mat-error *ngIf="registerForm.get('email').hasError('required')">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.get('email').hasError('email')">
+                        Please enter a valid email address
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" [errorStateMatcher]="matcher" [type]="hide ? 'password' : 'text'">
+                    <mat-icon style="cursor: pointer !important;" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="registerForm.get('password').hasError('required')" >
+                        Password is required
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.get('password').hasError('isNumberExist')">
+                        Must contain a number
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.get('password').hasError('isUpperExist')">
+                            Must contain an uppercase letter
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.get('password').hasError('isLowerExist')">
+                            Must contain a lowercase letter
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput type="password" formControlName="passwordConfirm" [type]="hide2 ? 'password' : 'text'">
+                    <mat-icon style="cursor: pointer !important;" matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="registerForm.get('passwordConfirm').hasError('required')">
+                        Password confirmation is required
+                    </mat-error>
+                    <mat-error *ngIf="!registerForm.get('passwordConfirm').hasError('required') &&
+                                       registerForm.get('passwordConfirm').hasError('passwordsNotMatching')">
+                        Passwords must match
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Gender</mat-label>
+                    <mat-select formControlName="gender">
+                        <mat-option *ngFor="let gen of genderList" [value]="gen.name">{{gen.viewValue}}</mat-option>
+                    </mat-select>
+                    <mat-error>
+                        Gender is required
+                    </mat-error>
+                </mat-form-field>
+                <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="15px">
+                    <div fxLayout="column" fxFlex="50">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Company Name</mat-label>
+                            <input matInput formControlName="companyName">
+                            <mat-error>
+                                Company Name is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxFlex="50">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Business Type</mat-label>
+                            <mat-select formControlName="businessType">
+                                <mat-option *ngFor="let type of businessTypeArray" [value]="type">{{type}}</mat-option>
+                            </mat-select>
+                            <mat-error>
+                                Business Type is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="15px">
+                    <div fxLayout="column" fxFlex="100">
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Category</mat-label>
+                            <mat-select  multiple formControlName="categoryId" panelClass="category-panel-class">
+                                <mat-option  *ngFor="let type of categoryData" [value]="type.id">{{type.name}}</mat-option>
+                            </mat-select>
+                            <mat-error>
+                                Category is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Country</mat-label>
+                    <mat-select formControlName="country">
+                        <mat-option *ngFor="let type of countryArray" [value]="type.name">{{type.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="15px">
+                    <div fxLayout="column" fxFlex="50">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Time Zone</mat-label>
+                            <mat-select formControlName="timezone" panelClass="my-select-panel-class">
+                                <mat-option class="mat-option-pl" *ngFor="let type of timeZoneArray" [value]="type">{{type}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxFlex="50">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Currency</mat-label>
+                            <mat-select formControlName="currency" panelClass="currency-panel-class">
+                                <mat-option *ngFor="let type of currencyArray" [value]="type.code">{{type.name}} -
+                                    {{type.code}}</mat-option>
+                            </mat-select>
+                            <mat-error>Currency is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="terms" fxLayout="row" fxLayoutAlign="center center">
+                    <mat-checkbox [(ngModel)]="acceptTC" [ngModelOptions]="{standalone: true}" name="terms"
+                        aria-label="I read and accept" required>
+                        <span>I read and accept</span>
+                    </mat-checkbox>
+                    <a href="#">terms and conditions</a>
+                </div>
+                <button [promiseBtn]="loader" (click)="getData()" mat-raised-button color="primary"
+                    class="submit-button" aria-label="CREATE AN ACCOUNT" [disabled]="registerForm.invalid || !acceptTC">
+                    CREATE AN ACCOUNT
+                </button>
+            </form>
+            <div class="register" fxLayout="column" fxLayoutAlign="center center">
+                <span class="text">Already have an account?</span>
+                <a class="link" [routerLink]="'/auth/login'">Login</a>
+            </div>
+        </div>
+    </div>
+</div>

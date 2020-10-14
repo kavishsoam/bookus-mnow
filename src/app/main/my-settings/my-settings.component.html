@@ -1,0 +1,108 @@
+<div id="dashboard-analytics" class="page-layout blank">
+  <p-toast [style]="{marginTop: '50px'}"></p-toast>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <h3>Personal Details</h3>
+  </div>
+  <form name="mySettingsForm" [formGroup]="mySettingsForm" (ngSubmit)="mySettings(mySettingsForm)">
+    <div class="content" fxLayoutAlign="center center">
+      <div class="left">
+        <div fxLayout="row" fxLayoutAlign="center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center">
+          <div fxFlex="100" fxFlex.gt-sm="66">
+            <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+              <div class="p-32 pb-20" fxLayout="row wrap" fxLayoutAlign="center end">
+                <div class="box">
+                  <div fxLayout="row" fxLayoutGap="30px" fxLayout.xs="column">
+                    <div fxLayout="column" fxFlex="50">
+                      <mat-form-field appearance="outline">
+                        <mat-label>FIRST NAME</mat-label>
+                        <input formControlName="firstName" matInput>
+                      </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxFlex="50">
+                      <mat-form-field appearance="outline">
+                        <mat-label>LAST NAME</mat-label>
+                        <input formControlName="lastName" matInput>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutGap="30px" fxLayout.xs="column">
+                    <div fxLayout="column" fxFlex="100">
+                      <!-- <mat-form-field appearance="outline">
+                        <mat-label>Mobile number</mat-label>
+                        <input formControlName="phone" matInput>
+                      </mat-form-field> -->
+                      <div *ngIf="phoneDis" class="border-phone"
+                        [ngClass]="{'border-phone-error' : !phone_invalid,'border-phone-not-touch':phone_invalid}">
+                        <input #telInput matInput type="text" (keydown)="telInputChange($event)" ng2TelInput
+                          [(ngModel)]="phoneNumber" [ng2TelInputOptions]="{initialCountry: countryStr}"
+                          value="+{{countryCode}} " (hasError)="hasError($event)" (ng2TelOutput)="getNumber($event)"
+                          (intlTelInputObject)="telInputObject($event)" (countryChange)="onCountryChange($event)"
+                          [ngModelOptions]="{standalone: true}" />
+                      </div>
+                      <div *ngIf="
+                            !phone_invalid" class="error-handle">Invalid Number</div>
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutGap="30px" fxLayout.xs="column">
+                    <div fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input formControlName="email" matInput>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <h3>Change password</h3>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center">
+          <div class="widget" fxFlex="100" fxFlex.gt-sm="66">
+            <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+              <div class="p-32 pb-20" fxLayout="row wrap" fxLayoutAlign="center end">
+                <div class="box">
+                  <div fxLayout="row" fxLayoutGap="30px" fxLayout.xs="column">
+                    <div fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Current password</mat-label>
+                        <input type="password" formControlName="current_pass" matInput>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutGap="30px" fxLayout.xs="column">
+                    <div fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>New password</mat-label>
+                        <input type="password" formControlName="new_pass" matInput>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutGap="30px" fxLayout.xs="column">
+                    <div fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Verify password</mat-label>
+                        <input type="password" formControlName="confirm_pass" matInput>
+                        <mat-error *ngIf="mySettingsForm.get('confirm_pass').hasError('required')">
+                          Password confirmation is required
+                        </mat-error>
+                        <mat-error *ngIf="!mySettingsForm.get('confirm_pass').hasError('required') &&
+                                           mySettingsForm.get('confirm_pass').hasError('passwordsNotMatching')">
+                          Passwords must match
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end end"> <button mat-raised-button class="saveButton"
+                type="submit">Save</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

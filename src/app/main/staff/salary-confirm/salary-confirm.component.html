@@ -1,0 +1,40 @@
+<div class="dialog-pad">
+  <p-toast></p-toast>
+  <div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+      <div fxLayout="column" class="header" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>Action</h2>
+        </div>
+      </div>
+      <mat-dialog-content class="content">
+        <div fxLayout="row" class="pt-20" fxLayoutAlign="space-around center">
+          <div fxLayout="column" fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>Requested Salary</mat-label>
+              <input matInput placeholder="Requested Salary" name="salary" formControlName="salary">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxLayout="column" fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>Messge</mat-label>
+              <textarea matInput placeholder="message" name="message" formControlName="message" cdkTextareaAutosize
+                cdkAutosizeMinRows="5" cdkAutosizeMaxRows="5">
+                </textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+      </mat-dialog-content>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+        <button mat-raised-button type="warn" mat-dialog-close>Cancel</button>
+        <div fxLayout="row" fxFlex="1 1 auto"></div>
+        <button mat-raised-button color="warn" type="button" (click)="reject()">Reject</button>
+
+        <button style="margin-left: 10px" mat-raised-button color="primary" type="submit">Accept </button>
+      </div>
+    </form>
+  </div>
+</div>

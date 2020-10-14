@@ -1,0 +1,132 @@
+.colorPicker {
+    height: 30px;
+    margin-top: 0em;
+    font-size: 0.875em;
+    text-align: center;
+    display: inline-table;
+    width: 100%;
+    max-width: 40em;
+    background: #fff;
+    padding: 2px;
+    border-radius: 0.35em;
+    box-shadow: 0 0.5em 1.5em rgba(0, 0, 0, 0.15);
+}
+::ng-deep .mat-dialog-container {
+    overflow-y: visible !important;
+}
+.colorPicker label {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.5);
+    transition: all 0.2s ease-in-out;
+    display: table-cell;
+    cursor: pointer;
+    vertical-align: middle;
+    padding: 0.5em 1em;
+    text-transform: capitalize;
+    letter-spacing: -0.5em;
+    color: transparent;
+    opacity: 0.5;
+    width: 1%;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+}
+.colorPicker label:first-of-type {
+    border-radius: 0.25em 0 0 0.25em;
+}
+.colorPicker label:last-of-type {
+    border-radius: 0 0.25em 0.25em 0;
+}
+.colorPicker label:hover {
+    opacity: 1;
+    color: #fff;
+    letter-spacing: normal;
+}
+.colorPicker input {
+    display: none;
+}
+.colorPicker input:checked+label {
+    width: 10%;
+    opacity: 1;
+    color: #fff;
+    letter-spacing: normal;
+}
+h2 {
+    text-align: center !important;
+    color: #24334A !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 24px !important;
+    padding: 0px 0px 16px 0px !important;
+    text-transform: capitalize !important;
+    font-size: 24px !important;
+    font-weight: 300 !important;
+    margin: 0 !important;
+}
+h4 {
+    margin: 0px !important;
+}
+p {
+    color: #24334A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: 300;
+}
+mat-form-field {
+    width: 45vw;
+}
+.grouplists {
+    overflow-y: visible;
+}
+.groupItem:hover {
+    background-color: #eefdc6;
+}
+.groupItem {
+    border-bottom: 1px solid #DEE3E7;
+    cursor: pointer;
+}
+.delete-button {
+    color: #fff !important;
+    background-color: #f55753 !important;
+    border-color: #f55753 !important;
+    height: 40px;
+}
+.close-button {
+    height: 40px;
+    color: #626262 !important;
+    background-color: #fff !important;
+    border-color: #c2c2c2 !important;
+    border: 1px solid;
+}
+.headingStyle {
+    display: block;
+    font-family: Sarabun, sans-serif;
+    font-weight: 300;
+    color: #2c2c2c;
+    font-size: 18px;
+    // line-height: 33.88px;
+    text-align: center;
+}
+.loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    border: 4px solid #f3f3f3;
+    /* Light grey */
+    border-top: 4px solid #3498db;
+    /* Blue */
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

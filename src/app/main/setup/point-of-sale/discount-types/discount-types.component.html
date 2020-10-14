@@ -1,0 +1,41 @@
+<div class="page-layout blank">
+  <p-toast [style]="{marginTop: '50px'}"></p-toast>
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+  <div fxLayout="column" class="header" fxLayoutAlign="start center">
+    <button mat-raised-button color="primary" (click)="addDiscount()">New
+      Discount</button>
+    <table mat-table [dataSource]="discountList" class="mat-elevation-z8">
+      <ng-container matColumnDef="discountName">
+        <th mat-header-cell *matHeaderCellDef> DISCOUNT NAME </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef> VALUE </th>
+        <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+      </ng-container>
+      <ng-container matColumnDef="discountType">
+        <th mat-header-cell *matHeaderCellDef> DISCOUNT TYPE </th>
+        <td mat-cell *matCellDef="let element"> {{element.valueType}} </td>
+      </ng-container>
+      <ng-container matColumnDef="serviceEnabled">
+        <th mat-header-cell *matHeaderCellDef> SERVICE ENABLED </th>
+        <td mat-cell *matCellDef="let element"> {{element.enableService}} </td>
+      </ng-container>
+      <ng-container matColumnDef="productEnabled">
+        <th mat-header-cell *matHeaderCellDef> PRODUCT ENABLED </th>
+        <td mat-cell *matCellDef="let element"> {{element.enableProduct}} </td>
+      </ng-container>
+      <ng-container matColumnDef="voucherEnabled">
+        <th mat-header-cell *matHeaderCellDef> VOUCHER ENABLED </th>
+        <td mat-cell *matCellDef="let element"> {{element.enableVoucher}} </td>
+      </ng-container>
+      <ng-container matColumnDef="dateAdded">
+        <th mat-header-cell *matHeaderCellDef> DATE ADDED </th>
+        <td mat-cell *matCellDef="let element"> {{element.addedAt |
+                    date:'fullDate'}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="discountListColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: discountListColumns;" (click)="editDiscount(row)"></tr>
+    </table>
+  </div>
+</div>

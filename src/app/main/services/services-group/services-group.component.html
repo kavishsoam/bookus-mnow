@@ -1,0 +1,100 @@
+<div class="dialog-pad">
+  <p-toast></p-toast>
+  <h2 mat-dialog-title>{{data.header}}</h2>
+  <div *ngIf=" (data.header == 'Edit Service Group' || data.header == 'Add Service Group') && !deletePrompt">
+    <form [formGroup]="editServiceGroup" (ngSubmit)="ServiceGroupSubmit(editServiceGroup)">
+      <mat-dialog-content>
+        <div fxLayout="row" fxflex="100">
+          <mat-form-field appearance="outline">
+            <mat-label>Group name</mat-label>
+            <input matInput formControlName="name" placeholder="e.g. Massage Services" alphabetsOnly>
+            <mat-error>Group Name is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxflex="100">
+          <mat-form-field  appearance="outline" >
+            <mat-label>CATEGORY</mat-label>
+            <mat-select class="dropdow" multiple formControlName="categoryId"
+              (selectionChange)="catSelectedListener($event.value)">
+              <mat-option *ngFor="let item of categoryData" [value]="item.id">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <h4>Appointment color</h4>
+        <div class="colorPicker">
+          <input class="red-200" [checked]="colorValue == '#ef9a9a' ?  true : false" (click)="colorSetter('#ef9a9a')"
+            type="radio" name="hat-color" value="red" id="hat-color-red" />
+          <label class="red-200" for="hat-color-red"></label>
+          <input class="orange-200" [checked]="colorValue == '#ffcc80' ? true : false" (click)="colorSetter('#ffcc80')"
+            type="radio" name="hat-color" value="orange" id="hat-color-orange" />
+          <label class="orange-200" for="hat-color-orange"></label>
+          <input class="yellow-200" [checked]="colorValue == '#fff59d' ?  true : false" (click)="colorSetter('#fff59d')"
+            type="radio" name="hat-color" value="yellow" id="hat-color-yellow" />
+          <label class="yellow-200" for="hat-color-yellow"></label>
+          <input class="green-200" [checked]="colorValue == '#a5d6a7' ?  true : false" (click)="colorSetter('#a5d6a7')"
+            type="radio" name="hat-color" value="green" id="hat-color-green" />
+          <label class="green-200" for="hat-color-green"></label>
+          <input class="blue-200" [checked]="colorValue == '#90caf9' ?  true : false" (click)="colorSetter('#90caf9')"
+            type="radio" name="hat-color" value="blue" id="hat-color-blue" />
+          <label class="blue-200" for="hat-color-blue"></label>
+          <input class="purple-100" [checked]="colorValue == '#e1bee7' ?  true : false" (click)="colorSetter('#e1bee7')"
+            type="radio" name="hat-color" value="violet" id="hat-color-violet" />
+          <label class="purple-100" for="hat-color-violet"></label>
+          <input class="indigo-100" [checked]="colorValue == '#c5cae9' ?  true : false" (click)="colorSetter('#c5cae9')"
+            type="radio" name="hat-color" value="indigo" id="hat-color-indigo" />
+          <label class="indigo-100" for="hat-color-indigo"></label>
+        </div>
+        <div fxLayout="row">
+          <p>
+            See your Calendar Settings page under Setup to set how colors are displayed on the calendar</p>
+        </div>
+        <div fxLayout="row" fxflex="100">
+          <mat-form-field appearance="outline">
+            <mat-label>Group desciption</mat-label>
+            <input formControlName="description" matInput>
+          </mat-form-field>
+        </div>
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button *ngIf="group_id != undefined" mat-raised-button color="warn" type="button"
+          (click)="deleteGroup()">Delete</button>
+        <button mat-button type="submit">Save</button>
+      </mat-dialog-actions>
+    </form>
+  </div>
+  <div *ngIf="data.header == 'Select Service Group' && !deletePrompt">
+    <div class="loader" *ngIf="groupLists.length == 0"></div>
+    <div class="grouplists">
+      <mat-list role="list">
+        <mat-list-item class="groupItem" role="listitem" *ngFor="let item of groupLists"
+          (click)="addNewService(item._id,item)">{{item.name}}</mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  <!-- confirmation mail -->
+  <div *ngIf="deletePrompt">
+    <div fxLayout="column" fxLayoutAlign="center">
+      <h3 class="headingStyle">Delete Service Group</h3>
+      <p class="description">
+        Are you sure you want to delete this group?
+      </p>
+    </div>
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlex="50">
+        <div fxLayout="row">
+          <button class="close-button" type="button" (click)="cancelDelete()" mat-button>Close</button>
+        </div>
+      </div>
+      <div fxLayout="column" fxFlex="50">
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <div fxLayout="column">
+            <button mat-button class="delete-button" type="button" (click)="deleteGoupConfirmed()">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- xx xx xx xx xx -->
+</div>

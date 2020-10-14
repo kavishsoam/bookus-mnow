@@ -1,0 +1,32 @@
+<div class="page-layout blank">
+    <p-toast></p-toast>
+    <div>
+        <form>
+            <div fxLayout="column" class="header" fxLayoutAlign="start center">
+                <div fxLayout="row">
+                    <h2 mat-dialog-title>{{data.Header}}</h2>
+                    <button mat-button mat-dialog-close class="crossButton">
+                        <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <mat-dialog-content class="content">
+                <div fxLayout="row" class="innerbody" fxLayoutAlign="space-around">
+                    <div class="left" fxLayout="column" fxFlex="50">
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                        </div>
+                    </div>
+                    <div class="right" fxLayout="column" fxFlex="30">
+                    </div>
+                </div>
+            </mat-dialog-content>
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+                <button mat-raised-button color="warn" type="button">Delete</button>
+                <div fxLayout="row" fxFlex="1 1 auto"></div>
+                <button mat-raised-button type="button" mat-dialog-close>Cancel</button>
+                <button style="margin-left: 10px" mat-raised-button color="primary" type="submit">Save
+                    appointment</button>
+            </div>
+        </form>
+    </div>
+</div>

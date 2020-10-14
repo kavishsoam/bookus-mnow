@@ -1,0 +1,54 @@
+<input type="file" (change)="fileChangeEvent($event)" />
+<div style="width:400px; height:400px">
+  <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3" format="png"
+    (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" [roundCropper]="true"
+    (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+  </image-cropper>
+</div>
+
+
+<img class="card-image-class2" [src]="croppedImage" *ngIf="croppedImage" />
+
+
+<div fxLayout="row" fxLayoutAlign="space-between center" class="buttons" style="padding-top: 10%;">
+  <!-- <button mat-raised-button color="warn" type="button" (click)="delete()">Delete</button> -->
+  <div fxLayout="row" fxFlex="1 1 auto"></div>
+  <button mat-raised-button type="button" mat-dialog-close>Cancel</button>
+  <button (click)="saveImage()" style="margin-left: 10px" mat-raised-button color="primary" type="submit"
+    [disabled]="!croppedImage">Save </button>
+</div>
+
+<!-- <button mat-stroked-button color="primary" type="button" (click)="saveImage()" [disabled]="croppedImage">Save</button> -->
+<!-- <ng-template matTabContent>
+  <div fxLayout="row" fxLayoutGap="30px" fxLayoutGap.xs="5px" class="pt-20 pad-lt">
+    <div fxLayout="column" fxFlex="100">
+      <mat-card class="example-card">
+        <mat-card-header style="width:100% !important">
+          <div mat-card-avatar class="example-header-image"
+            style="background-image: url(../../../../assets/images/avatars/profile.jpg);"></div>
+        </mat-card-header>
+        <mat-card-content style="height:190px !important">
+
+
+
+          <div class="image-div-style">
+            <img mat-card-image class="card-image-class2" [src]="croppedImage" *ngIf="croppedImage" /> -->
+<!-- <img mat-card-image class="card-image-class2" [src]="imgURL" *ngIf="imgURL"
+                alt="profile_image"> -->
+<!-- </div>
+        </mat-card-content>
+        <mat-card-actions style="padding: 20px 162px !important;"> -->
+<!-- <div>
+              <span style="color:red;" *ngIf="message">{{message}}</span>
+              <div class="file-input-wrapper">
+                <button mat-stroked-button color="primary" type="button" class="btn-file-input">Upload
+                  Image</button>
+                <input #file type="file" accept="image/x-png,image/gif,image/jpeg"
+                  (change)="preview(file.files)" formControlName="image" />
+              </div>
+            </div> -->
+<!-- </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</ng-template> -->

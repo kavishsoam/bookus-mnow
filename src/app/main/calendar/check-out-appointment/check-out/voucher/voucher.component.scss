@@ -1,0 +1,132 @@
+//layout start
+h2 {
+    text-align: center;
+    color: #24334A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0px 18px 18px 18px;
+    line-height: 30px;
+    font-size: 24px;
+    font-weight: 300;
+    margin: 0;
+    font-family: Sarabun, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+.innerbody {
+    border-top: 1px solid #dee3e6;
+    padding-top: 20px;
+}
+.buttons {
+    padding: 24px;
+}
+::ng-deep .mat-tab-body {
+    min-height: 78vh;
+}
+.content {
+    max-height: 80vh;
+}
+/* ::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+} */
+.header {
+    padding: 20px;
+    margin-bottom: -20px;
+}
+.buttons .mat-raised-button {
+    min-height: 42px !important;
+    text-transform: uppercase;
+    min-width: 128px;
+    letter-spacing: 0.3pt;
+    font-weight: 400;
+}
+.emptyicons {
+    text-align: center;
+    margin-top: 0%;
+    color: #616161 !important;
+    font-size: 70px;
+    p {
+        font-size: 15px;
+        padding: 0;
+    }
+    mat-icon {
+        line-height: 1em;
+    }
+}
+mat-card {
+    border: 1px solid #EEF0F2;
+    border-radius: 10px;
+    background-color: #FBFBFB !important;
+    box-shadow: 0 2px 5px 0 rgba(164, 173, 186, .25) !important;
+    width: 90%;
+}
+.outstanding {
+    color: #24334A;
+    // line-height: 28px;
+    font-size: 22px;
+}
+mat-form-field {
+    background-color: white;
+    margin-top: inherit;
+    // width: 60%;
+}
+button {
+    width: 60%;
+}
+.expire {
+    color: #67768C;
+    font-size: 12px;
+}
+.history {
+    color: rgb(104, 109, 117);
+    font-size: 17px;
+    font-weight: 500;
+}
+.badge {
+    height: 42px;
+    background: #878d94;
+    width: 190px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 50px;
+    font-family: sans-serif;
+    color: #FFF;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    position: relative;
+    top: 4px;
+    left: -68px;
+    box-shadow: inset 0px 0px 0px 4px rgba(255, 255, 255, 0.34);
+}
+.badge:after {
+    position: absolute;
+    content: '';
+    display: block;
+    height: 80px;
+    width: 45px;
+    background: #ffffff;
+    top: -27px;
+    left: 156px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.badge:before {
+    position: absolute;
+    content: '';
+    display: block;
+    height: 41px;
+    width: 68px;
+    background: white;
+    top: -11px;
+    left: -19px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg)
+}
+.serviceDetails {
+    font-size: 14px
+}
+.serviceNot {
+    text-align: center;
+    margin: 29px;
+    font-size: 15px;
+}

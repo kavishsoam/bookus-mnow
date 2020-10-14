@@ -1,0 +1,320 @@
+<div class="page-layout blank">
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+  <p-toast [style]="{marginTop: '50px'}"></p-toast>
+  <div class="banner" *ngIf="blockedTime">
+    <p>Click the calendar to add blocked time</p>
+    <button (click)="closeReschedule()" class="bannerClose" aria-label="Add event">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="banner" *ngIf="reschedule || rebook || clientAppointment">
+    <p>Click the calendar to choose a new date and time</p>
+    <button (click)="closeReschedule()" class="bannerClose" aria-label="Add event">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <!-- DROP DOWN -->
+  <div class="filters">
+    <div fxLayout="row" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+      <div *ngIf="workingNil" class="button-wrapper">
+        <div class="btn-control">
+          <div class="prev-btn" (click)="onDateNavigate('prev')"><i class="fa fa-angle-left prev-icon-button"
+              aria-hidden="true"></i>
+          </div>
+          <div class="next-btn" (click)="onDateNavigate('next')"><i class="fa fa-angle-right next-icon-button"
+              aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="main-button">
+          <div class="control-section">
+            <div id="control_wrapper" class="calendarDate">
+              <ejs-datepicker format='MMMM dd,yyyy' width="50px" [(value)]="selectedDate"
+                (change)="onDateChange($event)" [showClearButton]="false" [allowEdit]="false">
+              </ejs-datepicker>
+              <!-- strictMode="false" allowEdit="false" readonly="false" showClearButton="false"  -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <mat-form-field class="noline"
+          [ngClass]="(reschedule || rebook || clientAppointment || blockedTime) ? 'setting2' : 'setting'">
+          <button mat-raised-button class="settingButton" [routerLink]="['/main/setup/calendar-settings']"
+            matTooltip="Calender settings">
+            <mat-icon>settings</mat-icon>
+          </button>
+          <input style="visibility: hidden" matInput type="text" />
+        </mat-form-field>
+      </div>
+
+      <div class="column">
+        <mat-form-field class="noline"
+          [ngClass]="(reschedule || rebook || clientAppointment || blockedTime) ? 'location2' : 'location'">
+          <mat-select class="dropdown" [(ngModel)]="location_id" (selectionChange)="selectedLocation($event.value)">
+            <mat-option *ngFor="let item of locationList" [value]="item._id">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="column">
+        <mat-form-field class="noline"
+          [ngClass]="(reschedule || rebook || clientAppointment || blockedTime) ? 'staff2' : 'staff'">
+          <mat-select [disabled]="isStaffVisible" class="dropdown" [(ngModel)]="dropDownValue"
+            (selectionChange)="plotSchedule($event)">
+            <mat-option value="">All</mat-option>
+            <mat-option value="working">Working Staff</mat-option>
+            <mat-option *ngFor="let item of collection" [value]="item.unid">{{item.firstName}}
+              {{item.lastName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <!-- xxx xxx -->
+  <div [hidden]="!calendar || collection.length == 0" *ngIf="allServiceList.length != 0"
+    onscroll="ejsScrolled('$event')">
+    <div *ngIf="workingStaffCheck">
+      <ejs-schedule #scheduleObj [group]="group" [(selectedDate)]="selectedDate" [workHours]="workHours"
+        [eventSettings]="eventSettings" [(currentView)]="viewSet" [startHour]="startHour" [endHour]="endHour"
+        (eventRendered)="oneventRendered($event)" [showQuickInfo]="false" (actionBegin)="onActionBegin($event)"
+        (dataBinding)="onDataBinding($event)" (actionComplete)="onActionComplete($event)"
+        (actionFailure)="onActionFailure($event)" (cellClick)="onCellClick($event)"
+        (cellDoubleClick)="onCellDoubleClick($event)" (destroyed)="onDestroyed()" (navigating)="onNavigating()"
+        (renderCell)="onRenderCell($event)" (drag)="onItemDrag($event)" (eventClick)="onEventClick($event)"
+        (popupOpen)="onPopupOpen($event)" (dataBound)="afterDataBound($event)">
+
+        <ng-template #resourceHeaderTemplate let-data>
+          <div class="template-wrap">
+            <div class="employee-category">
+              <!-- <div>
+                <img src="../../../assets/icons/doctor.png" style="width:35px; height:50%; float: left;">
+              </div> -->
+              <div class="resource-image">
+                <img *ngIf="getEmployeeImage(data)" class="iconImage"
+                                 src="{{'data:image/jpg;base64,' + getEmployeeImage(data)}}" />
+                               <!-- <img *ngIf="!getEmployeeImage(data)" src="../../../assets/icons/male.png"> -->
+                
+                              <ng-container *ngIf="!getEmployeeImage(data)">
+                                  <img *ngIf="getEmployeeGender(data)=='Female'" class="iconImage" src="../../../assets/icons/female.png">
+                                <img *ngIf="getEmployeeGender(data)=='Male'" class="iconImage" src="../../../assets/icons/male.png">
+                                <img *ngIf="getEmployeeGender(data) != 'Male' && getEmployeeGender(data) != 'Female' " class="iconImage" src="../../../assets/icons/doctor.png">
+                               </ng-container> 
+
+                               <ng-container >
+                                <img *ngIf="getEmployeeGender(data)=='Female'" class="iconImageSmall" src="../../../assets/icons/female_outline.png">
+                              <img *ngIf="getEmployeeGender(data)=='Male'" class="iconImageSmall" src="../../../assets/icons/male_outline.png">
+                              <!-- <img *ngIf="getEmployeeGender(data) != 'Male' && getEmployeeGender(data) != 'female' " class="iconImageSmall" src="../../../assets/icons/doctor.png"> -->
+                             </ng-container> 
+                               <!-- <img *ngIf="getEmployeeImage(data)" class="iconImage"
+                                 src="{{'data:image/jpg;base64,' + getEmployeeImage(data)}}" /> -->
+                               <!-- <img *ngIf="!getEmployeeImage(data)" src="../../../assets/icons/male.png"> -->
+                
+                              <!-- <ng-container> -->
+                                  <!-- <img  class="iconImage" [src]="getEmployeeGender(data)"> -->
+                                  <!-- ../../../assets/icons/female.png -->
+                                <!-- <img *ngIf="getEmployeeGender(data)=='Male'" class="iconImage" src="../../../assets/icons/male.png"> -->
+                               <!-- </ng-container>               -->
+               </div>
+              <div class="employee-name boldText">{{getEmployeeName(data)}}
+              </div>
+              <div class="employee-designation">{{getEmployeeDesignation(data)}}</div>
+            </div>
+          </div>
+        </ng-template>
+        <e-views>
+          <e-view option="Day" [allowVirtualScrolling]="true">
+            <ng-template #eventTemplate let-data>
+              <div class="appointment-wrapper">
+                <div style="display: flex; flex-flow: row wrap;">
+                  <div class="timing">{{data.startTimeTT}} - {{data.endTimeTT}}</div>
+                  <div class="client">{{data.client_Name}}
+                    <img *ngIf="data.client_Name != 'Walk-In' && data.client_gender == 'Female'" style="width: 15px !important ;border-radius: 10px !important; height: 15px !important; background-color: white;" src="../../../assets/icons/female_icon.png">
+                    <img *ngIf="data.client_Name != 'Walk-In' && data.client_gender == 'Male'" style="width: 15px !important ;border-radius: 10px !important; height: 15px !important; background-color: white;" src="../../../assets/icons/male_icon.png">
+                  </div>
+                </div>
+
+                <div class="icons">
+                  <span *ngIf="data.requested_staff" matTooltip="{{data.staff_first}} {{data.staff_last}} requested"
+                    [matTooltipPosition]="['above']">
+                    <svg class="icon">
+                      <use xlink:href="#heart-icon" />
+                    </svg>
+                  </span>
+                  <span *ngIf="data.notes" matTooltip="Appointment with notes" [matTooltipPosition]="['above']">
+                    <mat-icon class="mat-icon-inline" [inline]='true'>comment
+                    </mat-icon>
+                  </span>
+                  <span *ngIf="data.repeat" matTooltip="Repeating Appointment" [matTooltipPosition]="['above']">
+                    <mat-icon class="mat-icon-inline" [inline]='true'>repeat
+                    </mat-icon>
+                  </span>
+                  <span *ngIf="data.checkout" matTooltip="Fully paid" [matTooltipPosition]="['above']">
+                    <mat-icon class="mat-icon-inline" [inline]='true'>file_copy
+                    </mat-icon>
+                  </span>
+                </div>
+                <div class="subject">{{data.Subject}}</div>
+                <div *ngIf="!data.checkout" class="drag"><img src="../../../assets/icons/drag-handle.png"></div>
+              </div>
+            </ng-template>
+          </e-view>
+          <e-view option="Week" [allowVirtualScrolling]="true">
+            <ng-template #eventTemplate let-data>
+              <div class="appointment-wrapper">
+                <div style="display: flex; flex-flow: row wrap;">
+                  <div class="timing">{{data.startTimeTT}} - {{data.endTimeTT}}</div>
+                </div>
+                <div class="client">{{data.client_Name}}
+                  <img *ngIf="data.client_Name != 'Walk-In' && data.client_gender == 'Female'" style="width: 15px !important ;border-radius: 10px !important; height: 15px !important; background-color: white;" src="../../../assets/icons/female_icon.png">
+                  <img *ngIf="data.client_Name != 'Walk-In' && data.client_gender == 'Male'" style="width: 15px !important ;border-radius: 10px !important; height: 15px !important; background-color: white;" src="../../../assets/icons/male_icon.png">
+                </div>
+                <div class="icons">
+                  <span *ngIf="data.requested_staff" matTooltip="{{data.staff_first}} {{data.staff_last}} requested"
+                    [matTooltipPosition]="['above']">
+                    <svg class="icon">
+                      <use xlink:href="#heart-icon" />
+                    </svg>
+                  </span>
+                  <span *ngIf="data.notes" matTooltip="Appointment with notes" [matTooltipPosition]="['above']">
+                    <mat-icon class="mat-icon-inline" [inline]='true'>comment
+                    </mat-icon>
+                  </span>
+                  <span *ngIf="data.repeat" matTooltip="Repeating Appointment" [matTooltipPosition]="['above']">
+                    <mat-icon class="mat-icon-inline" [inline]='true'>repeat
+                    </mat-icon>
+                  </span>
+                  <span *ngIf="data.checkout" matTooltip="Fully paid" [matTooltipPosition]="['above']">
+                    <mat-icon class="mat-icon-inline" [inline]='true'>file_copy
+                    </mat-icon>
+                  </span>
+                </div>
+                <div class="subject">{{data.Subject}}</div>
+                <div *ngIf="!data.checkout" class="drag"><img src="../../../assets/icons/drag-handle.png"></div>
+              </div>
+            </ng-template>
+          </e-view>
+        </e-views>
+        <e-resources>
+          <e-resource field='staff' title='Owners' [dataSource]='resourceDataSource' [allowMultiple]='allowMultiple'
+            name='Owners' textField='firstName' workDaysField='workDays' startHourField='startHour'
+            endHourField='endHour' idField='unid' colorField='CategoryColor'>
+          </e-resource>
+        </e-resources>
+      </ejs-schedule>
+    </div>
+  </div>
+  <div *ngIf="allServiceList.length == 0" class="text-center py-3 p-4">
+    <div class="emptyicons">
+      <mat-icon [inline]='true'>assignment_late
+      </mat-icon>
+      <h1 (click)="openDrawer()">No Services Set Up</h1>
+      <div class="service-des-box">
+        <p class="service-des">Oops! You do not have any
+          <a [routerLink]="[ '../services' ]">services</a>
+          yet. See the services page to create service types
+          used for appointment bookings.</p>
+      </div>
+    </div>
+  </div>
+  <!-- when no working staff found (trigger from plot schedule )-->
+  <div *ngIf="workingNil" class="text-center py-3 p-4"> 
+    <div class="emptyicons">
+      <mat-icon [inline]='true'>highlight_off
+      </mat-icon>
+      <h1>Working Staff Not Found</h1>
+      <div class="service-des-box">
+        <p class="service-des">Oops! You do not have any
+          <a [routerLink]="[ '../staff' ]">working staff</a>
+          yet. See the working staff page to create working staff
+          for appointment bookings.</p>
+      </div>
+    </div>
+  </div> 
+  <div *ngIf="allServiceList.length != 0 && collection.length == 0" class="text-center py-3 p-4">
+    <div class="emptyicons">
+      <mat-icon [inline]='true'>assignment_late
+      </mat-icon>
+      <h1>No Staff Set Up</h1>
+      <div class="service-des-box">
+        <p class="service-des">Oops! You do not have any
+          <a [routerLink]="[ '../staff' ]">staff</a>
+          yet. See the staff page to create staff
+          used for appointment bookings.</p>
+      </div>
+    </div>
+  </div> 
+  <div *ngIf="noLocationView" class="text-center py-3 p-4">
+    <div class="emptyicons">
+      <mat-icon [inline]='true'>assignment_late
+      </mat-icon>
+      <h1>No Location Available</h1>
+      <div class="service-des-box">
+        <p class="service-des">Oops! You do not have any
+          <a [routerLink]="[ '../setup/locations' ]">Location</a>
+          yet. See the setup page to create location or edit location
+          used for appointment bookings.</p>
+      </div>
+    </div>
+  </div> 
+  <div class="button-cal centered-x" *ngIf="allServiceList.length != 0">
+    <input type="checkbox" id="your-id" class="button-checkbox">
+    <label class="button-trigger" for="your-id">
+      <i class="material-icons">add</i>
+    </label>
+    <div class="button-option" (click)="openVoucherDialog()">
+      <a tooltip="New Voucher">
+        <i class="material-icons">local_offer</i>
+      </a>
+    </div>
+    <div class="button-option" (click)="openBlockedTime()">
+      <a tooltip="Block Time">
+        <i class="material-icons">highlight_off</i>
+      </a>
+    </div>
+    <div class="button-option" (click)="openNewDialog()">
+      <a tooltip="New Appointment">
+        <i class="material-icons">calendar_today</i>
+      </a>
+    </div>
+    <div class="button-option" (click)="changeSelectedIndex()" [routerLink]="['/main/sales']">
+      <a tooltip="Vouchers">
+        <i class="material-icons">card_giftcard</i>
+      </a>
+    </div>
+    <div class="button-option" [routerLink]="['/main/setup/calendar-settings']">
+      <a tooltip="Calendar settings">
+        <i class="material-icons">settings</i>
+      </a>
+    </div>
+    <div class="button-option" (click)="openDrawer()">
+      <a tooltip="Cash Drawer">
+        <i class="material-icons">local_atm</i>
+      </a>
+    </div>
+  </div>
+
+<!-- ! -->
+<div class="button-cal2 centered-x2" *ngIf="allServiceList.length != 0" >
+  <input type="checkbox" id="your-id2" class="button-checkbox2" (click)="openRequested()">
+  <label matBadge="8" matBadgePosition="before" matBadgeColor="warn" class="button-trigger2 shake" for="your-id2">
+   <i class="material-icons">notifications_active</i>
+  </label>
+  <!-- <div class="button-option2" (click)="openVoucherDialog()">
+    <a tooltip="New Voucher">
+      <i class="material-icons">local_offer</i>
+    </a>
+  </div> -->
+</div>
+<!-- ! -->
+
+</div>
+<svg width="0" height="0" style="overflow:hidden;">
+  <symbol id="heart-icon" viewBox="0 0 24 24">
+    <path
+      d="M12,21.86c11.43-8,11-10.78,11-13A5.27,5.27,0,0,0,17.5,4C14.06,4,12,7.25,12,7.25S9.94,4,6.5,4A5.27,5.27,0,0,0,1,8.87C1,11.08.57,13.89,12,21.86Z"
+      stroke-width="2" />
+  </symbol>
+</svg>

@@ -1,0 +1,53 @@
+//layout start
+h2 {
+    text-align: center;
+    padding: 0px 16px 16px 16px;
+    line-height: 30px;
+    font-size: 20px;
+    font-weight: 300;
+    margin: 0;
+}
+
+.buttons {
+    padding: 20px 5px 0px 5px;
+}
+
+::ng-deep .mat-tab-body {
+    min-height: 78vh;
+}
+.content {
+    max-height: 80vh;
+    overflow-y: hidden;
+}
+/* ::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+} */
+.header {
+    padding: 0px 20px 20px 20px;
+    margin-bottom: -20px;
+}
+.buttons .mat-raised-button {
+    min-height: 42px !important;
+    text-transform: uppercase;
+    min-width: 90px;
+    letter-spacing: 0.3pt;
+    font-weight: 400;
+}
+.center {
+    padding: 6px;
+}
+mat-radio-button {
+    color: #67768C;
+    font-size: 15px;
+    margin-bottom: 25px;
+    margin-right: 10px;
+}
+mat-checkbox {
+    font-family: Sarabun;
+    font-size: 12px;
+    font-weight: 500;
+}
+mat-dailog-content {
+    overflow-y: hidden;
+}
+//layout end

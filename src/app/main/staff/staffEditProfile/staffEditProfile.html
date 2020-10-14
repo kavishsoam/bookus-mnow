@@ -1,0 +1,538 @@
+<div class="page-layout blank">
+  <div *ngIf="!displayDelete">
+    <p-toast></p-toast>
+    <div fxLayout="column" class="header" fxLayoutAlign="start center">
+      <div fxLayout="row">
+        <h2 mat-dialog-title>{{data.header}}</h2> <button mat-button mat-dialog-close class="crossButton">
+          <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+        </button>
+      </div>
+    </div>
+    <form name="staffProfileForm" [formGroup]="staffProfileForm" (ngSubmit)="staffProfileSubmit(staffProfileForm)">
+      <mat-dialog-content class="content">
+        <div fxLayout="row" class="innerbody" fxLayoutAlign="space-around">
+          <div fxLayout="column" fxFlex="100" class="center">
+            <mat-tab-group style="height:80vh !important">
+              <div class="page-layout blank">
+                <mat-tab label="DETAILS">
+                  <ng-template matTabContent>
+                    <!-- xxx xxx xxx xxx Details xx xx xxx xxxx -->
+                    <div fxLayout="row" fxLayoutGap="30px" class="pt-20" fxLayout.sm="column" fxLayout.xs="column"
+                      fxLayoutGap.xs="5px">
+                      <!-- LEFT -->
+                      <div fxLayout="column" fxFlex="50">
+                        <div fxLayout="row" fxLayoutGap="30px" fxLayout.xs="column" fxLayoutGap.xs="5px">
+                          <div fxLayout="column" fxFlex="50">
+                            <mat-form-field appearance="outline">
+                              <mat-label>FIRST NAME</mat-label>
+                              <input formControlName="firstName" matInput placeholder="e.g. Jane">
+                              <mat-error *ngIf="!staffProfileForm.controls['firstName'].valid && 
+                                        (staffProfileForm.controls['firstName'].touched || submittedError)">
+                                <mat-error *ngIf="staffProfileForm.get('firstName').hasError('required')">
+                                  First name is required
+                                </mat-error>
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                          <div fxLayout="column" fxFlex="50">
+                            <mat-form-field appearance="outline">
+                              <mat-label>LAST NAME</mat-label>
+                              <input formControlName="lastName" matInput placeholder="e.g. Doe">
+                              <mat-error *ngIf="!staffProfileForm.controls['lastName'].valid && 
+                                        (staffProfileForm.controls['lastName'].touched || submittedError)">
+                                <mat-error *ngIf="staffProfileForm.get('lastName').hasError('required')">
+                                  Last name is required
+                                </mat-error>
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div fxLayout="column">
+                          <mat-form-field appearance="outline">
+                            <mat-label>GENDER</mat-label>
+                            <mat-select formControlName="gender">
+                              <mat-option value="Male">Male</mat-option>
+                              <mat-option value="Female">Female</mat-option>
+                              <mat-option value="Unknown">Others</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="!staffProfileForm.controls['gender'].valid && 
+                                        (staffProfileForm.controls['gender'].touched || submittedError)">
+                              <mat-error *ngIf="staffProfileForm.get('gender').hasError('required')">
+                                Please select a gender
+                              </mat-error>
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div fxLayout="column">
+                          <div class="border-phone"
+                            [ngClass]="{'border-phone-error' : !phone_invalid,'border-phone-not-touch':phone_invalid}">
+                            <!-- <input type="text" ng2TelInput [(ngModel)]="phoneNumber"
+                                                            [ng2TelInputOptions]="{initialCountry: countryStr }"
+                                                            (hasError)="hasError($event)"
+                                                            (ng2TelOutput)="getNumber($event)"
+                                                            (intlTelInputObject)="telInputObject($event)"
+                                                            (countryChange)="onCountryChange($event)"
+                                                            [ngModelOptions]="{standalone: true}" /> -->
+                            <input #telInput matInput type="text" (keydown)="telInputChange($event)" ng2TelInput
+                              [(ngModel)]="phoneNumber" [ng2TelInputOptions]="{initialCountry: countryStr}"
+                              value="+{{countryCode}} " (hasError)="hasError($event)" (ng2TelOutput)="getNumber($event)"
+                              (intlTelInputObject)="telInputObject($event)" (countryChange)="onCountryChange($event)"
+                              [ngModelOptions]="{standalone: true}" [disabled]="disabledForPast" />
+                          </div>
+                          <!-- <mat-error *ngIf="staffProfileForm.get('phone').hasError('required')">
+                            phone number is required
+                          </mat-error>
+                          <mat-error *ngIf="staffProfileForm.get('phone').hasError('pattern')">
+                            Please enter a valid phone number
+                          </mat-error> -->
+                          <div *ngIf="
+                                                !phone_invalid" class="error-handle">Invalid Number</div>
+                        </div>
+                        <div fxLayout="column">
+                          <mat-form-field appearance="outline">
+                            <mat-label>EMAIL</mat-label>
+                            <input formControlName="email" matInput placeholder="mail@example.com">
+                            <mat-error *ngIf="staffProfileForm.get('email').hasError('required')">
+                              Email is required
+                            </mat-error>
+                            <mat-error *ngIf="staffProfileForm.get('email').hasError('pattern')">
+                              Please enter a valid email address
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div fxLayout="column">
+                          <mat-form-field appearance="outline">
+                            <mat-label>QUALIFICAION</mat-label>
+                            <input formControlName="qualification" matInput placeholder="qualifications">
+                            <!-- <mat-error
+                                                        *ngIf="staffProfileForm.get('email').hasError('required')">
+                                                        Email is required
+                                                    </mat-error> -->
+                            <!-- <mat-error
+                                                        *ngIf="staffProfileForm.get('email').hasError('pattern')">
+                                                        Please enter a valid email address
+                                                    </mat-error> -->
+                          </mat-form-field>
+                        </div>
+                        <div class="mt-20">
+                          <mat-slide-toggle [disableRipple]="true" [(ngModel)]="calendarBooking"
+                            [ngModelOptions]="{standalone: true}" [checked]="toggle" (change)="toggle($event)">ENABLE
+                            APPOINTMENT
+                            BOOKINGS</mat-slide-toggle>
+                        </div>
+                        <div class="mt-20">
+                          <mat-slide-toggle [disableRipple]="true" formControlName="active" checked='false'>
+                            ACTIVE/INACTIVE</mat-slide-toggle>
+                        </div>
+                        <!-- <div class="mt-28" *ngIf="calendarBooking" fxLayout="column"
+                                                    fxLayoutAlign="space-between" fxLayout.xs="column">
+                                                    <div>
+                                                        <h3>APPOINTMENT COLOR </h3>
+                                                    </div>
+                                                    <div class="colorPicker">
+                                                        <input class="red-200"
+                                                            [checked]="colorValue == '#ef9a9a' ?  true : false"
+                                                            (click)="colorSetter('#ef9a9a')" type="radio"
+                                                            name="hat-color" value="red" id="hat-color-red" />
+                                                        <label class="red-200" for="hat-color-red"></label>
+                                                        <input class="orange-200"
+                                                            [checked]="colorValue == '#ffcc80' ? true : false"
+                                                            (click)="colorSetter('#ffcc80')" type="radio"
+                                                            name="hat-color" value="orange" id="hat-color-orange" />
+                                                        <label class="orange-200" for="hat-color-orange"></label>
+                                                        <input class="yellow-200"
+                                                            [checked]="colorValue == '#fff59d' ?  true : false"
+                                                            (click)="colorSetter('#fff59d')" type="radio"
+                                                            name="hat-color" value="yellow" id="hat-color-yellow" />
+                                                        <label class="yellow-200" for="hat-color-yellow"></label>
+                                                        <input class="green-200"
+                                                            [checked]="colorValue == '#a5d6a7' ?  true : false"
+                                                            (click)="colorSetter('#a5d6a7')" type="radio"
+                                                            name="hat-color" value="green" id="hat-color-green" />
+                                                        <label class="green-200" for="hat-color-green"></label>
+                                                        <input class="blue-200"
+                                                            [checked]="colorValue == '#90caf9' ?  true : false"
+                                                            (click)="colorSetter('#90caf9')" type="radio"
+                                                            name="hat-color" value="blue" id="hat-color-blue" />
+                                                        <label class="blue-200" for="hat-color-blue"></label>
+                                                        <input class="purple-100"
+                                                            [checked]="colorValue == '#e1bee7' ?  true : false"
+                                                            (click)="colorSetter('#e1bee7')" type="radio"
+                                                            name="hat-color" value="violet" id="hat-color-violet" />
+                                                        <label class="purple-100" for="hat-color-violet"></label>
+                                                        <input class="indigo-100"
+                                                            [checked]="colorValue == '#c5cae9' ?  true : false"
+                                                            (click)="colorSetter('#c5cae9')" type="radio"
+                                                            name="hat-color" value="indigo" id="hat-color-indigo" />
+                                                        <label class="indigo-100" for="hat-color-indigo"></label>
+                                                    </div>
+                                                </div> -->
+                      </div>
+                      <!-- XXXXXX LEFT XXXXX -->
+                      <!-- XXXXXXX RIGHT XXXXXXXXX -->
+                      <div fxLayout="column" fxFlex="50">
+                        <div fxLayout="column" class="staffTitle">
+                          <mat-form-field appearance="outline">
+                            <mat-label>STAFF TITLE</mat-label>
+                            <input formControlName="staffTitle" matInput
+                              placeholder="Add staff title (i.e. Massage Therapy) viewable in online booking only (optional)">
+                          </mat-form-field>
+                        </div>
+                        <div fxLayout="column" class="staffTitle">
+                          <mat-form-field appearance="outline" *ngIf="categoryData?.length">
+                            <mat-label>CATEGORY</mat-label>
+                            <mat-select class="dropdow" multiple formControlName="categoryId"
+                              (selectionChange)="catSelectedListener($event.value)">
+                              <mat-option *ngFor="let item of categoryData" [value]="item.id">
+                                {{item.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div fxLayout="column" class="staffTitle">
+                          <mat-form-field appearance="outline">
+                            <mat-label>STAFF PROVIDER NUMBER</mat-label>
+                            <input formControlName="provider" matInput numbersOnly
+                              placeholder="Add staff provider number (optional)">
+                          </mat-form-field>
+                        </div>
+                        <div fxLayout="column">
+                          <mat-form-field appearance="outline">
+                            <mat-label>DESCRIPTION</mat-label>
+                            <textarea formControlName="descriptions" rows="2" matInput
+                              placeholder="Add private notes viewable in staff settings only (optional)">
+                                            </textarea>
+                          </mat-form-field>
+                        </div>
+                        <div fxLayout="column">
+                          <mat-form-field appearance="outline">
+                            <mat-label>NOTES</mat-label>
+                            <textarea formControlName="notes" rows="6" matInput
+                              placeholder="Add private notes viewable in staff settings only (optional)">
+                                            </textarea>
+                          </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px" fxLayoutGap.xs="5px"
+                          fxLayout.xs="column" fxLayoutGap.xs="5px">
+                          <div fxLayout="column" fxFlex="50">
+                            <mat-form-field appearance="outline">
+                              <mat-label>EMPLOYMENT START DATE</mat-label>
+                              <input matInput formControlName="employmentStartDate" [matDatepicker]="picker1"
+                                placeholder="EMPLOYMENT START DATE">
+                              <mat-datepicker-toggle matSuffix [for]="picker1">
+                              </mat-datepicker-toggle>
+                              <mat-datepicker touchUi #picker1></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                          <div fxLayout="column" fxFlex="50">
+                            <mat-form-field appearance="outline">
+                              <mat-label>EMPLOYMENT END DATE</mat-label>
+                              <input matInput [min]="staffProfileForm.controls['employmentStartDate'].value"
+                                formControlName="employmentEndDate" [matDatepicker]="picker2"
+                                placeholder="EMPLOYMENT END DATE">
+                              <mat-datepicker-toggle matSuffix [for]="picker2">
+                              </mat-datepicker-toggle>
+                              <mat-datepicker touchUi #picker2></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- XXXXXXX RIGHT XXXXXXXXX -->
+                    </div>
+                  </ng-template>
+                  <!-- xx xx xxxx xxx xx xxxx xxx xxx xx xxxxx -->
+                </mat-tab>
+                <mat-tab label="EMPLOYMENT TYPE">
+
+                  <mat-radio-group aria-label="Select an option" formControlName="employmentType">
+                    <mat-radio-button value="freelancer" class="changeP">
+                      <div fxLayout="column" fxLayoutAlign="space-around start">
+                        <div fxFlex="30">
+                          <p style="font-size: 19px;">SUBCONTRACTOR</p>
+                        </div>
+                        <div fxFlex="20">
+                          <mat-form-field appearance="outline">
+                            <mat-label>ABN Number</mat-label>
+                            <input matInput placeholder="Enter Here" formControlName="subcontractorABN" numbersOnly
+                              maxlength="11">
+                            <!-- <mat-error *ngIf="!staffProfileForm.controls['firstName'].valid && 
+                                      (staffProfileForm.controls['firstName'].touched || submittedError)">
+                              <mat-error *ngIf="staffProfileForm.get('firstName').hasError('required')">
+                                First name is required
+                              </mat-error>
+                            </mat-error> -->
+                          </mat-form-field>
+                        </div>
+                        <div fxFlex="10">
+                          <div fxLayout="row" fxLayoutAlign="space-around center">
+                            <div fxFlex="57">
+                              <p>Does (Massage Contractor) have TAX </p>
+                            </div>
+                            <div fxFlex="25">
+                              <mat-form-field style="width: 125px;">
+                                <mat-label>Commission</mat-label>
+                                <mat-select formControlName="subcontractorCommission">
+                                  <mat-option value="serviceCommission">Service Commission</mat-option>
+                                  <mat-option value="specificCommission">specificCommission</mat-option>
+                                  <mat-option value="hourlyCommission">hourlyCommission</mat-option>
+                                </mat-select>
+                                <!-- <mat-error *ngIf="!staffProfileForm.controls['gender'].valid && 
+                                            (staffProfileForm.controls['gender'].touched || submittedError)">
+                                    <mat-error *ngIf="staffProfileForm.get('gender').hasError('required')">
+                                      Please select a gender
+                                    </mat-error>
+                                  </mat-error> -->
+                              </mat-form-field>
+                            </div>
+                            <div fxFlex="3">
+                              <p>of</p>
+                            </div>
+                            <div fxFlex="8">
+                              <mat-form-field style="width: 50px;">
+                                <input matInput formControlName="subcontractorPercent" maxlength="2">
+                              </mat-form-field>
+                            </div>
+                            <div fxFlex="3">
+                              <p> %</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div fxFlex="10">
+                          <p>
+                            <mat-icon>attach_file</mat-icon>Attach Tax Certificate
+                          </p>
+                        </div>
+                      </div>
+                    </mat-radio-button>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <mat-radio-button value="permanent" class="changeP">
+                      <div fxLayout="column" fxLayoutAlign="space-around start">
+                        <div fxFlex="30">
+                          <p style="font-size: 19px;">DIRECT EMPLOYEE</p>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-around center">
+                          <div fxFlex="28">
+                            <mat-form-field appearance="outline">
+                              <mat-label>ABN Number</mat-label>
+                              <input matInput placeholder="Enter Here" formControlName="permanentABN" numbersOnly
+                                maxlength="11">
+                              <!-- <mat-error *ngIf="!staffProfileForm.controls['firstName'].valid && 
+                                          (staffProfileForm.controls['firstName'].touched || submittedError)">
+                                  <mat-error *ngIf="staffProfileForm.get('firstName').hasError('required')">
+                                    First name is required
+                                  </mat-error>
+                                </mat-error> -->
+                            </mat-form-field>
+                          </div>
+                          <div fxFlex="10"></div>
+                          <div fxFlex="28">
+                            <mat-form-field appearance="outline">
+                              <mat-label>TFN Number</mat-label>
+                              <input matInput placeholder="Enter Here" formControlName="permanentTFN" numbersOnly
+                                maxlength="9">
+                              <!-- <mat-error *ngIf="!staffProfileForm.controls['firstName'].valid && 
+                                          (staffProfileForm.controls['firstName'].touched || submittedError)">
+                                  <mat-error *ngIf="staffProfileForm.get('firstName').hasError('required')">
+                                    First name is required
+                                  </mat-error>
+                                </mat-error> -->
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-radio-button>
+                  </mat-radio-group>
+
+                </mat-tab>
+                <mat-tab label="LOCATION">
+                  <ng-template matTabContent>
+                    <div fxLayout="column" fxLayoutAlign="space-between" fx class="pt-20" class="pl-20 p-12"
+                      fxLayoutGap="5px">
+                      <mat-checkbox #select_all [checked]="checkAll" [disabled]="disabledForPast"
+                        (change)="selectAll(1, $event.checked)">Select
+                        all</mat-checkbox>
+                      <mat-checkbox *ngFor="let item of locationList" [checked]="item.selected"
+                        [disabled]="disabledForPast" (change)="locationModify(item)" value="item">{{item.name}}
+                      </mat-checkbox>
+                    </div>
+                  </ng-template>
+                </mat-tab>
+                <mat-tab *ngIf="calendarBooking" label="SERVICES">
+                  <ng-template matTabContent>
+                    <div fxLayout="column" fxLayoutAlign="space-between" fx class="pt-20" class="pl-20  p-12"
+                      fxLayoutGap="5px">
+                      <mat-checkbox #select_all_ser [checked]="checkAll_ser" [disabled]="disabledForPast"
+                        (change)="selectAll(2, $event.checked)">
+                        Select
+                        all</mat-checkbox>
+                      <mat-checkbox *ngFor="let item of serviceList" [checked]="item.selected"
+                        [disabled]="disabledForPast" (change)="serviceModify(item)" value="item">{{item.name}}
+                      </mat-checkbox>
+                    </div>
+                  </ng-template>
+                </mat-tab>
+                <mat-tab label="COMMISSION">
+                  <ng-template matTabContent>
+                    <div fxLayout="row" fxLayoutGap="30px" fxLayoutGap.xs="2px" class="pt-20">
+                      <div fxLayout="column" fxFlex="100">
+                        <div fxLayout="row" fxLayoutGap="30px" fxLayoutGap.xs="2px" fxLayout.xs="column">
+                          <div fxLayout="column" fxFlex="50" fxFlex.xs="100">
+                            <mat-form-field appearance="outline">
+                              <mat-label>SERVICE COMMISSION</mat-label>
+                              <input formControlName="service_commission" matInput placeholder="0.00">
+                              <mat-icon matPrefix> % </mat-icon>
+                            </mat-form-field>
+                          </div>
+                          <div fxLayout="column" fxFlex="50" fxFlex.xs="100">
+                            <mat-form-field appearance="outline">
+                              <mat-label>SPECIFIC COMMISSION</mat-label>
+                              <input formControlName="specific_commission" matInput placeholder="22">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutGap="30px" fxLayoutGap.xs="2px" class="pt-20" fxLayout.xs="column">
+                      <div fxLayout="column" fxFlex="50" fxFlex.xs="100">
+                        <mat-form-field appearance="outline">
+                          <mat-label>HOURLY PAY</mat-label>
+                          <input formControlName="hourly_pay" matInput placeholder="18">
+                        </mat-form-field>
+                      </div>
+                      <div fxLayout="column" fxFlex="50" fxFlex.xs="100">
+                        <mat-form-field appearance="outline">
+                          <mat-label>HOURLY COMMISSION</mat-label>
+                          <input formControlName="hourly_commission" matInput placeholder="58">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </ng-template>
+                </mat-tab>
+                <mat-tab label="PROFILE PICTURE">
+                  <!-- <button mat-stroked-button color="primary" (click)="chooseButtonClicked()">choose image</button> -->
+                  <ng-template matTabContent>
+                    <div fxLayout="row" fxLayoutGap="30px" fxLayoutGap.xs="5px" class="pt-20 pad-lt">
+                      <div fxLayout="column" fxFlex="100">
+                        <mat-card class="example-card">
+                          <mat-card-header style="width:100% !important">
+                            <div mat-card-avatar class="example-header-image"
+                              style="background-image: url(../../../../assets/images/avatars/profile.jpg);"></div>
+                            <mat-card-title>{{staffProfileForm.get('firstName').value}}</mat-card-title>
+                            <mat-card-subtitle>{{staffProfileForm.get('email').value}}</mat-card-subtitle>
+                          </mat-card-header>
+                          <mat-card-content style="height:190px !important">
+                            <!-- <input type="file" (change)="fileChangeEvent($event)" />
+
+                            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                              [aspectRatio]="4 / 3" format="png" (imageCropped)="imageCropped($event)"
+                              (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+                              (loadImageFailed)="loadImageFailed()"></image-cropper> -->
+
+
+                            <div class="image-div-style">
+                              <img mat-card-image class="card-image-class2" [src]="croppedImage" *ngIf="croppedImage" />
+                              <!-- <img mat-card-image class="card-image-class2" [src]="imgURL" *ngIf="imgURL"
+                                alt="profile_image"> -->
+                            </div>
+                          </mat-card-content>
+                          <mat-card-actions style="padding: 20px 162px !important;">
+                            <!-- <div>
+                              <span style="color:red;" *ngIf="message">{{message}}</span>
+                              <div class="file-input-wrapper">
+                                <button mat-stroked-button color="primary" type="button" class="btn-file-input">Upload
+                                  Image</button>
+                                <input #file type="file" accept="image/x-png,image/gif,image/jpeg"
+                                  (change)="preview(file.files)" formControlName="image" />
+                              </div>
+                            </div> -->
+                            <button mat-stroked-button color="primary" type="button"
+                              (click)="chooseButtonClicked()">choose
+                              image</button>
+                          </mat-card-actions>
+                        </mat-card>
+                      </div>
+
+                      <div fxLayout="column" fxFlex="100" *ngIf="croppedImage != ''">
+                        <mat-card class="example-card">
+                          <mat-card-header>
+
+                          </mat-card-header>
+                          <mat-card-content>
+
+                            <div id="upload_img_list" class="">
+                              <div *ngFor="let url of allOtherImages;let index = index" class="upload_img ">
+                                <div class="product-image">
+                                  <span (click)="removeSelectedImg(index)">&#x292B;</span>
+                                  <img class="media" [src]="url" />
+                                </div>
+                              </div>
+                            </div>
+
+                            <!-- <div > -->
+                            <!-- <div fxLayout="column" fxLayoutAlign="space-around center"> -->
+                            <!-- <ng-container class="mr-6 ml-6 mb-5 mt-6 card-image-class123"
+                              *ngFor="let url of allOtherImages;let index = index" fxFlex="0 1 calc(30.3% - 32px)">
+                              <img class="card-image-class123" [src]="url" />
+                            </ng-container> -->
+                            <!-- </div> -->
+                            <!-- </div> -->
+                          </mat-card-content>
+                          <mat-card-actions>
+                            <button style="margin-top: 10%;" mat-stroked-button color="primary" type="button"
+                              (click)="moreUpload()">upload More
+                              +</button>
+                          </mat-card-actions>
+                        </mat-card>
+                      </div>
+
+                    </div>
+                    <!-- 
+                    <div fxLayout="row" fxLayoutGap="30px" fxLayoutGap.xs="5px" class="pt-10 pad-lt">
+
+                    </div> -->
+
+                  </ng-template>
+                </mat-tab>
+              </div>
+            </mat-tab-group>
+          </div>
+        </div>
+
+      </mat-dialog-content>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="buttons">
+        <button *ngIf="data.header != 'New Staff'" [disabled]="disabledForPast" mat-raised-button color="warn"
+          type="button" class="ml-12" (click)="deleteStaff()">Delete</button>
+        <div fxLayout="row" fxFlex="1 1 auto"></div>
+        <button mat-raised-button type="button" [disabled]="disabledForPast" mat-dialog-close
+          (click)=" onNoClick()">Cancel</button>
+        <button style="margin-left: 10px" *ngIf="staffProfileForm.active"
+          [disabled]="staffProfileForm.invalid && !phone_invalid" [promiseBtn]="loader" mat-raised-button
+          color="primary" type="submit" class="mr-12">Save
+        </button>
+        <button style="margin-left: 10px" *ngIf="!staffProfileForm.active" [disabled]="disabledForPast"
+          [promiseBtn]="loader" mat-raised-button color="primary" type="submit" class="mr-12">Save
+        </button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="displayDelete">
+    <div fxLayout="column" class="header" fxLayoutAlign="start center">
+      <div fxLayout="row">
+        <h2 mat-dialog-title>Delete Staff</h2>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <p class="description">
+        Are you sure you want to delete this employee?
+      </p>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons mt-60 pl-12 pr-12">
+      <button mat-raised-button type="button" mat-dialog-close>Close</button>
+      <div fxLayout="row" fxFlex="1 1 auto"></div>
+      <button mat-raised-button color="warn" type="button" (click)="deleteStaffConfirm()">Delete</button>
+    </div>
+  </div>
+</div>

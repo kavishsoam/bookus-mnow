@@ -1,0 +1,146 @@
+<div class="page-layout blank">
+  <div class="content">
+
+    <div class="content p-24">
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.gt-xs="row"
+      fxLayoutAlign.gt-xs="space-between center">
+
+      <!-- <div fxLayout="70">
+        <mat-form-field class="noline hello" [floatLabel]="'never'"  style="width: 230px;">
+          <input class="dropdown" autocomplete="off" matInput placeholder="Select date range"
+            [(ngModel)]="saleDateTimeRange" [selectMode]="'range'" [owlDateTimeTrigger]="dtRange2"
+            [owlDateTime]="dtRange2" >
+          <owl-date-time style="widows: 20px !important" [pickerType]="'calendar'" #dtRange2>
+          </owl-date-time>
+        </mat-form-field>
+      </div>
+
+       <div>
+              <mat-form-field class="noline">
+                <mat-select class="dropdown"  [formControl]="yearsValues" >
+                  <mat-option *ngFor="let item of noline" [value]="item.value">{{item.value}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field class="noline">
+                <mat-select class="dropdown" [formControl]="pokemonControl">
+                  <mat-option>-- None --</mat-option>
+                  <mat-optgroup *ngFor="let group of pokemonGroups" [label]="group.name"
+                                [disabled]="group.disabled">
+                    <mat-option *ngFor="let pokemon of group.pokemon" [value]="pokemon.value">
+                      {{pokemon.viewValue}}
+                    </mat-option>
+                  </mat-optgroup>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field class="noline">
+                <mat-select class="dropdown"  [formControl]="serviceValues" >
+                  <mat-option *ngFor="let item of serviceValues" [value]="item.value">{{item.value}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            
+            <div>
+              <button mat-raised-button color="primary" >Search</button>
+            </div>
+            <div>
+              <button mat-raised-button >Clear</button>
+            </div> -->
+
+      
+         
+     
+            <div class="">
+              <button mat-button [matMenuTriggerFor]="menu" [disabled]="!clientList.length">{{'Export' | translate}}</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item value="CSV"
+                (click)="onOptionSelected($event.currentTarget.value)">{{'CSV' | translate}}</button>
+                <button mat-menu-item value="Excel"
+                (click)="onOptionSelected($event.currentTarget.value)">{{'Excel' | translate}}</button>
+                <button mat-menu-item value="Pdf"
+                (click)="onOptionSelected($event.currentTarget.value)">{{'Pdf' | translate}}</button>
+              </mat-menu>
+              </div>  
+         
+          <div *ngIf="clientList.length != 0">
+            <mat-form-field mat-no-float class="" floatLabel="never">
+              <mat-label>
+                <mat-icon>search</mat-icon> {{'Search for anything' | translate}}
+              </mat-label>
+              <input matInput id="search" autocomplete="off" (keyup)="applyFilter($event.target.value)"
+                placeholder="{{'Search for anything' | translate}}">
+            </mat-form-field>
+          </div>
+    </div>
+
+    <div class="text-center py-3 p-4" *ngIf="clientList.length == 0">
+      <div class="emptyicons">
+        <mat-icon [inline]='true'>account_circle
+        </mat-icon>
+        <h1>No Clients</h1>
+        <p>{{'You do not have any clients yet'| translate}}</p>
+      </div>
+      <button mat-raised-button (click)="addClient()" color="primary">{{'New client' | translate}}</button>
+    </div>
+    <div class="filters" *ngIf="clientList.length > 0" fxLayout="column" fxLayoutAlign="start stretch" >
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+        <ng-container matColumnDef="profile">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element" > 
+            <div *ngIf="element.image.length">
+              <img class="row-img" src="{{element?.image[0]}}">
+            </div>
+            <div *ngIf="!element.image.length">
+              <avatar [name]="element?.firstName" [size]="50" background="#8c92a0" [displayType]="'circle'"></avatar>
+            </div>
+           </td>
+        </ng-container>
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Name' | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="phone1">
+          <th class="three" mat-header-cell *matHeaderCellDef > {{'Mobile Number'| translate}}. </th>
+          <td class="three" mat-cell *matCellDef="let element"> <span
+              *ngIf="element.phone1">+{{element.countryCode}}</span>
+            {{element.phone1}} </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th class="three" mat-header-cell *matHeaderCellDef > {{'Email' | translate}} </th>
+          <td class="three" mat-cell *matCellDef="let element"> {{(element?.email)? element?.email : '--'}} </td>
+        </ng-container>
+        <ng-container class="text-center" matColumnDef="gender">
+          <th class="two text-center" mat-header-cell *matHeaderCellDef > {{'Gender' | translate}} </th>
+          <td class="two text-center" mat-cell *matCellDef="let element"> {{ (element.gender) ? element?.gender : '--' }} </td>
+        </ng-container>
+        <ng-container matColumnDef="clientIntakeForm">
+          <th class="one" mat-header-cell *matHeaderCellDef > {{'Intake Form' | translate}} </th>
+          <td class="one" mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">
+            <button mat-button (click)=intakeFormLists(element._id)>
+              <mat-icon>assignment</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="clientListColumn"></tr>
+        <tr mat-row style="cursor: pointer;height: 70px !important;" *matRowDef="let row; columns: clientListColumn;" (click)=editClient(row)>
+        </tr> 
+      </table>
+      <mat-paginator class="mat-elevation-z8-page" [length]="100"
+      [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+    
+    </div>
+  
+  </div>
+
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+  <button *ngIf="clientList.length != 0" mat-fab class="add-event-button fab-button" color="primary"
+    (click)="addClient()" aria-label="Add event" style="z-index: 1 !important">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

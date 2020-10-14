@@ -1,0 +1,180 @@
+<div class="page-layout blank">
+  <p-toast></p-toast>
+  <div>
+    <form name="clientRegisterForm" [formGroup]="appointmentForm" (ngSubmit)="submitAppointmentForm(appointmentForm)">
+      <div *ngIf="clientList" class="align-button">
+        <div (click)="closeView()" class="outer">
+          <div class="inner">
+            <label>Back</label>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="column" class="header" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>{{data.Header}}</h2>
+          <button mat-button mat-dialog-close class="crossButton">
+            <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-dialog-content class="content">
+        <div fxLayout="row" class="innerbody" fxLayoutAlign="space-around">
+          <div class="left" fxLayout="column" fxFlex="70" [ngClass]="{'blur':clientList}">
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <button mat-icon-button class="arrow" type="button" mwlCalendarPreviousView [view]="view"
+                [(viewDate)]="viewDate" (viewDateChange)="($event)" aria-label="Previous">
+                <!-- selectedDay = {date:$event} -->
+                <mat-icon>chevron_left</mat-icon>
+              </button>
+              <div>
+                {{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}
+              </div>
+              <button mat-icon-button class="arrow" type="button" mwlCalendarNextView [view]="view"
+                [(viewDate)]="viewDate" (viewDateChange)="dateChange($event)" aria-label="Next">
+                <mat-icon>chevron_right</mat-icon>
+              </button>
+            </div>
+            <div formArrayName="booking">
+              <div class="step" [ngClass]="book.get('service').value ? 'completed': 'active'"
+                [@slideInTop]="{value:'*'}" *ngFor=" let book of getControls(); let i=index" [formGroupName]="i">
+                <div class="v-stepper">
+                  <div class="circle">
+                    <span *ngIf="book.get('service').value || i == 0" class="app_no">{{i+1}}</span>
+                  </div>
+                  <div [@slideInTop]="{value:'*'}" [ngClass]="book.get('service').value ? 'line': 'no-line'">
+                  </div>
+                </div>
+                <div class="contentApp">
+                  <mat-card [ngClass]="book.get('service').value || i == 0 ? 'enabledCard' : 'disabledCard'">
+                    <div fxLayout="row" fxLayoutGap="30px">
+                      <div fxLayout="column" fxFlex="15" class="staffTimePicker">
+                        <ejs-timepicker disabled formControlName="startTime" (change)='onStartTimeSelected($event,i)'
+                          name="time" placeholder='Start Time' floatLabelType='Always'>
+                        </ejs-timepicker>
+                      </div>
+                      <div fxLayout="column" fxFlex="85">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Choose a service </mat-label>
+                          <mat-select #select (selectionChange)="changeEndTime(book.value, i);"
+                            formControlName="service" [compareWith]="compareObjectsService">
+                            <input type="text" matInput style="margin: 16px 0;
+                            padding-left: 16px;" (keydown)="$event.stopPropagation()"
+                              (input)="searchElement($event.target.value,i)" autocomplete="off" placeholder="Search"
+                              formControlName="searchService">
+                            <button style="top: 10px;
+                            position: absolute;
+                            right: 10px;" mat-button matSuffix mat-icon-button aria-label="Clear"
+                              (click)="filterServicesGroups('',i)">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                            <mat-optgroup *ngFor="let item of lnt[i].data | async; let i = index"
+                              label="{{item.serviceGroup}}">
+                              <mat-option class="option" *ngFor="let service of item.services;" [value]="service">
+
+                                <div fxLayout="row" fxLayoutAlign="space-between center">
+                                  <div fxLayout="column">
+                                    <!-- {{service | json}} -->
+                                    {{service.name}}</div>
+                                  <div fxLayout="column">
+                                    {{ service.specialPrice ? (service.specialPrice|
+                                    currency:currencyCode : 'symbol-narrow') : (service.price|
+                                    currency:currencyCode : 'symbol-narrow')}}
+                                  </div>
+                                </div>
+                                <div class="option2" fxLayout="row" fxLayoutAlign="space-between center">
+                                  <div fxLayout="column">
+                                    {{service && service.pricingName ? service.pricingName + ',' : ''}}
+                                    {{service.duration}}</div>
+                                  <div fxLayout="column" class="line">
+                                    {{ service.specialPrice ? (service.price|
+                                    currency:currencyCode : 'symbol-narrow') : ""}}
+                                  </div>
+                                </div>
+                              </mat-option>
+                            </mat-optgroup>
+                          </mat-select>
+
+                          <mat-hint [ngStyle]="{color: hintColor}">
+                            {{isWorkingService[i]}}
+                          </mat-hint>
+                          <!--  -->
+                          <!-- <mat-hint *ngIf="showMathint">
+                            {{serviceValidation(book.value,i)}}{{submitButtonValidation(book)}}
+                          </mat-hint> -->
+                          <mat-error>Service is required</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div fxLayout="row" [@expandCollapse]="{value:'*'}" fxLayoutGap="30px"
+                      *ngIf="book.get('service').value">
+                      <div fxLayout="column" fxFlex="15">
+                        <ejs-timepicker [min]="minDate" formControlName="endTime" name="time" placeholder='End Time'
+                          (change)='onEndTimeSelected($event,i)' floatLabelType='Always'>
+                        </ejs-timepicker>
+                      </div>
+                      <div fxLayout="column" fxFlex="85 ">
+                        <div class="wrapper-demo">
+                          <button type="button"
+                            [ngClass]="book.get('requestedStaff').value ? ['toggle-icon','-checked'] : 'toggle-icon'"
+                            (click)="requestedStaff(i)" title="Requested Staff"></button>
+                        </div>
+                        <br>
+                        <mat-form-field appearance="outline">
+                          <mat-label>Staff</mat-label>
+                          <mat-select class="staffList" (selectionChange)="changeInStaff($event.value,book.value,i)"
+                            placeholder="" [compareWith]="compareObjectsStaff" formControlName='staff'>
+                            <mat-option style="padding-left: 10px;" *ngFor="let item of staff; let ind = index"
+                              [value]="item">
+                              {{item.firstName}} {{item.lastName}}
+                            </mat-option>
+                          </mat-select>
+                          <mat-hint>
+                            {{isStaffWorkingValidationMsg[i]}}
+                          </mat-hint>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </mat-card>
+                </div>
+              </div>
+              <br>
+            </div>
+            <div fxLayout="row" fxLayoutGap="30px" class="appNotes">
+              <div fxLayout="column" fxFlex="100">
+                <mat-form-field appearance="outline">
+                  <mat-label>Appointment Notes</mat-label>
+                  <textarea rows="7" matInput formControlName="notes"
+                    placeholder="Add an appointment note (visible to staff only)"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+          <!-- phase right -->
+          <div class="right" fxLayout="column" fxFlex="30">
+            <app-client-info [isView]="false" [isInvoice]="false" [data]="data" [searchClient]="searchClient"
+              [searchClientEmail]="searchClientEmail" [searchClientPhone]="searchClientPhone" [intakeFormFilled]="clientIntakeFormFilled"
+              (show_Menu)="showMenu($event)" (client_Option)="clientOption($event)"
+              (create_New_Client)="createNewClient()" (get_IntakeBy_ClientId)="getIntakeByClientId()"
+              (get_Intake_By_IntakeId)="getIntakeByIntakeId()" [clientDetails]="clientDetails"
+              [appointment]="appointment" [apt]="apt" [clientData]="clientData" [clientInvoices]="clientInvoices"
+              [intakeId]="intakeId" [clients]="clients" (select_Clients)="selectClient($event)" [ifClicked]="ifClicked"
+              [select_Client]="select_Client" (client_invoices)="getClientInvoices('')"
+              (client_List)="client_list_view($event)" [clientList]="clientList" (ReDirectSchedular)="reDirectingSchedular($event)" >
+            </app-client-info>
+          </div>
+        </div>
+      </mat-dialog-content>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+        <button *ngIf="_id" mat-raised-button color="warn" type="button" (click)="deleteAppointement"
+          style="margin-left:15px;">Delete</button>
+        <div fxLayout="row" fxFlex="1 1 auto"></div>
+        <button mat-raised-button type="button" style="margin-right: 15px" (click)="onNoClick('cancel')"
+          mat-dialog-close>Cancel</button>
+        <button [disabled]="appointmentForm.invalid || isDisabledButton || anyErrorPresent" style="padding: 0px 10px;" mat-raised-button
+          color="primary" [promiseBtn]="loader" type="submit">Save
+          appointment</button>
+      </div>
+    </form>
+  </div>
+</div>

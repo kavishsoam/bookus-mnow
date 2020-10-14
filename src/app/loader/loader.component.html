@@ -1,0 +1,6 @@
+
+<div *ngIf="loader" class="overlay" [ngStyle]="{'background-color': 'rgba(51,51,51,0.8)'}" [style.position]="'fixed'">
+  <div class="la-line-scale-pulse-out la-2x" [style.color]="'#fff'">
+    <div *ngFor="let d of dArray"></div>
+  </div>
+</div>

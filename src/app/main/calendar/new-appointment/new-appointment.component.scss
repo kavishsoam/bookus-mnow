@@ -1,0 +1,515 @@
+h2 {
+  text-align: center;
+  color: #24334A;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0px 18px 18px 18px;
+  line-height: 30px;
+  font-size: 30px;
+  font-weight: 300;
+  margin: 0;
+  font-family: Sarabun, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+// .pad-Mnow321 {
+//         padding: 0;
+// }
+
+.option {
+  height: 5em !important;
+  border-top: solid 0.5px #DEE3E7;
+  border-bottom: solid 0.5px #DEE3E7;
+}
+
+.innerbody {
+  border-bottom: 1px solid #dee3e6;
+  border-top: 1px solid #dee3e6;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+::ng-deep .mat-card {
+  margin-top: 20px;
+}
+
+.online-booking-header {
+  font-size: 15px;
+}
+
+.bottomSection {
+  position: fixed;
+  bottom: 7px;
+  left: 7px;
+  right: 10px;
+  width: 98%;
+}
+
+.form {
+  padding: 0 25px 0 25px;
+}
+
+.option2 {
+  color: #67768C;
+  font-size: 14px;
+}
+
+.line {
+  text-decoration: line-through;
+  color: #67768C;
+  font-size: 14px;
+}
+
+.search {
+  font-size: 68px;
+  height: 68px;
+  width: 68px;
+  margin-bottom: -16px;
+  color: #67768C;
+}
+
+p {
+  color: #67768C;
+  font-size: 16px;
+  line-height: 22px;
+  padding: 25px;
+}
+
+a {
+  color: #2B72BD !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
+  display: block !important;
+  padding: 16px 0 !important;
+  text-align: center !important;
+}
+
+.newclient {
+  border-top: 1px solid #EEF0F2 !important;
+  border-bottom: 1px solid #EEF0F2 !important;
+}
+
+.clientList {
+  height: 290px;
+  overflow-y: scroll;
+  list-style: none;
+}
+
+.intakeFormClosed {
+  pointer-events: none;
+  cursor: default;
+  color: grey !important;
+}
+
+::ng-deep .mat-list .mat-list-item .mat-list-item-content:hover {
+  cursor: pointer;
+  background-color: rgb(238, 253, 198);
+}
+
+.saveButton {
+  background-color: #24334A !important;
+  color: white !important;
+}
+
+.deleteButton {
+  background-color: #F74969 !important;
+  color: white !important;
+}
+
+.value-data {
+  font-weight: 500;
+  color: #24334A;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.header-data {
+  color: #67768C;
+  align-items: center;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.crossButton {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  font-size: 29px;
+}
+
+.heading {
+  word-wrap: break-word;
+  max-width: 100%;
+  min-width: 0;
+  padding: 16px 16px 25px 16px;
+  padding-bottom: 0px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #67768C;
+  line-height: 16px;
+  text-align: initial;
+  white-space: pre-wrap
+}
+
+.contentdata {
+  word-wrap: break-word;
+  max-width: 100%;
+  min-width: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #24334A;
+  padding: 0px 16px 10px 16px;
+  text-align: initial;
+}
+
+.clientInfo {
+  max-height: 40vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.step {
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: cream;
+}
+
+.v-stepper {
+  position: relative;
+  margin-top: 80px;
+}
+
+/* regular step */
+.step .circle {
+  background-color: white;
+  border: 3px solid gray;
+  border-radius: 100%;
+  width: 25px;
+  /* +6 for border */
+  height: 25px;
+  display: inline-block;
+}
+
+.step .line {
+  top: 23px;
+  left: 10px;
+  height: 220px;
+  position: absolute;
+  border-left: 3px solid gray;
+}
+
+.step.completed .circle {
+  visibility: visible;
+  border-color: rgb(6, 150, 215);
+}
+
+.step.completed .line {
+  border-left: 3px solid rgb(6, 150, 215);
+}
+
+.step.active .circle {
+  visibility: visible;
+  border-color: rgb(6, 150, 215);
+}
+
+.step.empty .circle {
+  visibility: hidden;
+}
+
+.step.empty .line {
+  /*     visibility: hidden; */
+  /*   height: 150%; */
+  top: 0;
+  height: 150%;
+}
+
+.step:last-child .line {
+  border-left: 3px solid white;
+  z-index: -1;
+  /* behind the circle to completely hide */
+}
+
+.contentApp {
+  width: 100%;
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.app_no {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px
+}
+
+.wrapper-demo {
+  margin-top: -34px;
+
+  button {
+    position: relative;
+    top: 55px;
+  }
+}
+
+:focus {
+  outline: none;
+}
+
+/* == Unicodes cheatsheet ==
+     http://fontawesome.bootstrapcheatsheets.com
+  */
+.toggle-icon {
+  position: absolute;
+  top: 32px;
+  left: 10px;
+  font-size: 17pt;
+  z-index: 999;
+  color: gray;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.toggle-icon:before,
+.toggle-icon:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all .3s ease-out;
+  content: "";
+  font-family: fontawesome;
+}
+
+.toggle-icon:hover:before {
+  transform: scale(1.2);
+}
+
+.toggle-icon:active:before {
+  transition: none;
+  transform: scale(1);
+}
+
+.toggle-icon:after {
+  opacity: 0;
+}
+
+.toggle-icon.-checked {
+  color: #FF2828;
+}
+
+.toggle-icon.-checked:before {
+  content: "";
+}
+
+.toggle-icon.-checked:after {
+  content: "";
+  animation: likeFly .6s ease-in;
+}
+
+@keyframes heartbeat {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+.staffList {
+  padding-left: 30px !important;
+}
+
+.disabledCard {
+  background-color: #F7F7F8 !important;
+  border: 1px solid rgba(222, 227, 231, .4);
+  padding: 24px calc(24px - 8px) calc(24px - 20px) calc(24px - 8px) !important;
+}
+
+.enabledCard {
+  padding: 24px calc(24px - 8px) calc(24px - 20px) calc(24px - 8px) !important;
+}
+
+.appNotes {
+  padding-left: 52px;
+  padding-right: 9px
+}
+
+.innerbody {
+  border-bottom: 1px solid #dee3e6;
+  border-top: 1px solid #dee3e6;
+}
+
+.crossButton {
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  font-size: 29px;
+}
+
+.buttons {
+  padding-right: 20px;
+}
+
+.left {
+  border-right: 1px solid #dee3e6;
+  padding: 35px;
+  margin-right: 0;
+  height: 77vh;
+  overflow-y: scroll;
+}
+
+.right {
+  padding-top: 15px;
+  height: 77vh;
+  overflow-y: scroll;
+}
+
+::ng-deep .mat-tab-body {
+  min-height: 80vh;
+}
+
+.content {
+  max-height: 78vh;
+}
+
+//  .mat-dialog-container {
+//   padding: 0 !important;
+// }
+
+.header {
+  padding: 20px;
+  margin-bottom: -20px;
+}
+
+.buttons .mat-raised-button {
+  min-height: 42px !important;
+  text-transform: uppercase;
+  min-width: 128px;
+  letter-spacing: 0.3pt;
+  font-weight: 400;
+}
+
+.blur {
+  background: rgba(103, 118, 140, .5);
+  z-index: 9999;
+  opacity: 0.5;
+  pointer-events: none;
+
+  .mat-card {
+    background: rgba(103, 118, 140, 0) !important;
+  }
+
+  .step.active {
+    .circle {
+      border-color: rgba(103, 118, 140, 0) !important;
+      background: rgba(103, 118, 140, 0) !important;
+    }
+  }
+}
+
+.align-button {
+  float: right;
+  position: relative;
+  left: -63%;
+  top: 90px;
+}
+
+//layout end
+
+///////////close button////////////////////////
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #141926;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.outer {
+  position: relative;
+  margin: auto;
+  width: 70px;
+  margin-top: 200px;
+  cursor: pointer;
+}
+
+.inner {
+  width: inherit;
+  text-align: center;
+}
+
+label {
+  font-size: .8em;
+  line-height: 4em;
+  text-transform: uppercase;
+  color: black;
+  transition: all .3s ease-in;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.inner:before,
+.inner:after {
+  position: absolute;
+  content: '';
+  height: 1px;
+  width: inherit;
+  background: black;
+  left: 0;
+  transition: all .3s ease-in;
+}
+
+.inner:before {
+  top: 50%;
+  transform: rotate(45deg);
+}
+
+.inner:after {
+  bottom: 50%;
+  transform: rotate(-45deg);
+}
+
+.outer:hover label {
+  opacity: 1;
+}
+
+.outer:hover .inner:before,
+.outer:hover .inner:after {
+  transform: rotate(0);
+}
+
+.outer:hover .inner:before {
+  top: 0;
+}
+
+.outer:hover .inner:after {
+  bottom: 0;
+}
+
+.staffTimePicker {
+  top: 5px;
+}
+
+
+
+.e-input-group .e-input-group-icon,
+.e-input-group.e-control-wrapper .e-input-group-icon {
+  color: rgb(117, 117, 117) !important;
+}
+
+
+// .e-date-wrapper span.e-input-group-icon.e-date-icon.e-icons:hover:not(:active) {
+//   background: none;
+// }

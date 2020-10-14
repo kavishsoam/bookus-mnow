@@ -1,0 +1,56 @@
+<div class="page-layout blank">
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+    <p-toast [style]="{marginTop: '50px'}"></p-toast>
+
+    <div>
+        <form name="invoicesForm" [formGroup]="invoicesForm" (ngSubmit)="invoices(invoicesForm)">
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <mat-card>
+                        <h2>Invoices & Receipts</h2>
+                        <div fxLayout="row">
+                            <mat-checkbox formControlName="autoPrint">Automatically print receipts upon sale completion
+                            </mat-checkbox>
+                        </div>
+                        <div fxLayout="row">
+                            <mat-checkbox formControlName="showMobEmail">Show client mobile and email on invoices
+                            </mat-checkbox>
+                        </div>
+                        <div fxLayout="row">
+                            <mat-checkbox formControlName="showAddress">Show client address on invoices</mat-checkbox>
+                        </div>
+                        <div fxLayout="row">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Invoice Title</mat-label>
+                                <input matInput placeholder="" formControlName="invoiceTitle">
+                                <mat-error>Invoice title is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Receipt Custom Line 1</mat-label>
+                                <input matInput placeholder="" formControlName="line1">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Receipt Custom Line 2</mat-label>
+                                <input matInput placeholder="" formControlName="line2">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Receipt Footer</mat-label>
+                                <input matInput placeholder="" formControlName="footer">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+                            <button style="margin-left: 10px" mat-raised-button color="primary" type="submit"
+                                [promiseBtn]="loader">Save</button>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

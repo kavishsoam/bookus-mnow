@@ -1,0 +1,79 @@
+<div id="customer-review-form" fxLayout="column">
+  <p-toast [style]="{marginTop: '50px'}"></p-toast>
+  <div id="review-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+      <div id="review-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+          <div class="logo">
+              <img  src="../../../assets/images/logos/massagenowblack.jpg">
+          </div>
+          <div>
+              <p style="font-size: 20px;font-weight: 500;"> Massagenow </p>
+          </div>
+          <div class="title">REVIEW</div>
+          <form name="forgotPasswordForm" [formGroup]="reviewForm" (ngSubmit)="submitReview(reviewForm)"
+              novalidate>
+
+              <div fxLayout="column" fxLayoutAlign="space-around center" >
+                
+                <div>
+                  <p class="text-center">Review The Shop</p>
+                  <h6 class="text-center">Review the shop based on cleaniness, management and facility.</h6>
+                </div>
+
+                <div>
+                  <p-rating [cancel]="false" formControlName="shopRate"></p-rating>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Review the shop</mat-label>
+                    <!-- <input matInput formControlName="shopReview" > -->
+                    <textarea matInput formControlName="shopReview"></textarea>
+                </mat-form-field>
+                </div>
+
+                <div>
+                  <p class="text-center">Review The Therapist</p>
+                  <h6 class="text-center">Review the therapist based on massage skills, communication skills and friendliness.</h6>
+                </div>
+
+                <div>
+                  <p-rating [cancel]="false" formControlName="therapistRate"></p-rating>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Review the therapist</mat-label>
+                    <!-- <input matInput formControlName="therapistReview"> -->
+                    <textarea matInput formControlName="therapistReview"></textarea>
+                </mat-form-field>
+                </div>
+
+                <div>
+                  <h5>Your review will be anonymous</h5>
+                </div>
+
+              </div>
+
+
+
+
+
+              <button mat-raised-button class="submit-button" color="accent" aria-label="Submit_review" >
+                  SUBMIT
+              </button>
+              <!-- [disabled]="forgotPasswordForm.invalid" -->
+          </form>
+          <div class="login" fxLayout="row" fxLayoutAlign="center center">
+              <a class="link" [routerLink]="'/auth/login'">login</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+                    <!-- <mat-error *ngIf="forgotPasswordForm.get('email').hasError('required')">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="forgotPasswordForm.get('email').hasError('email')">
+                        Please enter a valid email address
+                    </mat-error> -->

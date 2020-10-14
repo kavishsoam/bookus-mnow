@@ -1,0 +1,64 @@
+<div class="dialog-pad1">
+  <h2 mat-dialog-title>{{data.header}}</h2>
+  <mat-dialog-content class="mat-typography">
+    <div *ngIf="data.header == 'Add Tip'">
+      <p> Tip Amount : {{tip}} </p>
+      <div fxLayout="row" fxLayoutGap="40px">
+        <div fxLayout="column" fxFlex="60">
+          <mat-form-field class="example-full-width">
+            <span matPrefix> {{logoHeader}} &nbsp;</span>
+            <input type="number" min="0" matInput placeholder="" value=""
+              (input)="onTipAmountChange($event.target.value)">
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" class="buttondiv" fxFlex="20">
+          <div fxLayout="row">
+            <div fxLayout="column" fxFlex="50" class="buttondivwhite">
+              <button value="currency" [ngClass]="{'button1': !button,  'button2':button}" (click)="currency()"
+                style="flex-basis: 50%;">{{currCode}}</button>
+            </div>
+            <div fxFlex="50" fxLayout="column" class="buttondivblue">
+              <button value="percentage" [ngClass]="{'button2': !button,  'button1':button}" (click)="percentage()"
+                style="flex-basis: 50%;">%</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <mat-form-field class="form" appearance="outline">
+        <mat-label>Staff Tipped</mat-label>
+        <mat-select [(ngModel)]="selectedStaff" (selectionChange)="staffSelected($event)"
+          [ngModelOptions]="{standalone: true}" placeholder="">
+          <mat-option *ngFor="let item of staff" [value]="item._id">
+            {{item.firstName}} {{item.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="data.header == 'Invoice details' ">
+      <div fxLayout="row">
+        <div fxLayout="column" fxFlex="100">
+          <mat-form-field appearance="outline">
+            <mat-label>Payment received by</mat-label>
+            <mat-select [(ngModel)]="selectedStaff" (selectionChange)="staffSelected($event)"
+              [ngModelOptions]="{standalone: true}" placeholder="">
+              <mat-option *ngFor="let item of staff" [value]="item._id">
+                {{item.firstName}} {{item.lastName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- <div fxLayout="row">
+        <div fxLayout="column" fxFlex="100">
+          <mat-form-field appearance="outline">
+            <textarea matInput placeholder="Invoice notes"></textarea>
+          </mat-form-field>
+        </div>
+      </div> -->
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button (click)="tipAdded()" mat-button type="submit" class="saveButton">Save</button>
+    <br>
+  </mat-dialog-actions>
+</div>

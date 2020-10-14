@@ -1,0 +1,153 @@
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple"></ngx-spinner>
+<div id="dashboard-analytics" class="page-layout blank">
+    <div class="float">
+        <div fxLayout="column" fxLayoutAlign="end end" class="pad" *ngIf="!innerSettings">
+            <div class="widget" fxFlex="100">
+                <button mat-raised-button color="primary" (click)="openCopyBusinessModal()">Create Business +</button>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" class="pad" *ngIf="innerSettings">
+            <div class="widget" fxFlex="5">
+                <button mat-button>
+                    <mat-icon class="collapsable-arrow" (click)="navigatBack()">keyboard_arrow_left</mat-icon>
+                </button>
+            </div>
+            <div class="widget" fxFlex="30">
+                <h2>{{subHeader }}</h2>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content" *ngIf="!innerSettings">
+        <div class="left">
+            <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+                <div class="widget" fxFlex="100" fxFlex.gt-sm="50" *ngFor="let company of companyList">
+                    <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+                        <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+                            <div class="box ">
+                                <button mat-button>
+                                    <div class="h3" (click)="viewInnerSettings(company.businessName)">
+                                        {{company.businessName}}</div>
+                                </button>
+                                <p>{{'Manage your business location settings' | translate}}
+                                </p>
+                                <ng-container *ngFor="let location of locationList">
+                                    <a (click)="locationSelect(location)"> {{'Update' | translate}}
+                                        {{location.name}}</a>
+                                    <hr>
+                                </ng-container>
+                                <!-- <a [routerLink]="['locations']"> Update Location 2</a> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- account setup, point sale, client setting -->
+
+
+    <div class="content" *ngIf="innerSettings">
+
+        <div class="left">
+            <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+
+                <div class="widget" fxFlex="100" fxFlex.gt-sm="50">
+                    <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+                        <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+                            <div class="box ">
+                                <div class="h3"> {{'Account Setup' | translate}}</div>
+                                <p>{{'Manage your business general settings' | translate}}
+                                </p>
+                                <a [routerLink]="['company-details']"> {{'Company details' | translate}}</a>
+                                <hr>
+                                <a [routerLink]="['locations']"> {{'Locations' | translate}}</a>
+                                <hr>
+                                <a [routerLink]="['resources']"> {{'Resources' | translate}}</a>
+                                <hr>
+                                <a [routerLink]="['calendar-settings']"> {{'Calender Settings' | translate}}</a>
+                                <!-- <hr>
+                            <a [routerLink]="['online-booking-settings']"> {{'Online Booking Settings' | translate}}</a> -->
+                                <hr>
+                                <a [routerLink]="['staff-notifications']"> {{'Staff Notifications' | translate}}</a>
+                                <hr>
+                                <a [routerLink]="['post-blog']">{{'Post Blog' | translate}}</a>
+                                <hr>
+                                <a [routerLink]="['business-sale']">{{'Business Sale' }}</a>
+                                <hr>
+                                <a (click)="openPremium()">Premium</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget" fxFlex="70" fxFlex.gt-sm="50">
+                    <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+                        <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+                            <div class="box">
+                                <div class="h3 ">{{'Point of Sale' | translate}}
+                                </div>
+                                <p>{{'Manage point of sales settings' | translate}}
+                                </p>
+                                <a [routerLink]="['payment-types']"> {{'Payment Types' | translate}}</a>
+                                <hr>
+                                <a [routerLink]="['taxes']"> {{'Taxes' | translate}}</a>
+                                <hr>
+                                <a [routerLink]="['discount-types']"> {{'Discount Types' | translate}}</a>
+                                <hr>
+                                <a [routerLink]="['sales-settings']"> {{'Sales Settings' | translate}}</a>
+                                <hr>
+                                <a [routerLink]="['invoices']"> {{'Invoices & Receipts' | translate}}</a>
+                                <!-- <hr>
+                            <a [routerLink]="['loyalty-rewards']"> Loyalty Rewards</a> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+                <div class="widget" fxFlex="70" fxFlex.gt-sm="50">
+                    <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+                        <div class="third">
+                            <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+                                <div class="box">
+                                    <div class="h3 ">{{'Client Settings' | translate}}</div>
+                                    <p>{{'Setup client notifications, referral sources and cancellation reasons' | translate}}
+                                    </p>
+                                    <a
+                                        [routerLink]="['client-notifications']">{{'Client Notifications' | translate}}</a>
+                                    <hr>
+                                    <a [routerLink]="['referral-sources']"> {{'Referral Sources' | translate}}</a>
+                                    <hr>
+                                    <a [routerLink]="['cancellation-reasons']">
+                                        {{'Cancellation Reasons' | translate}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="widget" fxFlex="70" fxFlex.gt-sm="50">
+                    <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+                        <div class="third">
+                            <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+                                <div class="box">
+                                    <div class="h3 ">Online Payment Report</div>
+                                    <p>Manage Payment settings
+                                    </p>
+                                    <a [routerLink]="['client-notifications']">Credit Card Details of the Business</a>
+                                    <hr>
+                                    <a [routerLink]="['referral-sources']"> Transaction Service Rate</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

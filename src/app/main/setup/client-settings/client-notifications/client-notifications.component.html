@@ -1,0 +1,53 @@
+<div class="page-layout blank">
+    <div fxLayout="row" fxLayoutAlign="">
+        <div fxLayout="column" fxLayoutAlign="" fxFlex="100">
+            <div class="row" fxLayout="row" fxLayoutAlign="start center">
+                <div fxLayout="column" fxFlex="100">
+                    <mat-slide-toggle (change)="showMenu($event)">
+                        <h3>Enable Client Notification Messages</h3>
+                        <mat-hint>Automatically send booking notifications for reminders, reschedules, cancelations and
+                            more.
+                        </mat-hint>
+                    </mat-slide-toggle>
+                </div>
+            </div>
+            <div *ngIf="ifToggleOn" fxLayout="row" fxLayoutAlign="start center">
+                <div fxLayout="column" fxFlex="100">
+                    <mat-tab-group (selectedTabChange)="onTabChange($event)" md-stretch-tabs>
+                        <mat-tab label="REMINDERS">
+                            <app-client-notif [tabType]="tabLabel" #childR></app-client-notif>
+                        </mat-tab>
+                        <mat-tab label="CONFIRMATION">
+                            <app-client-notif [tabType]="tabLabel" #childCO></app-client-notif>
+                        </mat-tab>
+                        <mat-tab label="RESCHEDULES">
+                            <app-client-notif [tabType]="tabLabel" #childRE></app-client-notif>
+                        </mat-tab>
+                        <mat-tab label="CANCELLATIONS">
+                            <app-client-notif [tabType]="tabLabel" #childCA></app-client-notif>
+                        </mat-tab>
+                        <mat-tab label="THANK YOUS">
+                            <app-client-notif [tabType]="tabLabel" #childT></app-client-notif>
+                        </mat-tab>
+                        <mat-tab label="BIRTHDAY">
+                            <app-client-notif [tabType]="tabLabel" #childB></app-client-notif>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div>
+        </div>
+        <!-- <div fxLayout="column" class="rightBar" fxLayoutAlign="" fxFlex="20">
+            <div class="">
+                <p>Message types setup here will be automatically sent to clients. All messages generated can be easily
+                    accessed on the messages page (in your main menu).</p>
+                <p>Adjust the settings for how and when messages are sent, and edit the templates to personalise the
+                    text.</p>
+                <p>Use the below tags to include appointment details inside messages:</p>
+                <p>CLIENT_FIRST_NAME<br />CLIENT_LAST_NAME<br />STAFF_FIRST_NAME<br />STAFF_LAST_NAME</p>
+                <p>BOOKING_DATE_TIME<br />BOOKING_DATE<br />BOOKING_TIME</p>
+                <p>BOOKING_REFERENCE<br />SERVICE_NAME</p>
+                <p>BUSINESS_NAME<br />LOCATION_NAME<br />LOCATION_PHONE</p>
+            </div>
+        </div> -->
+    </div>
+</div>

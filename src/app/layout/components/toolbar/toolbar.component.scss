@@ -1,0 +1,122 @@
+@import "src/@fuse/scss/fuse";
+
+.mat-button {
+    min-width: 50px;
+}
+
+toolbar {
+    position: relative;
+    display: flex;
+    flex: 0 0 auto;
+    z-index: 4;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+
+    &.below {
+        z-index: 2;
+    }
+
+    .mat-toolbar {
+        position: relative;
+        background: inherit !important;
+        color: inherit !important;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+
+        .logo-icon {
+            width: 38px;
+        }
+    }
+
+    .user-button,
+    fuse-search-bar,
+    .quick-panel-toggle-button {
+        min-width: 64px;
+        height: 64px;
+
+        @include media-breakpoint-down('xs') {
+            height: 56px;
+        }
+    }
+
+    .navbar-toggle-button {
+        min-width: 56px;
+        height: 56px;
+    }
+
+    .toolbar-separator {
+        height: 64px;
+        width: 1px;
+
+        @include media-breakpoint-down('xs') {
+            height: 56px;
+        }
+    }
+
+
+}
+
+::ng-deep .mat-menu-content {
+    padding: 0 !important;
+}
+
+::ng-deep .mat-menu-content {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.mat-menu-item {
+    line-height: 55px !important;
+    height: 55px !important;
+}
+
+.date-design {
+    font-size: 13px;
+    color: #24334A;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+/* Needs to be in root because it is shown in a global overlay*/
+.mat-menu-panel.menu-product-list {
+    // max-width: 500px;
+    max-height: 300px;
+
+    .mat-menu-content {
+        // width: 500px;
+        height: 300px;
+        // display: flex;
+        // flex-direction: row;
+        // flex-wrap: wrap;
+    }
+}
+
+.heading {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #24334A;
+}
+
+.description {
+    font-size: 13px;
+    color: #24334A;
+    font-weight: 400;
+    line-height: 16px;
+    word-wrap: break-word;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.fontstyle {
+    font-family: Sarabun !important;
+    font-weight: bold;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.ftrt {
+    float: right !important;
+}

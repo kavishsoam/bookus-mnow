@@ -1,0 +1,17 @@
+@mixin customer-review-theme($theme) {
+    $background: map-get($theme, background);
+    $is-dark: map-get($theme, is-dark);
+    app-customer-review {
+        #customer-review-form {
+            #review-form-wrapper {
+                #review-form {
+                    @if ($is-dark) {
+                        background: mat-color($fuse-navy, 600);
+                    } @else {
+                        background: map-get($background, card);
+                    }
+                }
+            }
+        }
+    }
+}

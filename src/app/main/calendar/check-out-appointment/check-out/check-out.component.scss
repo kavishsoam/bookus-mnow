@@ -1,0 +1,301 @@
+.padRight {
+padding-right: 50% !important;
+}
+
+.total {
+    color: #24334A;
+    padding-right: 30px;
+    border-bottom: 1px solid #DEE3E7;
+}
+
+
+.item {
+    color: #2B72BD;
+    display: inline;
+    font-size: 16px;
+}
+.item:nth-child(2) {
+    border-bottom: 1px solid #DEE3E7;
+    padding: 15px 0px 15px 0px;
+}
+.item2 {
+    font-size: 22px;
+    color: #24334A;
+    padding: 15px 0px 15px 0px;
+}
+
+.item3 {
+    font-size: 12px;
+    color: #24334A;
+    padding: 15px 0px 15px 0px;
+}
+
+.specialPrice {
+    color: #67768C;
+    text-decoration: line-through;
+    padding-right: 16px !important;
+}
+.type1 {
+    font-size: 16px;
+    line-height: 19px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    white-space: initial;
+    word-wrap: break-word;
+    padding: 16px 16px 4px 16px;
+}
+.type2 {
+    color: #67768C;
+    font-size: 14px;
+    line-height: 16px;
+    text-overflow: ellipsis !important;
+    white-space: nowrap;
+    overflow: hidden !important;
+    padding-bottom: 1em !important;
+    padding-left: 16px !important;
+}
+.heading {
+    color: #24334A;
+    line-height: 18px;
+    font-size: 16px;
+    font-weight: 500;
+}
+// 
+.date-style {
+    font-size: 22px;
+    font-weight: 300;
+}
+/* Zebra striping */
+// tr:nth-of-type(odd) { 
+// 	background: #eee; 
+// 	}
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
+    table {
+        width: 100%;
+    }
+    /* Force table to not be like tables anymore */
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+    /* Hide table headers (but not display: none;, for accessibility) */
+}
+.online-booking-header {
+    font-size: 15px;
+}
+.bottomSection {
+    position: fixed;
+    bottom: 7px;
+    left: 7px;
+    right: 10px;
+    width: 98%;
+}
+.form {
+    padding: 0 25px 0 25px;
+}
+.newapp {
+    background-color: #F7F7F8;
+    margin: 0px 0px 25px 0px;
+}
+.search {
+    font-size: 68px;
+    height: 68px;
+    width: 68px;
+    margin-bottom: -16px;
+    color: #67768C;
+}
+p {
+    color: #67768C;
+    font-size: 16px;
+    line-height: 22px;
+    padding-left: 10px;
+}
+mat-tab-group {
+    min-height: 400px;
+    max-height: 400px;
+}
+a {
+    color: #2B72BD !important;
+    font-size: 14px !important;
+    line-height: 16px !important;
+    display: block !important;
+    padding: 16px 0 !important;
+    text-align: center !important;
+}
+.newclient {
+    border-top: 1px solid #EEF0F2 !important;
+    // border-bottom: 1px solid #EEF0F2 !important;
+}
+.clientList {
+    height: 280px;
+    overflow-y: scroll;
+    list-style: none;
+}
+::ng-deep .mat-list .mat-list-item .mat-list-item-content:hover {
+    cursor: pointer;
+    background-color: rgb(238, 253, 198);
+}
+.saveButton {
+    background-color: #24334A !important;
+    color: white !important;
+}
+.deleteButton {
+    background-color: #F74969 !important;
+    color: white !important;
+}
+.appointment-header {
+    font-size: 16px;
+    line-height: 19px;
+    color: #24334A;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+.appointment-data {
+    font-size: 14px;
+    line-height: 16px;
+    color: #67768C;
+    font-weight: 400;
+}
+.size-icon {
+    font-size: 65px;
+}
+.check-out-button {
+    background-color: #24334A !important;
+    color: white !important;
+    text-transform: uppercase;
+}
+.value-data {
+    font-weight: 500;
+    color: #24334A;
+    font-size: 18px;
+    line-height: 24px;
+    padding: 5px 10px 10px 10px;
+    margin-top: 5px
+}
+.header-data {
+    color: #67768C;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 0px 10px 10px 10px;
+    margin-bottom: 20px;
+}
+.line {
+    background: #DEE3E7;
+    height: 1px;
+    margin: 15px 0px 0px 0px;
+}
+// ::ng-deep.black-overlay {
+//     position: fixed !important;
+// }
+.pay-design {
+    color: #67768c;
+    font-size: 12px;
+}
+.price-display {
+    border: 1px solid #DEE3E7;
+    border-radius: 2px;
+    height: 60px;
+}
+.price-design {
+    font-size: 20px;
+    color: #24334A;
+    line-height: 33px;
+}
+.box-size {
+    border-radius: 3px;
+    height: 60px;
+    padding: 0;
+    background-color: #24334A;
+    color: white;
+}
+.backpay:hover {
+    color: blue;
+}
+.hand {
+    cursor: pointer;
+}
+.add-new:hover {
+    color: blue;
+}
+td:nth-child(2) {
+    color: black;
+    padding-left: 230px;
+}
+td:nth-child(3) {
+    color: red;
+}
+//layout start
+h2 {
+    text-align: center;
+    color: #24334A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0px 18px 18px 18px;
+    line-height: 30px;
+    font-size: 30px;
+    font-weight: 300;
+    margin: 0;
+    font-family: Sarabun, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+.innerbody {
+    // border-bottom: 1px solid #dee3e6;
+    border-top: 1px solid #dee3e6;
+}
+.crossButton {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    font-size: 29px;
+}
+.buttons {
+    padding: 24px;
+}
+.left {
+    border-right: 1px solid #dee3e6;
+    padding: 35px;
+    margin-right: 0;
+    height: 88vh;
+}
+.right {
+    padding: 35px;
+    height: 88vh;
+}
+::ng-deep .mat-tab-body {
+    min-height: 78vh;
+}
+.content {
+    max-height: 88vh;
+}
+/* ::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+} */
+.header {
+    padding: 20px;
+    margin-bottom: -20px;
+}
+.buttons .mat-raised-button {
+    min-height: 42px !important;
+    text-transform: uppercase;
+    min-width: 128px;
+    letter-spacing: 0.3pt;
+    font-weight: 400;
+}
+
+.error-handle {
+    color: #f44336;
+    font-size: 14px;
+    text-align: center;
+}
+//layout end

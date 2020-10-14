@@ -1,0 +1,145 @@
+// <!-- <mat-select-trigger>
+// {{locations.value ? locations.value[0] : ''}}
+// <span *ngIf="locations.value?.length > 1" class="example-additional-selection">
+//   (+{{locations.value.length - 1}} {{locations.value?.length === 2 ? 'other' : 'others'}})
+// </span>
+// </mat-select-trigger> -->
+
+// <!-- <mat-select-trigger>
+// {{viewsValues.value ? viewsValues.value[0] : ''}}
+// <span *ngIf="viewsValues.value?.length > 1" class="example-additional-selection">
+//   (+{{viewsValues.value.length - 1}} {{viewsValues.value?.length === 2 ? 'other' : 'others'}})
+// </span>
+// </mat-select-trigger> -->
+
+
+// <!-- <div>
+// <mat-form-field appearance="outline">
+//   <mat-select placeholder="Compare Years"  [formControl]="yearsValues" multiple>
+//     <mat-select-trigger>
+//       {{yearsValues.value ? yearsValues.value[0] : ''}}
+//       <span *ngIf="yearsValues.value?.length > 1" class="example-additional-selection">
+//         (+{{yearsValues.value.length - 1}} {{yearsValues.value?.length === 2 ? 'other' : 'others'}})
+//       </span>
+//     </mat-select-trigger>
+//     <mat-option *ngFor="let item of noline" [value]="item.value">{{item.viewValue}}</mat-option>
+//   </mat-select>
+// </mat-form-field>
+// </div> -->
+
+// <!-- <div class="widget" fxFlex="100" fxFlex.gt-sm="66">
+// <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+//   <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+//     <div class="box">
+//       <div class="h3 ">TOP STAFF</div>
+//       <hr>
+//       <div class="emptyicons">
+//         <mat-icon [inline]='true'>leak_add</mat-icon>
+//         <h1>No Sales This Month
+//         </h1>
+//         <p>Create some invoices for sales data to appear</p>
+//       </div>
+//     </div>
+//   </div>
+// </div>
+// </div> -->
+
+
+// <!-- 2 -->
+
+// <!-- appointments listing start-->
+// <!-- 
+// <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+//   <div fxFlex="100" fxFlex.gt-sm="50">
+//     <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+//       <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+//         <div class="box ">
+//           <div fxLayout="row" fxLayoutAlign="space-between center">
+//             <div class="h3"> Appointment Activity</div>
+//             <button mat-button><strong>...</strong></button>
+//           </div>
+//           <hr>
+//           <div class="emptyicons">
+//             <ng-template class="emptyicons">
+//               <mat-icon [inline]='true'>graphic_eq</mat-icon>
+//               <h1>Your Schedule is Empty</h1>
+//               <p>Make some appointments for schedule data to appear</p>
+//             </ng-template>
+//           </div>
+//           <div style="overflow:scroll !important">
+//             <mat-action-list class="mat-list-class">
+//               <mat-list-item class="mat-list-height" *ngFor="let item of viewData">
+//                 <div fxLayout="row" fxLayoutAlign="space-between center">
+//                   <div>
+//                     <strong>19</strong>
+//                     dec
+//                   </div>
+//                   <div>
+//                     Thu, 19 Dec 2019 9:00
+//                     {{item}}
+//                     Walk-in with esther
+//                   </div>
+//                   <div>
+//                     $90.00
+//                   </div>
+//                 </div>
+//                 <hr>
+//               </mat-list-item>
+//             </mat-action-list>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+//   <div class="widget" fxFlex="100" fxFlex.gt-sm="50">
+//     <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+//       <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+//         <div class="box">
+//           <div fxLayout="row" fxLayoutAlign="space-between center">
+//             <div class="h3"> UPCOMING APPOINTMENTS</div>
+//             <button mat-button><strong>...</strong></button>
+//           </div>
+//           <div class="emptyicons">
+//             <ng-template class="emptyicons">
+//               <mat-icon [inline]='true'>chrome_reader_mode</mat-icon>
+//               <h1>No Appointments Today
+//               </h1>
+//               <p>Visit the calendar section to add some appointments</p>
+//             </ng-template>
+//           </div>
+//           <div style="overflow:scroll !important">
+//             <mat-action-list class="mat-list-class">
+//               <mat-list-item class="mat-list-height" *ngFor="let item of viewData">
+//                 <div fxLayout="row" fxLayoutAlign="space-between center">
+//                   <div>
+//                     <strong>19</strong>
+//                     dec
+//                   </div>
+//                   <div>
+//                     Thu, 19 Dec 2019 9:00
+//                     {{item}}
+//                     Walk-in with esther
+//                   </div>
+//                   <div>
+//                     $90.00
+//                   </div>
+//                 </div>
+//                 <hr>
+//               </mat-list-item>
+//             </mat-action-list>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div> -->
+
+// <!-- appointment listing end -->
+
+
+// <!-- Top service list start -->
+
+
+
+// <!-- top service list ends -->
+

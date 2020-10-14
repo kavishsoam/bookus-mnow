@@ -1,0 +1,56 @@
+.float-right {
+    float: right;
+}
+
+.dropdown {
+    margin-left: 10px;
+    padding: 10px !important;
+    background: white !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    width: 256px !important;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 8 0;
+}
+
+
+
+::ng-deep .noline .mat-form-field-underline {
+    height: 0px !important;
+    display: none !important;
+}
+
+.nilMargin {
+    margin: 0;
+}
+
+.fs-15 {
+    font-size: 15px !important;
+}
+
+.fs-17 {
+    font-size: 17px !important;
+}
+
+.fs-9 {
+    font-size: 9px !important;
+}
+
+.card_style {
+    padding-right: 0px;
+    padding-left: 35px;
+}
+
+.ml-10 {
+    margin-left: 10px;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.creatBlog {
+    // margin-right: 35px;
+    // margin-bottom: 10px;
+}

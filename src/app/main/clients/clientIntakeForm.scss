@@ -1,0 +1,179 @@
+@import "src/@fuse/scss/fuse";
+
+mat-form-field {
+    width: 60% !important;
+    padding-left: 10px;
+    @include media-breakpoint('lt-md') {
+        width: 100% !important;
+    }
+}
+.stepper-scroller {
+    overflow-y: scroll !important;
+}
+::ng-deep .mat-dialog-container {
+    overflow-y: visible !important;
+}
+
+.content {
+    padding: 0px 25px 0px 40px;
+    overflow: inherit;
+    max-height: 94vh !important;
+    @include media-breakpoint('xs') {
+        padding: 0px 25px 0px 25px;
+    }
+}
+.button {
+    margin-left: 10px;
+}
+.crossButton {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    font-size: 29px;
+}
+h2 {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    padding: 7px 15px;
+    margin: 0px;
+}
+mat-radio-button {
+    margin-right: 5px;
+}
+textarea {
+    width: 100vw;
+}
+.pad {
+    border-bottom: 1px solid black;
+}
+.disabledPad {
+    pointer-events: none;
+}
+::ng-deep.mat-input-element:disabled {
+    color: rgba(0, 0, 0, 1) !important;
+}
+::ng-deep.mat-radio-button.mat-radio-disabled .mat-radio-label-content {
+    color: rgba(0, 0, 0, 1) !important;
+}
+::ng-deep.mat-checkbox-disabled .mat-checkbox-label {
+    color: rgba(0, 0, 0, 1) !important;
+}
+::ng-deep.mat-radio-button.mat-radio-disabled .mat-radio-inner-circle {
+    background-color: rgba(0, 0, 0, 1) !important;
+}
+::ng-deep.mat-radio-button.mat-radio-disabled .mat-radio-outer-circle {
+    border-color: rgba(0, 0, 0, 1) !important;
+}
+::ng-deep.mat-checkbox-disabled.mat-checkbox-checked .mat-checkbox-background {
+    background-color: rgba(0, 0, 0, 1) !important;
+}
+::ng-deep.mat-checkbox-frame {
+    border-color: rgba(0, 0, 0, 1) !important;
+}
+.inline-btn {
+    margin-top: 15px;
+    float: right;
+    margin-bottom: 10px;
+}
+.inline-btn-photo {
+    float: right;
+}
+p {
+    display: block;
+    margin-block-start: 0px !important;
+    margin-block-end: 0px !important;
+    margin-inline-start: 0px !important;
+    margin-inline-end: 0px !important;
+    border: 0px !important;
+}
+.sig-container-image {
+    background-image: url(../../../assets/images/bodypost/bodyposture.jpg);
+    background-repeat: no-repeat !important;
+    max-width: 500px !important;
+    max-height: 270px !important;
+    height: 270px !important;
+}
+p.dob {
+    border-bottom: 1px solid #959595 !important;
+    padding-left: 10px !important;
+}
+::ng-deep .mat-form-field-underline {
+    display: block
+}
+
+.crossButton {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    font-size: 29px;
+}
+.innerbody {
+    border-bottom: 1px solid #dee3e6;
+    border-top: 1px solid #dee3e6;
+}
+.buttons {
+    padding: 24px;
+}
+.left {
+    border-right: 1px solid #dee3e6;
+    padding: 35px;
+    margin-right: 0;
+}
+.right {
+    padding: 35px;
+}
+
+.header {
+    padding: 20px;
+    margin-bottom: -20px;
+}
+.buttons .mat-raised-button {
+    min-height: 42px !important;
+    text-transform: uppercase;
+    min-width: 128px;
+    letter-spacing: 0.3pt;
+    font-weight: 400;
+}
+//layout start
+h1 {
+    text-align: center;
+    color: #24334A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 15px 18px 0px 18px;
+    line-height: 30px;
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0;
+    font-family: Sarabun, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+.round {
+  border-radius : 50% !important;
+} 
+
+.borderRound {
+    border : 1px solid grey;
+    border-radius: 4px;
+    width: 76%;
+    padding: 2%;
+}
+
+.user_pro_img {
+    img {
+        width: 85px;
+        height: 85px;
+        border-radius: 100%;
+        margin: 0 auto;
+        cursor: pointer;
+        margin-bottom: 0px;
+        margin-left: 2%;
+        position: relative;
+    }
+
+
+}

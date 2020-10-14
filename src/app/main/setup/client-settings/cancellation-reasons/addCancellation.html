@@ -1,0 +1,30 @@
+<div class="dialog-pad">
+    <p-toast></p-toast>
+    <div>
+        <form name="addCancellationReason" [formGroup]="addCancellationReason" (ngSubmit)="addCancellation(addCancellationReason)">
+            <div fxLayout="column" class="header" fxLayoutAlign="start center">
+                <div fxLayout="row">
+                    <h2 mat-dialog-title>{{data.header}}</h2>
+                </div>
+            </div>
+            <mat-dialog-content class="content">
+                <div fxLayout="row" fxLayoutAlign="space-around">
+                    <div class="center" fxLayout="column" fxFlex="90">
+                        <mat-form-field appearance="outline" name>
+                            <mat-label>NAME</mat-label>
+                            <input matInput placeholder="e.g. Client Unavailable" formControlName="name" tabindex="-1">
+                            <mat-error>Name is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-dialog-content>
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+                <button mat-raised-button color="warn" *ngIf="data.header == 'Edit Cancellation Reason'" type="button"
+                    (click)="deleteCancellation()">Delete</button>
+                <div fxLayout="row" fxFlex="1 1 auto"></div>
+                <button mat-raised-button type="button" mat-dialog-close>Cancel</button>
+                <button style="margin-left: 10px" mat-raised-button color="primary" type="submit" [promiseBtn]="loader">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

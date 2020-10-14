@@ -1,0 +1,321 @@
+.style {
+  border-top: 1px solid #DEE3E7;
+  padding: 12px 0px 12px 0px;
+}
+.end {
+  padding-right:  15px;
+}
+.type1 {
+  font-size: 16px;
+  line-height: 19px;
+  margin-bottom: 5px;
+  font-weight: 500;
+  white-space: initial;
+  word-wrap: break-word;
+  padding: 16px 16px 4px 16px;
+}
+.type2 {
+  color: #67768C;
+  font-size: 14px;
+  line-height: 16px;
+  text-overflow: ellipsis !important;
+  white-space: nowrap;
+  overflow: hidden !important;
+  padding-bottom: 1em !important;
+  padding-left: 16px !important;
+}
+.type2price {
+  color: #67768C;
+  text-decoration: line-through;
+  padding-right: 16px !important;
+}
+.heading {
+  color: #24334A;
+  line-height: 18px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+// 
+.date-style {
+  font-size: 22px;
+  font-weight: 300;
+}
+table {
+  width: 750px;
+  border-collapse: collapse;
+  margin: 50px auto;
+}
+/* Zebra striping */
+// tr:nth-of-type(odd) { 
+// 	background: #eee; 
+// 	}
+th {
+  background: #3498db;
+  color: white;
+  font-weight: bold;
+}
+td,
+th {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+  font-size: 18px;
+}
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
+  table {
+      width: 100%;
+  }
+  /* Force table to not be like tables anymore */
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+      display: block;
+  }
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+  }
+  .tr-list {
+      border: 1px solid #ccc;
+  }
+  .td-backgound {
+      /* Behave  like a "row" */
+      border: none;
+      // border-bottom: 1px solid #eee;
+      position: relative;
+      padding-left: 50%;
+  }
+  td:before {
+      /* Now like a table header */
+      position: absolute;
+      /* Top/left values mimic padding */
+      top: 6px;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      /* Label the data */
+      content: attr(data-column);
+      color: #000;
+      font-weight: bold;
+  }
+}
+
+
+.online-booking-header {
+  font-size: 15px;
+}
+.bottomSection {
+  position: fixed;
+  bottom: 7px;
+  left: 7px;
+  right: 10px;
+  width: 98%;
+}
+.form {
+  padding: 0 25px 0 25px;
+}
+.newapp {
+  background-color: #F7F7F8;
+  margin: 0px 0px 25px 0px;
+}
+.search {
+  font-size: 68px;
+  height: 68px;
+  width: 68px;
+  margin-bottom: -16px;
+  color: #67768C;
+}
+p {
+  color: #67768C;
+  font-size: 16px;
+  line-height: 22px;
+  padding-left: 10px;
+}
+mat-tab-group {
+  min-height: 400px;
+  max-height: 400px;
+}
+a {
+  color: #2B72BD !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
+  display: block !important;
+  padding: 16px 0 !important;
+  text-align: center !important;
+}
+.newclient {
+  border-top: 1px solid #EEF0F2 !important;
+  // border-bottom: 1px solid #EEF0F2 !important;
+}
+.clientList {
+  height: 280px;
+  overflow-y: scroll;
+  list-style: none;
+}
+::ng-deep.mat-form-field-label-wrapper {
+  padding: 3px;
+}
+.mat-form-field {
+  padding-top: 12px;
+}
+::ng-deep .mat-list .mat-list-item .mat-list-item-content:hover {
+  cursor: pointer;
+  background-color: rgb(238, 253, 198);
+}
+.saveButton {
+  background-color: #24334A !important;
+  color: white !important;
+}
+.deleteButton {
+  background-color: #F74969 !important;
+  color: white !important;
+}
+.appointment-header {
+  font-size: 16px;
+  line-height: 19px;
+  color: #24334A;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.appointment-data {
+  font-size: 14px;
+  line-height: 16px;
+  color: #67768C;
+  font-weight: 400;
+  padding-bottom: 40px;
+}
+.size-icon {
+  font-size: 65px;
+}
+.check-out-button {
+  background-color: #24334A !important;
+  color: white !important;
+  text-transform: uppercase;
+}
+.value-data {
+  font-weight: 500;
+  color: #24334A;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 5px 10px 10px 10px;
+  margin-top: 5px
+}
+.header-data {
+  color: #67768C;
+  font-size: 14px;
+  line-height: 24px;
+  padding: 0px 10px 10px 10px;
+  margin-bottom: 20px;
+}
+// .line {
+//     background: #DEE3E7;
+//     height: 1px;
+//     margin: 15px 0px 0px 0px;
+// }
+.heading2 {
+  word-wrap: break-word;
+  max-width: 100%;
+  min-width: 0;
+  padding: 16px 16px 25px 16px;
+  padding-bottom: 0px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #67768C;
+  line-height: 16px;
+  text-align: initial;
+  white-space: pre-wrap
+}
+.contentdata {
+  word-wrap: break-word;
+  max-width: 100%;
+  min-width: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #24334A;
+  padding: 0px 16px 10px 16px;
+  text-align: initial;
+}
+
+.icon {
+  fill: red;
+  /* 2 */
+  height: 1em;
+  /* 3 */
+  width: 1em;
+  /* 3 */
+  font-size: 1.25em;
+  margin: 0px 4px
+}
+//layout start
+h2 {
+  text-align: center;
+  color: #24334A;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0px 18px 18px 18px;
+  line-height: 30px;
+  font-size: 30px;
+  font-weight: 300;
+  margin: 0;
+  font-family: Sarabun, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.innerbody {
+  border-top: 1px solid #dee3e6;
+}
+.crossButton {
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  font-size: 29px;
+}
+.buttons {
+  padding: 24px;
+}
+.left {
+  border-right: 1px solid #dee3e6;
+  border-left: 1px solid #dee3e6;
+  padding: 35px;
+  margin-right: 0 !important;
+  height: 88vh;
+}
+.right {
+  padding: 35px;
+  height: 88vh;
+}
+::ng-deep .mat-tab-body {
+  min-height: 78vh;
+}
+.content {
+  max-height: 88vh;
+}
+//  .mat-dialog-container {
+//   padding: 0 !important;
+// }
+.header {
+  padding: 20px;
+  margin-bottom: -20px;
+  margin-top: -20px
+}
+.buttons .mat-raised-button {
+  min-height: 42px !important;
+  text-transform: uppercase;
+  min-width: 128px;
+  letter-spacing: 0.3pt;
+  font-weight: 400;
+}
+//layout end

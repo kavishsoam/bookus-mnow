@@ -1,0 +1,27 @@
+<div class="page-layout blank">
+    <p-toast [style]="{marginTop: '50px'}"></p-toast>
+    <div>
+        <form>
+            <div fxLayout="column" class="header" fxLayoutAlign="start center">
+                <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+                    <div fxLayout="row" fxFlex="1 1 auto"></div>
+                    <button mat-raised-button color="primary" (click)="addCancellation()">New
+                        Cancellation Reason</button>
+                </div>
+                <table mat-table [dataSource]="cancellationReasonsList" class="mat-elevation-z8" *ngIf="cancellationReasonsList.length">
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="addedAt">
+                        <th mat-header-cell *matHeaderCellDef> Date Added </th>
+                        <td mat-cell *matCellDef="let element"> {{element.addedAt | date:'fullDate'}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="cancellationReasonsListColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: cancellationReasonsListColumns;" (click)="editCancellation(row)"></tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="dialog-pad">
+  <p-toast></p-toast>
+  <div>
+    <form [formGroup]="resource" (ngSubmit)="onSubmit(resource)">
+      <div fxLayout="column" class="header" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>{{data.header}}</h2>
+        </div>
+      </div>
+      <mat-dialog-content class="content">
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxLayout="column" fxFlex="100">
+            <mat-form-field  appearance="outline" >
+              <mat-label>CATEGORY</mat-label>
+              <mat-select class="dropdow" multiple formControlName="categoryId"
+                (selectionChange)="catSelectedListener($event.value)">
+                <mat-option *ngFor="let item of categoryData" [value]="item.id">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxLayout="column" fxFlex="100">
+        <mat-form-field appearance="outline" >
+          <!-- <mat-label class="styleText">Select Location</mat-label> -->
+          <mat-select class="dropdow" formControlName="locationId">
+            <mat-option *ngFor="let location of locationList" [value]="location._id">
+              {{location.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+        <div fxLayout="row" class="pt-20" fxLayoutAlign="space-around center">
+          <div fxLayout="column" fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>Topic</mat-label>
+              <input matInput placeholder="Topic" formControlName="heading">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxLayout="column" fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>DESCRIPTION</mat-label>
+              <textarea matInput placeholder="Description" formControlName="content" cdkTextareaAutosize
+                cdkAutosizeMinRows="5" cdkAutosizeMaxRows="5">
+              </textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+      </mat-dialog-content>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+        <button mat-raised-button color="warn" type="button" *ngIf="data.header == 'Edit Blog'" (click)="delete()">Delete</button>
+        <div fxLayout="row" fxFlex="1 1 auto"></div>
+        <button mat-raised-button type="button" mat-dialog-close>Cancel</button>
+        <button style="margin-left: 10px" [disabled]="resource.invalid" mat-raised-button color="primary" type="submit">Save </button>
+      </div>
+    </form>
+  </div>
+</div>

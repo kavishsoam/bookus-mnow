@@ -1,0 +1,46 @@
+.page-layout {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+h3 {
+    font-weight: 300;
+    color: #2c2c2c;
+    font-size: 24px;
+    margin: 10px;
+}
+
+div .mat-slide-toggle {
+    margin-right: 15px !important;
+}
+.row {
+    padding: 40px;
+    width: 100%;
+    border: 1px solid #c1c1c1;
+}
+h5 {
+    font-size: 20px;
+    font-weight: 300;
+    color: #2c2c2c;
+    margin: 20px 0px 10px 0px;
+}
+p {
+    font-weight: 400;
+    letter-spacing: .01em;
+    line-height: 22px;
+    margin: 0 0 10px;
+    font-style: normal;
+    white-space: normal;
+    font-size: 15px;
+    color: #67768C;
+}
+mat-checkbox {
+    font-family: Sarabun;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #67768C;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}

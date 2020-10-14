@@ -1,0 +1,39 @@
+.emptyicons {
+    text-align: center;
+    margin-top: 20%;
+    color: #616161 !important;
+    font-size: 100px;
+    p {
+        font-size: 15px;
+    }
+    h1 {
+        margin: -22px 0 5px 0;
+    }
+}
+.page-layout {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    background-color: #F7F7F8;
+}
+::ng-deep .noline .mat-form-field-underline {
+    display: none
+  }
+.dropdown {
+    margin-left: 10px;
+    padding: 10px !important;
+    background: white !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  }
+  .emptyicons {
+    text-align: center;
+    margin-top: 5%;
+    color: #616161 !important;
+    font-size: 100px;
+    p {
+        font-size: 15px;
+    }
+    h1 {
+        margin: -22px 0 5px 0;
+    }
+}

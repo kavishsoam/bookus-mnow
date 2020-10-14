@@ -1,0 +1,43 @@
+<!-- <app-page-under-construct></app-page-under-construct> -->
+<div class="page-layout blank">
+  <p-toast [style]="{marginTop: '50px'}"></p-toast>
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+
+  <mat-tab-group>
+    <mat-tab label="DASHBOARD">
+      <app-analytics-dashboard></app-analytics-dashboard>
+    </mat-tab>
+    <mat-tab label="{{'REPORTS' | translate}}">
+      <!-- kavish soam -->
+      <div *ngIf="salesByClient" id="dashboard-analytics" class="page-layout blank">
+        <div class="content">
+          <div class="left">
+            <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+              <div class="widget" fxFlex="100" fxFlex.gt-sm="50">
+                <div class="fuse-card auto-width mb-32 marginClass" [ngClass.gt-sm]="'mb-0 mr-32 '">
+                  <div class="p-16 pb-15" fxLayout="row wrap" fxLayoutAlign="start end">
+                    <div class="box ">
+                      <div class="h3 ">{{'Sale' | translate}}
+                      </div>
+                      <p>{{'Analyse the performance of your business by comparing sales across products, staff, channels and more' | translate}}
+                      </p>
+                      <a (click)="salesByNavigate('service')"> {{'Sales by Service' | translate}}</a>
+                      <hr>
+                      <a [routerLink]="['salesbylocation']"> {{'Sales by location' | translate}}</a>
+                      <hr>
+                      <a [routerLink]="['salesbyclient']"> {{'Sales by client' | translate}}</a>
+                      <hr>
+                      <a (click)="salesByNavigate('staff')"> {{'Sales by staff' | translate}}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+      <!-- kavish soam -->
+    </mat-tab>
+  </mat-tab-group>
+</div>

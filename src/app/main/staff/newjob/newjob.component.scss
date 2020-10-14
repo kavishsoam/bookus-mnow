@@ -1,0 +1,134 @@
+.example-full-width {
+    width: 95% !important;
+}
+
+.marg-top {
+    margin-top : 5% !important;
+}
+
+.float-rt {
+    float: right !important;
+}
+
+.timepicker {
+    padding-bottom: 20px;
+    padding-left: 30px !important;
+}
+
+.dropdown {
+    padding: 10px !important;
+    background: white !important;
+
+    // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    width: 200px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgray;
+    border-radius: 5px;
+}
+
+::ng-deep .noline .mat-form-field-underline {
+    display: none
+}
+
+.pad {
+    padding: 10px 10px 10px 37px;
+}
+
+::ng-deep .mat-tab-body-content {
+    overflow: hidden;
+}
+
+.mt2 {
+    margin-top: 2%;
+}
+
+
+.mat-tabgroup {
+    font-family: Sarabun !important;
+}
+
+.mat-label-pad {
+    padding-top: 6% !important;
+    // padding-left: 6% !important;
+}
+
+.dropdown2 {
+    padding: 10px !important;
+    background: white !important;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    width: 305px;
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: lightgray;
+    // border-radius: 5px;
+}
+
+.dropdown3 {
+    // padding: 10px !important;
+    // background: white !important;
+
+    // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    // width: 305px;
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: lightgray;
+    // border-radius: 5px;
+}
+
+.close-btn {
+    box-shadow: none;
+    border-style: solid;
+    border-radius: 0px;
+    width: 75%;
+    border-width: 1px;
+}
+
+.flat-button {
+    border-radius: 0px;
+}
+
+.fillBlanks {
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    border-bottom: 1px;
+    border-style: solid;
+    width: 60px;
+}
+
+.fillBlanks2 {
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    border-bottom: 1px;
+    border-style: solid;
+    width: 129px;
+}
+
+
+.fontStyle {
+    font-family: Sarabun !important;
+    font-size: smaller;
+}
+
+div {
+    font-family: Sarabun !important;
+}
+
+p {
+    font-family: Sarabun !important;
+}
+
+.styleText {
+    font-family: Sarabun !important;
+}
+
+.margRemove {
+    margin : 0px 0px 0px 0px;
+}
+
+.margRemove2 {
+    margin-bottom: 3%;
+}

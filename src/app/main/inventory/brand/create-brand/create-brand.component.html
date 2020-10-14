@@ -1,0 +1,29 @@
+<div class="dialog-pad">
+  <p-toast></p-toast>
+  <h2 mat-dialog-title class="text-center">Create Brand</h2>
+  <div >
+    <form [formGroup]="brandForm" (ngSubmit)="createForm(brandForm)">
+      <mat-dialog-content>
+        <div fxLayout="row" fxflex="100" >
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Brand name</mat-label>
+            <input matInput formControlName="brandName" placeholder="e.g. Massage Services" alphabetsOnly>
+            <mat-error>Brand Name is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxflex="100" >
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Product Count</mat-label>
+            <input matInput formControlName="count" placeholder="e.g. Massage Services">
+            <mat-error>Product Count is required</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button  mat-raised-button color="warn" type="button"
+          (click)="deleteGroup()">Delete</button>
+        <button mat-button type="submit">Save</button>
+      </mat-dialog-actions>
+    </form>
+  </div>
+</div>

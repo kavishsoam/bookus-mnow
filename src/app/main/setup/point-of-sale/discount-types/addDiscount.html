@@ -1,0 +1,56 @@
+<div class="dialog-pad">
+  <p-toast></p-toast>
+  <div>
+    <form name="addDiscount" [formGroup]="addDiscount" (ngSubmit)="Discount(addDiscount)">
+      <div fxLayout="column" class="header" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>{{data.header}}</h2>
+        </div>
+      </div>
+      <mat-dialog-content class="content">
+        <div fxLayout="row" fxLayoutAlign="space-around">
+          <div class="center" fxLayout="column" fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>DISCOUNT NAME</mat-label>
+              <input matInput placeholder="" formControlName="name" tabindex="-1">
+              <mat-error>Discount name is required </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-around">
+          <div class="center" fxLayout="column" fxFlex="50">
+            <mat-form-field appearance="outline">
+              <mat-label>DISCOUNT VALUE</mat-label>
+              <input tabindex="-1" type="number" matInput placeholder="" formControlName="value">
+              <mat-error>Discount value is required </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="center" fxLayout="column" fxFlex="50" fxLayoutAlign="center center">
+            <mat-radio-group formControlName="valueType" tabindex="-1">
+              <mat-radio-button value="percentage">% Percentage</mat-radio-button>
+              <mat-radio-button value="amount">Amount
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div fxLayout="row" class="center" fxLayoutAlign="start start">
+          <mat-checkbox formControlName="enableService">ENABLE FOR SERVICE SALES</mat-checkbox>
+        </div>
+        <div fxLayout="row" class="center" fxLayoutAlign="start start">
+          <mat-checkbox formControlName="enableProduct">ENABLE FOR PRODUCT SALES</mat-checkbox>
+        </div>
+        <div fxLayout="row" class="center" fxLayoutAlign="start start">
+          <mat-checkbox formControlName="enableVoucher">ENABLE FOR VOUCHER SALES</mat-checkbox>
+        </div>
+      </mat-dialog-content>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+        <button mat-raised-button color="warn" *ngIf="data.header == 'Edit Discount'" type="button"
+          (click)="deleteDiscount()">Delete</button>
+        <div fxLayout="row" fxFlex="1 1 auto"></div>
+        <button mat-raised-button type="button" mat-dialog-close>Cancel</button>
+        <button style="margin-left: 10px" mat-raised-button color="primary" type="submit" [promiseBtn]="loader">Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

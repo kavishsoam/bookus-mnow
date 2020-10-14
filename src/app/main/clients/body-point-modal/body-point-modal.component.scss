@@ -1,0 +1,166 @@
+//layout start
+h2 {
+    text-align: center;
+    padding: 0px 16px 16px 16px;
+    line-height: 30px;
+    font-size: 20px;
+    font-weight: 300;
+    margin: 0;
+}
+
+.mat-dialog-content {
+    height: 100%;
+}
+
+/* ::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+} */
+
+.header {
+    padding: 0px 20px 20px 20px;
+    margin-bottom: -20px;
+}
+
+.buttons .mat-raised-button {
+    min-height: 42px !important;
+    text-transform: uppercase;
+    min-width: 90px;
+    letter-spacing: 0.3pt;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+//layout end
+.note-service {
+    background-color: #daeffd;
+    color: #2b6994;
+    border-color: #2b6994;
+}
+
+::ng-deep .noline .mat-form-field-underline {
+    display: none
+}
+
+.dropdown {
+    margin-left: 10px;
+    padding: 10px !important;
+    background: white !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.invalid {
+    color: red;
+    margin-top: -23px;
+    font-size: 12px;
+}
+
+.text-bold,
+strong {
+    font-weight: 500 !important;
+}
+
+.prod_head {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.87);
+    text-transform: uppercase;
+    margin: 0;
+    font-size: 20px;
+
+}
+
+.prod_qty {
+    margin-bottom: 25px;
+
+    th {
+        text-align: center;
+        font-weight: 500;
+        font-size: 14px;
+    }
+}
+
+.prod_qty td {
+    text-align: center;
+}
+
+.age_table {
+    margin-bottom: 25px;
+
+    th {
+        font-weight: 500;
+    }
+}
+
+.prod_img {
+    overflow: auto;
+    height: 250px;
+    width: 448px;
+    text-align: left;
+    border: 1px solid #ccc;
+
+    ul {
+        margin: 0;
+
+        li {
+            border: 1px solid #ccc;
+            margin: 10px 5px 0px;
+            width: 100px;
+            height: 105px;
+            display: inline-block;
+            float: left;
+
+            img {
+                width: 98px;
+                height: 103px;
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+.full_descpt {
+    margin-top: 35px;
+
+    h2 {
+        margin: 0 0 0px;
+        font-size: 18px;
+        font-weight: 500;
+    }
+}
+
+.prod_details {
+    p {
+        strong {
+            font-size: 16px;
+        }
+    }
+}
+
+.fs-15 {
+    font-size: 15px !important;
+}
+
+.fs-17 {
+    font-size: 17px !important;
+}
+
+.fs-9 {
+    font-size: 9px !important;
+}
+
+.card_style {
+    padding-right: 0px;
+    padding-left: 35px;
+}
+
+.ml-10 {
+    margin-left: 10px;
+}
+
+.mt30 {
+    margin-top: 30px;
+}
+
+.blog {
+    border: 1px solid #9a9a9a;
+    padding: 10px;
+}

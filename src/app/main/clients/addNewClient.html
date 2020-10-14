@@ -1,0 +1,257 @@
+<div class="page-layout blank">
+    <p-toast></p-toast>
+    <div *ngIf="!isDeleteClient">
+        <form name="clientRegisterForm" [formGroup]="clientRegisterForm"
+            (ngSubmit)="clientRegister(clientRegisterForm)">
+            <div fxLayout="column" class="header" fxLayoutAlign="start center">
+                <div fxLayout="row">
+                    <h2 mat-dialog-title>{{data.header}}</h2>
+                    <button mat-button mat-dialog-close class="crossButton">
+                        <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <mat-dialog-content class="content">
+                <div fxLayout="row" fxLayout.xs="column" class="innerbody" fxLayoutAlign="space-around">
+                    <div class="left" fxLayout="column" fxFlex="50">
+                        <div fxLayout="row" fxLayoutGap="30px" fxLayout.xs="column" fxLayoutGap.xs="5px">
+                            <div fxLayout="column" fxFlex="50">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>First name</mat-label>
+                                    <input matInput formControlName="firstName">
+                                    <mat-error *ngIf="clientRegisterForm.get('firstName').hasError('required')">
+                                        First name is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="column" fxFlex="50">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Last name</mat-label>
+                                    <input matInput formControlName="lastName">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutGap="30px" fxLayout.xs="column" fxLayoutGap.xs="5px">
+                            <div fxLayout="column" fxFlex="50">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Phone No.</mat-label>
+                                    <input #telInput matInput type="text" (keydown)="telInputChange($event)" ng2TelInput
+                                        [(ngModel)]="phoneNumber" [ng2TelInputOptions]="{initialCountry: countryStr}"
+                                        value="+{{countryCode}} " (hasError)="hasError($event)"
+                                        (ng2TelOutput)="getNumber($event)" (intlTelInputObject)="telInputObject($event)"
+                                        (countryChange)="onCountryChange($event)"
+                                        [ngModelOptions]="{standalone: true}" />
+                                </mat-form-field>
+                                <div *ngIf="
+                                !phone_invalid" class="error-handle">Enter valid phone number</div>
+                            </div>
+                            <div fxLayout="column" fxFlex="50">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Telephone No.</mat-label>
+                                    <input matInput myNumberOnly type="text" placeholder="" formControlName="phone2">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxLayout="row">
+                            <div fxLayout="column" fxFlex="100">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput placeholder="" formControlName="email">
+                                    <mat-error *ngIf="clientRegisterForm.get('email').hasError('required')">
+                                        Email is required
+                                    </mat-error>
+                                    <mat-error *ngIf="clientRegisterForm.get('email').hasError('pattern')">
+                                        Please enter a valid email address
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxLayout="row">
+                            <div fxLayout="column" fxFlex="100">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Send notifications by </mat-label>
+                                    <mat-select [(ngModel)]="selectedNotification" formControlName="notifyBy">
+                                        <mat-option value="Don't send notification">Don't send notification</mat-option>
+                                        <mat-option value="Email">Email</mat-option>
+                                        <mat-option value="SMS">SMS</mat-option>
+                                        <mat-option value="Email & SMS">Email & SMS</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxLayout="row">
+                            <div fxLayout="column" fxFlex="100">
+                                <div class="terms" fxLayout="row" fxLayoutAlign="start start">
+                                    <mat-checkbox name="terms" aria-label="I read and accept" formControlName="notify"
+                                        required>
+                                        <span>Accept marketing notification</span>
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+                    <!-- phase right -->
+                    <div class="right" fxLayout="column" fxFlex="50">
+                        <mat-tab-group [dynamicHeight]="true">
+                            <mat-tab label="PERSONAL INFO">
+                                <ng-template matTabContent>
+                                    <div fxLayout="row" class="pt-16">
+                                        <div fxLayout="column" fxFlex="100">
+                                            <!-- Staff start -->
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Gender</mat-label>
+                                                <mat-select placeholder="" formControlName="gender">
+                                                    <mat-option value="Male">Male</mat-option>
+                                                    <mat-option value="Female">Female</mat-option>
+                                                    <mat-option value="Unknown">Unknown</mat-option>
+                                                </mat-select>
+                                                <mat-error *ngIf="clientRegisterForm.get('gender').hasError('required')">
+                                                    Please select a gender
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <div fxLayout="column" fxFlex="100">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Referral source</mat-label>
+                                                <mat-select placeholder="" formControlName="referral_source">
+                                                    <mat-option value="Select source" disabled="true">Select source
+                                                    </mat-option>
+                                                    <mat-option value="Walk-In">Walk-In</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <div fxLayout="column" fxFlex="40" fxFlex.xs="100">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>DOB</mat-label>
+                                                <input matInput [matDatepicker]="picker" formControlName="dob"
+                                                    placeholder="" [max]="maxDate">
+                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                <mat-datepicker touchUi #picker></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <div fxLayout="column" fxFlex="100">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Client notes</mat-label>
+                                                <textarea matInput formControlName="text" placeholder=""></textarea>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <div fxLayout="column" fxFlex="100">
+                                            <div class="terms" fxLayout="row" fxLayoutAlign="start start">
+                                                <mat-checkbox name="terms" aria-label="I read and accept"
+                                                    formControlName="globalDisplay" >
+                                                    <span>Display on all bookings</span>
+                                                </mat-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Staff end -->
+                                </ng-template>
+                            </mat-tab>
+                            <mat-tab label="ADDRESS">
+                                <!-- online booking -->
+                                <ng-template matTabContent>
+                                    <div fxLayout="row" class="pt-16">
+                                        <div fxLayout="column" fxFlex="100">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Area</mat-label>
+                                                <input matInput placeholder="" formControlName="area">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <div fxLayout="column" fxFlex="100">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Street</mat-label>
+                                                <input matInput placeholder="" formControlName="street">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutGap="30px" fxLayout.xs="column" fxLayoutGap.xs="5px">
+                                        <div fxLayout="column" fxFlex="50" fxFlex.xs="100">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>City</mat-label>
+                                                <input matInput placeholder="" formControlName="city">
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxLayout="column" fxFlex="50" fxFlex.xs="100">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>State</mat-label>
+                                                <input matInput placeholder="" formControlName="state">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutGap="30px" fxLayout.xs="column" fxLayoutGap.xs="5px">
+                                        <div fxLayout="column" fxFlex="50" fxFlex.xs="100">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Country</mat-label>
+                                                <input matInput placeholder="" formControlName="country">
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxLayout="column" fxFlex="50" fxFlex.xs="100">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Zip / Post Code</mat-label>
+                                                <input matInput placeholder="" formControlName="zip">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </mat-tab>
+                            <mat-tab label="PROFILE PICTURE">
+                                
+                                <div fxLayout="row" fxLayoutGap="10px" style="padding-top:20px;">
+                                    <div fxLayout="column" fxFlex="20" fxFlexOff="30" fxFlexAlign="center" class="file-input-wrapper">
+                                        <button mat-stroked-button color="primary"
+                            type="button" class="btn-file-input"
+                            >Upload
+                            Image</button> 
+                                        <input #file type="file" accept="image/x-png,image/gif,image/jpeg"
+                                            (change)="preview(file.files)" formControlName="image" />
+                                    </div>
+                                    <div fxLayout="column" fxFlex="40" fxFlexAlign="center">
+                                        <img [src]="imgURL" *ngIf="imgURL" style="height: 100px; width: 100px;border-radius: 8px;"   class="  mt-20">
+                                    </div>
+                                </div>
+
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+                </div>
+            </mat-dialog-content>
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+                <button *ngIf="_id" mat-raised-button color="warn" type="button" (click)="isDelete()">Delete</button>
+                <div fxLayout="row" fxFlex="1 1 auto"></div>
+                <button mat-raised-button type="button" mat-dialog-close>Cancel</button>
+                <button style="margin-left: 10px" mat-raised-button color="primary" type="submit" 
+                    [promiseBtn]="loader">{{data.intakeBtn}}</button>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="isDeleteClient">
+        <div fxLayout="column" class="header" fxLayoutAlign="start center">
+            <div fxLayout="row">
+                <h2 mat-dialog-title>Delete Client</h2>
+            </div>
+        </div>
+        <mat-dialog-content class="content">
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <p class="description">
+                    Are you sure? This action cannot be undone.
+                </p>
+            </div>
+        </mat-dialog-content>
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+            <button mat-raised-button type="button" mat-dialog-close>Close</button>
+            <div fxLayout="row" fxFlex="1 1 auto"></div>
+            <button mat-raised-button color="warn" type="button" (click)="deleteClient()">Delete</button>
+        </div>
+    </div>
+</div>

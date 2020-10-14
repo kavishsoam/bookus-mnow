@@ -1,0 +1,38 @@
+<div class="page-layout blank">
+    <p-toast [style]="{marginTop: '50px'}"></p-toast>
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+    <div>
+        <form name="salesSettingsForm" [formGroup]="salesSettingsForm" (ngSubmit)="salesSettings(salesSettingsForm)">
+            <div fxLayout="row">
+                <div fxLayout="column" fxFlex="50" class="box">
+                    <div fxLayout="row" fxLayoutAlign="start start" class="staffComissions">Staff Commissions</div>
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-checkbox formControlName="beforeDiscount">CALCULATE BY ITEM SALE PRICE BEFORE DISCOUNT</mat-checkbox>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-checkbox formControlName="includingTax">CALCULATE BY ITEM SALE PRICE INCLUDING TAX</mat-checkbox>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" class="ml-28 p-8">
+                <div fxLayout="column" fxFlex="50">
+                    <div fxLayout="row" fxLayoutAlign="start start" class="staffComissions ">Vouchers</div>
+                    <div fxLayout="row" fxLayoutAlign="start start" class="expiryPeriod ">DEFAULT EXPIRY PERIOD</div>
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-form-field>
+                            <mat-select placeholder="" [(value)]="selected" formControlName="expiryPeriod">
+                                <mat-option *ngFor="let item of expiryperiod" [value]="item.value">
+                                    {{item.value}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+                <button style="margin-left: 10px" mat-raised-button color="primary" type="submit" [promiseBtn]="loader">Save</button>
+            </div>
+
+        </form>
+    </div>
+</div>

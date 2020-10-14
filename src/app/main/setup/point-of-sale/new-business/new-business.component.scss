@@ -1,0 +1,79 @@
+@import "src/@fuse/scss/fuse";
+.page-layout {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+.mat-input-element:disabled {
+    cursor: not-allowed;
+}
+@include media-breakpoint-up('md') {
+    mat-form-field {
+        width: 95% !important;
+    }
+}
+button.mat-raised-button {
+    width: 130px !important;
+    height: 50px;
+}
+
+.page-layout>* {
+    width: 100%;
+}
+.content>*:not {
+    background-color: white;
+}
+// ::ng-deep.black-overlay {
+//     position:fixed !important;
+// }
+
+img { height: 120px; background-color: #444;}
+
+img[class] { 
+  width: 120px;
+}
+.object-fit_cover { object-fit: contain }
+.alert:hover{
+    background-color: blue;
+}
+.btn-del{
+    position: relative;
+    top: 30px;
+    right: -90px;
+}
+.file-hide{
+    display: none;
+}
+
+
+.innerbody {
+    border-bottom: 0px solid #dee3e6;
+    border-top: 1px solid #dee3e6;
+}
+
+.crossButton {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    font-size: 29px;
+}
+
+.img_class {
+        width: 85px;
+        height: 85px;
+        border-radius: 100%;
+        margin: 0 auto;
+        cursor: pointer;
+        position: relative;
+}
+
+.header {
+    padding: 0px;
+    margin-bottom: -3px;
+    margin-top: -7px;
+}
+
+.floatRight {
+    float : right !important;
+}

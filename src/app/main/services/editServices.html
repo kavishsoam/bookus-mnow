@@ -1,0 +1,288 @@
+<div class="page-layout blank">
+    <p-toast></p-toast>
+    <div>
+        <form [formGroup]="editService" (ngSubmit)="editServiceSave(editService)">
+            <div fxLayout="column" class="header" fxLayoutAlign="start center">
+                <div fxLayout="row">
+                    <h2 mat-dialog-title>{{data.header}}</h2>
+                    <button mat-button mat-dialog-close class="crossButton">
+                        <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <mat-dialog-content class="content">
+                <div fxLayout="row" fxLayoutAlign="space-around" class="innerbody">
+                    <!-- phase left -->
+                    <div class="left" fxLayout="column" fxFlex="50">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Service Name</mat-label>
+
+                            <input matInput formControlName="name">
+
+                            <mat-error *ngIf="!editService.controls['name'].valid && 
+                        (editService.controls['name'].touched || submitStaffForm)">
+                                <mat-error *ngIf="editService.get('name').hasError('required')">
+                                    Service name is required
+                                </mat-error>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Treatmeant type</mat-label>
+                            <input matInput formControlName="serviceType" placeholder="Enter Treatment Type">
+                            <mat-hint>Choose the most relevant type, for internal reference and not currently visible
+                                to
+                                clients.</mat-hint>
+                            <mat-error *ngIf="!editService.controls['serviceType'].valid && 
+                                (editService.controls['serviceType'].touched || submitStaffForm)">
+                                <mat-error *ngIf="editService.get('serviceType').hasError('required')">
+                                    Treatmeant type is required
+                                </mat-error>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field  appearance="outline" >
+                            <mat-label>CATEGORY</mat-label>
+                            <mat-select class="dropdow" multiple formControlName="categoryId"
+                              (selectionChange)="catSelectedListener($event.value)">
+                              <mat-option *ngFor="let item of categoryData" [value]="item.id">
+                                {{item.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        <br>
+                        <mat-card formArrayName="pricing_option" *ngFor="let item of formData.controls ; let i=index">
+                            <div [formGroupName]="i" fxLayout="column" >
+                                <!-- {{item.controls.duration.value}} -->
+                                <div fxLayout="row" fxLayoutAlign="space-around" fxLayout.lt-sm="column" fxFlex="50">
+                                    <div class="service" fxLayout="column" fxFlex="50" fxFlex.lt-sm="100" [ngStyle.lt-sm]="{'width':'100% !important'}" >
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Duration</mat-label>
+                                            <mat-select formControlName="duration" tabindex="-1">
+                                                <mat-option *ngFor="let item of durationArray" [value]="item"> {{item}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100" [ngStyle.lt-sm]="{'width':'100% !important'}" >
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Retail price</mat-label>
+                                            <input myNumberOnly matInput formControlName="price" placeholder="0.00">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" fxFlex="50" fxLayout.lt-sm="column">
+                                    <div class="service" fxLayout="column" fxFlex="50" fxFlex.lt-sm="100" [ngStyle.lt-sm]="{'width':'100% !important'}" >
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Pricing name (optional)</mat-label>
+                                            <input matInput formControlName="specialPriceFor"
+                                                placeholder="e.g. Long massage">
+                                        </mat-form-field>
+                                    </div>
+                                    <div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100" [ngStyle.lt-sm]="{'width':'100% !important'}" >
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Special price (optional)</mat-label>
+                                            <input myNumberOnly matInput formControlName="specialPrice"
+                                                placeholder="0.00">
+                                            <mat-error>
+                                                Special price should be less than Retail price </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card>
+                        <a class="addPricing" (click)="addPricingOption()"><span class="addPricingSpan">+ Add
+                                another
+                                pricing
+                                option</span></a>
+                    </div>
+                    <!-- xxxxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+                    <!-- phase right -->
+                    <div class="right" fxLayout="column" fxFlex="50">
+                        <mat-tab-group [dynamicHeight]="true">
+                            <mat-tab label="STAFF">
+                                <!-- Staff start -->
+                                <h3>Select staff who perform this service.</h3>
+                                <div fxLayout="column" fxLayoutAlign="space-between" fx class="pt-20" class="pl-20 p-12"
+                                    fxLayoutGap="5px">
+                                    <mat-checkbox #select_all [checked]="checkAll"  (change)="selectAll($event.checked)">
+                                        Select
+                                        all</mat-checkbox>
+                                    <mat-checkbox class="staffList"  [checked]="item.selected"
+                                        (change)="userSelectLogic(item)" *ngFor="let item of staffList">
+                                        {{item.firstName}}
+                                        {{item.lastName}}
+                                    </mat-checkbox>
+                                </div>
+                                <!-- Staff end -->
+                            </mat-tab>
+                            <mat-tab label="LOCATION">
+                                                                <!-- Staff start -->
+                                                                <h3>Select Locations where service will be performed.</h3>
+                                                                <div fxLayout="column" fxLayoutAlign="space-between" fx class="pt-20" class="pl-20 p-12"
+                                                                    fxLayoutGap="5px">
+                                                                    <mat-checkbox #select_allLocation [checked]="checkAllLocation"  (change)="selectAllLoc($event.checked)">
+                                                                        Select
+                                                                        all</mat-checkbox>
+                                                                    <mat-checkbox class="locationList"  [checked]="item.selected"
+                                                                        (change)="userSelectLogicLocation(item)" *ngFor="let item of locationList">
+                                                                        {{item.name}}
+                                                                    </mat-checkbox>
+                                                                </div>
+                                                                <!-- Staff end -->
+                            </mat-tab>
+                            <mat-tab label="ONLINE BOOKING">
+                                <ng-template matTabContent>
+                                    <!-- online booking -->
+                                    <p class="online-booking-header">
+                                        Allow clients to book this service online,<br>
+                                        switch off to hide this service from your online bookings menu.
+                                    </p>
+                                    <div fxLayout="row" fxLayoutAlign="start start">
+                                        <mat-checkbox name="enableOnlineBook"  [(ngModel)]="enableOnlineBook"
+                                            [ngModelOptions]="{standalone: true}">Enable
+                                            online bookings</mat-checkbox>
+                                        <!-- <mat-checkbox name="enableOnlineBook" [(ngModel)]="roomAvailable" [ngModelOptions]="{standalone: true}">Room
+                                        Available</mat-checkbox> -->
+                                    </div>
+                                    <br>
+                                    <div fxLayout="row" class="p-4">
+                                        <div fxLayout="column" fxFlex="100">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Service Description</mat-label>
+                                                <input [disabled]="!enableOnlineBook" formControlName="description"
+                                                    matInput placeholder="Enter a brief description for this service">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row">
+                                        <div fxLayout="column" fxFlex="100">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Service available for</mat-label>
+                                                <mat-select [disabled]="!enableOnlineBook" formControlName="serviceFor"
+                                                    placeholder="">
+                                                    <mat-option value="Everyone">Everyone</mat-option>
+                                                    <mat-option value="Male">Males Only</mat-option>
+                                                    <mat-option value="Female">Females Only</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </mat-tab>
+                            <mat-tab label="SETTINGS">
+                                <ng-template matTabContent>
+                                    <div fxLayout="row" fxLayoutGap="10px" class="extra"  fxLayout.lt-sm="column">
+                                        <div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Extra Time type</mat-label>
+                                                <mat-select formControlName="extra_time_type" placeholder="">
+                                                    <mat-option value="No extra time">No extra time</mat-option>
+                                                    <mat-option value="Processing time after">Processing time after
+                                                    </mat-option>
+                                                    <mat-option value="Blocked time after">Blocked time after
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Duration</mat-label>
+                                                <mat-select formControlName="extra_duration" placeholder="">
+                                                    <mat-option *ngFor="let item of duration" [value]="item.value">
+                                                        {{item.value}}
+                                                        min</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutGap="10px" fxLayout.lt-sm="column" >
+                                        <div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100" fxFlexAlign="center">
+                                            <mat-checkbox name="enableVoucher"  [(ngModel)]="enableVoucher"
+                                                [ngModelOptions]="{standalone: true}">Enable
+                                                voucher sales</mat-checkbox>
+                                        </div>
+                                        <div fxLayout="column" fxFlex="50" fxFlex.lt-sm="100">
+                                            <mat-form-field>
+                                                <mat-label>Voucher expire period</mat-label>
+                                                <input matInput [matDatepicker]="picker" formControlName="voucherExpiry"
+                                                    placeholder="">
+                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                <mat-datepicker touchUi #picker></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutGap="10px">
+                                        <div fxLayout="column" fxFlex="50" fxFlexAlign="center">
+                                            <mat-checkbox  formControlName="commissionEnabled">Enable
+                                                Commission</mat-checkbox>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div fxLayout="row" fxLayoutGap="10px" >
+                                        <div fxLayout="column" fxFlex="50" fxFlexAlign="center">
+                                            <mat-checkbox formControlName="loyalityPoints" [checked]="isShowPoints" (change)="pointsClicked($event)">Points</mat-checkbox>
+                                        </div>
+                                    </div>
+
+                                    <div fxLayout="row" fxLayoutGap="10px" *ngIf="isShowPoints">
+                                        <div fxLayout="column" fxFlex="82" fxFlexAlign="center">
+                                            <ul style="list-style-type:square;">
+                                                <li>How many points the customer should recieve on booking this service?</li>
+                                            </ul>
+                                        </div>
+                                        <div fxFlex="10">
+                                            <input 
+                                            formControlName="servicePoints" class="fillBlanks" type="text" placeholder="">
+                                        </div>
+                                    </div>
+
+                                    <div fxLayout="row" fxLayoutGap="10px" *ngIf="isShowPoints">
+                                        <div fxLayout="column" fxFlex="80" fxFlexAlign="center">
+                                            <ul style="list-style-type:square;">
+                                                <li>How many points the custome should have to redeem this service?</li>
+                                            </ul>
+                                        </div>
+                                        <div fxFlex="10">
+                                            <input
+                                            formControlName="redeemPoints" class="fillBlanks" type="text" placeholder="">
+                                        </div>
+                                        <!-- <div fxFlex="4">
+                                            <h3>pts.</h3>
+                                        </div> -->
+                                    </div>
+
+                                    <div fxLayout="row" fxLayoutGap="10px" style="padding-top:20px;">
+                                        <div fxLayout="column" fxFlex="20" fxFlexOff="30" fxFlexAlign="center" class="file-input-wrapper">
+                                            <button mat-stroked-button color="primary"
+                                type="button" class="btn-file-input"
+                                >Upload
+                                Image</button> 
+                                            <input #file type="file" accept="image/x-png,image/gif,image/jpeg"
+                                                (change)="preview(file.files)" formControlName="image" />
+                                        </div>
+                                        <div fxLayout="column" fxFlex="40" fxFlexAlign="center">
+                                            <img [src]="imgURL" *ngIf="imgURL" style="height: 100px; width: 100px;border-radius: 8px;"   class="  mt-20">
+                                        </div>
+                                    </div>
+
+                                </ng-template>
+                            </mat-tab>
+                            <!-- <mat-tab label="PROFILE"> -->
+                                <!-- <ng-template matTabContent> -->
+
+                                <!-- </ng-template> -->
+                            <!-- </mat-tab> -->
+                            
+                        </mat-tab-group>
+                    </div>
+                </div>
+            </mat-dialog-content>
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+                <button mat-raised-button color="warn" type="button" *ngIf="data.header == 'Edit Service'"
+                    (click)="deleteService()">Delete</button>
+                <div fxLayout="row" fxFlex="1 1 auto"></div>
+                <button mat-raised-button type="button" mat-dialog-close>Cancel</button>
+                <button style="margin-left: 10px" mat-raised-button color="primary" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

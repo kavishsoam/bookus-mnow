@@ -1,0 +1,461 @@
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+<p-toast [style]="{marginTop: '50px'}"></p-toast>
+
+
+
+
+<div class="page-layout blank textStyle">
+  <div class="content">
+    <mat-tab-group class="background">
+      <mat-tab label="PROFILE">
+        <div class="content p-24" *ngIf="showProfile" [@enter] [@leave]>
+          <div fxLayout="row" fxLayoutAlign="space-around center" fxLayout.xs="column">
+            <div fxFlex="50" fxLayout.xs="row">
+              <div class="Profile-card" fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="40">
+                  <div fxLayout="column" fxLayoutAlign="space-around center">
+                    <div>
+                      <img class="user_pro_img" src="{{profileInfo?.image[0] ? profileInfo?.image[0] :  'https://i.ibb.co/phhFBKX/profile.jpg'}}  " alt="image">
+                    
+                    </div>
+                    <div>
+                      <button mat-button class="changeColor" color="primary" (click)="onOptionSelected('Edit')">Edit
+                        profile</button>
+                    </div>
+                    <div>
+                      <button mat-button color="warn" (click)="onOptionSelected('delete')">delete</button>
+                    </div>
+                  </div>
+
+                </div>
+                <div fxFlex="60" style="float: right">
+                  <div class="texth2" fxLayout="column" fxLayoutAlign="space-around start">
+                    <div>
+                      <h1>{{profileInfo?.firstName | titlecase}} {{profileInfo?.lastName | titlecase}}</h1>
+                      <h3 *ngIf="profileInfo.dob != undefined ">Birthday {{profileInfo?.dob | date: 'mediumDate'}}</h3>
+                      <h3 *ngIf="profileInfo.dob == undefined">Birthday date not available</h3>
+                    </div>
+                    <br />
+                    <div>
+                      <h2>Contact</h2>
+                      <h3 class="changeColor">{{profileInfo?.email}}</h3>
+                      <h3>Cell: +{{profileInfo?.countryCode}}{{profileInfo?.phone1}}</h3>
+                    </div>
+                    <br />
+                    <div *ngIf="profileInfo.address == undefined || profileInfo.address.country == ''">
+                      <h2>Address</h2><br>
+                      <h3>No Address available</h3>
+                    </div>
+                    <div *ngIf="profileInfo.address != undefined && profileInfo.address.country != ''">
+                      <h2>Address</h2>
+                      <h3>
+                        {{profileInfo?.address?.area | titlecase}},{{profileInfo?.address?.street}},({{profileInfo?.address?.zip}})
+                      </h3>
+                      <h3>
+                        {{profileInfo?.address?.city}},{{profileInfo?.address?.state}},{{profileInfo?.address?.country}}
+                      </h3>
+                    </div>
+                    <br />
+                    <div>
+                      <h4>CC Emails to Aaron- Aaron</h4>
+                    </div>
+                  </div>
+                </div>
+                <div fxFlex="10">
+
+                </div>
+              </div>
+            </div>
+              <div fxFlex="50" fxLayout="column">
+                <div >
+                  <mat-form-field class="widthFull" appearance="outline">
+                    <mat-label>Client notes</mat-label>
+                    <textarea class="textareaStyle" [value]="profileInfo?.notes?.text" matInput readonly></textarea>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field class="widthFull" appearance="outline">
+                    <mat-label>Intro</mat-label>
+                    <textarea matInput class="textareaStyle" readonly></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              </div>
+
+              <!-- add family and friends !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! --> 
+              <div fxLayout="row" fxLayoutAlign="space-around center">
+                  <div fxFlex="50">
+                    <div fxLayout="column" fxLayoutAlign="space-around start">
+                      <div class="">
+                        <div class="">
+                          <p>Family and Friends Sharing</p>
+                          <p class="smallFont blurText">share memberships and packages with your family and friends. <br>you
+                            can also book, pay and receive<br> notifications on your family and friend's behalf. </p>
+                          <button mat-raised-button><a class="smallFont pointer" (click)="familyAndFriend()">Add Family and Friends</a></button>
+                        </div>
+                      </div>
+                      <div class="">
+                        <div class="">
+                          <p>General Tags</p>
+                          <p class="smallFont blurText">Share memberships and packages with your family and friends. <br>you
+                            can also book, pay and receive<br> notifications on your family and friend's behalf. </p>
+                         <button mat-raised-button>  <a class="smallFont pointer">Add Tags</a></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div fxFlex="50">
+                    <div  fxLayout.xs="row">
+
+
+                      <div>
+                        <mat-grid-list cols="2" rowHeight="3:1">
+                          <mat-grid-tile>
+                            <div fxLayout="column" fxLayoutAlign="space-around center">
+                              <div class="gridHeader">
+                                {{profileInfo?.createdAt | date : 'mediumDate'}}
+                              </div>
+                              <div class="blurText">
+                                Customer since
+                              </div>
+                            </div>
+                          </mat-grid-tile>
+                          <mat-grid-tile>
+                            <div fxLayout="column" fxLayoutAlign="space-around center">
+                              <div class="gridHeader">
+                                {{clientDetails?.allBookings}}
+                              </div>
+                              <div class="blurText">
+                                Appointments
+                              </div>
+                            </div>
+                          </mat-grid-tile>
+                          <mat-grid-tile>
+                            <div fxLayout="column" fxLayoutAlign="space-around center">
+                              <div class="gridHeader">{{profileInfo?.updatedAt | date : 'mediumDate'}}</div>
+                              <div class="blurText">Last Visit</div>
+                            </div>
+                          </mat-grid-tile>
+                          <mat-grid-tile>
+                            <div fxLayout="column" fxLayoutAlign="space-around center">
+                              <div class="gridHeader">{{clientDetails?.totalSales}}</div>
+                              <div class="blurText">Sales</div>
+                            </div>
+                          </mat-grid-tile>
+                          <mat-grid-tile>
+                            <div fxLayout="column" fxLayoutAlign="space-around center">
+                              <div class="gridHeader">{{clientDetails?.noShow}}</div>
+                              <div class="blurText">No Show</div>
+                            </div>
+                          </mat-grid-tile>
+                          <mat-grid-tile>
+                            <div fxLayout="column" fxLayoutAlign="space-around center">
+                              <div class="gridHeader">{{clientDetails?.cancelled}}</div>
+                              <div class="blurText">Cancellations</div>
+                            </div>
+                          </mat-grid-tile>
+                        </mat-grid-list>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            
+
+              <div fxLayout="row" fxLayoutAlign="start start">
+                <div class="styleBox1" fxFlex="20" *ngIf="friendsList.length"
+                fxLayout.xs="row">
+                <div>
+                  <p class="smallFont">Family</p>
+                </div>
+                <div>
+                  <div fxLayout="row" *ngFor="let friend of friendsList" fxLayoutAlign="space-around center">
+                    <div fxFlex="45">
+                      <avatar [size]="40" [name]="friend?.firstName" background="#A9A9A9" [displayType]="'circle'"></avatar>
+                    </div>
+                    <div fxFlex="40">
+                      <p class="styleFriends">{{friend?.firstName }} {{ friend?.lastName}} </p>
+                      <p class="styleFriends">({{friend?.relationship}})</p>
+                    </div>
+                    <div fxFlex="15">
+                      <button mat-icon-button aria-label="Example icon-button with a heart icon" [matMenuTriggerFor]="menu"
+                        #menuTrigger="matMenuTrigger" (click)="menuTrigger.openMenu()">
+                        <app-material-animated-icon start="more_vert" end="more_vert" colorStart="none" colorEnd="none"
+                          [animate]="animate"></app-material-animated-icon>
+                      </button>
+                    </div>
+                    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+                      <span (mouseleave)="menuTrigger.closeMenu()">
+                        <span mat-menu-item class="fs10">Attach to Business</span>
+                        <span mat-menu-item class="fs10">Edit</span>
+                        <span mat-menu-item class="fs10">Remove</span>
+                      </span>
+                    </mat-menu>
+                  </div>
+                </div>
+              </div>
+              </div>
+          <!-- </div> -->
+        </div>
+
+        <div class="content p-24" *ngIf="!showProfile">
+          <div fxLayout="row" fxLayout.xs="column" class="innerbody" fxLayoutAlign="space-around">
+            <!-- //TODO KAVISH EDIT CLIENT -->
+            <form name="clientEditForm" [formGroup]="clientEditForm" (ngSubmit)="submitClientForm(clientEditForm)">
+              <div class="left" fxLayout="column" fxFlex="80" [@enter]>
+
+                <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column" fxLayoutGap.xs="5px">
+                  <div fxLayout="column" fxFlex="48">
+                    <mat-label>First name:</mat-label>
+                    <mat-form-field appearance="outline">
+                      <input matInput formControlName="firstName">
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="column" fxFlex="48">
+                    <mat-label>Last name:</mat-label>
+                    <mat-form-field appearance="outline">
+                      <input matInput formControlName="lastName">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column" fxLayoutGap.xs="5px">
+                  <div fxLayout="column" fxFlex="96">
+                    <mat-label>Email:</mat-label>
+                    <mat-form-field appearance="outline">
+                      <input matInput placeholder="" formControlName="email">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column" fxLayoutGap.xs="5px">
+                  <div fxLayout="column" fxFlex="68">
+                    <mat-label>Confirm Email:</mat-label>
+                    <mat-form-field appearance="outline">
+                      <input matInput placeholder="" formControlName="confirmEmail">
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="column" fxFlex="28">
+                    <mat-label>Gender:</mat-label>
+                    <mat-form-field appearance="outline">
+                      <input matInput placeholder="" formControlName="gender">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column" fxLayoutGap.xs="5px">
+                  <div fxLayout="column" fxFlex="68">
+                    <mat-label>Home Address:</mat-label>
+                    <mat-form-field appearance="outline">
+                      <input matInput placeholder="" formControlName="address">
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="column" fxFlex="28">
+                    <mat-label>Apt/Suite:</mat-label>
+                    <mat-form-field appearance="outline">
+                      <input matInput placeholder="" formControlName="apartmentNo">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutGap="60px" fxLayout.xs="column" fxLayoutGap.xs="5px">
+                  <div fxLayout="column" fxFlex="20">
+                    <button mat-raised-button (click)="editCancel()">Cancel</button>
+                  </div>
+                  <div fxLayout="column" fxFlex="20">
+                    <button mat-raised-button color="primary" type="submit">Save</button>
+                  </div>
+                </div>
+
+              </div>
+              <div fxLayout="column" fxFlex="20" [@enter]>
+                <p>Profile Photo:</p>
+                <div class="image-border">
+                  <ngx-image-uploader [options]="imageOptions" #imageUploader></ngx-image-uploader>
+                </div>
+                <button class="w88" mat-raised-button color="primary"
+                  (click)="uploadImage(imageUploader)">Upload</button>
+              </div>
+            </form>
+            <!-- //TODO KAVISH EDIT CLIENT -->
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="APPOINTMENTS">
+        <div class="content p-24">
+          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.gt-xs="row"
+            fxLayoutAlign.gt-xs="space-between center">
+
+            <div fxLayout="70">
+              <mat-form-field class="noline hello" [floatLabel]="'never'" style="width: 230px;">
+                <input class="dropdown" autocomplete="off" matInput placeholder="Select date range"
+                  [(ngModel)]="saleDateTimeRange" [selectMode]="'range'" [owlDateTimeTrigger]="dtRange2"
+                  [owlDateTime]="dtRange2">
+                <owl-date-time style="widows: 20px !important" [pickerType]="'calendar'" #dtRange2>
+                </owl-date-time>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field class="noline">
+                <mat-select class="dropdown" [formControl]="statusDrop">
+                  <mat-option *ngFor="let item of noline" [value]="item.value">{{item.viewValue}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field class="noline">
+                <mat-select class="dropdown" [formControl]="serviceDrop">
+                  <mat-option>-- None --</mat-option>
+                  <mat-optgroup *ngFor="let group of serviceGroups" [label]="group.name" [disabled]="group.disabled">
+                    <mat-option *ngFor="let service of group.service" [value]="service.value">
+                      {{service.viewValue}}
+                    </mat-option>
+                  </mat-optgroup>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field class="noline">
+                <mat-select class="dropdown" [formControl]="staffDrop">
+                  <mat-option *ngFor="let item of staffDropList" [value]="item._id">{{item.firstName + item.lastName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <button mat-raised-button color="primary" (click)="appointmentSearch()">Search</button>
+            </div>
+            <div>
+              <button mat-raised-button>Clear</button>
+            </div>
+
+
+
+
+            <!-- <div *ngIf="clientAppointmentList.length != 0" fxLayout="20">
+            </div> -->
+
+            <div fxLayout="10">
+              <button mat-button [matMenuTriggerFor]="menu">
+                <mat-icon>get_app</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item value="CSV" (click)="onOptionSelected($event.currentTarget.value)">CSV</button>
+                <button mat-menu-item value="Excel"
+                  (click)="onOptionSelected($event.currentTarget.value)">Excel</button>
+                <button mat-menu-item value="Pdf" (click)="onOptionSelected($event.currentTarget.value)">Pdf</button>
+              </mat-menu>
+              <button mat-button>
+                <mat-icon>print</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="text-center py-3 p-4" *ngIf="clientAppointmentList.length == 0">
+            <div class="emptyicons">
+              <mat-icon [inline]='true'>account_circle
+              </mat-icon>
+              <h1>No Client's Appointments</h1>
+              <p>No appointments present for {{profileInfo?.firstName | titlecase}}
+                {{profileInfo?.lastName | titlecase}}</p>
+            </div>
+            <!-- <button mat-raised-button (click)="addClient()" color="primary">New client</button> -->
+          </div>
+          <div class="filters" *ngIf="clientAppointmentList.length > 0" fxLayout="column" fxLayoutAlign="start stretch">
+            <table mat-table [dataSource]="clientAppointmentList" class="mat-elevation-z8">
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+              </ng-container>
+              <ng-container matColumnDef="startTime">
+                <th class="three" mat-header-cell *matHeaderCellDef> Date. </th>
+                <td class="three" mat-cell *matCellDef="let element">
+                  {{element.startTime | date : 'medium'}} </td>
+              </ng-container>
+              <ng-container matColumnDef="price">
+                <th class="three" mat-header-cell *matHeaderCellDef> Price </th>
+                <td class="three" mat-cell *matCellDef="let element"> {{element.price}} </td>
+              </ng-container>
+              <ng-container matColumnDef="service">
+                <th class="two" mat-header-cell *matHeaderCellDef> Service </th>
+                <td class="two" mat-cell *matCellDef="let element"> {{element?.service?.name}} </td>
+              </ng-container>
+              <ng-container matColumnDef="staff">
+                <th class="two" mat-header-cell *matHeaderCellDef> Staff </th>
+                <td class="two" mat-cell *matCellDef="let element">
+                  {{element?.staff?.firstName}}{{element?.staff?.lastName}} </td>
+              </ng-container>
+              <!-- <ng-container matColumnDef="clientIntakeForm">
+                <th class="one" mat-header-cell *matHeaderCellDef> Intake Form </th>
+                <td class="one" mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">
+                  <button mat-button (click)=intakeFormLists(element._id)>
+                    <mat-icon>assignment</mat-icon>
+                  </button>
+                </td>
+              </ng-container> -->
+              <tr mat-header-row *matHeaderRowDef="clientListColumn"></tr>
+              <tr mat-row style="cursor: pointer;" *matRowDef="let row; columns: clientListColumn;"
+               >
+              </tr>
+            </table>
+          </div>
+        </div>
+
+      </mat-tab>
+      <mat-tab label="ACCOUNT">
+
+        <mat-tab-group mat-align-tabs="center" [selectedIndex]="selectedInd" style="background-color: white">
+          <mat-tab label="POINT LABEL">
+            <div class="margin-TL">
+              <div fxLayout="row" fxLayoutAlign="space-around center">
+                <div class="borderStyle" fxFlex="80" style="padding: 0px;">
+                  <div fxLayout="row" fxLayoutAlign="space-around center">
+                    <div fxFlex="5">
+                      <mat-icon mat-list-icon>
+                        <avatar style="float: left" [size]="40" name="Test" [displayType]="'circle'"></avatar>
+                      </mat-icon>
+                    </div>
+                    <div fxFlex="45" style="float: left;    padding: 10px;">
+                      <h4 class="account-point-label" mat-line>test 01(123) 456-7890</h4>
+                      <p class="account-point-label" mat-line>tester3@parangat.com</p>
+                    </div>
+                    <div fxFlex="40">
+                      <button mat-raised-button color="primary"
+                        style="float: right; background-color: lightskyblue ;">10pts</button>
+                    </div>
+                  </div>
+                </div>
+                <div fxFlex="20" fxLayoutAlign="space-around center">
+                  <button mat-raised-button color="primary" style=" float:left; background-color: green">Create
+                    New</button>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="MONEY">
+          </mat-tab>
+          <mat-tab label="TRANSACTION MONEY">
+          </mat-tab>
+        </mat-tab-group>
+
+      </mat-tab>
+      <mat-tab label="PRODUCTS">
+
+      </mat-tab>
+      <mat-tab label="GIFT RECORD">
+
+      </mat-tab>
+      <mat-tab label="IOU">
+        <app-iou-list></app-iou-list>
+      </mat-tab>
+      <mat-tab label="SOAP">
+        <app-soap [clientId]="id"></app-soap>
+
+      </mat-tab>
+    </mat-tab-group>
+
+  </div>
+</div>
+
+
+
+<!-- -------------------------------------------------------------------------------------------------- Move content -->

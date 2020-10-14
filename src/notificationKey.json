@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "massagenow-194ba",
+  "private_key_id": "1716edb1a30efbadda8e264a92c3cf2fb430127a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCg85Om40XKGbp/\n9lMvF0HPCq3TFMau5ms6rJ6oONLAwNH4r6w9lsPJf3Nin+H2wEQqNroIHs+hdXgA\n2smYNME5tKuW4rjZC0YjazvKssED/HNyudCQwUvGS7BcuAIF8FDY/OzYhzBFlbkS\nRmPuEJwvGRHKKbf4vtHDm16vI5LA4nxWNP7ECcekRrpTFKBaxTGUmlo7H5cJgyjj\nLPzBaamUi1feC2uM4OqxSk3hvwEI1TQcbjmCl2SMAsdx7UbX5yyFKRqyY+OC8aNg\nXg4wf0K/MMbggijbyw+2JEroTDmzOC5wyYBwobTlm3MykEDC7TDssxUUxaYdLh6C\nAKOy9F/fAgMBAAECggEAA1VCo6xFh+EO2iiH4iFD/8geVREzPhr6cdLHpFSCP3NJ\ncId0HysN7zsgRhS+hrAbmUOHMwou+DkpB4eAW5JixVGm/gRq7zULD5+1s3Bj4TPA\npkm6dnec8e8jqKqM1telAkwBPEisaLx9gnyKWZCRfhjcTp3yN939FQ+/dGFdtXh9\ndNmq0tvqK2vBO1V++55eVvKvMfACXdFLoNobpk2NVFh1Klz+7m/vTFwKWkfrH74J\nVmqCN9FYISEwovcNUe2d9sfKs/fpNVO29yKzqFXohQqIfn3Qf6XNCvX0x5TPqTcH\nCeVdmZ1HSHUGOgg/rrTWIG1HLk5GF8bkmrAe0kqFNQKBgQDdKKpKzyNkLLHXAzpo\ndMwQzcgAtmbjuUjaSho9TouJtcrkY0qji+bsTwoPA7r5K5/SY9nntHlbbq4bV+nG\nMJqLq3Gwg4QTk3uHU/W1CR2a2T8EgonxWJjnXZx6lxwk0x/aZwW901gnZ3GH9FRw\njIYEhxeaUrtrCV4cccWOoFHzhQKBgQC6Tr+cn+jNykck8BSiIyXvZAHjchJV+Z3p\nt4YH5hTdVcjv8e+JdGktVAItpDaBuBTUCeg73Nma3cQBzc3AqkQxG4fqPno76WB8\n5+hvN176vzvyRiTschGNRoRHXa7bXslG0TG7MuR3oWEW5l5y8b0gBgWwN+DYkoq9\ns6qPUhMpEwKBgQCGIPqe4l/BioXVNGUBIwz8iAFrxTRDmoT/tv+Q/QkN3Q6PU1Ta\nOag0237rOkT0h6unit2GdGNBu6+mb7wdci7Y1ILgHfNFeCXsHlSflka5OlbI4m7M\nzAH4GEMl6m2sO8tOxzqpNPt68nbdkKaBmAhTyKbc9p4qPYUxVSMO7FanjQKBgQCo\nrq4MGDiHQpLBneGAn4Q0R/7xuJFjaFsShgiDVE0lzQrePNXdRRoJYVuLiXeUYV/y\nT3oF4ULgVdOmsniM7VxKfhvD+YdggT/MN4iaUa7cJpMXG21I60p6+BLCLs8nbZ2d\nUcDONhjnO6UVP8TaG4dZ3DoAP8eDLsMRWP+fPfd9IwKBgQCVijUnl/YR0kSqpyZB\nWCSrqdjfqO/5k9ec1GtXyiCfqDb2UNSLkp33w/RiwTXRzj16XSlE3n27Cb1X/GzJ\n6JIOYR+/QhMoqg0fQTBq8vDgBFR41UHPnPkBluqYAycxTdgvweCVMQIMHJoKG1Xf\nzo8kuu/BM2DX2IYlggsDhgcEuw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-ens4w@massagenow-194ba.iam.gserviceaccount.com",
+  "client_id": "111333920967479392801",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ens4w%40massagenow-194ba.iam.gserviceaccount.com"
+}

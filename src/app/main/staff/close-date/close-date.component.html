@@ -1,0 +1,134 @@
+<div class="dialog-pad">
+  <div *ngIf="!ifDelete">
+    <form [formGroup]="closeDateForm" (ngSubmit)="AddCloseSubmit(closeDateForm)">
+      <div fxLayout="column" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>{{ data.header }}</h2>
+        </div>
+      </div>
+      <mat-dialog-content class="content">
+        <div fxLayout="row" class="pt-20" fxLayoutGap.xs="5px">
+          <div fxLayout="column" fxFlex="100" fxLayoutGap="10px" fxLayoutGap.xs="5px">
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column" fxLayoutGap.xs="5px" fxLayoutGap="20px">
+              <div fxLayout="column" [ngStyle.xs]="{'width':'100%'}" fxFlex="50">
+                <mat-form-field appearance="outline">
+                  <input matInput [matDatepicker]="startDate" placeholder="Choose a date" formControlName="startDate" />
+                  <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #startDate></mat-datepicker>
+                  <mat-error *ngIf="
+                      !closeDateForm.controls['startDate'].valid &&
+                      (closeDateForm.controls['startDate'].touched ||
+                        submittedError)
+                    ">
+                    <mat-error *ngIf="
+                        closeDateForm.get('startDate').hasError('required')
+                      ">
+                      Start date is required
+                    </mat-error>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div fxLayout="column"  [ngStyle.xs]="{'width':'100%'}" fxFlex="50">
+                <mat-form-field appearance="outline">
+                  <input matInput [matDatepicker]="endDate" [min]="closeDateForm.get('startDate').value"
+                    placeholder="Choose a date" formControlName="endDate" />
+                  <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #endDate></mat-datepicker>
+                  <mat-error *ngIf="
+                      !closeDateForm.controls['endDate'].valid &&
+                      (closeDateForm.controls['endDate'].touched ||
+                        submittedError)
+                    ">
+                    <mat-error *ngIf="closeDateForm.get('endDate').hasError('required')">
+                      End date is required
+                    </mat-error>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <div fxLayout="column" fxFlex="100">
+                <mat-form-field appearance="outline">
+                  <mat-label>DESCRIPTION</mat-label>
+                  <textarea matInput formControlName="description"></textarea>
+                  <mat-error *ngIf="
+                      !closeDateForm.controls['description'].valid &&
+                      (closeDateForm.controls['description'].touched ||
+                        submittedError)
+                    ">
+                    <mat-error *ngIf="
+                        closeDateForm.get('description').hasError('required')
+                      ">
+                      Description is required
+                    </mat-error>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <div fxLayout="column" fxFlex="100" fxLayoutGap="5px">
+                <div fxLayout="row" fxLayoutAlign="start">
+                  <mat-label>LOCATION</mat-label>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                  <div fxLayout="column" fxLayoutGap="2px" fxFlex="100">
+                    <div fxLayout="row" formArrayName="location" fxLayoutAlign="start center">
+                      <mat-checkbox [(ngModel)]="allCheck" [ngModelOptions]="{ standalone: true }"
+                        (click)="selectAll(allCheck)">All location</mat-checkbox>
+                    </div>
+                    <div fxLayout="row" formArrayName="location" fxLayoutAlign="start center" *ngFor="
+                        let loc of closeDateForm.controls.location.controls;
+                        let i = index
+                      ">
+                      <mat-checkbox [formControlName]="i">{{
+                        data.location[i].name
+                      }}</mat-checkbox>
+                    </div>
+                    <mat-error *ngIf="
+                        !closeDateForm.controls['location'].valid &&
+                        (closeDateForm.controls['location'].touched ||
+                          submittedError)
+                      " style="    font-size: 12px;
+                                   padding-left: 1px;">
+                      <mat-error *ngIf="
+                          closeDateForm.get('location').hasError('required')
+                        ">
+                        At least select one.
+                      </mat-error>
+                    </mat-error>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-content>
+      <div fxLayout="row" style="padding-top: 5px;" fxLayoutAlign="space-between center" class="buttons" fxLayout.xs="column">
+        <button mat-raised-button color="warn" type="button" (click)="deleteCloseDate()" [ngStyle.xs]="{'width':'100%'}">
+          Delete
+        </button>
+        <div fxLayout="row" fxFlex="1 1 auto"></div>
+        <button [ngStyle.xs]="{'width':'100%','margin-top': '5px'}" mat-raised-button type="button" mat-dialog-close>Close</button>
+        <button [ngStyle.xs]="{'width':'100%','margin-top': '5px'}" class="save" mat-raised-button color="primary" type="submit">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="ifDelete">
+    <div fxLayout="column" fxLayoutAlign="start center">
+      <h2 mat-dialog-title>Delete Shift</h2>
+      <p class="description">
+        You are deleting a shift that repeats weekly. Deleting upcoming shifts
+        will overwrite {{ data.empName }} ongoing
+        {{ data.empDate | date }} schedule.
+      </p>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+      <button mat-raised-button type="button" mat-dialog-close>Close</button>
+      <button mat-raised-button color="warn" (click)="deleteCloseDate()" type="button">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

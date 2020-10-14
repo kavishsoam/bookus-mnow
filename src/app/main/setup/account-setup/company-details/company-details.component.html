@@ -1,0 +1,145 @@
+<div class="page-layout blank">
+  <p-toast></p-toast>
+  <form name="companyDetailsForm" [formGroup]="companyDetailsForm" (ngSubmit)="companyDetails(companyDetailsForm)">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px" style="overflow-x: auto;" >
+      <div fxLayout="column" fxFlex="100" *ngIf="!!imgURL" >
+					<div class="avatar-upload">
+						<div class="avatar-edit">
+							<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="preview($event)" formControlName="image"  />
+            </div>
+            <div class="avatar-preview">
+              <div id="imagePreview" [style.backgroundImage]="'url('+ imgURL +')'">
+              </div>
+            </div>
+          </div>
+          <button type="button"  mat-stroked-button  class="btn-class" (click)="fileInput.click()">Upload Image</button>
+      </div>
+    </div>
+
+    <br />
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+        <mat-form-field appearance="outline">
+          <mat-label>Business Name</mat-label>
+          <input matInput formControlName="businessName">
+        </mat-form-field>
+        </div>
+        <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+        <mat-form-field appearance="outline">
+          <mat-label>Website</mat-label>
+          <input matInput formControlName="website">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+        <mat-form-field appearance="outline">
+          <mat-select placeholder="Business Type" formControlName="businessType">
+            <mat-option *ngFor="let type of businessTypeArray" [value]="type">{{type}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        </div>
+        <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+        <mat-form-field appearance="outline">
+          <mat-select placeholder="Time Zone" formControlName="timezone">
+            <mat-option *ngFor="let type of timeZoneArray" [value]="type">{{type}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row">
+        <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+        <mat-form-field appearance="outline">
+          <mat-select placeholder="Time Format" formControlName="timeFormat">
+            <mat-option *ngFor="let type of timeFormatArray" [value]="type.value">{{type.viewValue}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        </div>
+        <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+        <mat-form-field appearance="outline">
+          <mat-select placeholder="Country" formControlName="country">
+            <mat-option *ngFor="let type of countryArray" [value]="type.name">{{type.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+        <mat-form-field appearance="outline">
+          <mat-select placeholder="Currency" formControlName="currency">
+            <mat-option *ngFor="let type of currencyArray" [value]="type.code">{{type.name}} - {{type.code}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+
+<div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+        <mat-form-field appearance="outline">
+          <mat-label>ABN Number</mat-label>
+          <input matInput >
+        </mat-form-field>
+        </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+        <mat-form-field appearance="outline">
+          <mat-label>Tax Name</mat-label>
+          <input matInput >
+        </mat-form-field>
+        </div>
+        <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+        <mat-form-field appearance="outline">
+          <mat-label>Bank  A/C to recieve Money</mat-label>
+          <input matInput formControlName="website">
+        </mat-form-field>
+        </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+        <mat-form-field appearance="outline">
+          <mat-label>A/C Name</mat-label>
+          <input matInput formControlName="website">
+        </mat-form-field>
+        </div>
+        <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+        <mat-form-field appearance="outline">
+          <mat-label>B&B</mat-label>
+          <input matInput formControlName="website">
+        </mat-form-field>
+      </div>
+      </div>
+
+      <div fxLayout="row">
+        <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+        <mat-form-field appearance="outline">
+          <mat-label>A/C Number</mat-label>
+          <input matInput formControlName="website"></mat-form-field>
+      </div>
+      <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea maxLength="400" matInput formControlName="description"></textarea>
+          </mat-form-field>
+          </div>
+          </div>
+          <div fxLayout="row">
+            <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around start">
+          <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <textarea matInput formControlName="address"></textarea>
+          </mat-form-field>
+          </div>
+          </div>
+ 
+
+
+    <div>
+      <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+      <button mat-raised-button color="primary" type="submit" [promiseBtn]="loader">Save Changes</button>
+    </div>
+  </form>
+</div>

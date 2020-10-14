@@ -1,0 +1,292 @@
+<!-- <div class="dialog-pad"> -->
+
+    <div *ngIf="!isDeletePrompt" class="pt-10 pl-20 pr-20 pb-20" style="background-color: white;">
+        <form name="addLocationForm" [formGroup]="addLocationForm" (ngSubmit)="addLocation(addLocationForm)">
+            <div class="heading" fxLayout="column" fxLayoutAlign="start center">
+            </div>
+            <ng-template #addLocations>
+                <div class="heading" fxLayout="column" fxLayoutAlign="start center">
+                    <h2 mat-dialog-title> Location </h2>
+                </div>
+            </ng-template>
+            <mat-dialog-content>
+
+
+                  <br>
+
+                <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="30px">
+                    <div fxLayout="column" fxFlex="50">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Location Name</mat-label>
+                            <input matInput placeholder="e.g. Downtown Branch" formControlName="name">
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxFlex="50">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Phone No.</mat-label>
+                            <input #telInput matInput type="text" (keydown)="telInputChange($event)" ng2TelInput
+                                [(ngModel)]="phoneNumber" [ng2TelInputOptions]="{initialCountry: countryStr}"
+                                value="+{{countryCode}} " (hasError)="hasError($event)"
+                                (ng2TelOutput)="getNumber($event)" (intlTelInputObject)="telInputObject($event)"
+                                (countryChange)="onCountryChange($event)" [ngModelOptions]="{standalone: true}" />
+                        </mat-form-field>
+                        <div *ngIf="
+                                !phone_invalid" class="error-handle">Invalid Number</div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+                <!-- <div fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="30px">
+
+                </div> -->
+                <div fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="30px">
+                    <div fxLayout="column" fxFlex="50">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Contact Email</mat-label>
+                            <input matInput placeholder="Jane.doe@gmail.com" formControlName="email">
+                            <mat-error>Email is required</mat-error>
+                            <mat-hint>Replies to client appointment notifications will go to this email.
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxFlex="50">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Street Address</mat-label>
+                            <input matInput google-place (onSelect)="setAddress($event)"
+                                (input)="OnAddrChg($event.target.value)" placeholder="e.g. 120 Queen Street"
+                                formControlName="street">
+                            <!-- <mat-error *ngIf="addrSel"></mat-error> -->
+                        </mat-form-field>
+                        <div *ngIf="(f.street.touched)">
+                            <div *ngIf="(f.street.errors || addrSel)" class="error-handle">
+                                Select address from the dropdown</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="30px">
+
+                </div> -->
+
+                <div fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="30px">
+                    <div fxLayout="column" fxFlex="50">
+                        <mat-form-field  appearance="outline" >
+                            <mat-label>Category</mat-label>
+                            <mat-select class="dropdow" multiple formControlName="categoryId"
+                              (selectionChange)="catSelectedListener($event.value)">
+                              <mat-option *ngFor="let item of categoryData" [value]="item.id">
+                                {{item.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxFlex="50">
+                        <mat-form-field appearance="outline">
+                            <mat-label> APT, Suite, BLDG. (Optional)</mat-label>
+                            <input matInput placeholder="" formControlName="building">
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <!-- <div fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="30px">
+
+                </div> -->
+                <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
+                    <div fxLayout="column" fxFlex="32">
+                        <mat-form-field appearance="outline">
+                            <mat-label>City</mat-label>
+                            <input matInput placeholder="" formControlName="city">
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxFlex="32">
+                        <mat-form-field appearance="outline">
+                            <mat-label>State</mat-label>
+                            <input matInput placeholder="" formControlName="state">
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxFlex="32">
+                        <mat-form-field appearance="outline">
+                            <mat-label> Zip code</mat-label>
+                            <input matInput placeholder="" formControlName="zip">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="30px">
+                    <div fxLayout="column" fxFlex="100">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Description</mat-label>
+                            <input matInput placeholder="" formControlName="descriptions">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br />
+                <!-- xx xx xx xx xx xx xx -->
+                <div fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="5px" style="overflow-x: auto;">
+                    <div fxLayout="column" fxFlex="50" *ngFor="let item of profileUrl">
+                        <div>
+                            <div class="btn-del">
+                                <button mat-icon-button type="button" (click)="removeImage(item,'profileUrl')">
+                                    <mat-icon class="alert">close</mat-icon>
+                                </button>
+                            </div>
+                            <div class="image">
+                                <img class="object-fit_cover" [src]="getSantizeUrl(item)">
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="column" fxFlex="50"  >
+                        <div class="btn-del">
+                        </div>
+
+                    </div>
+                </div>
+                <br />
+
+                <!-- <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px" style="overflow-x: auto;" >
+                    <div fxLayout="column" fxFlex="100" *ngIf="!!imgURL" >
+                                  <div class="avatar-upload">
+                                      <div class="avatar-edit">
+                                          <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="preview($event)" formControlName="profileImg"  />
+                          </div>
+                          <div class="avatar-preview">
+                            <div id="imagePreview" [style.backgroundImage]="'url('+ imgURL +')'">
+                            </div>
+                          </div>
+                        </div>
+                        <button type="button"  mat-stroked-button  class="btn-class" (click)="fileInput.click()">Upload Image</button>
+                    </div>
+                  </div> -->
+
+                                   <div fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="10px">
+                    <div fxLayout="column" fxFlex="100">
+                  <!-- <div class="add_img" fxFlex="100"> -->
+                    <p>Add images</p>
+                    <div class="img_select">
+                      <input #file type="file" class="" id="s-img" accept="image/*" multiple (change)="detectFiles($event)"
+                        style="opacity: 0" >
+                      <label class="img-label" for="s-img">+</label>
+                      <div id="upload_img_list" class="">
+                        <div *ngFor="let url of urls;let index = index" class="upload_img ">
+                          <div class="product-image">
+                            <span (click)="removeSelectedImg(index)">&#x292B;</span>
+                            <img class="media" [src]="url" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <!-- </div> -->
+                  </div>
+                                   </div>
+
+                <!-- <div fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="30px">
+                    <div fxLayout="column" fxFlex="20">
+                        <div class="file-input-wrapper">
+                            <button mat-stroked-button color="primary"
+                            type="button" class="btn-file-input"
+                            >Upload
+                            Image</button>
+                            <input #file type="file" accept="image/x-png,image/gif,image/jpeg"
+                          (change)="preview(file.files)" formControlName="profileImg" />
+                          </div>
+                    </div>
+                    <div fxFlex="40">
+                        <img [src]="imgURL" *ngIf="imgURL" style="height: 100px; width: 100px;border-radius: 8px;"   class="">
+                    </div>
+                </div> -->
+                <br />
+
+                <div fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="30px">
+                    <div fxLayout="column" fxFlex="47">
+                        Facilities
+                    </div>
+                    <div fxLayout="column" fxFlex="50">
+                        Cannot receive points if paying from
+                    </div>
+                </div>
+
+                <div fxLayout="coulmn" fxLayoutAlign="space-around start" >
+                    <div fxFlex="50">
+                        <div fxLayout="row" fxLayoutAlign="" *ngFor="let item of amenity" fxLayoutGap="30px">
+                            <mat-checkbox [checked]="item.selected" (change)="facilitySelect($event,item)">{{item.name}}
+                            </mat-checkbox>
+                    </div>
+                    </div>
+
+                    <div fxFlex="50">
+                        <div fxLayout="row" fxLayoutAlign="" *ngFor="let item of points" fxLayoutGap="30px">
+                            <mat-checkbox [checked]="item.checked" (change)="pointSelect($event,item)">{{item.viewValue}}
+                            </mat-checkbox>
+                        </div>
+                    </div>
+                    </div>
+                    <br>
+
+                    <div  fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="30px">
+                        <div fxLayout="column" fxFlex="100">
+                                Payment Methods
+                        </div>
+                    </div>
+
+                    <div fxLayout="coulmn" fxLayoutAlign="space-around start">
+                        <div fxFlex="100">
+                            <div fxLayout="row" fxLayoutAlign=" start start" *ngFor="let item of payment" >
+                                <mat-checkbox [checked]="item.selected" (change)="paymentSelect($event,item)">{{item.name}}
+                                </mat-checkbox>
+                        </div>
+                        </div>
+                        </div>
+                
+                <br />
+                <div fxLayout="row" fxLayoutGap="30px">
+                    <div fxLayout="column" fxFlex="100">
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-checkbox name="terms" aria-label="I read and accept" formControlName="onlineBooking">
+                                <span class="checkbox">ENABLE ONLINE BOOKINGS</span>
+                            </mat-checkbox>
+                        </div>
+                    </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutGap="30px">
+                    <div fxLayout="column" fxFlex="100">
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-checkbox name="terms" aria-label="Extra job" >
+                                <span class="checkbox">ENABLE EXTRA JOB</span>
+                            </mat-checkbox>
+                        </div>
+                    </div>
+                </div>
+            </mat-dialog-content>
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+                <button mat-raised-button color="warn" type="button" (click)="ConfirmDelLocation()"
+                    *ngIf="_id" > Delete</button>
+                <div fxLayout="row" fxFlex="1 1 auto"></div>
+                <button mat-raised-button type="button" (click)="onCancelClick()">Cancel</button>
+                <button style="margin-left: 10px" mat-raised-button color="primary" type="submit"
+                    [promiseBtn]="loader">SAVE</button>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="isDeletePrompt">
+        <div class="heading" fxLayout="column" fxLayoutAlign="center center">
+            <h2 mat-dialog-title>Delete Location</h2>
+        </div>
+        <mat-dialog-content>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="">
+                <div fxLayout="column" fxFlex="100">
+                    <p class="" style="text-align: center;">
+                        Are you sure you want to delete this location?
+                    </p>
+                </div>
+            </div>
+        </mat-dialog-content>
+
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="">
+            <div fxLayout="column" fxFlex="50">
+        <mat-dialog-actions allign="center" style="text-align: center;">
+            <button mat-raised-button color="warn" type="button" (click)="deleteLocation()">Delete</button>
+        </mat-dialog-actions>
+        </div>
+        </div>
+    </div>
+<!-- </div> -->

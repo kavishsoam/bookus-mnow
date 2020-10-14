@@ -1,0 +1,80 @@
+<div class="page-layout blank">
+    <p-toast [style]="{marginTop: '50px'}"></p-toast>
+    <div fxLayout="column" fxLayoutAlign="center center">
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-card>
+                <mat-card-header fxLayoutAlign="space-between center">
+                    <mat-card-title>Tax Rates</mat-card-title>
+                    <button mat-raised-button color="primary" class="ml-20 button" [matMenuTriggerFor]="add_new">ADD
+                        NEW
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #add_new="matMenu">
+                        <button mat-menu-item (click)="addNewTax()">Tax </button>
+                        <button mat-menu-item (click)="addNewTaxGroup()">Tax Group</button>
+                    </mat-menu>
+                    <mat-card-subtitle>Add your tax rates and use groups for multiple taxes, for example
+                        combining
+                        city and state taxes
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <table mat-table [dataSource]="taxesList" class="mat-elevation-z8">
+                    <ng-container matColumnDef="name" *ngIf="taxesList.length">
+                        <th mat-header-cell *matHeaderCellDef> Tax Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="taxRate" *ngIf="taxesList.length">
+                        <th mat-header-cell *matHeaderCellDef> Tax Rate </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.taxGroup ? element.tax : element.taxRate + '%'}}
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="taxesListColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: taxesListColumns;" (click)="editTax(row)"></tr>
+                </table>
+            </mat-card>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Tax Defaults</mat-card-title>
+                    <button mat-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_horiz</mat-icon>
+                    </button>
+                    <mat-menu xPosition="before" #menu="matMenu">
+                        <button mat-menu-item (click)="addNewService()">Apply default to all items</button>
+
+                    </mat-menu>
+                    <mat-card-subtitle>Setup the default taxes for your business, you can still override
+                        defaults in the settings of individual products and services
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <table mat-table [dataSource]="defaultTaxList" class="mat-elevation-z8">
+                    <ng-container matColumnDef="location">
+                        <th mat-header-cell *matHeaderCellDef> Location </th>
+                        <td mat-cell *matCellDef="let element"> {{element?.location?.name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="defaultServiceTax">
+                        <th mat-header-cell *matHeaderCellDef> Services Default </th>
+                        <td mat-cell *matCellDef="let element"> {{element?.defaultServiceTax.name ?
+                                    element.defaultServiceTax.name : 'No tax'}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="defaultTaxListColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: defaultTaxListColumns;" (click)="editTaxDefaults(row)">
+                    </tr>
+                </table>
+            </mat-card>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Tax Calculation</mat-card-title>
+                    <mat-card-subtitle>Your retail prices are <strong *ngIf="!changeText">excluding taxes</strong><strong  *ngIf="changeText">including taxes</strong>.
+                        <a (click)="changeSetting()"> Change this setting</a>
+                    </mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+        </div>
+    </div>
+</div>

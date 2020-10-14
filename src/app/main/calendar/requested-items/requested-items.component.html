@@ -1,0 +1,110 @@
+<div class="full-width bg-white">
+  <div class="header">
+    REQUEST
+    <mat-icon style="float: right;" (click)="closeModal()">cancel</mat-icon>
+  </div>
+  <mat-tab-group style="background: #fff;">
+    <mat-tab label="REQUESTED APPOINTMENT">
+      <div
+        class="pr-20 pl-20"
+        fxLayout="row"
+        fxLayoutAlign="start"
+        fxFlex.xs="100"
+      ></div>
+      <div class="p20" fxLayout="column" fxLayoutAlign="start stretch">
+        <table
+          mat-table
+          [dataSource]="requestedAppointmentList"
+          matSort
+          class="mat-elevation-z8"
+        >
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Client Name
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-centerer">
+              {{
+                element.clientId && element.clientId.firstName
+                  ? element?.clientId?.firstName
+                  : "---"
+              }}{{ " " }}{{ element?.clientId?.lastName }}
+            </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="rating">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Therapist Name
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element?.therapistId?.firstName }}
+            </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="review">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Appointment Location
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <span>{{ element.locationId.name }}</span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="timeSlot">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Time Slots
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <ng-container>
+                <mat-form-field class="noline" style="width: 100px;">
+                  <mat-label>Time</mat-label>
+                  <mat-select class="dropdown">
+                    <mat-option
+                      *ngFor="let item of element.date"
+                      [value]="item.date"
+                      >{{ item.date | date: "fullDate" }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </ng-container>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              class="text-center"
+            >
+              Actions
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <div fxFlex="20">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="acceptClicked(element)"
+                  >
+                    Accept
+                  </button>
+                </div>
+                <div fxFlex="20" fxFlexOffset="10">
+                  <button mat-raised-button color="warn">
+                    Reject
+                  </button>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

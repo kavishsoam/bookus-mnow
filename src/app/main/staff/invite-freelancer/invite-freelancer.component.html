@@ -1,0 +1,145 @@
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+<p-toast [style]="{marginTop: '50px'}"></p-toast>
+<div>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxFlex="95">
+      <p class="text-center margRemove">INVITE</p>
+    </div>
+    <div fxFlex="5">
+      <button>
+        <mat-icon (click)="cancelInvite()">close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <form [formGroup]="inviteForm" (ngSubmit)="submitInviteForm(inviteForm)">
+    <div *ngIf="newJobInvite">
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+        <div fxFlexAlign="center" fxLayout="column" fxFlex="30" fxFlexOffset="5">
+          <p>Invite Freelancer : </p>
+        </div>
+        <div class="float-left" fxFlexAlign="center" fxLayout="column" fxFlex="40" fxFlexOffset="">
+          <mat-form-field class="  example-full-width noline">
+            <!-- <mat-label class="pt-5">Freelancer Type</mat-label> -->
+            <mat-select class='dropdown' formControlName="inviteType">
+              <mat-option value="default">Default</mat-option>
+              <mat-option value="recent">Recent</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+        <div fxFlexAlign="center" fxLayout="column" fxFlex="100">
+          <mat-radio-group aria-label="Select an option" formControlName="verification">
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="30" fxFlexOffset="5">
+              <mat-radio-button value="true">Verified</mat-radio-button>
+            </div>
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="30">
+              <mat-radio-button value="false">Non-Verified</mat-radio-button>
+            </div>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <br>
+
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlexAlign="center" fxLayout="column" fxFlex="100">
+          <mat-radio-group aria-label="Select an option" formControlName="businessCard">
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="30" fxFlexOffset="5">
+              <mat-radio-button value="ABN">ABN</mat-radio-button>
+            </div>
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="30">
+              <mat-radio-button value="TFN">TFN</mat-radio-button>
+            </div>
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="30">
+              <mat-radio-button value="None">None</mat-radio-button>
+            </div>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <br>
+
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlexAlign="center" fxLayout="column" fxFlex="100">
+          <mat-radio-group aria-label="Select an option" formControlName="gender">
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="30" fxFlexOffset="5">
+              <mat-radio-button value="Male">Male</mat-radio-button>
+            </div>
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="30">
+              <mat-radio-button value="Female">Female</mat-radio-button>
+            </div>
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="30">
+              <mat-radio-button value="Any">Any</mat-radio-button>
+            </div>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <br>
+
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+        <div fxFlexAlign="center" fxLayout="column" fxFlex="10" fxFlexOffset="">
+          <p>Certificate : </p>
+        </div>
+        <div fxFlexAlign="center" fxLayout="column" fxFlex="40" style="float: left;">
+          <mat-form-field class="  example-full-width noline">
+            <!-- <mat-label>Select Certificate</mat-label> -->
+            <mat-select class="dropdown" formControlName="certificate">
+              <mat-option value="certificate1">certificate1</mat-option>
+              <mat-option value="certificate2">certificate2</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+
+        <div fxFlexAlign="center" fxLayout="column" fxFlex="10" fxFlexOffset="40">
+          <button mat-raised-button (click)="skipClicked()">Skip</button>
+        </div>
+        <div fxFlexAlign="center" fxLayout="column" fxFlex="20">
+          <button mat-raised-button color="primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div *ngIf="!newJobInvite">
+    <form [formGroup]="reHireForm" (ngSubmit)="submitRehireForm(reHireForm)">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxLayout="column" fxFlex="100">
+        <mat-label>Select job</mat-label>
+        <mat-form-field class="noline123" appearance="outline">
+          <mat-select class="dropdown123" (selectionChange)="openCreateJob($event)"  formControlName="jobId">
+            <mat-option *ngFor="let job of jobsListView" [value]="job._id">
+              {{job?.jobTitle | titlecase}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <!-- <div fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxFlexAlign="center" fxLayout="column" fxFlex="10" fxFlexOffset="40">
+        <mat-form-field class="  example-full-width noline">
+          <mat-label>Choose a Job</mat-label>
+          <mat-select class="dropdown">
+            <mat-option value="default">Default</mat-option>
+            <mat-option value="recent">Recent</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div> -->
+    <br>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <div fxFlexAlign="center" fxLayout="column" fxFlex="10" fxFlexOffset="50">
+        <button mat-raised-button type="button" (click)="cancelInvite()">Cancel</button>
+      </div>
+      <div fxFlexAlign="center" fxLayout="column" fxFlex="10">
+        <button mat-raised-button type="submit" color="primary" >Invite</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>

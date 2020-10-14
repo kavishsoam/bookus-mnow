@@ -1,0 +1,314 @@
+<!-- <div class="dialog-pad">
+  <form name="suppliersForm" [formGroup]="suppliersForm" (ngSubmit)="suppliers(suppliersForm)">
+    <div fxLayout="column" class="header" fxLayoutAlign="start center">
+      <div fxLayout="row">
+        <h2 mat-dialog-title>{{data.header}}</h2>
+        <button mat-button mat-dialog-close class="crossButton">
+          <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-dialog-content class="content" style="border-top: 1px solid #dee3e6;">
+      <div fxLayout="row" fxLayoutAlign="space-around" fxLayoutGap="40px">
+
+
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button style="margin-left: 10px; width: 10vw;" mat-raised-button color="primary" type="submit">SAVE</button>
+    </mat-dialog-actions>
+  </form>
+</div> -->
+
+
+
+<!-- ? new structure -------------------------
+*--------------------------------------------------- -->
+
+
+<div class="page-layout blank">
+  <!-- <p-toast></p-toast> -->
+  <form name="supplierForm" [formGroup]="suppliersForm" (ngSubmit)="onSubmitProduct(suppliersForm)">
+    <div >
+      <div fxLayout="column" class="header" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>Create Product</h2>
+          <button mat-button mat-dialog-close class="crossButton">
+            <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-dialog-content class="content" style="border-top: 1px solid #dee3e6;">
+        <div fxLayout="row" class="innerbody" fxLayoutAlign="space-around">
+          <div class="left" fxLayout="column" fxFlex="50">
+
+            <!-- !LEFT -->
+            <div fxLayout="column" fxFlex="50">
+              <div class="sub-heading" fxLayout="row" fxLayoutAlign="start center">
+                Supplier Details
+              </div>
+              <div fxLayout="row">
+                <div fxLayout="column" fxFlex="100">
+                <mat-form-field appearance="outline">
+                  <mat-label>SUPPLIER NAME</mat-label>
+                  <input matInput formControlName="name" placeholder="e.g. L'Oreal">
+                </mat-form-field>
+              </div>
+              </div>
+              <div fxLayout="row">
+                <div fxLayout="column" fxFlex="100">
+                <mat-form-field appearance="outline">
+                  <mat-label>SUPPLIER DESCRIPTION</mat-label>
+                  <textarea matInput formControlName="description"
+                    placeholder="e.g. Local provider for hair products"></textarea>
+                </mat-form-field>
+              </div>
+              </div>
+              <div class="sub-heading" fxLayout="row" fxLayoutAlign="start center">
+                Contact Information </div>
+              <div fxLayout="row" fxLayoutGap="15px">
+                <div fxLayout="column" fxFlex="50">
+                  <mat-form-field appearance="outline">
+                    <mat-label>FIRST NAME</mat-label>
+                    <input matInput formControlName="firstName" placeholder="e.g. John">
+                  </mat-form-field>
+                </div>
+                <div fxLayout="column" fxFlex="50">
+                  <mat-form-field appearance="outline">
+                    <mat-label>LAST NAME</mat-label>
+                    <input matInput formControlName="lastName" placeholder="e.g. Doe">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutGap="15px">
+                <div fxLayout="column" fxFlex="50">
+                  <mat-form-field appearance="outline">
+                    <mat-label>PHONE NUMBER</mat-label>
+                    <input matInput formControlName="phone" placeholder="e.g. L'Oreal">
+                  </mat-form-field>
+                </div>
+                <div fxLayout="column" fxFlex="50">
+                  <mat-form-field appearance="outline">
+                    <mat-label>EMAIL</mat-label>
+                    <input matInput formControlName="email" placeholder="mail@example.com">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutGap="15px">
+                <div fxLayout="column" fxFlex="50">
+                  <mat-form-field appearance="outline">
+                    <mat-label>TELEPHONE</mat-label>
+                    <input matInput formControlName="telePhone" placeholder="e.g. L'Oreal">
+                  </mat-form-field>
+                </div>
+                <div fxLayout="column" fxFlex="50">
+                  <mat-form-field appearance="outline">
+                    <mat-label>WEBSITE</mat-label>
+                    <input matInput formControlName="website" placeholder="www.google.com">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <!-- !LEFT -->
+          </div>
+          <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+          <!-- phase right -->
+          <div class="right" fxLayout="column" fxFlex="50">
+                <!-- TODO !!!!----RIGHT -->
+                <div *ngIf="formFunction.usePostalAddress.value" fxLayout="column" fxFlex="50"  >
+                  <div formGroupName="physicalAddress">
+                  <div class="sub-heading" fxLayout="row" fxLayoutAlign="start center">
+                    Physical Address
+                  </div>
+                  <div fxLayout="row">
+                    <div  fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>STREET</mat-label>
+                        <textarea matInput formControlName="street" placeholder="e.g. 12 Main Street"></textarea>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div fxLayout="row">
+                    <div  fxLayout="column" fxFlex="100">
+                    <mat-form-field appearance="outline">
+                      <mat-label>SUBURB</mat-label>
+                      <input matInput formControlName="area" placeholder="e.g. L'Oreal">
+                    </mat-form-field>
+                    </div>
+                  </div>
+                  <div fxLayout="row">
+                    <div  fxLayout="column" fxFlex="100">
+                    <mat-form-field appearance="outline">
+                      <mat-label>CITY</mat-label>
+                      <input matInput formControlName="city" placeholder="e.g. L'Oreal">
+                    </mat-form-field>
+                    </div>
+                  </div>
+                  <div fxLayout="row">
+                    <div  fxLayout="column" fxFlex="100">
+                    <mat-form-field appearance="outline">
+                      <mat-label>STATE</mat-label>
+                      <input matInput formControlName="state" placeholder="e.g. L'Oreal">
+                    </mat-form-field>
+                    </div>
+                  </div>
+                  <div fxLayout="row">
+                    <div  fxLayout="column" fxFlex="100">
+                    <mat-form-field appearance="outline">
+                      <mat-label>ZIP / POST CODE</mat-label>
+                      <input matInput formControlName="zip" placeholder="e.g. L'Oreal">
+                    </mat-form-field>
+                    </div>
+                  </div>
+                  <div fxLayout="row">
+                    <div  fxLayout="column" fxFlex="100">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Country</mat-label>
+                      <mat-select formControlName="country">
+                        <mat-option *ngFor="let type of countryArray" [value]="type.name">{{type.name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div fxLayout="row">
+                  <mat-checkbox formControlName="usePostalAddress">Same as postal address</mat-checkbox>
+                </div>
+                </div>
+
+                <div *ngIf="!formFunction.usePostalAddress.value" style="width: 100%" fxLayout="row" fxLayoutGap="20px"  >
+                  <div fxLayout="column" fxFlex="50" >
+                    <div formGroupName="physicalAddress">
+                    <div class="sub-heading" fxLayout="row" fxLayoutAlign="start center">
+                      Physical Address
+                    </div>
+                    <div fxLayout="row">
+                      <div  fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>STREET</mat-label>
+                        <textarea matInput formControlName="street" placeholder="e.g. 12 Main Street"></textarea>
+                      </mat-form-field>
+                      </div>
+                    </div>
+                    <div fxLayout="row">
+                      <div  fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>SUBURB</mat-label>
+                        <input matInput formControlName="area" placeholder="e.g. L'Oreal">
+                      </mat-form-field>
+                      </div>
+                    </div>
+                    <div fxLayout="row">
+                      <div  fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>CITY</mat-label>
+                        <input matInput formControlName="city" placeholder="e.g. L'Oreal">
+                      </mat-form-field>
+                      </div>
+                    </div>
+                    <div fxLayout="row">
+                      <div  fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>STATE</mat-label>
+                        <input matInput formControlName="state" placeholder="e.g. L'Oreal">
+                      </mat-form-field>
+                      </div>
+                    </div>
+                    <div fxLayout="row">
+                      <div  fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>ZIP / POST CODE</mat-label>
+                        <input matInput formControlName="zip" placeholder="e.g. L'Oreal">
+                      </mat-form-field>
+                      </div>
+                    </div>
+                    <div fxLayout="row">
+                      <div  fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Country</mat-label>
+                        <mat-select formControlName="country">
+                          <mat-option *ngFor="let type of countryArray" [value]="type.name">{{type.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                    <div fxLayout="row">
+                      <mat-checkbox formControlName="usePostalAddress">Same as postal address</mat-checkbox>
+                    </div>
+                  </div>
+                  <div fxLayout="column" fxFlex="100" formGroupName="postalAddress">
+                    <div class="sub-heading" fxLayout="row" fxLayoutAlign="start center">
+                      Postal Address
+                    </div>
+                    <div fxLayout="row">
+                      <div  fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>STREET</mat-label>
+                        <textarea matInput formControlName="street" placeholder="e.g. 12 Main Street"></textarea>
+                      </mat-form-field>
+                      </div>
+                    </div>
+                    <div fxLayout="row">
+                      <div  fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>SUBURB</mat-label>
+                        <input matInput formControlName="area" placeholder="e.g. L'Oreal">
+                      </mat-form-field>
+                      </div>
+                    </div>
+                    <div fxLayout="row">
+                      <div  fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>CITY</mat-label>
+                        <input matInput formControlName="city" placeholder="e.g. L'Oreal">
+                      </mat-form-field>
+                      </div>
+                    </div>
+                    <div fxLayout="row">
+                      <div  fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>STATE</mat-label>
+                        <input matInput formControlName="state" placeholder="e.g. L'Oreal">
+                      </mat-form-field>
+                      </div>
+                    </div>
+                    <div fxLayout="row">
+                      <div  fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>ZIP / POST CODE</mat-label>
+                        <input matInput formControlName="zip" placeholder="e.g. L'Oreal">
+                      </mat-form-field>
+                      </div>
+                    </div>
+                    <div fxLayout="row">
+                      <div  fxLayout="column" fxFlex="100">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Country</mat-label>
+                        <mat-select formControlName="country">
+                          <mat-option *ngFor="let type of countryArray" [value]="type.name">{{type.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TODO !!!! ----RIGHT-->
+          </div>
+        </div>
+      </mat-dialog-content>
+      <div style="border-top: 1px solid #dee3e6;" fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+        <button mat-raised-button color="warn" type="button" (click)="isDelete()">Delete</button>
+        <div fxLayout="row" fxFlex="1 1 auto"></div>
+        <button mat-raised-button type="button" mat-dialog-close>Cancel</button>
+        <button style="margin-left: 10px !important;" mat-raised-button type="submit" color="primary"
+          >Saves</button>
+      </div>
+    </div>
+    <!--  -->
+    <!--  -->
+
+  </form>
+</div>

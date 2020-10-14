@@ -1,0 +1,31 @@
+<div class="full-width bg-white pt-10 pl-10 pr-10 pb-10">
+  <div class="header pt-4 pb-4">
+    Select Time And Date
+    <mat-icon style="float: right; cursor: pointer;" (click)="closeModal()">cancel</mat-icon>
+  </div>
+  <div class="pt-20">
+    <mat-form-field class="noline" style="width: 100px;" class="example-full-width" appearance="outline">
+      <mat-label>Time</mat-label>
+      <mat-select class="dropdown" (selectionChange)="matSelectChange($event)">
+        <mat-option *ngFor="let item of data.date" [value]="item">{{ item?.date | date: "fullDate" }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="pt-6 pb-6 pl-50">
+    <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+      <ng-container *ngFor="let item of availableTimeSlots">
+        <button (click)="timeSeletion(item.count)" fxFlex="0 1 calc(30.3% - 32px)" mat-raised-button class="mt-6 mb-6"
+          [ngClass]="{ selectedButton: item.count == counting }">
+          {{ item.slot | date: "shortTime" }}
+        </button>
+      </ng-container>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons pt-68">
+    <div fxLayout="row" fxFlex="1 1 auto"></div>
+    <button mat-raised-button type="button" (click)="closeModal!()">Cancel</button>
+    <button (click)="confirmClicked()" style="margin-left: 10px" mat-raised-button color="primary" type="button">Confirm
+    </button>
+  </div>
+</div>

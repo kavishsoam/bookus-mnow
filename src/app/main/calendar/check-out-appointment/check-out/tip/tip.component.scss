@@ -1,0 +1,55 @@
+.button1 {
+    color: #24334A;
+    background-color: white;
+    border: 1px solid #24334A;
+    height: 42px;
+    font-size: 16px;
+    line-height: unset;
+    font-weight: 400;
+}
+
+.button2 {
+    color: white;
+    background-color: #24334A;
+    height: 42px;
+    font-size: 16px;
+    line-height: unset;
+    font-weight: 400;
+    border: 1px solid #24334A;
+    border-radius: 0;
+}
+
+.buttondiv {
+    min-width: 140px;
+}
+
+.buttondivwhite {
+    height: 100%;
+}
+
+.buttondivblue {
+    height: 100%;
+}
+
+.form {
+    width: 200px;
+}
+
+.saveButton {
+    color: white !important;
+    background-color: #172336 !important;
+    flex-basis: 100%;
+    align-self: stretch;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 300;
+    color: #24334A;
+    text-align: center;
+}
+
+.dialog-pad1 {
+    padding: 24px !important;
+    margin: 0px !important;
+}

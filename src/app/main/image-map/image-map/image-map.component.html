@@ -1,0 +1,10 @@
+<div id="image-container">
+	<img [src]="src" usemap="#auto">
+    <map name="auto" id="auto" #imageMap>
+        <area *ngFor="let part of coordinates" shape="rect" on-click="getCoordinateStyle(part)"
+        coords="{{part.coords}}" 
+         title="{{part.muscle}}"/>
+      </map>
+  </div>
+
+

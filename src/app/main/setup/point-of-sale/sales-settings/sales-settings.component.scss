@@ -1,0 +1,28 @@
+.staffComissions {
+    font-weight: 300;
+    font-size: 18px;
+    color: #2c2c2c;
+    margin: 10px 0;
+}
+mat-checkbox {
+    color: #67768C;
+    font-family: Sarabun;
+    font-size: 12px;
+    font-weight: 500;
+}
+.box {
+    margin-right: 36px;
+    margin-left: 28px;
+    padding: 10px;
+    // border-bottom: solid 1px black;
+}
+.expiryPeriod {
+    font-size: 13px;
+    color: #2c2c2c;
+}
+mat-form-field {
+    width: 100%;
+}
+.buttons .mat-raised-button {
+    margin-left: 35px !important;
+}

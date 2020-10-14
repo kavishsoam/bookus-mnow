@@ -1,0 +1,41 @@
+//layout start
+h2 {
+    text-align: center;
+    color: #24334A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0px 18px 18px 18px;
+    line-height: 30px;
+    font-size: 30px;
+    font-weight: 300;
+    margin: 0;
+    font-family: Sarabun, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.crossButton {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    font-size: 29px;
+}
+
+::ng-deep .mat-tab-body {
+    min-height: 78vh;
+}
+.content {
+    max-height: 80vh;
+}
+/* ::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+} */
+.header {
+    padding: 20px;
+    margin-bottom: -20px;
+}
+
+tr.mat-footer-row {
+    font-weight: bold;
+}
+//layout end

@@ -1,0 +1,58 @@
+
+  <!-- <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxLayout="column" fxFlex="100"> -->
+      
+    <!-- </div>
+  </div> -->
+
+<div fxLayout="row"  class="topShift"  fxLayoutAlign="space-around center">
+
+<!-- <div fxLayout="column" fxflex="100" class=" topShift text-center py-3 p-4" *ngIf="!reviewDataSource.length">
+  <div class="emptyicons">
+    <mat-icon [inline]='true'>rate_review
+    </mat-icon>
+    <h1>No Review</h1>
+    <p>Add some </p>
+  </div>
+</div> -->
+
+<div fxLayout="column" style="max-width:95% !important" class="pad-bot" fxFlex="100" *ngIf="!!reviewDataSource.length">
+<p style="padding-left: 2%">REVIEWS</p>
+<table mat-table [dataSource]="reviewDataSource" matSort class="mat-elevation-z8">
+<!-- Position Column -->
+<ng-container matColumnDef="RATED_BY" sticky>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Rated By </th>
+    <td mat-cell *matCellDef="let element"> {{element?.customerId.userName}} </td>
+  </ng-container>
+
+<!-- Name Column -->
+<!-- <ng-container matColumnDef="RATED_TO">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Rated to </th>
+    <td mat-cell *matCellDef="let element"> {{element?.ratedTo}} </td>
+  </ng-container> -->
+
+  <ng-container matColumnDef="REVIEW">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Review </th>
+    <td mat-cell *matCellDef="let element"> {{element?.review}} </td>
+  </ng-container>
+
+  <!-- <ng-container matColumnDef="COMMUNICATION_STAR">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Commnication Stars </th>
+    <td mat-cell *matCellDef="let element"> {{element?.communication_star}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="MASSAGE_STAR">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Massage Stars </th>
+    <td mat-cell *matCellDef="let element"> {{element?.massage_star}} </td>
+  </ng-container> -->
+
+  <ng-container matColumnDef="STAR">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Overall Stars </th>
+    <td mat-cell *matCellDef="let element"> {{element?.star}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="reviewDisplayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: reviewDisplayedColumns;"></tr>
+</table>
+
+</div>
+</div>

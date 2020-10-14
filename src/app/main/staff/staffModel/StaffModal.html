@@ -1,0 +1,164 @@
+<div class="dialog-pad">
+    <div *ngIf="!modifyUserHour">
+        <form [formGroup]="staffHour" (ngSubmit)="staffHourSubmit(staffHour)">
+            <div fxLayout="column" fxLayoutAlign="start center">
+                <div fxLayout="row">
+                    <h2 mat-dialog-title>Edit Hours</h2>
+                </div>
+            </div>
+            <mat-dialog-content class="content">
+                <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+                    <div fxLayout="column" fxFlex="50">
+                        <ejs-timepicker formControlName="time_start_one" name="time" placeholder='SHIFT START'
+                            floatLabelType='Always'>
+                        </ejs-timepicker>
+                    </div>
+                    <div fxLayout="column" fxFlex="50">
+                        <ejs-timepicker formControlName="time_end_one"
+                            [min]="timeIncrease(staffHour.get('time_start_one').value)" name="time"
+                            placeholder='SHIFT END' floatLabelType='Always'>
+                        </ejs-timepicker>
+                    </div>
+                </div>
+                <div fxLayout="row" *ngIf="!ifNewShift" (click)="addNewShift()">
+                    <button class="addShift" mat-button>Add another shift</button>
+                </div>
+                <div *ngIf="ifNewShift" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+                    <div fxLayout="column" fxFlex="50">
+                        <ejs-timepicker formControlName="time_start_two"
+                            [min]="timeIncrease(staffHour.get('time_end_one').value)" name="time"
+                            placeholder='SHIFT START' floatLabelType='Always'>
+                        </ejs-timepicker>
+                    </div>
+                    <div fxLayout="column" fxFlex="50">
+                        <ejs-timepicker formControlName="time_end_two"
+                            [min]="timeIncrease(staffHour.get('time_start_two').value)" name="time"
+                            placeholder='SHIFT END' floatLabelType='Always'>
+                        </ejs-timepicker>
+                    </div>
+                </div>
+                <div *ngIf="ifNewShift" fxLayout="row" fxLayoutAlign="end center">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="addNewShift()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+                    <div fxLayout="column" fxFlex="50">
+                        {{staffHour.repeat}}
+                        <mat-form-field appearance="outline">
+                            <mat-select formControlName="repeat" (ngModelChange)="selectValueChanged($event)"
+                                placeholder="REPEATS">
+                                <mat-option value="Don't repeat">
+                                    Don't repeat
+                                </mat-option>
+                                <mat-option value="Weekly">
+                                    Weekly
+                                </mat-option>
+                                <mat-option value="Daily">
+                                    Daily
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxFlex="50">
+                        <div *ngIf="staffHour.value.repeat =='Weekly' && staffHour.value.endRepeat !='Specific date' "
+                            fxLayout="column" fxFlex="50">
+                            <mat-form-field appearance="outline">
+                                <mat-label>END REPEAT</mat-label>
+                                <mat-select formControlName="endRepeat" placeholder="End REPEAT">
+                                    <mat-option value="Ongoing">
+                                        Ongoing
+                                    </mat-option>
+                                    <mat-option value="Specific date">
+                                        Specific date
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div *ngIf="staffHour.value.endRepeat == 'Specific date' && staffHour.value.repeat =='Weekly'"
+                            fxLayout="column" fxFlex="50">
+                            <div fxLayout="row">
+                                <div fxLayout="column" fxFlex="80">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>END REPEAT</mat-label>
+                                        <input matInput formControlName="end_date"
+                                            [min]="data && data.date ? data.date : '' " [matDatepickerFilter]="myFilter"
+                                            [matDatepicker]="picker" placeholder="Choose a date">
+                                        <mat-datepicker-toggle matSuffix [for]="picker">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker touchUi #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="column" fxFlex="10" fxFlexAlign="center">
+                                    <button type="button" mat-icon-button (click)="setEndRepeat(staffHour)">
+                                        <mat-icon aria-label="close">close</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- kavish -->
+                    <div fxLayout="column" fxFlex="50">
+                        <div *ngIf="staffHour.value.repeat =='Daily' && staffHour.value.endRepeat !='Specific date' "
+                            fxLayout="column" fxFlex="50">
+                            <mat-form-field appearance="outline">
+                                <mat-label>END REPEAT</mat-label>
+                                <mat-select formControlName="endRepeat" placeholder="End REPEAT">
+                                    <mat-option value="Ongoing">
+                                        Ongoing
+                                    </mat-option>
+                                    <mat-option value="Specific date">
+                                        Specific date
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div *ngIf="staffHour.value.endRepeat == 'Specific date' && staffHour.value.repeat =='Daily'"
+                            fxLayout="column" fxFlex="50">
+                            <div fxLayout="row">
+                                <div fxLayout="column" fxFlex="80">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>END REPEAT</mat-label>
+                                        <input matInput formControlName="end_date" [min]="minValidation"
+                                            [matDatepicker]="picker" placeholder="Choose a date">
+                                        <mat-datepicker-toggle matSuffix [for]="picker">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker touchUi #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="column" fxFlex="10" fxFlexAlign="center">
+                                    <button type="button" mat-icon-button (click)="setEndRepeat()">
+                                        <mat-icon aria-label="close">close</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- kavish -->
+                </div>
+            </mat-dialog-content>
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons" fxLayout.xs="column">
+                <button mat-raised-button color="warn" type="button" (click)="delete()">Delete</button>
+                <div fxLayout="row" fxFlex="1 1 auto"></div>
+                <button mat-raised-button type="button" mat-dialog-close>Close</button>
+                <button class="save" mat-raised-button color="primary" type="submit">Save
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div *ngIf="modifyUserHour">
+        <div fxLayout="column" fxLayoutAlign="start center">
+            <h2 mat-dialog-title>Delete Shift</h2>
+            <p class="description">
+                You are deleting a shift that repeats weekly.
+                Deleting upcoming shifts will overwrite {{data.empName}} ongoing {{data.empDate | date}} schedule.
+            </p>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+            <button mat-raised-button type="button" mat-dialog-close>Close</button>
+            <button mat-raised-button color="warn" (click)="ConfirmDelShift()" type="button">Delete</button>
+        </div>
+    </div>
+</div>

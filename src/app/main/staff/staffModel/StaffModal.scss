@@ -1,0 +1,119 @@
+@import "src/@fuse/scss/fuse";
+
+.headingStyle {
+
+    display: block;
+    font-family: Sarabun, sans-serif;
+    font-weight: 300;
+    color: #2c2c2c;
+    font-size: 18px;
+    line-height: 33.88px;
+}
+
+h2 {
+    text-align: center;
+    color: #24334A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0px 18px 18px 18px;
+    -webkit-font-smoothing: antialiased;
+
+    @include media-breakpoint-down('xs') {
+        text-align: center;
+        color: #24334A;
+        font-size: 18px;
+        font-weight: 200
+    }
+}
+
+.dateStyle {
+    padding-right: 20px !important;
+    font-weight: 300;
+    line-height: 1;
+    color: #777;
+    position: relative;
+    top: -38px;
+}
+
+.addShift {
+    color: #626262 !important;
+    background-color: #fff;
+    border-color: #c2c2c2;
+}
+
+
+.description {
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: .01em;
+    line-height: 22px;
+    margin: 0 0 10px;
+    font-style: normal;
+    white-space: normal;
+}
+
+.headerStyle {
+    max-height: 83px !important;
+}
+
+@media (min-width: 480px) {
+    :host /deep/ .overlay-bg .loader-own {
+        right: 40% !important;
+    }
+}
+
+@media (min-width: 1235px) {
+    :host /deep/ .overlay-bg .loader-own {
+        right: 45% !important;
+    }
+}
+
+.innerbody {
+    border-bottom: 1px solid #dee3e6;
+    border-top: 1px solid #dee3e6;
+}
+
+
+::ng-deep .mat-tab-body {
+    min-height: 78vh;
+}
+
+.content {
+    max-height: 80vh;
+}
+
+.buttons .mat-raised-button {
+    min-height: 42px !important;
+    text-transform: uppercase;
+    min-width: 128px;
+    letter-spacing: 0.3pt;
+    font-weight: 400;
+
+    @include media-breakpoint-down('xs') {
+        width: 85vw;
+        margin-bottom: 15px;
+    }
+}
+
+.buttons .mat-raised-button .save {
+    margin-left: 10px;
+
+    @include media-breakpoint-down('xs') {
+        margin-left: 0px;
+    }
+}
+
+mat-select {
+    @include media-breakpoint-down('xs') {
+        width: 75vw;
+    }
+}
+
+//layout end
+
+.dialog-pad {
+    padding: 24px !important;
+    margin: 0px !important;
+}

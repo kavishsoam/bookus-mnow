@@ -1,0 +1,203 @@
+<div id="dashboard-analytics" class="page-layout blank">
+  <div class="content">
+    <div class="center">
+      <div>
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxFlex="100">
+            <!-- style="height:60% !important; padding-bottom: 30%;" -->
+      <mat-card class="style-border">
+        <mat-card-title>{{'SALES' | translate}}
+          <h2>{{totalSales | currency : currencyCode : 'symbol-narrow'}}</h2>
+          <h4>{{'Appointments' | translate}} : {{totalAppointments}}</h4>
+          <h4>{{'Appointments value' | translate}} : {{totalAppointmentSales | currency : currencyCode : 'symbol-narrow'}}</h4>
+        </mat-card-title>
+        <mat-card-content>
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center" fxFill>
+            <div>
+              <p style="margin: 0;">{{'Locations' | translate}}</p>
+              <mat-form-field class="noline">
+                <mat-select  class="dropdown" [formControl]="locations">
+                  <mat-option *ngFor="let item of locationDrop"  [value]="item.value">{{item.viewValue}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <p style="margin: 0;">{{'Views' | translate}}</p>
+              <mat-form-field class="noline">
+                <mat-select  class="dropdown"  [formControl]="viewsValues">
+                  <mat-option *ngFor="let item of viewDrop" [value]="item.value">{{item.viewValue}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <p style="margin: 0;">{{'Items' | translate}}</p>
+              <mat-form-field class="noline">
+                <mat-select class="dropdown"  [formControl]="itemsValues"  multiple>
+                  <mat-select-trigger>
+                    {{itemsValues.value ? itemsValues.value[0] : ''}}
+                    <span *ngIf="itemsValues.value?.length > 1" class="example-additional-selection">
+                      (+{{itemsValues.value.length - 1}} {{itemsValues.value?.length === 2 ? 'other' : 'others'}})
+                    </span>
+                  </mat-select-trigger>
+                  <mat-option *ngFor="let item of itemDrop" [value]="item.value">{{item.viewValue}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <p style="margin: 0;">{{'Date range' | translate}}</p>
+              <mat-form-field  class="noline hello" [floatLabel]="'never'" style="width: 230px;">
+                <input class="dropdown" autocomplete="off" matInput placeholder="Select date range"
+            [(ngModel)]="saleDateTimeRange" [selectMode]="'range'" [owlDateTimeTrigger]="dtRange2"
+            [owlDateTime]="dtRange2" (ngModelChange)="inputChange($event)">
+          <owl-date-time style="widows: 80px !important" [pickerType]="'calendar'" #dtRange2>
+          </owl-date-time>
+              </mat-form-field>
+            </div>
+            <div>
+              <button mat-raised-button color="primary" (click)="filterData()">{{'Filter' | translate}}</button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="center">
+            <div fxFlex="100%">
+
+              <mat-card class="style-border-2" *ngIf="isSpinner" style="height: 300px;">
+                <mat-card-title>
+                  {{'Sales' | translate}}
+                </mat-card-title>
+                <div fxLayout="column" fxLayoutAlign="space-around center" >
+                  <div  class="text-center" >
+                      <mat-progress-spinner  diameter="20" mode="indeterminate"  [value]="value">
+                      </mat-progress-spinner>
+                  </div>
+                  <div  class="text-center">
+                    <h5>Loading..</h5>
+               </div>
+                </div>
+              </mat-card>
+
+              <mat-card class="style-border-2" *ngIf="!isSpinner">
+                <mat-card-title>
+                  {{'Sales' | translate}}
+                </mat-card-title>
+              <app-linechart [chartData]="sendData"  (appointmentGraphData)="appointmentGraphDatas($event)"></app-linechart>
+            </mat-card>
+            </div>
+          </div>
+        </mat-card-content>
+        <!-- <mat-card-footer>
+          
+        </mat-card-footer> -->
+      </mat-card>
+      </div>
+      </div>
+
+
+      <!-- ---------------------------------------------------------kavish edit scroll issue ------------>
+      <br>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="3%" fxLayoutAlign="space-around center">
+        <div fxFlex="33">
+          <mat-card class="style-border" *ngIf="isSpinner" >
+            <mat-card-title class="textSize text-center">
+              {{'SERVICES' | translate}}
+            </mat-card-title>
+            <div fxLayout="column" fxLayoutAlign="space-around center" style="height: 150px;">
+              <div  class="text-center" >
+                  <mat-progress-spinner  diameter="20" mode="indeterminate"  [value]="value">
+                  </mat-progress-spinner>
+              </div>
+              <div  class="text-center">
+                <h5>Loading..</h5>
+           </div>
+            </div>
+          </mat-card>
+          <mat-card class="style-border" *ngIf="!isSpinner">
+            <mat-card-title class="textSize text-center">{{'SERVICES' | translate}}</mat-card-title>
+            <div>
+              <app-barchart [chartData]="sendData"></app-barchart>
+            </div>
+          </mat-card>
+        </div>
+        <!-- class="graphCard" style="padding: 0% !important;" -->
+        <div fxFlex="33">
+          <mat-card class="style-border" *ngIf="isSpinner">
+            <mat-card-title class="textSize text-center">
+              {{'APPOINTMENTS' | translate}}
+            </mat-card-title>
+            <div fxLayout="column" fxLayoutAlign="space-around center" style="height: 150px;">
+              <div  class="text-center" >
+                  <mat-progress-spinner  diameter="20" mode="indeterminate"  [value]="value">
+                  </mat-progress-spinner>
+              </div>
+              <div  class="text-center">
+                <h5>Loading..</h5>
+           </div>
+            </div>
+          </mat-card>
+          <mat-card class="style-border" *ngIf="!isSpinner">
+            <mat-card-title class="textSize text-center">{{'APPOINTMENTS' | translate}}</mat-card-title>
+            <div>
+              <app-product-chart [chartData]="sendData"></app-product-chart>
+            </div>
+          </mat-card>
+        </div>
+        <div fxFlex="33">
+          <mat-card class="style-border" *ngIf="isSpinner" >
+            <mat-card-title class="textSize text-center">
+              {{'VOUCHERS' | translate}}
+            </mat-card-title>
+            <div fxLayout="column" fxLayoutAlign="space-around center" style="height: 150px;">
+              <div  class="text-center" >
+                  <mat-progress-spinner  diameter="20" mode="indeterminate"  [value]="value">
+                  </mat-progress-spinner>
+              </div>
+              <div  class="text-center">
+                <h5>Loading..</h5>
+           </div>
+            </div>
+          </mat-card>
+          <mat-card class="style-border" *ngIf="!isSpinner">
+            <mat-card-title class="textSize text-center">{{'VOUCHERS' | translate}}</mat-card-title>
+            <div>
+              <app-sales-pie-chart [chartData]="sendData"></app-sales-pie-chart>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+      <br>
+      <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+        <div class="widget" fxFlex="100" fxFlex.gt-sm="100">
+          <div class="fuse-card auto-width mb-0" [ngClass.gt-sm]="'mb-0 mr-0'">
+            <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+              <div class="box">
+                <div>
+                  <table mat-table [dataSource]="
+                                                dataSource" class="">
+                    <ng-container matColumnDef="topservice" >
+                      <th class="table-head table" mat-header-cell *matHeaderCellDef> {{'TOP SERVICES' | translate}} </th>
+                      <td mat-cell *matCellDef="let element"> {{element?.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="thismonth">
+                      <th class="align-end table-head table" mat-header-cell *matHeaderCellDef> {{'THIS MONTH' | translate}} </th>
+                      <td class="align-end" mat-cell *matCellDef="let element">
+                        {{element?.thismonthCount}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="lastmonth">
+                      <th class="align-end table-head table" mat-header-cell *matHeaderCellDef> {{'LAST MONTH' | translate }} </th>
+                      <td class="align-end" mat-cell *matCellDef="let element">
+                        {{element?.count}} </td>{{'count' | translate}}
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

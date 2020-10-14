@@ -1,0 +1,356 @@
+<div class="page-layout blank scroller">
+  <ngx-spinner bdColor="rgba(0,0,0,0)" size="medium" color="#3c4252" type="line-scale-pulse-out-rapid"></ngx-spinner>
+  <p-toast [style]="{marginTop: '50px'}"></p-toast>
+  <div fxLayout="column" class="header" fxLayoutAlign="start center">
+    <div fxLayout="row">
+      <h2 mat-dialog-title>Cash Drawer</h2>
+      <button mat-button mat-dialog-close class="crossButton" (click)="closeCashDrawer()">
+        <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="scroller boxItem">
+    <div class="row" fxLayout="row" fxLayoutAlign="start center">
+      <div fxLayout="column" fxFlex="50">
+        <mat-slide-toggle #showMenuRef (change)="showMenu($event)">
+          <h3>Enable Cash Drawer</h3>
+          <mat-hint>Start shift and end shift are for cash drawer.
+          </mat-hint>
+        </mat-slide-toggle>
+      </div>
+      <div class="column" fxFlex="50">
+        <mat-form-field class="noline">
+          <mat-select class="dropdown" [(ngModel)]="location_id" (selectionChange)="selectedLocation($event.value)">
+            <mat-option *ngFor="let item of locationList" [value]="item._id">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+
+      </div>
+    </div>
+    <mat-tab-group *ngIf="cashDrawer" class="scroller" mat-align-tabs="center">
+
+      <mat-tab label="START SHIFT">
+
+        <form name="startShiftForm" [formGroup]="startShiftForm" (ngSubmit)="submitStartShift(startShiftForm)">
+          <div class="fullBody">
+            <mat-checkbox formControlName="key">Start Shift</mat-checkbox>
+            <div fxLayout="column" fxLayoutAlign="space-evenly start">
+              <div fxFlex="20" class="styleBodyTop" fxLayout="column" fxLayoutAlign="space-around center">
+                <div>
+                  <h6>Count Cash in Drawer</h6>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <div fxFlex="30">
+                    <mat-form-field class="example-full-width width20px" appearance="outline">
+                      <!-- <mat-label>Favorite food</mat-label> -->
+                      <input matInput formControlName="dollar100" (change)="startShiftCurrency($event)">
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="20">
+                    <h6>100 $</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <mat-form-field class="example-full-width width20px" appearance="outline">
+                      <!-- <mat-label>Favorite food</mat-label> -->
+                      <input matInput formControlName="dollar50" (change)="startShiftCurrency($event)">
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="20">
+                    <h6>50 $</h6>
+                  </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <div fxFlex="30">
+                    <mat-form-field class="example-full-width width20px" appearance="outline">
+                      <!-- <mat-label>Favorite food</mat-label> -->
+                      <input matInput formControlName="dollar20" (change)="startShiftCurrency($event)">
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="20">
+                    <h6>20 $</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <mat-form-field class="example-full-width width20px" appearance="outline">
+                      <!-- <mat-label>Favorite food</mat-label> -->
+                      <input matInput formControlName="cent1" (change)="startShiftCurrency($event)">
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="20">
+                    <h6>1 Cent</h6>
+                  </div>
+                </div>
+              </div>
+
+              <div fxFlex="10" fxLayout="column" class=" styleBodyTop" fxLayoutAlign="space-around center">
+                <div fxLayout="row" style="width: 100% " fxLayoutAlign="space-around center">
+                  <div fxFlex="60" fxFlexOffset="10">
+                    <h6>Starting Cash</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <input class="nothing" [hidden]="true" formControlName="startingCash" placeholder="0$" readonly>
+                    {{startShiftForm.controls.startingCash.value | currency : currencyCode : 'symbol-narrow'}}
+                  </div>
+                </div>
+              </div>
+
+              <div fxFlex="10" fxLayout="column" class=" styleBodyTop" fxLayoutAlign="space-around center">
+                <div fxLayout="row" style="width: 100% " fxLayoutAlign="space-around center">
+                  <div fxFlex="60" fxFlexOffset="10">
+                    <h6>Cash From Yesterday</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <input class="nothing" mvndrMatCurrencyFormat [allowNegative]="false" [currencyCode]="currencyCode"
+                      formControlName="closingCash" placeholder="0" (change)="cashFromYesterdayFunc($event)">
+                  </div>
+                </div>
+              </div>
+
+              <div fxFlex="20" fxLayout="column" class=" styleBodyTop" fxLayoutAlign="space-around center">
+                <div fxLayout="row" style="width: 100% " fxLayoutAlign="space-around center">
+                  <div fxFlex="60" fxFlexOffset="10">
+                    <h6>Difference</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <input class="nothing" [hidden]="true" formControlName="differenceValue" placeholder="0$" readonly>
+                    {{startShiftForm.controls.differenceValue.value | currency : currencyCode : 'symbol-narrow'}}
+                  </div>
+                </div>
+                <div style="width: 60%;">
+                  <mat-checkbox style="float: right;" id="acceptCheckbox" formControlName="differenceAccept">Accept</mat-checkbox>
+                  <!-- <button mat-raised-button color="primary" style="float: right;"
+                    (click)="startShiftAccept()">Accept</button> -->
+                </div>
+              </div>
+
+              <div fxFlex="20" fxLayout="column" class=" styleBodyTop" fxLayoutAlign="space-around center">
+                <div fxLayout="row" style="width: 100% " fxLayoutAlign="space-around center">
+                  <div fxFlex="60" fxFlexOffset="10">
+                    <h6>Withdraw</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <input class="nothing2" mvndrMatCurrencyFormat [allowNegative]="false" [currencyCode]="currencyCode"
+                      formControlName="withDraw" placeholder="0$" (change)="startShiftChange($event)">
+                  </div>
+                </div>
+                <div fxLayout="row" style="width: 100% " fxLayoutAlign="space-around center">
+                  <div fxFlex="60" fxFlexOffset="10">
+                    <h6>Deposit</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <input class="nothing2" mvndrMatCurrencyFormat [allowNegative]="false" [currencyCode]="currencyCode"
+                      formControlName="deposit" placeholder="0$" (change)="startShiftChange($event)">
+                  </div>
+                </div>
+              </div>
+
+              <div fxFlex="10" fxLayout="column" class=" styleBodyTop-total" fxLayoutAlign="space-around center">
+                <div fxLayout="row" style="width: 100% " fxLayoutAlign="space-around center">
+                  <div fxFlex="60" fxFlexOffset="10">
+                    <h6>Total</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <input class="nothing2" [hidden]="true" formControlName="total" placeholder="0$" readonly>
+                    {{startShiftForm.controls.total.value | currency : currencyCode : 'symbol-narrow'}}
+                  </div>
+                </div>
+              </div>
+
+              <div fxFlex="10" fxLayout="column" class=" styleBorderBottom" fxLayoutAlign="space-around center">
+                <div fxLayout="column" fxLayoutAlign="start center">
+                  <div fxFlex="10" fxFlexOffset="50">
+                    <button mat-raised-button color="primary" type="submit">Start Shift</button>
+                  </div>
+                  <div fxFlex="40">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </mat-tab>
+      <mat-tab label="END SHIFT">
+        <form name="endShiftForm" [formGroup]="endShiftForm" (ngSubmit)="submitEndShift(endShiftForm)">
+          <div class="fullBody">
+            <mat-checkbox formControlName="key">End Shift</mat-checkbox>
+            <div fxLayout="column" fxLayoutAlign="space-evenly start">
+              <div fxFlex="20" class="styleBodyTop" fxLayout="column" fxLayoutAlign="space-around center">
+                <div>
+                  <h6>Count Cash in Drawer</h6>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <div fxFlex="30">
+                    <mat-form-field class="example-full-width width20px" appearance="outline">
+                      <!-- <mat-label>Favorite food</mat-label> -->
+                      <input matInput formControlName="dollar100" (change)="endShiftCurrency($event)">
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="20">
+                    <h6>100 $</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <mat-form-field class="example-full-width width20px" appearance="outline">
+                      <!-- <mat-label>Favorite food</mat-label> -->
+                      <input matInput formControlName="dollar50" (change)="endShiftCurrency($event)">
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="20">
+                    <h6>50 $</h6>
+                  </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <div fxFlex="30">
+                    <mat-form-field class="example-full-width width20px" appearance="outline">
+                      <!-- <mat-label>Favorite food</mat-label> -->
+                      <input matInput formControlName="dollar20" (change)="endShiftCurrency($event)">
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="20">
+                    <h6>20 $</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <mat-form-field class="example-full-width width20px" appearance="outline">
+                      <!-- <mat-label>Favorite food</mat-label> -->
+                      <input matInput formControlName="cent1" (change)="endShiftCurrency($event)">
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="20">
+                    <h6>1 Cent</h6>
+                  </div>
+                </div>
+              </div>
+
+              <div fxFlex="10" fxLayout="column" class=" styleBodyTop" fxLayoutAlign="space-around center">
+                <div fxLayout="row" style="width: 100% " fxLayoutAlign="space-around center">
+                  <div fxFlex="60" fxFlexOffset="10">
+                    <h6>Closing Cash</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <input class="nothing" [hidden]="true" formControlName="closingCash" placeholder="0$" readonly>
+                    {{endShiftForm.controls.closingCash.value | currency : currencyCode : 'symbol-narrow'}}
+                  </div>
+                </div>
+              </div>
+
+              <div fxFlex="10" fxLayout="column" class=" styleBodyTop" fxLayoutAlign="space-around center">
+                <div fxLayout="row" style="width: 100% " fxLayoutAlign="space-around center">
+                  <div fxFlex="60" fxFlexOffset="10">
+                    <h6>Starting Cash</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <input class="nothing" [hidden]="true" formControlName="startingCash" placeholder="0$" readonly>
+                    {{endShiftForm.controls.startingCash.value | currency : currencyCode : 'symbol-narrow'}}
+                  </div>
+                </div>
+              </div>
+
+              <div fxFlex="10" fxLayout="column" class=" styleBodyTop" fxLayoutAlign="space-around center">
+                <div fxLayout="row" style="width: 100% " fxLayoutAlign="space-around center">
+                  <div fxFlex="60" fxFlexOffset="10">
+                    <h6>Cash Received(Today)</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <input class="nothing" [hidden]="true" formControlName="recievedCash" placeholder="0$" readonly>
+                    {{endShiftForm.controls.recievedCash.value | currency : currencyCode : 'symbol-narrow'}}
+                  </div>
+                </div>
+                <div fxLayout="row" style="width: 100% " fxLayoutAlign="space-around center">
+                  <div fxFlex="60" fxFlexOffset="10">
+                    <h6>Expected Cash</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <input class="nothing" mvndrMatCurrencyFormat [allowNegative]="false" [currencyCode]="currencyCode"
+                      formControlName="expectedCash" placeholder="0$" (change)="expectedCashChange($event)">
+                  </div>
+                </div>
+              </div>
+
+              <div fxFlex="20" fxLayout="column" class=" styleBodyTop" fxLayoutAlign="space-around center">
+                <div fxLayout="row" style="width: 100% " fxLayoutAlign="space-around center">
+                  <div fxFlex="60" fxFlexOffset="10">
+                    <h6>Difference</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <input class="nothing" [hidden]="true" formControlName="differenceValue" placeholder="0$" readonly>
+                    {{endShiftForm.controls.differenceValue.value | currency : currencyCode : 'symbol-narrow'}}
+                  </div>
+                </div>
+                <div style="width: 60%;">
+                  <mat-checkbox style="float: right;" formControlName="differenceAccept">Accept</mat-checkbox> 
+                  <!-- <button
+                    mat-raised-button color="primary" style="float: right;" (click)="endShiftAccept()">Accept</button> -->
+                </div>
+              </div>
+
+              <div fxFlex="20" fxLayout="column" class=" styleBodyTop" fxLayoutAlign="space-around center">
+                <div fxLayout="row" style="width: 100% " fxLayoutAlign="space-around center">
+                  <div fxFlex="60" fxFlexOffset="10">
+                    <h6>Withdraw</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <input class="nothing2" mvndrMatCurrencyFormat [allowNegative]="false" [currencyCode]="currencyCode"
+                      formControlName="withDraw" placeholder="0$" (change)="endShiftChange($event)">
+                  </div>
+                </div>
+                <div fxLayout="row" style="width: 100% " fxLayoutAlign="space-around center">
+                  <div fxFlex="60" fxFlexOffset="10">
+                    <h6>Deposit</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <input class="nothing2" mvndrMatCurrencyFormat [allowNegative]="false" [currencyCode]="currencyCode"
+                      formControlName="deposit" placeholder="0$" (change)="endShiftChange($event)">
+                  </div>
+                </div>
+              </div>
+
+              <div fxFlex="10" fxLayout="column" class=" styleBodyTop-total" fxLayoutAlign="space-around center">
+                <div fxLayout="row" style="width: 100% " fxLayoutAlign="space-around center">
+                  <div fxFlex="60" fxFlexOffset="10">
+                    <h6>Total</h6>
+                  </div>
+                  <div fxFlex="30">
+                    <input class="nothing2" [hidden]="true" formControlName="total" placeholder="0$" readonly>
+                    {{endShiftForm.controls.total.value | currency : currencyCode : 'symbol-narrow'}}
+                  </div>
+                </div>
+              </div>
+
+              <div fxFlex="10" fxLayout="column" class=" styleBorderBottom" fxLayoutAlign="space-around center">
+                <div fxLayout="column" fxLayoutAlign="start center">
+                  <div fxFlex="10" fxFlexOffset="50">
+                    <button mat-raised-button color="primary" type="submit">End Shift</button>
+                  </div>
+                  <div fxFlex="40">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

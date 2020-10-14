@@ -1,0 +1,174 @@
+<mat-toolbar class="p-0 mat-elevation-z1">
+  <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+      <button
+        mat-icon-button
+        class="navbar-toggle-button"
+        *ngIf="!hiddenNavbar && !rightNavbar"
+        (click)="toggleSidebarOpen('navbar')"
+        fxHide.gt-md
+      >
+        <mat-icon class="secondary-text">menu</mat-icon>
+      </button>
+      <div
+        class="toolbar-separator"
+        *ngIf="!hiddenNavbar && !rightNavbar"
+        fxHide.gt-md
+      ></div>
+      <div class="px-8 px-md-16">
+        <span>
+          <span *ngIf="navigate" class="breadcrumb">
+            <span class="fontstyle" (click)="breadcrumb($event)">{{
+              anchorPage | translate
+            }}</span>
+            /</span
+          >
+          <span class="page fontstyle">{{ page | translate }}</span>
+        </span>
+      </div>
+    </div>
+    <div
+      *ngIf="!isConnected"
+      style="
+        color: red;
+        font-weight: 300;
+        font-size: 24px;
+        position: absolute;
+        right: 48%;
+      "
+    >
+      No internet !
+    </div>
+    <!-- <fuse-search-bar (input)="search($event)"></fuse-search-bar> -->
+    <div
+      class=""
+      fxFlex="0 1 auto"
+      fxFill
+      fxLayout="row"
+      fxLayoutAlign="end center"
+    >
+      <!-- translate view -->
+      <!-- <div class="btn-group float-right ftrt">
+              <button mat-button *ngFor="let lang of supportedLangs"
+                  (click)="selectLang(lang.value)"
+                  class="btn btn-default" [class.btn-primary]="isCurrentLang(lang.value)">
+                  {{ lang.display | translate }}
+              </button>
+          </div> -->
+      <!-- translate view -->
+      <button mat-button [matMenuTriggerFor]="translate" class="user-button">
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <mat-icon>translate</mat-icon>
+        </div>
+      </button>
+      <mat-menu #translate="matMenu" [overlapTrigger]="false">
+        <div *ngFor="let lang of supportedLangs">
+          <button mat-menu-item (click)="selectLang(lang.value)">
+            <span> {{ lang.display | translate }}</span>
+          </button>
+        </div>
+      </mat-menu>
+      <!-- <div class="margin-item float-right" fxFlex="15">
+        <button mat-raised-button [matMenuTriggerFor]="mematMenuTriggerFornu"><mat-icon>keyboard_arrow_down</mat-icon> <i class="fa fa-download"
+            aria-hidden="true"></i></button>
+        <mat-menu #menu="matMenu" *ngFor="let item of supportedLangs">
+          <button mat-menu-item (click)="selectLang(item.value)" [value]="item.value">{{item.display}}</button>
+          <button mat-menu-item value="zh" >Chinese</button>
+          <button mat-menu-item value="zh-Hans" >Mandarin</button>
+        </mat-menu>
+      </div> -->
+      <button
+        mat-button
+        [matMenuTriggerFor]="userNotification"
+        class="user-button"
+      >
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <mat-icon>notifications_none</mat-icon>
+        </div>
+      </button>
+      <mat-menu
+        #userNotification="matMenu"
+        [overlapTrigger]="false"
+        class="menu-product-list"
+      >
+        <!-- <div fxLayout="row" fxLayoutAlign="space-between center" >
+                            <div fxLayout="column" style="padding-left: 13px;">Notification</div>
+                            <div fxLayout="column" style="padding-right: 13px;" ><mat-slide-toggle (change)="toggle($event)"></mat-slide-toggle></div>
+                    </div> -->
+        <div *ngFor="let item of notifiy">
+          <button mat-menu-item>
+            <span>
+              <div
+                fxLayout="row"
+                fxLayoutAlign="start center"
+                class="date-design"
+              >
+                {{ item.createdAt | date }}
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start center" class="heading">
+                {{
+                  item.clientId && item.clientId.firstName
+                    ? item?.clientId?.firstName
+                    : item.therapistId.firstName
+                }}{{ " " }}{{ item?.clientId?.lastName }}
+              </div>
+              <div
+                fxLayout="row"
+                fxLayoutAlign="start center"
+                class="description"
+              >
+                Location - {{ item?.locationId?.name }}
+              </div>
+            </span>
+          </button>
+          <br />
+          <!-- <div fxLayout="column" style="padding-top: 10px"></div>
+          <div fxLayout="column" style="padding-left: 13px;" fxLayoutGap="2px">
+            <div fxLayout="row" fxLayoutAlign="start center" class="date-design">{{item.createdAt|date}}</div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="heading">
+              {{(item.clientId && item.clientId.firstName) ? item?.clientId?.firstName : item.therapistId.firstName}}{{' '}}{{item?.clientId?.lastName}}
+              <mat-icon style="color: darkred;">notification_important
+              </mat-icon>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="description">Location - {{item?.locationId?.name}}
+            </div>
+            <hr>
+          </div> -->
+        </div>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <avatar
+            [name]="profileData"
+            [size]="50"
+            background="#2D323E"
+            [displayType]="'circle'"
+          ></avatar>
+          <!-- <mat-icon>account_circle</mat-icon> -->
+        </div>
+      </button>
+      <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item [routerLink]="['/main/my-settings']">
+          <span> {{ "my settings" | translate }}</span>
+        </button>
+        <button mat-menu-item class="" [routerLink]="['/main/setup']">
+          <span>{{ "Account Setup" | translate }}</span>
+        </button>
+        <button mat-menu-item class="" disabled>
+          <span>{{ "Contact Support" | translate }}</span>
+        </button>
+        <button mat-menu-item class="" disabled>
+          <span>{{ "Help Center" | translate }}</span>
+        </button>
+        <button
+          mat-menu-item
+          class=""
+          [routerLink]="['/auth/login']"
+          (click)="logout()"
+        >
+          <span>{{ "Logout" | translate }}</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>

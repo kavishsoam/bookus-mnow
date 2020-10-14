@@ -1,0 +1,28 @@
+<!--
+    *ngIf="true" hack is required here for router-outlet to work
+    correctly. Otherwise, it won't register the changes on the
+    layout and won't update the view.
+ -->
+<!-- <div *ngIf="!isConnected" fxLayout="row">
+    <div id="error-information-popup-container">
+        <div id="error-information-popup">
+            <div id="error-information-popup-box">
+                <div id="error-information-popup-content">
+                    <div id="suggestions-list">
+                        <div>
+                            <h1>No Internet</h1>
+                        </div>
+                        <p>Try:</p>
+                        <ul class="">
+                            <li>Checking the network cables, modem and router</li>
+                            <li>Reconnecting to Wi-Fi</li>
+                        </ul>
+                    </div>
+                    <div class="error-code">ERR_INTERNET_DISCONNECTED</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<router-outlet *ngIf="true">
+</router-outlet>

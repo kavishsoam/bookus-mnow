@@ -1,0 +1,135 @@
+<div class="page-layout blank">
+
+  <div fxLayout="row">
+    <p-toast></p-toast>
+    <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+      <div fxLayout="row">
+        <div fxLayout="column" fxFlex="30" fxLayoutAlign="space-around stretch">
+          <h1>{{getCompanydetails?.businessName}}</h1>
+          <mat-label>{{getCompanydetails?.businessType}}</mat-label>
+        </div>
+
+        <div fxLayout="column" fxFlex="40" fxLayoutAlign="space-around stretch">
+          <img width="50" height="50" [src]="getCompanydetails.logo[0]">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+      <div fxLayout="row">
+        <div fxLayout="column" fxFlex="5" fxLayoutAlign="space-around stretch">
+          <mat-icon class="amber-600-fgt">star</mat-icon>
+        </div>
+        <div fxLayout="column" fxFlex="10" fxLayoutAlign="space-around stretch">
+          <mat-label>{{getCompanydetails?.rating?.count}}</mat-label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+      <div fxLayout="row">
+        <div fxLayout="column" fxFlex="5" fxLayoutAlign="space-around stretch">
+          <mat-icon class="amber-600-fgt">location_on</mat-icon>
+        </div>
+        <div fxLayout="column" fxFlex="20" fxLayoutAlign="space-around stretch">
+          <span>{{getCompanydetails?.timezone}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+
+      <div fxLayout="row">
+        <div fxLayout="column" fxFlex="5" fxLayoutAlign="space-around stretch">
+          <mat-icon class="amber-600-fgt size-small">lens</mat-icon>
+        </div>
+        <div fxLayout="column" fxFlex="40" fxLayoutAlign="space-around stretch">
+          <span>{{'$'}} {{getCompanydetails?.salePrice}} {{'(Sale price)'}}</span>
+        </div>
+        <!--  -->
+        <div fxLayout="column" fxFlex="5" fxLayoutAlign="space-around stretch">
+          <mat-icon class="amber-600-fgt size-small">lens</mat-icon>
+        </div>
+        <div fxLayout="column" fxFlex="40" fxLayoutAlign="space-around stretch">
+          <span>{{'$'}}{{getCompanydetails?.yearlyTurnOver}} {{'(Yearly Turn Over)'}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+
+      <div fxLayout="row">
+        <div fxLayout="column" fxFlex="5" fxLayoutAlign="space-around stretch">
+          <mat-icon class="amber-600-fgt size-small">lens</mat-icon>
+        </div>
+        <div fxLayout="column" fxFlex="40" fxLayoutAlign="space-around stretch">
+          <span>{{'$'}}{{getCompanydetails?.totalEmployees}} {{'(employees)'}}</span>
+        </div>
+        <!--  -->
+        <div fxLayout="column" fxFlex="5" fxLayoutAlign="space-around stretch">
+          <mat-icon class="amber-600-fgt size-small">lens</mat-icon>
+        </div>
+        <div fxLayout="column" fxFlex="40" fxLayoutAlign="space-around stretch">
+          <span>{{'Established'}}{{' '}}{{getCompanydetails?.createdAt | date : 'yyyy'}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+      <p>Business Description</p>
+    </div>
+  </div>
+
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+      <span>Established Membership based for monthly recurring revenue</span>
+    </div>
+  </div>
+
+
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+      <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Quis ipsum suspendisse ultrices gravida dictum fusce ut. Blandit massa enim nec dui. Sed velit
+        dignissim sodales ut eu sem. Diam vel quam elementum pulvinar etiam non. Adipiscing at in tellus integer feugiat
+        scelerisque varius morbi enim. Pharetra et ultrices neque ornare aenean euismod elementum nisi quis. Commodo
+        ullamcorper a lacus vestibulum sed arcu non odio. In metus vulputate eu scelerisque felis imperdiet.
+        Pellentesque adipiscing commodo elit at. Fusce id velit ut tortor pretium. Vel facilisis volutpat est velit
+        egestas. Enim facilisis gravida neque convallis. Dui nunc mattis enim ut tellus elementum sagittis vitae.
+        Habitasse platea dictumst vestibulum rhoncus est pellentesque elit. Ac felis donec et odio pellentesque diam
+        volutpat. Vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi. Mi in nulla posuere
+        sollicitudin aliquam ultrices sagittis orci.</h6>
+    </div>
+  </div>
+
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+      <p>Reason For Selling:</p>
+    </div>
+  </div>
+
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+      <mat-form-field appearance="outline">
+        <mat-label>Reason</mat-label>
+        <input matInput [(ngModel)]='sellingReason'>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50" fxLayoutAlign="space-around stretch">
+      <button mat-raised-button color="primary" type="submit" (click)="saleBussiness()">Sell Out</button>
+    </div>
+  </div>
+
+</div>

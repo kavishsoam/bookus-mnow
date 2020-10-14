@@ -1,0 +1,128 @@
+
+<p-toast [style]="{marginTop: '50px'}"></p-toast>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Active" fxLayout="row" fxLayoutAlign="space-around center">
+    <div style="margin-top: 15px !important" *ngIf="activeJobList.length > 0" fxLayout="column"
+      fxLayoutAlign="start stretch">
+      <table mat-table [dataSource]="activeJobList" class="mat-elevation-z8">
+        <ng-container matColumnDef="photo" sticky>
+          <th mat-header-cell *matHeaderCellDef> Photo </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="!element.image.length">
+              <img class="active_past_img" [src]="(element && element.image && element?.image[0])? element?.image[0] : 'assets/images/logos/icon.jpg'"
+              alt="">
+            </div>
+              <div *ngIf=" element.image.length ">
+                <avatar [name]="element?.firstName" [size]="50" background="#8c92a0" [displayType]="'circle'"></avatar>
+              </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element?.firstName }} </td>
+        </ng-container>style="top: 15px !important"
+        <ng-container matColumnDef="gender">
+          <th mat-header-cell *matHeaderCellDef> Gender </th>
+          <td mat-cell *matCellDef="let element"> {{element?.gender}} </td>
+        </ng-container>
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef> Mobile No. </th>
+          <td mat-cell *matCellDef="let element"> {{element?.phone}}</td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element?.email}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Working" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef> Working </th>
+          <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()"> 
+            <mat-slide-toggle [checked]="element.isWorking" (click)="deactivateStaff(element)">
+            </mat-slide-toggle>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="activeJobListColumn"></tr>
+        <tr mat-row style="height:60px !important; " *matRowDef="let row; columns: activeJobListColumn;let element"
+          [ngClass]="(id == element._id || type == 'owner') ? 'cur' : 'cur2'" (click)="editStaffProfile(row)"></tr>
+      </table>
+    </div>
+    <div class="text-center py-3 p-4" *ngIf="activeJobList.length == 0">
+      <div class="emptyicons">
+        <mat-icon [inline]='true' style="font-size: 100px;
+        color: #616161;">people
+        </mat-icon>
+        <h1>No Working Freelancer</h1>
+        <p>All hired/working freelancers will appear here.</p>
+      </div>
+    </div>
+
+  </mat-tab>
+  <mat-tab label="Past">
+    <div style="margin-top: 15px !important" *ngIf="pastJobList.length > 0" fxLayout="column"
+      fxLayoutAlign="start stretch">
+      <table mat-table [dataSource]="pastJobList" class="mat-elevation-z8">
+        <ng-container matColumnDef="photo" sticky>
+          <th mat-header-cell *matHeaderCellDef> Photo </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.image.length">
+              <img class="active_past_img" [src]="(element && element?.image && element?.image[0])? element?.image[0] : 'assets/images/logos/icon.jpg'"
+              alt="">
+            </div>
+            <div *ngIf="!element.image.length ">
+              <avatar [name]="element?.firstName" [size]="50" background="#8c92a0" [displayType]="'circle'"></avatar>
+            </div>
+         
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element?.firstName }} </td>
+        </ng-container>style="top: 15px !important"
+        <ng-container matColumnDef="specialist">
+          <th mat-header-cell *matHeaderCellDef> Specialist </th>
+          <td mat-cell *matCellDef="let element"> {{element?._type}} </td>
+        </ng-container>
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef> Mobile No. </th>
+          <td mat-cell *matCellDef="let element"> {{element?.phone}}</td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element?.email}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="level">
+          <th mat-header-cell *matHeaderCellDef> Rating </th>
+          <td mat-cell *matCellDef="let element"> {{element?.rating?.count}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Working" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef> Working </th>
+          <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()"> 
+            <mat-slide-toggle [checked]="element.isWorking" (click)="deactivateStaff(element)">
+            </mat-slide-toggle>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Reviews">
+          <th mat-header-cell *matHeaderCellDef> Re-Hire </th>
+          <td mat-cell *matCellDef="let element " (click)="$event.stopPropagation()">
+
+            <button mat-raised-button class="reviews" (click)="reHireClicked(element)"> Re-Hire </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="pastJobListColumn"></tr>
+        <tr mat-row style="height:60px !important" *matRowDef="let row; columns: pastJobListColumn;let element"
+          [ngClass]="(id == element._id || type == 'owner') ? 'cur' : 'cur2'" (click)="editStaffProfile(row)"></tr>
+      </table>
+    </div>
+    <div class="text-center py-3 p-4" *ngIf="pastJobList.length == 0">
+      <div class="emptyicons">
+        <mat-icon [inline]='true' style="font-size: 100px;
+        color: #616161;">people
+        </mat-icon>
+        <h1>No Data</h1>
+        <p>The data of the Freelancers <br>who have worked for you will appear here.</p>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

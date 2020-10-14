@@ -1,0 +1,67 @@
+.page-layout {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+h3 {
+    font-weight: 300;
+    color: #2c2c2c;
+    font-size: 24px;
+    margin: 10px;
+}
+
+div .mat-slide-toggle {
+    margin-right: 15px !important;
+}
+.row {
+    padding: 40px;
+    width: 100%;
+    border: 1px solid #c1c1c1;
+    border-radius: 5px;
+    
+}
+h5 {
+    font-size: 16px;
+    font-weight: 300;
+    color: #2c2c2c;
+    margin: 20px 0px 10px 0px;
+}
+p {
+    font-weight: 400;
+    letter-spacing: .01em;
+    line-height: 22px;
+    margin: 0 0 10px;
+    font-style: normal;
+    white-space: normal;
+    font-size: 13px;
+    color: #67768C;
+}
+
+.dropdown {
+    padding: 10px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+::ng-deep .noline .mat-form-field-underline {
+    display: none
+}
+.buttonstyle{
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 16px;
+    font-weight: 400;
+}
+.saveButton{
+    margin-top: 20px;
+}
+.rightBar{
+    background-color:#f7f7f8;
+    padding: 10px; 
+    margin-left: 10px;
+    border-left: 1px solid #c1c2c1; 
+}
+
+// :host ::ng-deep mat-tab-labels {
+//     padding : 0 15px ;
+//     min-width: 148px !important;
+// }

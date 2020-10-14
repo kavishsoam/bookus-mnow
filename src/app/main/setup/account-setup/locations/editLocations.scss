@@ -1,0 +1,315 @@
+h2 {
+    text-align: center;
+    color: #24334A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 24px;
+    padding: 0px 18px 18px 18px;
+    font-size: 24px;
+    font-weight: 300;
+    margin: 0;
+    font-family: Sarabun, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+// mat-dialog-content {
+//     // min-height: 68vh;
+// }
+h2>mat-icon {
+    align-items: flex-end;
+}
+
+::ng-deep.mat-dialog-container {
+    padding: 0 !important;
+    overflow-y: scroll;
+}
+
+::ng-deep .mat-dialog-content {
+    overflow-y: scroll !important;
+}
+
+page-layout {
+    color: #67768C;
+}
+
+p {
+    font-size: 13px;
+    font-weight: 400;
+    color: #24334A;
+    line-height: 16px;
+    margin: 0px 0px 5px 0px;
+}
+
+// mat-dialog-actions {
+//     // padding: 50px 0px 0px 0px;
+// }
+.checkbox {
+    display: inline-block;
+    font-family: Sarabun;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 0;
+    cursor: pointer;
+}
+
+.description {
+    border-top: 1px solid #dee3e6;
+    border-bottom: 1px solid #dee3e6;
+    color: #67768C;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+    padding: 9% 37%;
+}
+
+.buttons {
+    margin-top: 45px;
+}
+
+.online-booking-header {
+    font-size: 15px;
+}
+
+.border-phone {
+    border: 1px solid #e1e1e1;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.border-phone:hover {
+    border: 2px solid black;
+}
+
+.error-handle {
+    color: #f44336;
+    font-size: 12px;
+    padding-left: 2px;
+    margin-top: -24px;
+    margin-bottom: 12px;
+}
+
+.border-phone-error {
+    border: 2px solid red;
+}
+
+.border-phone-error:hover {
+    border: 2px solid red;
+}
+
+.border-phone-not-touch {
+    border: 1px solid black;
+}
+
+p {
+    font-weight: 200;
+    font-size: 13px;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+// img {
+//     height: 120px;
+//     background-color: #444;
+// }
+
+// img[class] {
+//     width: 120px;
+// }
+
+.object-fit_cover {
+    object-fit: contain
+}
+
+.close-button {
+    position: absolute;
+    top: 0;
+    left: 41px;
+}
+
+.alert:hover {
+    background-color: blue;
+}
+
+
+
+.hide {
+    display: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid #bbbbbb;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-bottom-color: #a2a2a2;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.btn {
+    border-color: #c5c5c5;
+    border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
+}
+
+.btn-large {
+    padding: 11px 19px;
+    font-size: 17.5px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+
+
+.inputWrapper {
+    height: 32px;
+    width: 64px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    /*Using a background color, but you can use a background image to represent a button*/
+    background-color: #DDF;
+}
+
+.fileInput {
+    cursor: pointer;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 99;
+    /*This makes the button huge. If you want a bigger button, increase the font size*/
+    font-size: 50px;
+    /*Opacity settings for all browsers*/
+    opacity: 0;
+    -moz-opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0)
+}
+
+.file-hide {
+    display: none;
+}
+
+.btn-del {
+    position: relative;
+    top: 30px;
+    right: -90px;
+}
+
+.error-handle {
+    color: #f44336;
+    font-size: 12px;
+    padding-left: 2px;
+    margin-top: -24px;
+    margin-bottom: 12px;
+}
+
+
+.makeBorder {
+    border-left-width: 1px !important;
+    border-style: outset;
+    border-top: hidden;
+    border-bottom: hidden;
+    border-right: hidden;
+  }
+
+
+  .disable-action {
+    pointer-events: none !important;
+    background: grey;
+  }
+
+
+
+  .file-input-wrapper {
+    width: 200px;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+  }
+  .file-input-wrapper > input[type="file"] {
+    font-size: 200px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+  }
+  .file-input-wrapper > .btn-file-input {
+    display: inline-block;
+    // width: 200px;
+    // height: 40px;
+    // color: lightblue;
+    // background-color: lightpink;
+  }
+  .file-input-wrapper:hover > .btn-file-input {
+    // background-color: green;
+  }
+
+
+.img_select {
+    position: relative;
+
+    input {
+        opacity: 0;
+        top: 13px;
+        position: absolute;
+        width: 75px;
+    }
+
+    .img-label {
+        display: block;
+        width: 34px;
+        height: 34px;
+        padding-left: 10px;
+        background: #eee url("/assets/images/download-camera.svg") no-repeat;
+        background-position: 50%;
+        background-size: 20px;
+        cursor: pointer;
+    }
+
+    #upload_img_list {
+        .upload_img {
+            float: left;
+            border: 1px solid #ccc;
+            margin: 15px 10px;
+            width: 80px;
+            position: relative;
+
+            span {
+                background: #4a5775;
+                border-radius: 100%;
+                color: #fff;
+                font-size: 15px;
+                padding: 0px 5px;
+                position: absolute;
+                z-index: 999;
+                cursor: pointer;
+                top: -5px;
+                left: -6px;
+                display: inline-block;
+                box-shadow: 0px 0px 6px 0px black;
+            }
+
+            img {
+                width: 100%;
+                max-width: 100%;
+                height: 80px;
+                margin: 0 auto;
+            }
+        }
+    }
+
+
+}

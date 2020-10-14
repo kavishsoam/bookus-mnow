@@ -1,0 +1,82 @@
+<!-- <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner> -->
+<p-toast [style]="{marginTop: '50px'}"></p-toast>
+<div style="margin-top: 15px !important" fxLayout="row" *ngIf="localJobList.length > 0" fxLayoutAlign="space-around center" fxLayout.xs="column">
+  <div fxFlex="60">
+    <button class="positionRel" mat-raised-button (click)="getBackToStaff()"><mat-icon>arrow_back</mat-icon>{{jobData.jobTitle}}</button>
+  </div>
+  <div fxLayout="column" fxFlex.xs="100" fxFlex="10">
+    <!-- <div class="">
+      <button mat-raised-button [matMenuTriggerFor]="menu" class="newStaffButton" [disabled]="!localJobList.length">Export</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item value="CSV"
+          (click)="onOptionSelected($event.currentTarget.value,'staff')">CSV</button>
+        <button mat-menu-item value="Excel"
+          (click)="onOptionSelected($event.currentTarget.value,'staff')">Excel</button>
+        <button mat-menu-item value="Pdf"
+          (click)="onOptionSelected($event.currentTarget.value,'staff')">Pdf</button>
+      </mat-menu>
+    </div> -->
+  </div>
+  <div fxLayout="column" fxFlex="20" style="margin-right: 24px">
+    <button *ngIf="localJobList.length > 0" mat-raised-button class="newStaffButton" (click)="addStaff()">Recent Ratings (Business)</button>
+  </div>
+</div>
+<div style="margin-top: 15px !important" *ngIf="localJobList.length > 0" fxLayout="column" fxLayoutAlign="start stretch">
+  <table mat-table [dataSource]="localJobList" class="mat-elevation-z8">
+    <ng-container matColumnDef="photo" sticky>
+      <th mat-header-cell *matHeaderCellDef> Photo </th>
+      <td mat-cell *matCellDef="let element"> <mat-icon style="font-size: 20px;">image</mat-icon> </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element?.therapistId?.firstName }}{{element?.therapistId?.lastName}}</td>
+    </ng-container>style="top: 15px !important"
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef> Gender </th>
+      <td mat-cell *matCellDef="let element"> {{element?.therapistId?.gender}} </td>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef> Mobile No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.therapistId?.phone}}</td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element?.therapistId?.email}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="level">
+      <th mat-header-cell *matHeaderCellDef> Level </th>
+      <td mat-cell *matCellDef="let element"><mat-icon style="color: gold; font-size:20px">pan_tool</mat-icon> 
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="customerRating">
+      <th mat-header-cell *matHeaderCellDef> Customer Rating </th>
+      <td mat-cell *matCellDef="let element"> {{element?.therapistId?.rating?.count}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="businessRating" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef> Business Rating </th>
+      <td mat-cell *matCellDef="let element"> {{element?.therapistId?.rating?.star}} </td>
+    </ng-container>
+    <ng-container matColumnDef="hire">
+      <th mat-header-cell *matHeaderCellDef> Hire </th>
+      <td mat-cell *matCellDef="let element " (click)="$event.stopPropagation()">
+
+        <button mat-raised-button class="reviews" (click)="HireClicked(element)"> Hire </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="jobListColumn"></tr>
+    <tr mat-row *matRowDef="let row; columns: jobListColumn;let element"
+      [ngClass]="(id == element._id || type == 'owner') ? 'cur' : 'cur2'" (click)="editStaffProfile(row)"></tr>
+  </table>
+</div>
+<div class="text-center py-3 p-4" *ngIf="localJobList.length == 0">
+  <button class="positionRel" mat-raised-button (click)="getBackToStaff()"><mat-icon>arrow_back</mat-icon></button>
+  <div>
+    <mat-icon class="emptyicons" [inline]='true'>people
+    </mat-icon>
+    <h1 class="font-styling">No Applicants</h1>
+    <p class="font-styling">There are no applicants for this job</p>
+  </div>
+  <button mat-raised-button class="button font-styling" (click)="addStaff()">Feature Job</button>
+</div>

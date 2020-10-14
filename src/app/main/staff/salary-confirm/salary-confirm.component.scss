@@ -1,0 +1,54 @@
+//layout start
+h2 {
+    text-align: center;
+    padding: 0px 16px 16px 16px;
+    line-height: 30px;
+    font-size: 20px;
+    font-weight: 300;
+    margin: 0;
+}
+
+.mat-dialog-content {
+    height: 100%;
+}
+
+/* ::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+} */
+
+.header {
+    padding: 0px 20px 20px 20px;
+    margin-bottom: -20px;
+}
+
+.buttons .mat-raised-button {
+    min-height: 42px !important;
+    text-transform: uppercase;
+    min-width: 90px;
+    letter-spacing: 0.3pt;
+    font-weight: 400;
+}
+
+//layout end
+.note-service {
+    background-color: #daeffd;
+    color: #2b6994;
+    border-color: #2b6994;
+}
+
+::ng-deep .noline .mat-form-field-underline {
+    display: none
+}
+
+.dropdown {
+    margin-left: 10px;
+    padding: 10px !important;
+    background: white !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.invalid {
+    color: red;
+    margin-top: -23px;
+    font-size: 12px;
+}

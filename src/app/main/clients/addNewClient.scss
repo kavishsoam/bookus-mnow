@@ -1,0 +1,175 @@
+//layout start
+@import "src/@fuse/scss/fuse";
+
+h2 {
+
+    text-align: center;
+    color: #24334A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0px 18px 18px 18px;
+    line-height: 30px;
+    font-size: 30px;
+    font-weight: 300;
+    margin: 0;
+    font-family: Sarabun, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.innerbody {
+    border-bottom: 1px solid #dee3e6;
+    border-top: 1px solid #dee3e6;
+}
+
+.crossButton {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    font-size: 29px;
+}
+
+.buttons {
+    padding: 24px;
+}
+
+.description {
+    font-size: 14px;
+    font-weight: 400;
+    color: #24334A;
+    line-height: 18px;
+}
+
+.left {
+    border-right: 1px solid #dee3e6;
+    padding: 35px;
+    margin-right: 0;
+    height: 79vh;
+
+    @include media-breakpoint-down('xs') {
+        height: 100%
+    }
+}
+
+.right {
+    padding: 35px;
+    height: 79vh;
+    
+
+    @include media-breakpoint-down('xs') {
+        height: 100%
+    }
+
+}
+
+::ng-deep .mat-tab-body {
+    min-height: 78vh;
+}
+
+.content {
+    max-height: 80vh;
+}
+
+// ::ng-deep .mat-dialog-container {
+//     overflow-x: hidden;
+// }
+
+.header {
+    padding: 20px;
+    margin-bottom: -20px;
+}
+
+.buttons .mat-raised-button {
+    min-height: 42px !important;
+    text-transform: uppercase;
+    min-width: 128px;
+    letter-spacing: 0.3pt;
+    font-weight: 400;
+}
+
+//layout end
+.headingStyle {
+    display: block;
+    font-family: Sarabun, sans-serif;
+    font-weight: 300;
+    color: #2c2c2c;
+    font-size: 18px;
+    text-align: center;
+}
+
+.border-phone {
+    border: 1px solid #e1e1e1;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.border-phone:hover {
+    border: 2px solid black;
+}
+
+.error-handle {
+    color: #f44336;
+    font-size: 12px;
+    padding-left: 2px;
+    margin-top: -24px;
+    margin-bottom: 12px;
+}
+
+.border-phone-error {
+    border: 2px solid red;
+}
+
+.border-phone-error:hover {
+    border: 2px solid red;
+}
+
+.border-phone-not-touch {
+    border: 1px solid black;
+}
+
+.delete-button {
+    color: #fff !important;
+    background-color: #f55753 !important;
+    border-color: #f55753 !important;
+    height: 40px;
+}
+
+.close-button {
+    height: 40px;
+    color: #626262 !important;
+    background-color: #fff !important;
+    border-color: #c2c2c2 !important;
+    border: 1px solid;
+}
+
+
+.file-input-wrapper {
+    width: 200px;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+  }
+  .file-input-wrapper > input[type="file"] {
+    font-size: 200px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+  }
+  .file-input-wrapper > .btn-file-input {
+    display: inline-block;
+    // width: 200px;
+    // height: 40px;
+    // color: lightblue;
+    // background-color: lightpink;
+  }
+  .file-input-wrapper:hover > .btn-file-input {
+    // background-color: green;
+  }
+
+  .imageStytle {
+    height: 130px;
+    width: 150px;
+    border-radius: 8px;
+  }

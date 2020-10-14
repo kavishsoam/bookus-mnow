@@ -1,0 +1,87 @@
+<div class="page-layout blank">
+  <p-toast></p-toast>
+  <div class="p-8">
+    <form>
+      <div fxLayout="column" class="header" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>Redeem Voucher</h2>
+        </div>
+      </div>
+      <mat-dialog-content class="content innerbody">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxLayout="column" fxFlex="10">
+
+          </div>
+          <div fxLayout="column" fxFlex="60">
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Enter Voucher Code" (input)="onSearchChange($event.target.value)">
+            </mat-form-field>
+          </div>
+          <div fxLayout="column" fxFlex="5">
+
+          </div>
+          <div fxLayout="column" fxFlex="15" style="margin-bottom:3px !important">
+            <button mat-raised-button [(ngModel)]="VoucherInput" (click)="voucherSubmit()" >Apply</button>
+          </div>
+          <div fxLayout="column" fxFlex="10">
+
+          </div>
+        </div>
+        <div *ngIf="voucherGet" fxLayout="column" class="wrapper" fxLayoutAlign="center center">
+          <mat-card>
+            <div class="wrapper">
+              <div class="badge">
+                {{voucherGet._type == 'Gift Voucher' ? 'GIFT' : 'SERVICE'}}
+              </div>
+            </div>
+            <div *ngIf="voucherGet._type == 'Gift Voucher'" fxLayoutAlign="center center" class="outstanding">
+              Outstanding
+              {{voucherGet.remainingAmount |
+              currency:currencyCode : 'symbol-narrow'}}</div>
+            <div fxLayoutAlign="center center" class="outstanding" *ngIf="voucherGet._type == 'Service Voucher'">Voucher
+              of {{voucherGet.remainingAmount |
+              currency:currencyCode : 'symbol-narrow'}}</div>
+            <!-- <div fxLayoutAlign="center center" *ngIf="voucherGet._type == 'Service Voucher'" class="serviceDetails">
+              {{voucherGet.service}},
+              with {{voucherGet.staff.firstName}} {{voucherGet.staff.lastName}}</div> -->
+            <div fxLayoutAlign="center center"
+              *ngIf="voucherGet._type == 'Gift Voucher' || voucherGet.service == this.data.service ">
+              <mat-form-field appearance="outline">
+                <input disabled matInput value="{{data.redemptionAmount.totalPrice > voucherGet.remainingAmount ? (voucherGet.remainingAmount  |
+                  currency:currencyCode : 'symbol-narrow') : (data.redemptionAmount.totalPrice  |
+                  currency:currencyCode : 'symbol-narrow') }}
+                ">
+              </mat-form-field>
+            </div>
+            <div fxLayoutAlign="center center"
+              *ngIf="voucherGet._type != 'Gift Voucher' && voucherGet.service != this.data.service" class="serviceNot">
+              This voucher cannot be redeemed, the service type does not match.
+            </div>
+            <div fxLayoutAlign="center center"
+              *ngIf="(voucherGet._type == 'Gift Voucher') || (voucherGet._type == 'Service Voucher' && voucherGet.service == this.data.service)">
+              <button mat-raised-button color="primary" (click)="voucherAdded()"> REDEEM
+                VOUCHER</button>
+            </div>
+          </mat-card>
+        </div>
+        <div *ngIf="voucherGet" fxLayout="column" fxLayoutAlign="start start" class="m-20">
+          <div class="history">Voucher History
+          </div>
+          <div class="expire" *ngIf="voucherGet._type == 'Gift Voucher'">Expires {{voucherGet.expiryDate
+            |date:'fullDate'}}</div>
+          <div class="expire"> Purchased {{voucherGet.createdAt |date:'fullDate'}}</div>
+        </div>
+        <div *ngIf="!voucherSearch && !voucherGet" fxLayout="column" class="emptyicons">
+          <mat-icon [inline]='true'>account_circle
+          </mat-icon>
+          <p>Check an existing voucher status & balance</p>
+        </div>
+        <div *ngIf="voucherSearch && !voucherGet" fxLayout="column" class="emptyicons">
+          <mat-icon [inline]='true'>account_circle
+          </mat-icon>
+          <p>No voucher found</p>
+        </div>
+      </mat-dialog-content>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,262 @@
+<div class="page-layout blank">
+  <p-toast></p-toast>
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+  <div>
+
+    <form name="checkoutForm">
+      <div fxLayout="column" class="header" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>{{data.header}}</h2>
+          <button mat-button mat-dialog-close class="crossButton">
+            <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-dialog-content class="content">
+        <div fxLayout="row" style="padding-top: 26px;" class="innerbody" fxLayoutAlign="space-around"
+          fxLayoutGap="30px">
+          <div lass="left" fxLayout="column" fxFlex="70">
+            <!-- reactive form for appoitment (previous component view appoitment) -->
+            <div [formGroup]="CheckoutForm">
+              <div formArrayName="purchaseItem"
+                *ngFor="let item of CheckoutForm.get('purchaseItem')['controls']; let i = index;">
+                <div [formGroupName]="i">
+                  <!-- repeat code -->
+                  <div class="fuse-card auto-width mb-28" [ngClass.gt-sm]="'mb-0 mr-28'">
+                    <div class="type1" fxLayout="row wrap" fxLayoutAlign="space-between center">
+                      <div>{{ item.get('service_name').value }}</div>
+                      <!-- the below html is depended on drop-down of the discount so just put special price on display -->
+                      <div *ngIf="item.get('special_price').value">
+                        {{ item.get('special_price').value |currency:currencyCode : 'symbol-narrow'}}
+                      </div>
+                      <div *ngIf="!item.get('special_price').value">
+                        {{ item.get('price').value |currency:currencyCode : 'symbol-narrow' }}
+                      </div>
+                    </div>
+                    <div class="type2" fxLayout="row wrap" fxLayoutAlign="space-between center">
+                      <div *ngIf="data.type == 'Appointment'"> {{ item.get('service_pricing_name').value + ' ' + 
+  ((item.get('startTime').value) | date:'shortTime') + ' ' +
+  'with' + ' ' + 
+  item.get('staff_firstName').value + ' ' +
+  item.get('staff_lastName').value }} </div>
+                      <div *ngIf="data.type == 'Voucher'"> {{ 'Duration ' + item.get('duration').value }} </div>
+                      <div *ngIf="data.type == 'Gift'"> {{ 'Expires in ' + item.get('expiry').value }} </div>
+                      <div *ngIf="item.get('special_price').value" class="specialPrice">
+                        {{item.get('price').value |currency:currencyCode : 'symbol-narrow'}}</div>
+                    </div>
+                    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+                      <div fxLayout="column">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Quantity</mat-label>
+                          <input matInput disabled value="1">
+                        </mat-form-field>
+                      </div>
+                      <div fxLayout="column">
+                        <mat-form-field appearance="outline" *ngIf="item.get('special_price').value ">
+                          <mat-label>Price</mat-label>
+                          <input matInput  formControlName="special_price" #specialSearchInput (ngModelChange)="this.userQuestionUpdate.next($event)">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" *ngIf="!item.get('special_price').value">
+                          <mat-label>Price</mat-label>
+                          <input matInput  formControlName="price" #searchInput  (ngModelChange)="this.userQuestionUpdate.next($event)" >
+                        </mat-form-field>
+                      </div>
+                      <!-- input from price removed by kavish instead used ngModelchange-->
+                      <!-- (input)="editPrice(item.value.priceInput,i,'price')" -->
+                      <!-- (input)="editPrice(item.value.specialPriceInput,i,'special_price')" -->
+                      <div fxLayout="column">
+                        <mat-form-field>
+                          <mat-select tabindex="-1" [disabled]=false formControlName="staff_id"
+                            placeholder="Select Staff">
+                            <mat-option *ngFor="let item of staffLists;" [value]="item._id"> {{item.firstName}}
+                              {{item.lastName}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <!-- <div fxLayout="column">
+                        <mat-form-field>
+                          <mat-select tabindex="-1" formControlName="selectedDiscount" placeholder=""
+                            (selectionChange)="discountChanges($event)">
+                            <mat-option (click)="customDiscount(false)" value="No Discount">No Discount</mat-option>
+                            <mat-option (click)="customDiscount(false)"
+                              *ngIf="item.get('offDiscount').value != 'No Discount'"
+                              [value]="(item.get('offDiscount').value)">
+                              Special
+                              Discount {{(item.get('offDiscount').value) |
+                              currency:currencyCode : 'symbol-narrow'}}
+                              off
+                            </mat-option>
+                            <mat-option value="inputValue" (click)="customDiscount(true)">
+                              Custom Discount</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div> -->
+                      <div fxLayout="column" *ngIf="!data.voucherCheckout">
+                        <mat-form-field>
+                          <mat-select tabindex="-1" formControlName="discountSelected" placeholder="Discount"
+                            (selectionChange)="discountChanges($event,i);">
+                            <mat-option  value="No_Discount">No Discount</mat-option>
+                            <mat-option  value="custom">Custom Discount</mat-option>
+                            <mat-option  [value]="item"
+                              *ngFor="let item of discountList">{{item.name}}( {{item.value}}{{item.valueType | discountType}})</mat-option>
+                            
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      
+                    </div>
+
+                    <div *ngIf="item.get('discountSelected').value == 'custom'" fxLayout="row">
+                      <div fxFlex="40">
+
+                      </div>
+                      <div fxFlex="30" >
+                        <!-- {{consoleData(item.get('customDiscountValue'))}} -->
+                        <mat-form-field appearance="outline" >
+                          <mat-label>Discount Amount</mat-label>
+                          <input matInput formControlName="customDiscountValue" (input)="customDiscountTypeListener($event,i)"  placeholder="">
+                        </mat-form-field>
+                        
+                        <div *ngIf="item.get('customDiscountValue')?.errors?.discountInvalid" class="error-handle" >Enter the valid amount</div>
+                      </div>
+                      <div fxFlex="20">
+                        <mat-radio-group formControlName="customDiscountType" (change)="customDiscountTypeListener($event,i)" aria-label="Select an option"  >
+                          <mat-radio-button value="percentage">Percentage</mat-radio-button>
+                          <br>
+                          <mat-radio-button value="amount">Amount</mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                      <div fxFlex="10">
+                        <button mat-raised-button  [disabled]="item.get('customDiscountValue')?.errors?.discountInvalid    ||  item.get('customDiscountType')?.errors?.discountInvalid" (click)="confirmCustom()">Confirm</button>
+                      </div>
+                      
+                    </div>
+
+                  </div>
+                  <!-- repeat end -->
+                </div>
+              </div>
+            </div>
+            <!-- XXXXXXXXXXXXXX Repeat End XXXXXXXXXXXXXXXXXXXXXXXXXX -->
+            <div fxLayout="row" fxLayoutAlign="start start">
+              <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50">
+              </div>
+              <div fxLayout="column" fxFlex="50">
+
+                <div fxLayout="row" *ngIf="actualTax != 0">
+                  <div fxLayout="column" class="total" fxFlex="50" fxLayoutAlign="start start">Tax</div>
+                  <div fxLayout="column" class="total" fxFlex="50" fxLayoutAlign="end end">
+                    {{actualTax|currency:currencyCode : 'symbol-narrow'}} </div>
+                </div>
+
+                <div fxLayout="row">
+                  <div fxLayout="column" class="total" fxFlex="50" fxLayoutAlign="start start">Total</div>
+                  <div fxLayout="column" class="total" fxFlex="50" fxLayoutAlign="end end">
+                    {{ ((actualPrice != actualTaxAmt) ? ((actualPrice) - (actualTax)) : (actualPrice))|currency:currencyCode : 'symbol-narrow'}}
+                  </div>
+                </div>
+                <div fxLayout="row" class="item">
+                  <ng-container *ngIf="tipsArray.length !=0">
+                    <tr *ngFor="let item of tipsArray; let i = index;" style="width:100%">
+                      <td style="white-space: nowrap;">Tip for {{item.firstName}}</td>
+                      <td style="white-space: nowrap;"> {{item.amount|
+  currency:currencyCode : 'symbol-narrow'}}</td>
+                      <td> <button mat-icon-button (click)="removeTipBucket(item, i)">
+                          <mat-icon>close</mat-icon>
+                        </button></td>
+                    </tr>
+                  </ng-container>
+                  <button class="item" (click)="AddtipListener()">+ Add tips</button>
+                </div>
+                
+                <div fxLayout="row" class="item">
+                  <ng-container *ngIf="paymentArray.length !=0">
+                    <tr *ngFor="let item of paymentArray; let i = index;" style="width:100%">
+                      <td style="white-space: nowrap;">{{item.type}}</td>
+                      <td style="white-space: nowrap;"> {{item.amount| currency:currencyCode : 'symbol-narrow'}}</td>
+                      <td> <button mat-icon-button (click)="removePaymentBucket(item, i)">
+                          <mat-icon>close</mat-icon>
+                        </button></td>
+                    </tr>
+                  </ng-container>
+                </div>
+                <div  class="item3" *ngIf="totalAppliedPercentage != 0 || totalAppliedDiscount != 0">
+                  <div fxLayout="row">
+                    <div *ngIf="totalAppliedPercentage != 0">
+                      <div fxLayout="column" class="total" fxFlex="80" fxLayoutAlign="start start" >Total Discount %</div>
+                      <div fxLayout="column" class="total" fxFlex="20" fxLayoutAlign="end end">
+                        {{totalAppliedPercentage}}%</div>
+                    </div>
+                  </div>
+                    <div fxLayout="row" >
+                      <div *ngIf="totalAppliedDiscount != 0">
+                        <div fxLayout="column" class="total" fxFlex="80" fxLayoutAlign="start start" >Total Discount Amount</div>
+                        <div fxLayout="column" class="total" fxFlex="20" fxLayoutAlign="end end">
+                          {{totalAppliedDiscount | currency:currencyCode : 'symbol-narrow'}}</div>
+                      </div>
+                    </div>
+                    
+                  <!-- <ng-container *ngIf="appliedDiscount">
+                    <tr  style="width:100%">
+                      <td style="white-space: nowrap;" *ngIf="itemValue" >Discount Applied : {{discountValue | currency:currencyCode : 'symbol-narrow'}}</td>
+                      <td style="white-space: nowrap;" *ngIf="customAmount"  > Discount Applied : {{discountValue | currency:currencyCode : 'symbol-narrow'}}</td>
+                    </tr>
+                  </ng-container> -->
+                </div>
+                <div fxLayout="row" class="item2">
+                  <div fxLayout="column" class="total" fxFlex="50" fxLayoutAlign="start start">Balance</div>
+                  <div fxLayout="column" class="total" fxFlex="50" fxLayoutAlign="end end">
+                    {{grandAmount | currency:currencyCode : 'symbol-narrow'}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+          <!-- phase right shared -->
+
+          <div class="right" fxLayout="column" fxFlex="30" #walkinPay>
+
+            <div #searchClient *ngIf="data.voucherCheckout">
+
+              <!-- <app-client-info [isView]="false" [isInvoice]="true" [data]="data" [searchClient]="searchClient"
+                [searchClientEmail]="searchClientEmail" [intakeFormFilled]="clientIntakeFormFilled"
+                (show_Menu)="showMenu($event)" (client_Option)="clientOption($event)"
+                (create_New_Client)="createNewClient()" (get_IntakeBy_ClientId)="getIntakeByClientId()"
+                (get_Intake_By_IntakeId)="getIntakeByIntakeId()" [clientDetails]="clientDetails"
+                [appointment]="appointment" [apt]="apt" [clientData]="clientData" [clientInvoices]="clientInvoices"
+                [intakeId]="intakeId" [clients]="clients" (select_Clients)="selectClient($event)"
+                [ifClicked]="ifClicked" [select_Client]="select_Client" (client_invoices)="getClientInvoices('')"
+                (client_List)="client_list_view($event)" [clientList]="clientList">
+              </app-client-info> -->
+              <!-- <app-voucher-checkout-search-client></app-voucher-checkout-search-client>
+                          (show_Menu)="showMenu($event)"
+            [ifClicked]="ifClicked"
+            [searchClient]="searchClient"
+            [searchClientEmail]="searchClientEmail"
+            (select_Clients)="selectClient($event)"
+            [clientList]="clientList"
+            [clientInvoices]="clientInvoices"
+            [select_Client]="select_Client"
+            [intakeFormFilled]="clientIntakeFormFilled"
+              
+              -->
+            </div>
+
+
+            <app-client-info [isView]="true" [discount]="discount" [reduceAmount]="reduceAmount" [type]="type"
+              [reducePayment]="reducePayment" [checkout]="true" [apt]="apt" [data]="data" [clientData]="clientData"
+              [appointment]="appointment" [clientDetails]="clientDetails" (payment_mode)="paymentMode($event)"
+              [isPayMode]="isPayMode" (back_to_payment)="backToPayment(apt)" (complete_sale)="completeSale()"
+              (view_Profile)="viewProfile()" [totalAmount]="totalAmount" [profile]="profile"
+              (get_Intake_By_IntakeId)="getIntakeByIntakeId()" (on_More_Option_Selected)="onMoreOptionSelected($event)"
+              (view_Invoice)="viewInvoice()" (voucher_dialog)="voucher()" [grandAmount]="grandAmount" [completeSaleClick]="completeSalesClick" [isVoucher]="isVoucher">
+            </app-client-info>
+          </div>
+          <!-- right phase -->
+        </div>
+      </mat-dialog-content>
+    </form>
+  </div>
+</div>
+<custom-loader [loader]="loader"></custom-loader>

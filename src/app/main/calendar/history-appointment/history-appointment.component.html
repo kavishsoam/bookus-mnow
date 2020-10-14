@@ -1,0 +1,141 @@
+<div class="page-layout blank">
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+  <p-toast></p-toast>
+  <svg width="0" height="0" style="overflow:hidden;">
+    <symbol id="heart-icon" viewBox="0 0 24 24">
+      <path
+        d="M12,21.86c11.43-8,11-10.78,11-13A5.27,5.27,0,0,0,17.5,4C14.06,4,12,7.25,12,7.25S9.94,4,6.5,4A5.27,5.27,0,0,0,1,8.87C1,11.08.57,13.89,12,21.86Z"
+        stroke-width="2" />
+    </symbol>
+  </svg>
+  <div>
+    <form name="historyAppointment">
+      <div fxLayout="column" class="header" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>View Appointment History</h2>
+          <button mat-button mat-dialog-close class="crossButton" (click)="closeViewAppointement()">
+            <mat-icon class="crossButton">close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-dialog-content class="content">
+        <div fxLayout="row" class="innerbody" fxLayoutAlign="space-around" fxLayoutGap="30px">
+          <div class="left" fxLayout="column" fxFlex="70">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <div class="date-style">
+                {{AppointmentHistoryData && AppointmentHistoryData[0]?.createdAt|  date:'EEEE, d MMM y'}}</div>
+            </div>
+            <div *ngFor="let item of AppointmentHistoryData;">
+              <div class="fuse-card auto-width mb-28" [ngClass.gt-sm]="'mb-0 mr-28'">
+                <div class="type1" fxLayout="row wrap" fxLayoutAlign="space-between center">
+                  <div fxLayout="column" fxFlex="20"> {{item && item.startTime ? (item.startTime |
+									date:'shortTime') : ''}}</div>
+                  <div fxLayout="column" fxFlex="60">
+                    {{ (item &&  item.service && item.service.name) ? item.service.name :
+									''
+									}}</div>
+                  <div fxLayout="column" fxFlex="20" fxLayoutAlign="end end">{{item && item.special_price ?
+									(item.special_price|
+									currency:currencyCode : 'symbol-narrow') :
+									item && (item.price|
+									currency:currencyCode : 'symbol-narrow') }}
+                  </div>
+                </div>
+                <div class="type2" fxLayout="row wrap" fxLayoutAlign="start center">
+                  <div fxLayout="column" fxFlex="20"></div>
+                  <div fxLayout="row" fxFlex="60"> {{item.remain_hour != 0 ? item.remain_hour + ' hour' : '' }}
+                    {{item.remain_min != 0 ?
+									item.remain_min + ' minutes' : '' }} with
+                    <span *ngIf="item && item.requested_staff">
+                      <svg class="icon">
+                        <use xlink:href="#heart-icon" />
+                      </svg>
+                    </span>
+                    {{item && item.staff.firstName ? item.staff.firstName : ''}} {{item
+									&&
+									item.staff.lastName ?
+									item.staff.lastName : ''}}
+                  </div>
+                  <div fxLayout="column" class="type2price" fxFlex="20" fxLayoutAlign="end end">{{item &&
+									item.special_price ?
+									(item.price|
+									currency:currencyCode : 'symbol-narrow') :
+									''}}</div>
+                </div>
+                <div class="style" fxLayout="row wrap" fxLayoutAlign="space-around center">
+                  <div fxLayout="column" fxFlex="20"></div>
+                  <div fxLayout="column" class="pl-8" fxFlex="60" style="font-size: 14px">
+                    {{item.remain_hour != 0 ? item.remain_hour + ' hour' : '' }}
+                    {{item.remain_min != 0 ?
+									item.remain_min + ' minutes' : '' }}</div>
+                  <div fxLayout="column" class="end" fxFlex="20" fxLayoutAlign="end end">{{item && item.special_price ?
+									(item.special_price|
+									currency:currencyCode : 'symbol-narrow') : item && (item.price|currency:currencyCode : 'symbol-narrow')}}</div>
+                </div>
+              </div>
+              <div *ngIf="item && item.notes != ''">
+                <div fxLayout="row">
+                  <div class="appointment-header"> Appointment Note
+                  </div>
+                </div>
+                <div fxLayout="row">
+                  <div class="appointment-data">{{item && item.notes}}</div>
+                </div>
+              </div>
+            </div>
+            <div fxLayout="row">
+              <div class="appointment-header"> Appointment History
+              </div>
+            </div>
+            <div class="appointment-data">Reference
+              {{AppointmentHistoryData && AppointmentHistoryData[0]?.booking_reference}} at
+              {{AppointmentHistoryData && AppointmentHistoryData[0]?.createdAt|date :'E, d MMM y'}} at
+              {{AppointmentHistoryData && AppointmentHistoryData[0]?.createdAt|date : 'shortTime'}}
+            </div>
+
+          </div>
+
+
+          <div fxLayout="column" class="right" fxFlex="30">
+            <app-client-info 
+            [historyAppointment]="historyAppointment"
+            [isView]="true"
+            [IsClientInTakeFormExist]="IsClientInTakeFormExist"
+            [isInvoice]="false"
+            [status]="status"
+            [apt]="apt" 
+            [clientData]="clientData"
+            [appointment]="appointment" 
+            [clientDetails]="clientDetails" 
+            (view_Profile)="viewProfile()"
+            [profile]="profile" 
+            [clientInvoices]="clientInvoices"
+            (get_Intake_By_IntakeId)="getIntakeByIntakeId()" 
+            (change_Status)="changeStatus($event)"
+            (on_More_Option_Selected)="onMoreOptionSelected($event)" 
+            (check_Out)="checkOut()"
+            (view_Invoice)="viewInvoice($event)" 
+            [allData]="multipleAppList" 
+            (client_Option)="clientOption($event)" 
+            [isViewAppointment]="isViewAppointment" 
+            (ReDirectSchedular)="reDirectingSchedular($event)" >
+						</app-client-info>
+					</div>
+
+          <!-- <div fxLayout="column" class="right" fxFlex="30">
+						<app-client-info [isView]="true" [IsClientInTakeFormExist]="IsClientInTakeFormExist"
+							[isInvoice]="false" [status]="status" [apt]="apt" [clientData]="clientData"
+							[appointment]="appointment" [clientDetails]="clientDetails" (view_Profile)="viewProfile()"
+							[profile]="profile" [clientInvoices]="clientInvoices"
+							(get_Intake_By_IntakeId)="getIntakeByIntakeId()" (change_Status)="changeStatus($event)"
+							(on_More_Option_Selected)="onMoreOptionSelected($event)" (check_Out)="checkOut()"
+							(view_Invoice)="viewInvoice()" [allData]="AppointmentHistoryData">
+						</app-client-info>
+					</div> -->
+          <!-- right phase -->
+
+        </div>
+      </mat-dialog-content>
+    </form>
+  </div>
+</div>

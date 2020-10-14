@@ -1,0 +1,36 @@
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+<div class="page-layout blank">
+  <p-toast [style]="{marginTop: '50px'}"></p-toast>
+  <form [formGroup]="staffNotificationsForm" (ngSubmit)="staffNotifications(staffNotificationsForm)">
+    <div class="row" fxLayout="row" fxLayoutAlign="start center">
+      <div fxLayout="column">
+        <mat-slide-toggle (change)="showMenu($event)">
+          <h3>Enable Staff Notifications</h3>
+          <mat-hint>Automatically send booking notifications to staff members.
+          </mat-hint>
+        </mat-slide-toggle>
+      </div>
+    </div>
+    <div *ngIf="ifToggleOn" fxLayout="row" fxLayoutAlign="start center">
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <div fxLayout="column">
+            <h5>New online bookings</h5>
+            <p>Send email notification with booking details each time an online booking is made
+            </p>
+            <mat-checkbox formControlName="sendToStaff">Send to staff members booked </mat-checkbox>
+            <mat-checkbox formControlName="sendToSpecific"> Send to specific email address </mat-checkbox>
+            <mat-form-field appearance="outline">
+              <input formControlName="specificMailId" matInput placeholder="Email">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" class="mt-12">
+      <div fxLayout="column">
+        <button mat-raised-button color="primary" type="submit" [promiseBtn]="loader">Save Changes</button>
+      </div>
+    </div>
+  </form>
+</div>

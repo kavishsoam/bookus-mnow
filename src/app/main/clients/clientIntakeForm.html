@@ -1,0 +1,303 @@
+<div>
+  <p-toast></p-toast>
+  <form name="clientIntakeForm" [formGroup]="clientIntakeForm" (ngSubmit)="clientIntake(clientIntakeForm)">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <div *ngIf="businessName" class="user_pro_img" style="padding-left: 46%" fxFlex="100">
+        <img src="{{'data:image/jpg;base64,'+businessLogo}}">
+      </div>
+      <button mat-button mat-dialog-close class="crossButton" *ngIf="data.type != 'get'">
+        <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+      </button></div>
+      <p class="text-center">{{businessName}}</p>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <h1 mat-dialog-title>Client Intake Form</h1>
+    </div>
+    <mat-dialog-content class="content">
+      <mat-horizontal-stepper [linear]="false" #stepper (selectionChange)="stepperChange($event)">
+        <mat-step [stepControl]="clientIntakeForm">
+          <ng-template matStepLabel>Personal Information</ng-template>
+          <div style="padding-left: 100px;" fxLayout="row" fxLayoutAlign="space-between center">
+            <div></div>
+            <h2>Personal Information</h2>
+            <button mat-raised-button color="primary" class="button round" matStepperNext type="button">Next
+              &raquo;</button>
+          </div>
+          <div class="stepper-scroller">
+            <div fxLayout="row" formGroupName="client_info" fxLayoutAlign="center start" fxLayout.lt-md="column">
+              <div fxLayout="column" fxFlex="50" fxFlex.lt-md="100">
+                <p>First name: <mat-form-field>
+                    <input matInput placeholder="" formControlName="firstName">
+                  </mat-form-field>
+                </p>
+                <p>Email:
+                  <mat-form-field>
+                    <input matInput placeholder="" formControlName="email">
+                  </mat-form-field>
+                </p>
+                <p class="pt-20 pb-20">Gender : <mat-radio-group formControlName="gender">
+                    <mat-radio-button value="Male">Male </mat-radio-button>
+                    <mat-radio-button value="Female">Female</mat-radio-button>
+                    <mat-radio-button value="Unknown">Unknown</mat-radio-button>
+                  </mat-radio-group>
+                </p>
+                <p>Area :
+                  <mat-form-field>
+                    <input matInput placeholder="" formControlName="area">
+                  </mat-form-field>
+                </p>
+                <div class="borderRound" style="padding-right: 10px">
+                  <p>Emergency Contact Details</p>
+                <div fxLayout="row" fxLayoutAlign="start start" fxLayout.lt-lg="column" >
+                  <div fxLayout="column" fxFlex="40">
+                    <p>Relation:
+                      <mat-form-field>
+                        <input matInput placeholder="" formControlName="emergencyContactRelation" value="">
+                      </mat-form-field>
+                    </p>
+                  </div>
+                  <div fxLayout="column" fxFlex="60">
+                    <p>Phone :
+                      <mat-form-field>
+                        <input matInput placeholder="" formControlName="emergencyContactNo" value="">
+                      </mat-form-field>
+                    </p>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign ="start start" fxLayout.lt-lg="column" >
+                  <div fxlayout="column" fxFlex="100">
+                    <p> Name :
+                      <mat-form-field>
+                        <input matInput placeholder="" formControlName="emergencyContactName">
+                      </mat-form-field>
+                    </p>
+                  </div>
+                </div>
+                </div>
+
+              </div>
+              <div fxLayout="column" fxFlex="50" fxLayout.lt-sm="column">
+                <p>Last name: <mat-form-field>
+                    <input matInput placeholder="" formControlName="lastName">
+                  </mat-form-field>
+                </p>
+                <p>Mobile: <mat-form-field>
+                    <input matInput placeholder="" formControlName="phone1">
+                  </mat-form-field>
+                </p>
+                <p>Date of Birth: <mat-form-field>
+                    <input matInput [value]="clientIntakeForm.controls.client_info['controls'].dob.value  | date"
+                      placeholder="" formControlName="dob">
+                  </mat-form-field>
+                </p>
+                <div fxLayout="row" fxLayoutAlign="start start" fxLayout.lt-md="column">
+                  <div fxLayout="column" fxFlex="30">
+                    <p>City :
+                      <mat-form-field>
+                        <input matInput placeholder="" formControlName="city">
+                      </mat-form-field>
+                    </p>
+                  </div>
+                  <div fxLayout="column" fxFlex="70">
+                    <p>State :
+                      <mat-form-field>
+                        <input matInput placeholder="" formControlName="state">
+                      </mat-form-field>
+                    </p>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step [stepControl]="clientIntakeForm">
+          <ng-template matStepLabel>Medical Information</ng-template>
+          <div fxLayout="row" fxLayoutAlign="space-between start">
+            <button mat-raised-button color="primary" class="button round" matStepperPrevious>&laquo; Previous</button>
+            <h2>Medical Information </h2>
+            <button mat-raised-button color="primary" class="button round" matStepperNext type="button">Next
+              &raquo;</button>
+          </div>
+          <div class="stepper-scroller">
+            <div fxLayout="row" formGroupName="medical_info" fxLayoutAlign="center start" fxLayout.lt-lg="column">
+              <div class="left" fxLayout="column" fxFlex="50">
+                <p>Are you taking any medications?</p>
+                <mat-radio-group formControlName="medicationStatus">
+                  <mat-radio-button value="yes">Yes </mat-radio-button>
+                  <mat-radio-button value="no">No</mat-radio-button>
+                </mat-radio-group>
+                <p> If yes, please list: <mat-form-field>
+                    <input matInput placeholder="" formControlName="medicationDetails" value="">
+                  </mat-form-field>
+                </p>
+                <p>Are you currently pregnant? </p>
+                <mat-radio-group formControlName="pregnancyStatus">
+                  <mat-radio-button value="yes">Yes </mat-radio-button>
+                  <mat-radio-button value="no">No</mat-radio-button>
+                </mat-radio-group>
+                <p>If yes, how far along? <mat-form-field>
+                    <input matInput placeholder="" formControlName="pregnancyDuration" value="">
+                  </mat-form-field>
+                </p>
+                <p>Any high risk factors? <mat-form-field>
+                    <input matInput placeholder="" formControlName="pregnancyRiskFactor" value="">
+                  </mat-form-field>
+                </p>
+                <p>Do you suffer from chronic pain?</p>
+                <mat-radio-group formControlName="chronicPainStatus">
+                  <mat-radio-button value="yes">Yes </mat-radio-button>
+                  <mat-radio-button value="no">No</mat-radio-button>
+                </mat-radio-group>
+                <p> If yes, please explain <mat-form-field>
+                    <input matInput placeholder="" formControlName="chronicPainDetails" value="">
+                  </mat-form-field>
+                </p>
+                <p> What makes it better? <mat-form-field>
+                    <input matInput placeholder="" formControlName="chronicPainMakesBetter" value="">
+                  </mat-form-field>
+                </p>
+                <p>What makes it worse? <mat-form-field>
+                    <input matInput placeholder="" formControlName="chronicPainMakesWorse" value="">
+                  </mat-form-field>
+                </p>
+              </div>
+              <div class="right" fxLayout="column" fxFlex="50">
+                <p>Have you had any orthopedic injuries?</p>
+                <mat-radio-group formControlName="orthoInjuriesStatus">
+                  <mat-radio-button value="yes">Yes </mat-radio-button><span></span>
+                  <mat-radio-button value="no">No</mat-radio-button>
+                </mat-radio-group>
+                <p>If yes, please list: <mat-form-field>
+                    <input matInput placeholder="" formControlName="orthoInjuriesDetails" value="">
+                  </mat-form-field>
+                </p>
+                <p>Please indicate any of the following that apply you</p>
+                <div fxLayout="row" fxLayout.lt-lg="column">
+                  <div fxLayout="column" fxFlex="50">
+                    <div *ngFor="let item of diseases | slice:0:6">
+                      <mat-checkbox class="diseases" [disabled]="disableCheckbox" [checked]="item.selected"
+                        (change)=diseaseChange(item)>
+                        {{item.name}}
+                      </mat-checkbox>
+                    </div>
+                  </div>
+                  <div fxLayout="column" fxFlex="50">
+                    <div *ngFor="let item of diseases | slice:7:13">
+                      <mat-checkbox class="diseases" [disabled]="disableCheckbox" [checked]="item.selected"
+                        (change)=diseaseChange(item)>
+                        {{item.name}}
+                      </mat-checkbox>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <p>Explain any conditions you have marked above:
+                  <mat-form-field>
+                    <textarea appearance="outline" formControlName="diseasesDescription" cdkTextareaAutosize matInput
+                      placeholder="" value=""></textarea>
+                  </mat-form-field>
+                </p>
+              </div>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step [stepControl]="clientIntakeForm">
+          <ng-template matStepLabel>Massage Information</ng-template>
+          <div style="padding-right: 60px;" fxLayout="row" fxLayoutAlign="space-between start">
+            <button mat-raised-button color="primary" class="button round" matStepperPrevious>&laquo; Previous</button>
+            <h2>Massage Information</h2>
+            <div></div>
+          </div>
+          <div class="stepper-scroller">
+            <div fxLayout="row" formGroupName="massage_info" fxLayoutAlign="center start" fxLayout.lt-lg="column">
+              <div class="left" fxLayout="column" fxFlex="50">
+                <mat-radio-group formControlName="therapistGender">
+                  <p>What therpist's gender do you expect? (Not you) </p>
+                  <mat-radio-button value="Female">Female
+                  </mat-radio-button>
+                  <mat-radio-button value="Male">Male</mat-radio-button>
+                  <mat-radio-button value="I do not mind">I do not mind</mat-radio-button>
+                </mat-radio-group>
+                <br>
+                <p>Have you had a professional massage before?</p>
+                <mat-radio-group formControlName="priorMassage">
+                  <mat-radio-button value="yes">Yes </mat-radio-button><span></span>
+                  <mat-radio-button value="no">No</mat-radio-button>
+                </mat-radio-group>
+                <br>
+                <p>What pressure do you prefer? </p>
+                <mat-radio-group formControlName="pressure">
+                  <mat-radio-button value="Soft">Soft </mat-radio-button><span></span>
+                  <mat-radio-button value="Medium">Medium</mat-radio-button>
+                  <mat-radio-button value="Hard">Hard</mat-radio-button>
+                  <mat-radio-button value="Extremely Hard">Extremely Hard</mat-radio-button>
+                </mat-radio-group>
+                <br>
+                <p>Do you have any allergies or sensitivities? (essential oil)? </p>
+                <mat-radio-group formControlName="allergiesStatus">
+                  <mat-radio-button value="yes">Yes </mat-radio-button><span></span>
+                  <mat-radio-button value="no">No</mat-radio-button>
+                </mat-radio-group>
+                <p>Please explain: <mat-form-field>
+                    <input matInput placeholder="" formControlName="allergiesDetails" value="">
+                  </mat-form-field>
+                </p>
+                <p> Are there any areas (feet, face, abdomen, etc.) you do not want massaged? </p>
+                <mat-radio-group formControlName="avoidingAreasStatus">
+                  <mat-radio-button value="yes">Yes </mat-radio-button><span></span>
+                  <mat-radio-button value="no">No</mat-radio-button>
+                </mat-radio-group>
+                <p>Please explain: <mat-form-field>
+                    <input matInput placeholder="" formControlName="avoidingAreasDetails" value="">
+                  </mat-form-field>
+                </p>
+              </div>
+              <div class="right" fxLayout="column" fxFlex="50">
+                <p>Do you want your therpist to be quite or talkative?</p>
+                <mat-radio-group formControlName="therapist">
+                  <mat-radio-button value="Talk">Talk </mat-radio-button><span></span>
+                  <mat-radio-button value="Quite">Quite</mat-radio-button>
+                  <mat-radio-button value="I do not mind">I do not mind</mat-radio-button>
+                </mat-radio-group>
+                <br>
+                <p>Please mark any areas of discomfort</p>
+                <div class="sig-container sig-container-image" #sigContainer3>
+                  <signature-field [ngClass]="{'disabledPad': !data.secBtn}" formControlName="discomfortArea">
+                  </signature-field>
+                </div>
+                <div class="mt-8">
+                  <button class="inline-btn-photo" *ngIf="data.secBtn" mat-raised-button type="button"
+                    (click)="sigs.first.clear()">Reset</button>
+                  <p>By signing below, you agree to the following :</p>
+                  <p>I have completed this form to the best of my ability and knowledge and agree to
+                    inform
+                    my
+                    therapist if any of the above information changes at any time.</p>
+                </div>
+                <div>Client Signature
+                  <signature-field [ngClass]="{'disabledPad': !data.secBtn, 'pad': true}" formControlName="client_sign">
+                  </signature-field>
+                  <button class="inline-btn" *ngIf="data.secBtn" mat-raised-button type="button"
+                    (click)="secondSig.clear()">Reset</button>
+                </div>
+                <div> Therapist signature
+                  <signature-field [ngClass]=" {'disabledPad': !data.secBtn, 'pad' : true}"
+                    formControlName="therapist_sign">
+                  </signature-field>
+                  <button class="inline-btn" *ngIf="data.secBtn" mat-raised-button type="button"
+                    (click)="sigs.last.clear()">Reset</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="end center" class="buttons">
+            <button class="button" *ngIf="data.type == 'get'" mat-stroked-button class="button"
+              type="submit">Save</button>
+            <button *ngIf="data.type == 'appointment'" mat-raised-button class="button" type="button"
+              (click)="intakeAppointmentForm()">Save</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </mat-dialog-content>
+  </form>
+</div>

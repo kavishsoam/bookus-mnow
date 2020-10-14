@@ -1,0 +1,113 @@
+//layout start
+h2 {
+    text-align: center;
+    color: #24334A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0px 18px 18px 18px;
+    line-height: 30px;
+    font-size: 22px;
+    font-weight: 300;
+    margin: 0;
+    font-family: Sarabun, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+.innerbody {
+    border-bottom: 1px solid #dee3e6;
+}
+.crossButton {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    font-size: 29px;
+}
+.buttons {
+    padding: 24px;
+}
+.buttonsTaxCalculation {
+    margin: 12px;
+    padding: 4px;
+    width: 100%;
+}
+::ng-deep .mat-tab-body {
+    min-height: 78vh;
+}
+.content {
+    max-height: 80vh;
+}
+/* ::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+} */
+.header {
+    padding: 20px;
+    margin-bottom: -20px;
+}
+.buttons .mat-raised-button {
+    min-height: 42px !important;
+    text-transform: uppercase;
+    min-width: 128px;
+    letter-spacing: 0.3pt;
+    font-weight: 400;
+}
+mat-form-field {
+    width: 45%;
+}
+.text {
+    padding: 10px;
+    color: #67768C;
+    font-size: 14px;
+}
+.text2 {
+    padding: 10px;
+    color: #67768C;
+    font-size: 14px;
+    background-color: #EEF0F2;
+}
+.group {
+    width: 90%;
+}
+.box {
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid #EEF0F2;
+    padding: 16px;
+    border-color: #24334A !important;
+}
+.boxText1 {
+    color: #24334A;
+    line-height: 18px;
+    font-size: 15px;
+    font-weight: 400;
+}
+.boxText2 {
+    color: #67768C;
+    font-size: 14px;
+}
+.boxText3 {
+    margin-top: 16px;
+    color: #67768C;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 500;
+}
+.boxText4 {
+    color: #67768C;
+    font-size: 13px;
+    line-height: 22px;
+}
+.mat-radio-label-content {
+    padding-left: 20px !important;
+}
+.taxDefaults {
+    width: 95%;
+}
+
+.dropdownReset {
+    position: absolute;
+    right: 18px;
+    font-size: 16px;
+    top: 14px;
+}
+//layout end

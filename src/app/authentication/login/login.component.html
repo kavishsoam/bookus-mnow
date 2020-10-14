@@ -1,0 +1,48 @@
+<div id="login" fxLayout="column">
+    <p-toast></p-toast>
+    <div id="login-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+        <div id="login-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+            <div class="logo">
+                <img src="../../../assets/images/logos/massagenowblack.jpg">
+            </div>
+            <div>
+                <p style="font-size: 20px;font-weight: 500;"> Massagenow </p>
+            </div>
+            <div class="title">LOGIN TO YOUR ACCOUNT</div>
+            <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="submitLogin(loginForm)" novalidate>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error *ngIf="loginForm.get('email').hasError('required')">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="!loginForm.get('email').hasError('required') &&
+                            loginForm.get('email').hasError('email')">
+                        Please enter a valid email address
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" [type]="hide ? 'password' : 'text'">
+                    <mat-icon style="cursor: pointer !important;" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error>
+                        Password is required
+                    </mat-error>
+                </mat-form-field>
+                <button mat-raised-button color="primary" [promiseBtn]="loader" class="submit-button"
+                    aria-label="LOG IN" [disabled]="loginForm.invalid">
+                    LOGIN
+                </button>
+                <div>
+                    <a class="forgot-password" [routerLink]="'/auth/forgot-password'">
+                        Forgot Password?
+                    </a>
+                </div>
+                <div class="register" fxLayout="column" fxLayoutAlign="center center">
+                    <span class="text">Don't have an account?</span>
+                    <a class="link" [routerLink]="'/auth/register'">Sign Up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

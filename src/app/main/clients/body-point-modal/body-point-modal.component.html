@@ -1,0 +1,45 @@
+<div class="dialog-pad">
+  <form  [formGroup]="bodyPointForm" name="bodyPointForm" (ngSubmit)="submitBodyPoint(bodyPointForm)" >
+    <div fxLayout="row">
+      <div class="h3 " fxFlex="100">
+        <!-- <strong>{{data?.bodyPoint}}</strong> -->
+      </div>
+    </div>
+    <mat-dialog-content class="parent">
+      <div class="row blog fs-15">
+        <div class="prod_details">
+          {{data?.muscle}}
+        </div>
+      </div>
+    </mat-dialog-content>
+    <br>
+    <div fxLayout="row">
+        <div fxFlex="100">
+          <mat-form-field appearance="outline" style="width:100%">
+            <mat-label>Describe Details</mat-label>
+            <textarea matInput  formControlName="description"  cdkTextareaAutosize
+              cdkAutosizeMinRows="3" cdkAutosizeMaxRows="3">
+            </textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <br>      
+        <div fxLayout="row">
+        <div fxLayout="column" fxFlex="100" fxLayoutAlign="space-around stretch" >
+            <mat-label> Severity/Pain Level (1 being minimal and 10 being extreme) :</mat-label>
+            <br>
+            <p-selectButton [options]="painLevels" formControlName="pain"></p-selectButton>
+        </div>
+    </div>
+      <br>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+      <!-- <button mat-raised-button color="warn" type="button" (click)="delete()">Delete</button> -->
+      <div fxLayout="row" fxFlex="1 1 auto"></div>
+      <button mat-raised-button type="button" (click)="cancelClicked(bodyPointForm)">Cancel</button>
+      <button (click)="savePointData(bodyPointForm)" style="margin-left: 10px" mat-raised-button color="primary"
+        type="button">Save </button>
+    </div>
+  </form>
+  </div>
+  
+  

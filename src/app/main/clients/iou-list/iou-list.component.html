@@ -1,0 +1,119 @@
+<div class="page-layout blank">
+  <div class="content">
+
+    <div class="content p-24">
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.gt-xs="row"
+      fxLayoutAlign.gt-xs="space-between center">
+
+         
+     
+            <!-- <div class="">
+              <button mat-button [matMenuTriggerFor]="menu" [disabled]="!iouList.length">{{'Export' | translate}}</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item value="CSV"
+                (click)="onOptionSelected($event.currentTarget.value)">{{'CSV' | translate}}</button>
+                <button mat-menu-item value="Excel"
+                (click)="onOptionSelected($event.currentTarget.value)">{{'Excel' | translate}}</button>
+                <button mat-menu-item value="Pdf"
+                (click)="onOptionSelected($event.currentTarget.value)">{{'Pdf' | translate}}</button>
+              </mat-menu>
+              </div>   -->
+              <div>
+                <button mat-raised-button color="primary">Add IOU</button>
+              </div>
+         
+          <div *ngIf="iouList.length != 0">
+            <p>Total  IOU : $167.90</p>
+            <!-- <mat-form-field mat-no-float class="" floatLabel="never">
+              <mat-label>
+                <mat-icon>search</mat-icon> {{'Search for anything' | translate}}
+              </mat-label>
+              <input matInput id="search" autocomplete="off" (keyup)="applyFilter($event.target.value)"
+                placeholder="{{'Search for anything' | translate}}">
+            </mat-form-field> -->
+          </div>
+    </div>
+
+    <div class="text-center py-3 p-4" *ngIf="iouList.length == 0">
+      <div class="emptyicons">
+        <mat-icon [inline]='true'>account_circle
+        </mat-icon>
+        <h1>No Clients</h1>
+        <p>{{'You do not have any clients yet'| translate}}</p>
+      </div>
+      <button mat-raised-button (click)="addClient()" color="primary">{{'New client' | translate}}</button>
+    </div>
+    <div class="filters" *ngIf="iouList.length > 0" fxLayout="column" fxLayoutAlign="start stretch" >
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+        <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let element; let i  = index" (click)="event.stopPropagation()" > 
+              <mat-select [(ngModel)]="element.value" name="food">
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+<!-- <button mat-raised-button >Action</button> -->
+           </td>
+        </ng-container>
+        <ng-container matColumnDef="CreateDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date</th>
+          <td mat-cell *matCellDef="let element"> {{element.a1}} </td>
+        </ng-container>
+        <ng-container matColumnDef="CloseDate">
+          <th class="three" mat-header-cell *matHeaderCellDef > Closed Date </th>
+          <td class="three" mat-cell *matCellDef="let element"> <span
+              >{{element.a2}}</span>
+            {{element.phone1}} </td>
+        </ng-container>
+        <ng-container matColumnDef="NotedBy">
+          <th class="three" mat-header-cell *matHeaderCellDef >Noted By </th>
+          <td class="three" mat-cell *matCellDef="let element"> {{element.a3}} </td>
+        </ng-container>
+        <ng-container class="text-center" matColumnDef="ClosedBy">
+          <th class="two text-center" mat-header-cell *matHeaderCellDef > Closed By</th>
+          <td class="two text-center" mat-cell *matCellDef="let element"> {{element.a4 }} </td>
+        </ng-container>
+        <ng-container matColumnDef="Customer">
+          <th class="one" mat-header-cell *matHeaderCellDef > Customer </th>
+          <td class="one" mat-cell *matCellDef="let element"> {{element.a5}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Comment">
+          <th class="one" mat-header-cell *matHeaderCellDef > Comment</th>
+          <td class="one" mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">{{element.a6}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Status">
+          <th class="one" mat-header-cell *matHeaderCellDef >Status </th>
+          <td class="one" mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">{{element.a7}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Amount">
+          <th class="one" mat-header-cell *matHeaderCellDef > Amount </th>
+          <td class="one" mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">{{element.a8}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="VoidReason">
+          <th class="one" mat-header-cell *matHeaderCellDef > Void Reason </th>
+          <td class="one" mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">{{element.a9}}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="iouListColumn"></tr>
+        <tr mat-row style="cursor: pointer;height: 70px !important;" *matRowDef="let row; columns: iouListColumn;" >
+        </tr> 
+      </table>
+      <mat-paginator class="mat-elevation-z8-page" [length]="100"
+      [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+    
+    </div>
+  
+  </div>
+
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+  <!-- <button *ngIf="iouList.length != 0" mat-fab class="add-event-button fab-button" color="primary"
+    (click)="addClient()" aria-label="Add event" style="z-index: 1 !important">
+    <mat-icon>add</mat-icon>
+  </button> -->
+</div>

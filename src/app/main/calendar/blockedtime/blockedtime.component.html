@@ -1,0 +1,63 @@
+<div class="page-layout blank">
+  
+  <p-toast></p-toast>
+  <div>
+    	<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" [fullScreen]='false' type="line-scale-pulse-out"></ngx-spinner>
+    <form name="blockedTimeForm" [formGroup]="blockedTimeForm" (ngSubmit)="blockedTime(blockedTimeForm)">
+      <div fxLayout="column" class="header" fxLayoutAlign="start center">
+        <div fxLayout="row">
+          <h2 mat-dialog-title>{{data.header}}</h2>
+          <button mat-button mat-dialog-close class="crossButton">
+            <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-dialog-content class="content">
+        <div class="heading">Date</div>
+        <div fxLayout="row" fxLayoutAlign="center start">
+          <mat-form-field class="noline hello" [floatLabel]="'never'" style="width: 200px;">
+            <input class="dropdown" autocomplete="off" matInput [selectMode]="'single'" [owlDateTimeTrigger]="dtRange2"
+              [owlDateTime]="dtRange2" formControlName="day">
+            <owl-date-time style="widows: 20px !important" [pickerType]="'calendar'" #dtRange2>
+            </owl-date-time>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center start">
+          <mat-form-field class="noline">
+            <mat-label>Staff</mat-label>
+            <mat-select class="dropdown" formControlName='staff'  [compareWith]="compareObjectsStaff" >
+              <mat-option *ngFor="let item of staffLists" [value]="item">{{item.firstName}}
+                {{item.lastName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" style="margin: 20px 20px 0px 20px;" fxLayoutAlign="space-betweem center" fxLayoutGap="20px">
+          <div fxLayout="column" fxFlex="50">
+            <ejs-timepicker disabled formControlName="startTime" name="time" placeholder='Start Time'
+              floatLabelType='Always'>
+            </ejs-timepicker>
+          </div>
+          <div fxLayout="column" fxFlex="50">
+            <ejs-timepicker disabled formControlName="endTime" name="time" placeholder='End Time'
+              floatLabelType='Always'>
+            </ejs-timepicker>
+          </div>
+        </div>
+        <div fxLayout="row" style="margin-top: 40px">
+          <div fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <textarea rows="2" matInput formControlName="notes" placeholder="e.g. lunch meeting">
+              </textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-dialog-content>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="buttons">
+        <button style="margin-left: 10px" *ngIf="data.header == 'Edit Blocked Time'" mat-raised-button color="warn"
+          type="button" (click)="deleteBlockedTime()">Delete</button>
+        <button style="margin-left: 10px" mat-raised-button color="primary" type="submit">SAVE</button>
+      </div>
+    </form>
+  </div>
+</div>

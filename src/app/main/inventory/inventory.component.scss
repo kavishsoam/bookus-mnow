@@ -1,0 +1,29 @@
+table {
+    width: 95%;
+}
+th.mat-sort-header-sorted {
+    color: black;
+}
+.fab-button {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+}
+.description {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: -1px 0;
+    text-align: center;
+}
+.emptyicons {
+    text-align: center;
+    margin-top: 5%;
+    color: #616161 !important;
+    font-size: 100px;
+    p {
+        font-size: 15px;
+    }
+    h1 {
+        margin: -22px 0 5px 0;
+    }
+}

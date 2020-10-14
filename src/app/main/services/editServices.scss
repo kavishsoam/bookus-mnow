@@ -1,0 +1,210 @@
+// ::ng-deep .mat-dialog-content {
+//     overflow-y: hidden !important;
+//     max-height: 100vh !important;
+// }
+h5 {
+    font-weight: 400;
+    color: #67768C;
+    word-wrap: break-word;
+    max-width: 100%;
+    min-width: 0;
+    margin-top: 0px !important;
+}
+
+.fillBlanks {
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    border-bottom: 1px;
+    border-style: solid;
+    width: 110px;
+    margin-top: 30%;
+}
+
+
+h3 {
+    color: #67768C;
+    font-size: 16px;
+    line-height: 22px;
+    word-wrap: break-word;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.borderLine {
+    border-bottom: 1px solid #dee3e6;
+}
+
+// h2 {
+//     padding-bottom: 20px;
+//     border-bottom: 1px solid #dee3e6;
+// }
+p {
+    color: #67768C;
+    font-size: 16px;
+    line-height: 22px;
+    word-wrap: break-word;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.heading {
+    text-align: center;
+    line-height: 30px;
+    font-weight: 200;
+    font-size: 30px;
+    color: #24334A;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.page-layout-blank {
+    overflow: hidden !important;
+}
+
+.staffList {
+    display: block;
+}
+
+.online-booking-header {
+    font-size: 15px;
+}
+
+.extra {
+    padding-top: 20px;
+}
+
+.service {
+    padding-right: 10px;
+}
+
+::ng-deep .mat-card {
+    margin-top: 20px;
+}
+
+.addPricing {
+    // margin-top: 10px;
+    padding-top: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 17px;
+    text-transform: none;
+    color: #2B72BD;
+    display: inline
+}
+
+.addPricingSpan {
+    margin-right: 8px;
+    min-width: 16px;
+    min-height: 16px;
+    position: relative;
+}
+
+
+
+
+
+//layout start
+h2 {
+    text-align: center;
+    color: #24334A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0px 18px 18px 18px;
+    line-height: 30px;
+    font-size: 30px;
+    font-weight: 300;
+    margin: 0;
+    font-family: Sarabun, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.innerbody {
+    border-bottom: 1px solid #dee3e6;
+    border-top: 1px solid #dee3e6;
+}
+
+.crossButton {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    font-size: 29px;
+}
+
+.buttons {
+    padding: 24px;
+}
+
+.left {
+    // overflow-x: visible;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-right: 1px solid #dee3e6;
+    padding: 35px;
+    margin-right: 0;
+    height: 77vh;
+}
+
+.right {
+    padding: 35px;
+    height: 77vh;
+}
+
+::ng-deep .mat-tab-body {
+    min-height: 78vh;
+}
+
+.content {
+    max-height: 80vh;
+}
+
+/* ::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+} */
+
+.header {
+    padding: 20px;
+    margin-bottom: -20px;
+}
+
+.buttons .mat-raised-button {
+    min-height: 42px !important;
+    text-transform: uppercase;
+    min-width: 128px;
+    letter-spacing: 0.3pt;
+    font-weight: 400;
+}
+
+
+//layout end
+
+.file-input-wrapper {
+    width: 200px;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+  }
+  .file-input-wrapper > input[type="file"] {
+    font-size: 200px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+  }
+  .file-input-wrapper > .btn-file-input {
+    display: inline-block;
+    // width: 200px;
+    // height: 40px;
+    // color: lightblue;
+    // background-color: lightpink;
+  }
+  .file-input-wrapper:hover > .btn-file-input {
+    // background-color: green;
+  }
+
+  .imageStytle {
+    height: 130px;
+    width: 150px;
+    border-radius: 8px;
+  }

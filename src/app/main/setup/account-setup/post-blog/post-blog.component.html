@@ -1,0 +1,83 @@
+<div class="page-layout blank">
+  <p-toast></p-toast>
+  <br />
+  <div class="row" fxLayoutAlign="space-around end">
+    <!-- <div fxLayout="column" fxLayoutAlign="end end" class="pad"> -->
+      <div fxFlex="20">
+        <mat-form-field  class="noline example-full-width" style="width: 100%; margin-left: 2% !important;">
+          <!-- <mat-label class="styleText">Select Location</mat-label> -->
+          <mat-select class="dropdown" [(ngModel)]="locationId" (selectionChange)="onWriterChange($event)">
+            <mat-option *ngFor="let location of locationList" [value]="location._id">
+              {{location.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="creatBlog" fxFlex="10" fxFlexOffset="64" style="margin-bottom:2%">
+        <button mat-raised-button color="primary" (click)="openCreateModal(false)">Create Blog +</button>
+      </div>
+    <!-- </div> -->
+  </div>
+  <div class="page-layout blank">
+    <div fxLayout="column" fxLayoutAlign="start" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+      <div *ngFor="let item of blogList" class="widget card_style" fxFlex="50" fxFlex.gt-sm="50">
+        <div (click)="viewBlogInfoModal(item)" class="cursor fuse-card auto-width mb-32 marginClass"
+          [ngClass.gt-sm]="'mb-0 mr-32 '" *ngIf="!!blogList.length">
+          <div class="p-16 pb-15" fxLayout="row" fxLayoutAlign="start end">
+            <div style="width:100%">
+              <div fxLayout="row">
+                <div class="h3 " fxFlex="50"><strong>{{item?.heading}}</strong>
+                </div>
+                <div class="text-right" fxFlex="25">
+                  <span class="material-icons  fs-17">
+                    visibility
+                  </span>
+                </div>
+                <div fxFlex="25" class="fs-15 ">
+                  {{ (item?.viewCount) ? item?.viewCount : 0 }} People
+                </div>
+
+              </div>
+              <div class="row">
+                <p fxFlex="100" class="fs-15">
+                  <span class="material-icons fs-9">
+                    fiber_manual_record
+                  </span>
+                  {{item?.createdAt | date : 'shortDate'}} <span class="material-icons fs-9 ml-10">
+                    fiber_manual_record
+                  </span>{{item?.createdAt | date:'shortTime'}}
+                </p>
+              </div>
+
+              <p class="fs-15">
+                {{item?.content}}
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!blogList.length">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex="100">
+          <p class="text-center" >
+            <mat-icon class="text-center" style="font-size: 100px; margin-right:4% !important;">
+              post_add
+            </mat-icon>
+          </p>
+          <p class="text-center">No blogs are present for this location</p>
+          <h6 class="text-center">Add new blogs by creating blog for a particular location</h6>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div>
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+  </div>
+</div>

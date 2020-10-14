@@ -1,0 +1,37 @@
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+<div class="dialog-pad">
+  <p-toast></p-toast>
+  <h2 mat-dialog-title>View Intake Form List</h2>
+  <div class="overflow">
+    <mat-dialog-content>
+      <div *ngIf="intakeList" class="intakelists">
+        <!-- <div>
+          <p *ngFor="let item of intakeList;let i = index" >
+            <span *ngIf="i==0">
+              {{item.updatedAt
+          | date}}
+          </span>
+          </p>
+        </div> -->   
+        <mat-list role="list">
+          <mat-list-item class="intakeItem" *ngFor="let item of intakeList;let i = index" (click)="getIntakeId(item._id)"
+            role="listitem">
+            <span >
+              {{item.updatedAt
+          | date}}
+          </span>
+        </mat-list-item>
+        </mat-list>
+      </div>
+      <div class="text-center py-3 p-4" *ngIf="!intakeList">
+        <div class="emptyicons">
+          <mat-icon [inline]='true'>format_list_numbered
+          </mat-icon>
+          <h1>No Intake Forms</h1>
+          <p>You do not have any past Client Intake Form yet, fill an intake form to see the list</p>
+        </div>
+        <app-loading-screen *ngIf="loader"></app-loading-screen>
+      </div>
+    </mat-dialog-content>
+  </div>
+</div>

@@ -1,0 +1,118 @@
+//layout start
+h2 {
+    text-align: center;
+    color: #24334A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0px 18px 18px 18px;
+    line-height: 30px;
+    font-size: 25px;
+    font-weight: 300;
+    margin: 0;
+    font-family: Sarabun, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+.centered {
+    width: 100% !important;
+}
+.loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 2s linear infinite;
+    -webkit-animation: spin 2s linear infinite !important;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.innerbody {
+    // border-bottom: 1px solid #dee3e6;
+    border-top: 1px solid #dee3e6;
+    padding: 15px;
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #24334A;
+    cursor: pointer;
+}
+.innerbody:nth-last-child(1) {
+    border-bottom: 1px solid #dee3e6;
+}
+.innerbody:hover {
+    background: #FBFBFB
+}
+
+.crossButton {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    font-size: 29px;
+}
+.backButton {
+    cursor: pointer;
+    position: absolute;
+    left: 10px;
+    font-size: 29px;
+}
+.buttons {
+    padding: 5px;
+    width: 90%;
+}
+
+::ng-deep .mat-tab-body {
+    min-height: 78vh;
+}
+.content {
+    max-height: 80vh;
+}
+/* ::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+} */
+.header {
+    padding: 20px;
+    margin-bottom: -20px;
+}
+.buttons .mat-raised-button {
+    min-height: 42px !important;
+    text-transform: uppercase;
+    min-width: 128px;
+    letter-spacing: 0.3pt;
+    font-weight: 400;
+}
+mat-form-field {
+    width: 90%;
+}
+.form2 {
+    width: 90%;
+}
+.listText {
+    color: #67768C;
+    font-size: 12px;
+}
+.listText2 {
+    text-decoration: line-through;
+    color: #67768C;
+    font-size: 14px;
+}
+button {
+    width: 90%;
+}
+.invalid-feedback {
+    color: red;
+    font-size: 12px;
+    margin-left: 12px;
+    margin-top: -22px;
+    padding-bottom: 25px;
+}

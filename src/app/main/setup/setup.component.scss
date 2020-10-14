@@ -1,0 +1,108 @@
+@import "src/@fuse/scss/fuse";
+body {
+    background-color: white !important
+}
+
+.h3 {
+    font-size: 18px;
+    font-weight: 500;
+}
+@include media-breakpoint-up('md') {
+    .left {
+        margin-right: -32px;
+    }
+}
+.fuse-card {
+    transition: all .25s linear;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+}
+.fuse-card:hover {
+    -webkit-box-shadow: 9px 9px 22px -9px rgba(71, 60, 71, 1);
+    -moz-box-shadow: 9px 9px 22px -9px rgba(71, 60, 71, 1);
+    box-shadow: 9px 9px 22px -9px rgba(71, 60, 71, 1);
+}
+p {
+    font-size: 16px;
+    color: #67768C;
+}
+a {
+    font-size: 16px;
+    color: #2B72BD !important;
+}
+.p-16 {
+    padding: 26px !important;
+}
+.align-end {
+    text-align: end !important;
+}
+:host /deep/ .mat-cell,
+.mat-footer-cell {
+    font-size: 16px;
+    color: #616161 !important;
+}
+:host /deep/ th.mat-header-cell {
+    color: black;
+    font-size: 15px;
+}
+#dashboard-analytics {
+    table {
+        width: 100%;
+    }
+
+    .box {
+        min-width: 100%;
+        padding: 40px auto;
+        hr {
+            border-top: 1px solid #E0E0E0;
+        }
+    }
+    .main-widget {
+        display: flex;
+        flex-direction: column;
+    }
+    .content {
+        display: flex;
+        flex: 1 1 auto;
+        padding: 32px;
+        min-width: 0;
+        @include media-breakpoint-down('md') {
+            flex-direction: column;
+        }
+        .left {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            min-width: 0;
+            .widget {
+                flex: 1 1 auto;
+                min-width: 0;
+            }
+        }
+        .right {
+            display: flex;
+            flex: 0 0 auto;
+            width: 320px;
+            min-width: 320px;
+            max-width: 320px;
+            @include media-breakpoint-down('md') {
+                flex: 1 0 100%;
+                margin-top: 32px;
+                width: 100%;
+                min-width: 0;
+                max-width: none;
+            }
+            .fuse-card {
+                @include media-breakpoint-down('md') {
+                    width: 100%;
+                    min-width: 0;
+                    max-width: none;
+                }
+            }
+        }
+    }
+}
+
+.pad {
+    padding-top: 2% !important;
+    padding-right: 2% !important;
+}

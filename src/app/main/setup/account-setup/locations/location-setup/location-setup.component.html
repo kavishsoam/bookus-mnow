@@ -1,0 +1,300 @@
+<p-toast [style]="{marginTop: '50px'}"></p-toast>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
+
+<div class="width-full">
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Location Info">
+
+    <editLocation [locationDetails]="locationData"></editLocation>
+
+  </mat-tab>
+
+  <mat-tab label="Online Booking Rules">
+
+<div>
+  <mat-card>
+    <mat-card-title style="font: Sarabun;">
+      Booking
+    </mat-card-title>
+    <hr>
+    <form [formGroup]="bookingRulesForm"  (submit)="submitBookingRules(bookingRulesForm)" >
+    <mat-card-content>
+      <div>
+        
+
+          <div fxLayout="row" fxLayoutAlign="start start">
+            <div  fxFlexAlign="center" fxLayout="column" fxFlex="10">
+              <p-inputSwitch inputId="inputSwitch" formControlName="active"></p-inputSwitch>
+
+            </div>
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="90" style="float: left;">
+              <label for="inputSwitch">
+              <strong>Active</strong> 
+              </label>
+            </div>
+          </div>
+
+          
+          <div  fxLayout="row" fxLayoutAlign="start center" >
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="10" style="padding-right: 25px !important;">
+              <mat-form-field class="example-full-width">
+                <mat-label>hrs</mat-label>
+                <input matInput formControlName="appointmentTime" placeholder="1">
+              </mat-form-field>
+            </div>
+            <div fxFlex="90" fxFlexAlign="center" fxLayout="column" style="float: left; ">
+              <h3 style=" margin: 0px !important;">
+               <strong> Appointment Time</strong>
+              </h3>
+              <h6 style="margin: 0px  !important;">
+                (At least 30 mins time should be given)
+              </h6>
+            </div>
+          </div>
+
+
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div  fxFlexAlign="center" fxLayout="column" fxFlex="100">
+              <div>
+                <p-toggleButton formControlName="allowClient" onLabel="Allow&nbsp;clients&nbsp;to&nbsp;select&nbsp;staff" offLabel="Allow clients to select staff"
+                onIcon="pi&nbsp;pi-check" offIcon="pi pi-times"  ></p-toggleButton>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <br>
+
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div  fxFlexAlign="center" fxLayout="column" fxFlex="10">
+              <p-inputSwitch inputId="acceptance" formControlName="wanted"></p-inputSwitch>
+            </div>
+            <div  fxFlexAlign="center" fxLayout="column" fxFlex="90">
+              <label for="acceptance">
+                <h3 style="margin: 0px 0px 0px 0px !important;"><strong>Require Acceptance for Appointment</strong></h3>
+                <h6 style="margin: 0px 0px 0px 0px !important;">when someone book online, they need to get accepted</h6>
+              </label>
+            </div>
+          </div>
+
+          <br>
+          <br>
+
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div  fxFlexAlign="center" fxLayout="column" fxFlex="30">
+              <strong>Require Acceptance For :</strong>
+            </div>
+          </div>
+
+          <br>
+
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div  fxFlexAlign="center" fxLayout="column" fxFlex="30">
+              <p-toggleButton formControlName="customerAppointment" onLabel="New&nbsp;customer&nbsp;appointments" offLabel="New customer appointments"
+              onIcon="pi&nbsp;pi-check" offIcon="pi pi-times"  ></p-toggleButton>
+            </div>
+          </div>
+
+          <br>
+
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div  fxFlexAlign="center" fxLayout="column" fxFlex="30">
+              <p-toggleButton formControlName="verifiedCustomer" onLabel="New&nbsp;verified&nbsp;customer" offLabel="New verified customer"
+              onIcon="pi&nbsp;pi-check" offIcon="pi pi-times"  ></p-toggleButton>
+            </div>
+          </div>
+
+          <br>
+
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div  fxFlexAlign="center" fxLayout="column" fxFlex="15">
+              <p-toggleButton formControlName="allow" onLabel="Credit&nbsp;below" offLabel="Credit below"
+              onIcon="pi&nbsp;pi-check" offIcon="pi pi-times"  ></p-toggleButton>
+            </div>
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="8">
+              <mat-form-field class="example-full-width">
+                <mat-label></mat-label>
+                <input matInput placeholder="50" formControlName="range">
+              </mat-form-field>
+            </div>
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="77" style="float: left;padding-left: 1%;">
+              <p>(1-100)</p>
+            </div>
+          </div>
+
+          <br>
+
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div  fxFlexAlign="center" fxLayout="column" fxFlex="30">
+              <p-toggleButton formControlName="everyone" onLabel="Everyone" offLabel="Everyone"
+              onIcon="pi&nbsp;pi-check" offIcon="pi pi-times"  ></p-toggleButton>
+            </div>
+          </div>
+
+          <br>
+          <br>
+
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div  fxFlexAlign="center" fxLayout="column" fxFlex="10">
+              <p-inputSwitch inputId="online-payment" formControlName="acceptOnlinePayment"></p-inputSwitch>
+            </div>
+            <div  fxFlexAlign="center" fxLayout="column" fxFlex="90" style="float: left;">
+              <label for="online-payment">
+                <strong>Only Accept Online Payments</strong>
+              </label>
+            </div>
+          </div>
+
+          <br>
+          <br>
+          <mat-card-title>
+            Cancellation
+          </mat-card-title>
+          <hr>
+
+          <div  fxLayout="row" fxLayoutAlign="start center" >
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="10" style="padding-right: 25px !important;">
+              <mat-form-field class="example-full-width">
+                <mat-label>hrs</mat-label>
+                <input matInput placeholder="1" formControlName="cancellationTime">
+              </mat-form-field>
+            </div>
+            <div fxFlex="90" fxFlexAlign="center" fxLayout="column" style="float: left;">
+              <h3 style="margin: 0px 0px 0px 0px !important;">
+               <strong>Cancellation</strong>
+              </h3>
+              <h6 style="margin: 0px 0px 0px 0px !important;">
+                (User will be able to cancel before this time, without any cancellation fees after this time.)
+              </h6>
+            </div>
+          </div>
+
+          <br>
+          <br>
+          <mat-card-title>
+            No Show Protection
+          </mat-card-title>
+          <hr>
+          <br>
+          <div fxLayout="row" fxLayoutAlign="start start">
+            <div  fxFlexAlign="center" fxLayout="column" fxFlex="10">
+              <p-inputSwitch inputId="card-payment" formControlName="cardPayment"></p-inputSwitch>
+
+            </div>
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="90" style="float: left;">
+              <label for="card-payment">
+              <strong>Require card payment for online booking</strong> 
+              </label>
+            </div>
+          </div>
+          <br>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlexAlign="center" fxLayout="column" fxFlexOffset="15" fxFlex="70" style="padding-right: 25px !important;" (click)="selectZero()" >
+              <mat-card appMaterialElevation [defaultElevation]="defaultZero"  raisedElevation="16" class="card-style">
+                <mat-card-header>
+                  <mat-card-title>Zero Charge</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                    Accept only commited clients who book online with a card, with zero no show fees.
+                  </p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+
+          <br>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlexAlign="center" fxLayout="column" fxFlexOffset="15" fxFlex="70" style="padding-right: 25px !important;" (click)="selectFlexible()">
+              <mat-card appMaterialElevation [defaultElevation]="defaultFlexible"  raisedElevation="16" class="card-style">
+                <mat-card-header>
+                  <mat-card-title>Flexible policy</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                    No fees for advance cancellation , 10% no show fee
+                  </p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+
+
+          <br>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlexAlign="center" fxLayout="column" fxFlexOffset="15" fxFlex="70" style="padding-right: 25px !important;" (click)="selectFair()">
+              <mat-card appMaterialElevation [defaultElevation]="defaultFair"  raisedElevation="16" class="card-style">
+                <mat-card-header>
+                  <mat-card-title>Fair Policy</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                    10% policy to cancel within 3 hours, 30% no fees.
+                  </p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+
+
+          <br>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlexAlign="center" fxLayout="column" fxFlexOffset="15" fxFlex="70" style="padding-right: 25px !important;" (click)="selectModerate()" >
+              <mat-card appMaterialElevation [defaultElevation]="defaultModerate"  raisedElevation="16" class="card-style">
+                <mat-card-header>
+                  <mat-card-title>Moderate policy</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                    30% fee to cancel within 3 hours, 50% no show fee
+                  </p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+
+
+          <br>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlexAlign="center" fxLayout="column" fxFlexOffset="15" fxFlex="70" style="padding-right: 25px !important;" (click)="selectStrict()" >
+              <mat-card appMaterialElevation [defaultElevation]="defaultStrict" raisedElevation="16" class="card-style">
+                <mat-card-header>
+                  <mat-card-title>Strict Policy</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                    50% fee to cancel within 3 hours, 100% no fee
+                  </p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+
+
+        
+      </div>
+    </mat-card-content>
+    <br>
+    <mat-card-footer>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlexAlign="center" fxLayout="column" fxFlexOffset="70" fxFlex="10" style=" float: right;padding-right: 25px !important;" >
+<button mat-raised-button >cancel</button>
+        </div>
+        <div fxFlexAlign="center" fxLayout="column"  fxFlex="10" fxFlexOffset="5">
+          <button mat-raised-button  color="primary">Save</button>
+        </div>
+        <div fxFlexAlign="center" fxLayout="column"  fxFlex="5" >
+
+        </div>
+
+      </div>
+    </mat-card-footer>
+  </form>
+  <br>
+  <br>
+  </mat-card>
+</div>
+
+  </mat-tab>
+</mat-tab-group>
+</div>

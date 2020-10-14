@@ -1,0 +1,46 @@
+.full-width {
+    max-width: 100%;
+    width: 100%;
+}
+
+.bg-white {
+    // background: #fff !important;
+}
+
+.p20 {
+    padding: 20px !important;
+}
+
+.fs17 {
+    font-size: 17px !important;
+}
+
+::ng-deep .hello .mat-form-field-empty.mat-form-field-label {
+    padding-top: 6px;
+    padding-left: 10px;
+}
+
+::ng-deep .noline .mat-form-field-underline {
+    display: none
+}
+
+::ng-deep.owl-dt-popup-container {
+    width: 24rem !important;
+}
+
+::ng-deep.owl-dt-calendar {
+    height: 15em !important;
+    font-size: 18px !important;
+}
+
+::ng-deep.owl-dt-container-row:last-child {
+    font-size: 20px !important;
+}
+
+.ratedStar {
+    color :#DAA520;
+}
+
+.nonRatedStar {
+    color : lightgray;
+}
