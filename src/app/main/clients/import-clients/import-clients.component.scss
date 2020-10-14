@@ -1,0 +1,33 @@
+.img-div {
+    height: 300px;
+    text-align: center;
+    border: 1px solid #c3c3c3;
+
+    img {
+        width: 80%;
+        text-align: center;
+    }
+}
+
+.border-right {
+    border-right: 1px solid #bbbbbb;
+}
+
+.p-10 {
+    padding: 10px;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.border-number {
+    padding: 5px 11px;
+    border: 1px solid #007ad9;
+    margin-right: 20px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}

@@ -16,6 +16,7 @@ import { ApiService } from 'app/services/api.service';
 import { ExportService } from 'app/services/export.service';
 import { FamilyandfriendComponent } from './familyandfriend/familyandfriend.component';
 import { Translator } from 'app/services/translator';
+import { ImportClientsComponent } from './import-clients/import-clients.component';
 
 interface Pokemon {
   value: string;
@@ -135,8 +136,8 @@ export class ClientsComponent implements OnInit, AfterViewInit {
     }
   ];
   intakeList: any;
-  clientListColumn: string[] = ['profile','firstName', 'phone1', 'email',
-    'gender', 'clientIntakeForm'];
+  clientListColumn: string[] = ['firstName', 'phone1', 'email',
+    'gender', 'intake', 'soapCount'];
   dataSource = new MatTableDataSource(this.clientList);
   constructor(private _fuseConfigService: FuseConfigService,
     public router: Router,
@@ -193,6 +194,16 @@ export class ClientsComponent implements OnInit, AfterViewInit {
           this.getAllClients();
         }
       }
+    });
+  }
+  importClientPopup(intakedata): void {
+    const dialogRef = this.dialog.open(ImportClientsComponent, {
+      disableClose: false,
+      width: '60%',
+      autoFocus: false,
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
     });
   }
   intakeFormLists(id) {
@@ -563,6 +574,7 @@ export class AddNewClient implements OnInit, AfterViewChecked {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+
   updateClient(data) {
     this._service.put(`${CLIENT}/${this._id}`, data).subscribe(res => {
       this._toast.add({ severity: 'success', summary: 'Service Message', detail: res.message });

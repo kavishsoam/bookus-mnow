@@ -26,6 +26,8 @@ import { ImageMapModule } from "../image-map/image-map.module";
 import { BodyPointModalComponent } from "./body-point-modal/body-point-modal.component";
 import {SelectButtonModule} from 'primeng/selectbutton';
 import { IouListComponent } from "./iou-list/iou-list.component";
+import { MatBadgeModule } from '@angular/material/badge';
+import { ImportClientsComponent } from "./import-clients/import-clients.component";
 
 
 const routes = [
@@ -65,7 +67,8 @@ const routes = [
         MaterialAnimatedIconModule,
         Ng2TelInputModule,
         ImageMapModule,
-        SelectButtonModule
+        SelectButtonModule,
+        MatBadgeModule
 
     ],
     declarations: [
@@ -75,7 +78,8 @@ const routes = [
         FamilyandfriendComponent,
         SoapComponent,
         BodyPointModalComponent,
-        IouListComponent
+        IouListComponent,
+        ImportClientsComponent
         // SignatureFieldComponent,
         
     ],
@@ -85,14 +89,16 @@ const routes = [
         ClientprofileComponent,
         FamilyandfriendComponent,
         BodyPointModalComponent,
-        IouListComponent
+        IouListComponent,
+        ImportClientsComponent
         // SignatureFieldComponent,
     ],
     entryComponents: [
         ClientsComponent,
         FamilyandfriendComponent,
         ClientIntakeListComponent,
-        BodyPointModalComponent
+        BodyPointModalComponent,
+        ImportClientsComponent
     ]
 })
 
