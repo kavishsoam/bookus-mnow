@@ -56,7 +56,7 @@
 
 
         <div class="ml-19">
-          <button mat-raised-button color="primary" style="margin-right: 20px;" (click)="importClientPopup()"
+          <button mat-raised-button color="primary" style="margin-right: 20px;" (click)="importClientPopup('')"
             [disabled]="!clientList.length">{{'Import Client'}}</button>
           <button mat-raised-button color="primary" [disabled]="!clientList.length">{{'Export Client' | translate}}</button>
           <mat-menu #menu="matMenu">
