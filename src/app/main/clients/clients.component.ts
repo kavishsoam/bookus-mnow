@@ -16,7 +16,8 @@ import { ApiService } from 'app/services/api.service';
 import { ExportService } from 'app/services/export.service';
 import { FamilyandfriendComponent } from './familyandfriend/familyandfriend.component';
 import { Translator } from 'app/services/translator';
-import { ImportClientsComponent } from './import-clients/import-clients.component';
+import { ImportClientsComponent } from './import-clients/import-clients.components';
+
 
 interface Pokemon {
   value: string;

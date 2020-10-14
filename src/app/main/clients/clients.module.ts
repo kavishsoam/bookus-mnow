@@ -27,7 +27,8 @@ import { BodyPointModalComponent } from "./body-point-modal/body-point-modal.com
 import {SelectButtonModule} from 'primeng/selectbutton';
 import { IouListComponent } from "./iou-list/iou-list.component";
 import { MatBadgeModule } from '@angular/material/badge';
-import { ImportClientsComponent } from "./import-clients/import-clients.component";
+import { ImportClientsComponent } from "./import-clients/import-clients.components";
+
 
 
 const routes = [
