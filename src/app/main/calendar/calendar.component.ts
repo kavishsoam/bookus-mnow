@@ -52,6 +52,7 @@ import { fuseAnimations } from "@fuse/animations";
 import { getCurrencySymbol } from "@angular/common";
 import { CashDrawerComponent } from "./cash-drawer/cash-drawer.component";
 import { RequestedItemsComponent } from "./requested-items/requested-items.component";
+import {CalendarSettingModalComponent} from './calendar-setting-modal/calendar-setting-modal.component'
 
 @Component({
   selector: "calendar",
@@ -1582,6 +1583,20 @@ export class CalendarComponent implements OnInit {
     const dialogRef = this.dialog.open(CashDrawerComponent, {
       width: "60vw",
       height: "90vh",
+
+      // data: data,
+      autoFocus: false,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+    });
+  }
+
+  openSettingModal(){
+    console.log('open setting modal')
+    const dialogRef = this.dialog.open(CalendarSettingModalComponent, {
+      width: "50vw",
+      height: "85vh",
 
       // data: data,
       autoFocus: false,

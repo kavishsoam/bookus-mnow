@@ -124,6 +124,7 @@ import {
 } from "app/translate";
 import { TranslatefilesModule } from "app/translate/translatefiles.module";
 import { MatSharedAngularModule } from "app/shared/mat-shared-angular/mat-shared-angular.module";
+import { CalendarSettingModalComponent } from './calendar/calendar-setting-modal/calendar-setting-modal.component';
 // import { MaterialElevationDirective } from 'app/directive/material-elevation.directive';
 // import { HomeModule } from './home/home.module';
 // import { SalesbyComponent } from './analytics/salesby/salesby.component';
@@ -248,6 +249,8 @@ const routes = [
     AwesomeTooltipComponent,
     ReviewsComponent,
     VoucherCheckoutSearchClientComponent,
+    CalendarSettingModalComponent,
+
     // StaffFilter,
     // LinechartComponent,
     // BarchartComponent,
@@ -259,6 +262,7 @@ const routes = [
     // smallTruncatePipe,
     HighlightDirective,
     TooltipDirective,
+    CalendarSettingModalComponent,
 
     // InvoiceEmailComponent,
     // NewjobComponent,
@@ -365,6 +369,8 @@ const routes = [
     // TransferComponent,
     // CloseDateComponent,
     AwesomeTooltipComponent,
+    CalendarSettingModalComponent,
+
     // HistoryAppointmentComponent,
     // NewjobComponent,
     // FamilyandfriendComponent,
@@ -377,6 +383,7 @@ const routes = [
     // ClientsComponent,
     MessagesComponent,
     OnlinebookingComponent,
+    CalendarSettingModalComponent,
     // LoadingScreenComponent,
     // SalesComponent,
     // ServicesComponent,

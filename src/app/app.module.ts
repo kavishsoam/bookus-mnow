@@ -40,6 +40,7 @@ import { TRANSLATION_PROVIDERS } from "../app/translate/translation";
 import { TranslateService } from "../app/translate/translate.service";
 import { MatSharedAngularModule } from "./shared/mat-shared-angular/mat-shared-angular.module";
 
+
 // import { AuthGuard } from './services/auth-guard.service';
 const appRoutes: Routes = [
   {

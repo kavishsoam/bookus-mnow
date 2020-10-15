@@ -201,6 +201,7 @@ const routes = [
     BlogCommentComponent,
     PremiumComponent,
     BusinessSaleComponent,
+
   ],
   imports: [
     Angular2PromiseButtonModule.forRoot(),
@@ -268,6 +269,7 @@ const routes = [
     BlogAddEditComponent,
     BlogCommentComponent,
     PremiumComponent,
+  
   ],
   providers: [ImageCompressService, ResizeOptions],
 

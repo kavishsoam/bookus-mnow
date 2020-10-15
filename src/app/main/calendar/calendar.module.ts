@@ -44,6 +44,7 @@ import { ViewAppointmentModule } from "./view-appointment/view-appointment.modul
 import { InvoiceModule } from "./check-out-appointment/invoice/invoice.module";
 import { TruncatePipe } from "app/pipe/textTruncate";
 import { RequestedItemsModule } from "./requested-items/requested-items.module";
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 // import {ScheduleComponent, GroupModel,EventSettingsModel,DayService,WeekService,WorkWeekService,MonthService,AgendaService,MonthAgendaService,DragAndDropService,ResizeService,ResourceDetails,EventRenderedArgs,PopupOpenEventArgs,WorkHoursModel} from "@syncfusion/ej2-angular-schedule";
 
 const routes = [
@@ -83,9 +84,13 @@ const routes = [
     InvoiceModule,
     ViewAppointmentModule,
     RequestedItemsModule,
+    OverlayPanelModule
+  
   ],
   declarations: [
     CalendarComponent,
+   
+
     // duration,
     // TruncatePipe,
 
@@ -103,6 +108,8 @@ const routes = [
   ],
   exports: [
     CalendarComponent,
+    
+
     // BlockedtimeComponent,
     // CancelComponent,
     // CashDrawerComponent,
@@ -117,6 +124,8 @@ const routes = [
   ],
   entryComponents: [
     CalendarComponent,
+   
+
     // BlockedtimeComponent,
     // CancelComponent,
     // CashDrawerComponent,

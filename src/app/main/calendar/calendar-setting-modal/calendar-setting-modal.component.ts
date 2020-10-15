@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { enableRipple } from '@syncfusion/ej2-base';
-import { CALENDAR_SETTINGS } from '../../../../services/url'
+import { CALENDAR_SETTINGS } from '../../../services/url'
 import { ApiService } from 'app/services/api.service';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as moment from 'moment';
-enableRipple(true)
+import {MatDialogRef} from '@angular/material/dialog'
 @Component({
-  selector: 'app-calendar-settings',
-  templateUrl: './calendar-settings.component.html',
-  styleUrls: ['./calendar-settings.component.scss']
+  selector: 'app-calendar-setting-modal',
+  templateUrl: './calendar-setting-modal.component.html',
+  styleUrls: ['./calendar-setting-modal.component.scss']
 })
-export class CalendarSettingsComponent implements OnInit {
+export class CalendarSettingModalComponent implements OnInit {
   calendarSettingsForm: FormGroup;
   calendarSettings: boolean;
   time = [
@@ -49,7 +50,8 @@ export class CalendarSettingsComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _service: ApiService,
     private _toast: MessageService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private dialogRef:MatDialogRef<CalendarSettingModalComponent>
   ) { }
   pageHeader: Object = { header: " Calendar Settings", main: "Setup", navigate: true }
   ngOnInit() {
@@ -77,8 +79,11 @@ export class CalendarSettingsComponent implements OnInit {
       this._toast.add({ severity: 'success', summary: 'Service Message', detail: 'Calendar settings updated' });
       this.loader = false
       localStorage.setItem('calendarSettings', JSON.stringify(res.result))
+        this.dialogRef.close()
     }, err => {
       this.loader = false
+      this.dialogRef.close()
+
       this._toast.add({ severity: 'error', summary: 'Service Message', detail: 'Calendar settings update failed' });
     })
   }
