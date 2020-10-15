@@ -13,6 +13,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
   MatTableDataSource,
+  Sort,
 } from "@angular/material";
 import { FuseConfigService } from "@fuse/services/config.service";
 import { AddNewClient, ClientIntakeForm } from "../clients.component";
@@ -92,6 +93,18 @@ export class ClientprofileComponent implements OnInit {
   staffDrop = new FormControl();
   serviceDrop = new FormControl();
   statusDrop = new FormControl();
+  moment = moment;
+
+  transactionHisroty = [
+    { date: '12 Feb - 6:00 PM', name: 'Relaxation Massage', type: 'Service', serveBy: 'Eilyn', price: 100 },
+    { date: '12 Feb - 6:00 PM', name: 'Massage Oil', type: 'Equipment', serveBy: 'Eilyn', price: 100 },
+    { date: '12 Feb - 6:00 PM', name: 'Relaxation Massage', type: 'Service', serveBy: 'Eilyn', price: 100 },
+    { date: '12 Feb - 6:00 PM', name: 'Relaxation Massage', type: 'Service', serveBy: 'Eilyn', price: 100 },
+    { date: '12 Feb - 6:00 PM', name: 'Massage Oil', type: 'Equipment', serveBy: 'Eilyn', price: 100 },
+    { date: '12 Feb - 6:00 PM', name: 'Massage Towel', type: 'Equipment', serveBy: 'Eilyn', price: 100 },
+    { date: '12 Feb - 6:00 PM', name: 'Relaxation Massage', type: 'Completed', serveBy: 'Eilyn', price: 100 },
+  ];
+  sortedtransactionHisroty: any;
   toggleAnimate() {
     this.animate = !this.animate;
   }
@@ -320,6 +333,9 @@ export class ClientprofileComponent implements OnInit {
     this.getAllStaffLoc(locationId);
     this.getAppointmentByStatus();
     this.getAllStaffList();
+
+
+    this.sortedtransactionHisroty = this.transactionHisroty.slice();
   }
 
   getAppointmentByStatus() {
@@ -458,6 +474,9 @@ export class ClientprofileComponent implements OnInit {
   getOneClient() {
     this._service.get(`${CLIENT}/${this.id}`).subscribe((res) => {
       this.profileInfo = res[0];
+
+      // set verifiled user
+      this.profileInfo.isverifiled = this.profileInfo.firstName === "naina";
       this.setClientFormData();
       this.getAllFriendsList();
       let clone = _.cloneDeep(res);
@@ -647,4 +666,27 @@ export class ClientprofileComponent implements OnInit {
       this.imgURL = reader.result;
     };
   }
+  sortData(sort: Sort) {
+    const data = this.transactionHisroty.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedtransactionHisroty = data;
+      return;
+    }
+
+    this.sortedtransactionHisroty = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'date': return compare(a.date, b.date, isAsc);
+        case 'name': return compare(a.name, b.name, isAsc);
+        case 'type': return compare(a.type, b.type, isAsc);
+        case 'serveBy': return compare(a.serveBy, b.serveBy, isAsc);
+        case 'price': return compare(a.price, b.price, isAsc);
+        default: return 0;
+      }
+    });
+  }
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

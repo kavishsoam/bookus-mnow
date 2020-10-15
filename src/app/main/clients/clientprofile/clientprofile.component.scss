@@ -105,8 +105,7 @@
 }
 
 mat-tab-group {
-    min-height: 1000px;
-    max-height: 1000px;
+    min-height: 100px;
 }
 
 .new_appointment {
@@ -143,6 +142,10 @@ mat-tab-group {
 
 .align-end {
     text-align: end !important;
+}
+
+.text-center {
+    text-align: center;
 }
 
 :host /deep/ .mat-cell,
@@ -293,7 +296,7 @@ mat-tab-group {
     h3 {
         margin-top: 0%;
         margin-bottom: 0%;
-        float: left;
+        // float: left;
         font-family: Sarabun !important;
     }
 }
@@ -305,7 +308,7 @@ mat-tab-group {
 }
 
 .changeColor {
-    color: aqua;
+    color: #039be5;
 }
 
 .background {
@@ -356,6 +359,7 @@ mat-tab-group {
 
 .gridHeader {
     font-family: Sarabun;
+    color: #039be5;
 }
 
 .image-card {
@@ -475,4 +479,153 @@ mat-tab-group {
     font-size: 15px;
     padding: 0px;
     margin: 0px;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.border-tab {
+    border: 1px solid #c8c8c8;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+}
+
+.p-50 {
+    padding: 50px;
+}
+
+.border-right {
+    border-right: 1px solid #a1a1a1;
+}
+
+.yellow-text {
+    color: orange;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.border-div {
+    border: 1px solid #a1a1a1;
+    margin: 35px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.v-align-middle {
+    vertical-align: middle;
+}
+
+.transaction-table {
+    font-family: Sarabun !important;
+    width: 100%;
+    font-size: 14px;
+}
+
+@media screen and (max-width: 450px),
+(min-device-width: 450px) and (max-device-width: 450px) {
+    .p-50 {
+        padding: 10px;
+    }
+
+    .p-24 {
+        padding: 0px !important;
+    }
+
+    .border-div {
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 760px),
+(min-device-width: 760px) and (max-device-width: 760px) {
+
+    /* Force table to not be like tables anymore */
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+
+    .transaction-table {
+
+        /* Hide table headers (but not display: none;, for accessibility) */
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        tr {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        td {
+            /* Behave  like a "row" */
+            border: none;
+            // border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+
+        td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            font-weight: bold;
+        }
+
+        .text-center {
+            text-align: left;
+        }
+
+        /*
+	Label the data
+    */
+        td:nth-of-type(1):before {
+            content: 'Date';
+            ;
+        }
+
+        td:nth-of-type(2):before {
+            content: "Name";
+        }
+
+        td:nth-of-type(3):before {
+            content: "Type";
+        }
+
+        td:nth-of-type(4):before {
+            content: "Service by";
+        }
+
+        td:nth-of-type(5):before {
+            content: "price";
+        }
+
+        td:nth-of-type(6):before {
+            content: "";
+        }
+    }
+
 }
