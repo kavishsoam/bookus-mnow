@@ -5,11 +5,254 @@
 
 
 <div class="page-layout blank textStyle">
-  <div class="content">
-    <mat-tab-group class="background">
+  <div class="content p-50">
+    <mat-tab-group class="background border-tab">
       <mat-tab label="PROFILE">
-        <div class="content p-24" *ngIf="showProfile" [@enter] [@leave]>
-          <div fxLayout="row" fxLayoutAlign="space-around center" fxLayout.xs="column">
+        <div class="content border-div" *ngIf="showProfile" [@enter] [@leave]>
+          <div fxLayout="row" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-around start"
+            class="p-24">
+            <!-- Left side block --->
+        
+            <div fxFlex="40" class="p-24" [ngClass.lg]="'border-right'" [ngClass.xl]="'border-right'">
+              <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center">
+                <!-- Profile block --->
+                <div fxFlex="40">
+                  <div fxLayout="column" fxLayoutAlign="space-around center">
+                    <div>
+                      <img class="user_pro_img"
+                        src="{{profileInfo?.image && profileInfo?.image[0] ? profileInfo?.image[0] :  'https://i.ibb.co/phhFBKX/profile.jpg'}}  "
+                        alt="image">
+        
+                    </div>
+                    <div>
+                      <button mat-button color="primary" (click)="onOptionSelected('Edit')" class="font-bold"
+                        [disabled]="this.profileInfo?.isverifiled">Edit
+                        profile <i *ngIf="this.profileInfo?.isverifiled" class="material-icons">lock</i></button>
+                    </div>
+                    <div>
+                      <button mat-button color="warn" [disabled]="this.profileInfo?.isverifiled" class="font-bold"
+                        (click)="onOptionSelected('delete')">Remove <i *ngIf="this.profileInfo?.isverifiled"
+                          class="material-icons">lock</i></button>
+                    </div>
+                  </div>
+        
+                </div>
+        
+                <!-- Profile Detail block --->
+                <div fxFlex="60">
+                  <div class="texth2" fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="10px">
+                    <div>
+                      <h1>{{profileInfo?.firstName | titlecase}} {{profileInfo?.lastName | titlecase}}</h1>
+        
+                    </div>
+                    <div><i class="material-icons yellow-text"
+                        *ngFor="let dummy of ' '.repeat(profileInfo?.rating.star).split(''), let x = index">star</i>
+                      <i class="material-icons yellow-text" *ngIf="profileInfo?.rating.star  % 1 !== 0">star_half</i>
+                      <span *ngIf="profileInfo?.rating.star === 0"></span><i class="material-icons"
+                        *ngFor="let dummy of ' '.repeat(5).split(''), let x = index">star</i>
+                    </div>
+                    <div>
+                      <h3 class="changeColor">{{profileInfo?.email}}</h3>
+                    </div>
+                    <div>
+                      <h3>+{{profileInfo?.countryCode}}{{profileInfo?.phone1}} | <img style="height: 21px;"
+                          [src]="(profileInfo?.gender === 'Female' || profileInfo?.gender ===  'female' )? '../../../../assets/images/avatars/female.png' : '../../../../assets/images/avatars/male.png'">
+                        {{profileInfo?.gender}}</h3>
+                    </div>
+                    <div>
+                      <h3 *ngIf="profileInfo?.dob != undefined "><span class="font-bold">Date of Birth:
+                        </span>{{profileInfo?.dob | date: 'mediumDate'}}</h3>
+                      <h3 *ngIf="profileInfo?.dob == undefined"><span class="font-bold">Date of Birth: </span> not available
+                      </h3>
+                    </div>
+                    <div>
+                      <h3><span class="font-bold">Client Since</span>{{profileInfo?.createdAt | date : 'mediumDate'}}</h3>
+                    </div>
+        
+                    <div *ngIf="profileInfo?.address == undefined || profileInfo?.address?.country == ''">
+                      <h3>No Address available</h3>
+                    </div>
+                    <div *ngIf="profileInfo?.address != undefined && profileInfo?.address?.country != ''">
+                      <h3>
+                        {{profileInfo?.address?.area | titlecase}} - {{profileInfo?.address?.street}}
+                      </h3>
+                      <h3 *ngIf="profileInfo?.address?.city || profileInfo?.address?.zip">
+                        {{profileInfo?.address?.city}},{{profileInfo?.address?.state}},{{profileInfo?.address?.country}} -
+                        {{profileInfo?.address?.zip}}
+                      </h3>
+                    </div>
+        
+                  </div>
+                </div>
+              </div>
+        
+              <div fxLayout="row" fxLayoutAlign="space-around start">
+                <fieldset style="border-color: #ffffff; width: 100%;font-size: 16px;">
+                  <legend style="border-color: #ebecee;color: grey;" align="left">Client Note</legend>
+                  <div>{{profileInfo?.notes?.text || 'No notes available'}} </div>
+                </fieldset>
+              </div>
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-around start">
+                <div fxFlex="60">
+                  <h3 class="font-bold">Family & Friends Sharing</h3>
+                  <button mat-raised-button [disabled]="this.profileInfo?.isverifiled" (click)="familyAndFriend()">Add Family
+                    and
+                    Friends <i *ngIf="this.profileInfo?.isverifiled" class="material-icons v-align-middle">lock</i></button>
+        
+        
+                </div>
+                <div fxFlex="40">
+                  <h3 class="font-bold">General Tags</h3>
+                  <button mat-raised-button [disabled]="this.profileInfo?.isverifiled"> Add Tags <i
+                      *ngIf="this.profileInfo?.isverifiled" class="material-icons v-align-middle">lock</i></button>
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start start">
+                <div>
+                  <p class="smallFont blurText">share memberships and packages with your family and friends. you
+                    can also book, pay and receive notifications on your family and friend's behalf. </p>
+                </div>
+              </div>
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="space-around start">
+                <div fxFlex="33">
+                  <h4 class="font-bold m-0">Temporary Login: </h4>
+                </div>
+                <div fxFlex="33" class="text-center" [ngClass.lg]="'border-right'" [ngClass.xl]="'border-right'">
+                  <h5 class="m-0"><i class="material-icons" style="vertical-align: middle;">person</i> usernamesample </h5>
+                </div>
+                <div fxFlex="33" class="text-center">
+                  <h5 class="m-0"><i class="material-icons" style="vertical-align: middle;">vpn_key</i> passwordsample</h5>
+        
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-around start">
+                <div fxFlex="50" class="text-center">
+                  <h3 class="font-bold changeColor">Point balance</h3>
+                  <h1 class="font-bold">15 pts</h1>
+                  <button mat-raised-button [disabled]="this.profileInfo?.isverifiled">Edit <i
+                      *ngIf="this.profileInfo?.isverifiled" class="material-icons">lock</i></button>
+                </div>
+                <div fxFlex="50" class="text-center">
+                  <h3 class=" changeColor font-bold">money</h3>
+                  <h1 class="font-bold">$ 75.76</h1>
+                </div>
+              </div>
+            </div>
+        
+            <!-- Right side block --->
+            <div fxFlex="60" class="p-24" style="width: 100%;">
+              <div fxFlex="100" fxLayout="column" fxLayoutAlign="space-around stretch" class="p-24" fxLayoutGap="10px">
+                <div>
+                  <div fxLayout="row" fxLayoutAlign="center stretch" fxLayout.xs="column">
+                    <div fxFlex="100" class="border-div m-0">
+                      <div fxLayout="column" fxLayoutAlign="space-evenly center" class="min-h-100">
+                        <div class="gridHeader">{{moment(profileInfo?.updatedAt).fromNow()}}</div>
+                        <div class="blurText">{{profileInfo?.updatedAt | date : 'mediumDate'}}</div>
+                        <div class="blurText">Last Visit</div>
+                      </div>
+                    </div>
+                    <div fxFlex="100" class="border-div m-0">
+                      <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
+                        <div class="gridHeader">{{clientDetails?.totalSales}}</div>
+                        <div class="blurText">Sales</div>
+                      </div>
+                    </div>
+                    <div fxFlex="100" class="border-div m-0">
+                      <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
+                        <div class="gridHeader">
+                          15 pts.
+                        </div>
+                        <div class="blurText">
+                          Localty Points
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="center stretch" fxLayout.xs="column">
+                      <div fxFlex="100" class="border-div m-0">
+                        <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
+                          <div class="gridHeader">
+                            {{clientDetails?.allBookings}}
+                          </div>
+                          <div class="blurText">
+                            Appointments
+                          </div>
+                        </div>
+                      </div>
+          
+                      <div fxFlex="100" class="border-div m-0">
+                        <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
+                          <div class="gridHeader">{{clientDetails?.noShow}}</div>
+                          <div class="blurText">No Show</div>
+                        </div>
+                      </div>
+                      <div fxFlex="100" class="border-div m-0">
+                        <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
+                          <div class="gridHeader">{{clientDetails?.cancelled}}</div>
+                          <div class="blurText">Cancellations</div>
+                        </div>
+                      </div>
+          
+                  </div>
+                </div>
+                <div class="border-tab">
+                  <mat-tab-group mat-align-tabs="start">
+                    <mat-tab label="Tarnsaction History">
+                      <table matSort (matSortChange)="sortData($event)" class="transaction-table">
+                        <thead>
+                        <tr>
+                          <th mat-sort-header="date">Date</th>
+                          <th mat-sort-header="name">Name</th>
+                          <th mat-sort-header="type">Type</th>
+                          <th mat-sort-header="serveBy">Serve by</th>
+                          <th mat-sort-header="price">Price</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let dessert of sortedtransactionHisroty">
+                          <td>{{dessert.date}}</td>
+                          <td>{{dessert.name}}</td>
+                          <td>{{dessert.type}}</td>
+                          <td>{{dessert.serveBy}}</td>
+                          <td>{{dessert.price}}</td>
+                          <td><i class="material-icons">content_copy</i></td>
+                        </tr>
+                      </tbody>
+                      </table>
+                      </mat-tab>
+                      <mat-tab label="Treatment Notes">
+                        <table matSort (matSortChange)="sortTreatmentData($event)" class="treatment-table">
+                          <thead>
+                            <tr>
+                              <th mat-sort-header="date" style="width: 20%">Date</th>
+                              <th mat-sort-header="noteBy" style="width: 10%">Note by</th>
+                              <th mat-sort-header="item" style="width: 20%">Item</th>
+                              <th mat-sort-header="decription" style="width: 30%">Description</th>
+                              <th mat-sort-header="soapNote" style="width: 20%">SOAP Note</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let dessert of sortedtreamentNotes">
+                              <td>{{dessert.date}}</td>
+                              <td>{{dessert.noteBy}}</td>
+                              <td>{{dessert.item}}</td>
+                              <td>${{dessert.decription}}</td>
+                              <td>${{dessert.soapNote}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </mat-tab>
+        
+                  </mat-tab-group>
+        
+                </div>
+              </div>
+        
+            </div>
+        
+          </div>
+          <!-- <div fxLayout="row" fxLayoutAlign="space-around center" fxLayout.xs="column" class="p-24">
             <div fxFlex="50" fxLayout.xs="row">
               <div class="Profile-card" fxLayout="row" fxLayoutAlign="space-around center">
                 <div fxFlex="40">
@@ -32,8 +275,8 @@
                   <div class="texth2" fxLayout="column" fxLayoutAlign="space-around start">
                     <div>
                       <h1>{{profileInfo?.firstName | titlecase}} {{profileInfo?.lastName | titlecase}}</h1>
-                      <h3 *ngIf="profileInfo.dob != undefined ">Birthday {{profileInfo?.dob | date: 'mediumDate'}}</h3>
-                      <h3 *ngIf="profileInfo.dob == undefined">Birthday date not available</h3>
+                      <h3 *ngIf="profileInfo?.dob != undefined ">Birthday {{profileInfo?.dob | date: 'mediumDate'}}</h3>
+                      <h3 *ngIf="profileInfo?.dob == undefined">Birthday date not available</h3>
                     </div>
                     <br />
                     <div>
@@ -42,11 +285,11 @@
                       <h3>Cell: +{{profileInfo?.countryCode}}{{profileInfo?.phone1}}</h3>
                     </div>
                     <br />
-                    <div *ngIf="profileInfo.address == undefined || profileInfo.address.country == ''">
+                    <div *ngIf="profileInfo?.address == undefined || profileInfo?.address?.country == ''">
                       <h2>Address</h2><br>
                       <h3>No Address available</h3>
                     </div>
-                    <div *ngIf="profileInfo.address != undefined && profileInfo.address.country != ''">
+                    <div *ngIf="profileInfo?.address != undefined && profileInfo?.address?.country != ''">
                       <h2>Address</h2>
                       <h3>
                         {{profileInfo?.address?.area | titlecase}},{{profileInfo?.address?.street}},({{profileInfo?.address?.zip}})
@@ -80,10 +323,10 @@
                   </mat-form-field>
                 </div>
               </div>
-              </div>
+              </div> -->
 
               <!-- add family and friends !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! --> 
-              <div fxLayout="row" fxLayoutAlign="space-around center">
+              <!-- <div fxLayout="row" fxLayoutAlign="space-around center">
                   <div fxFlex="50">
                     <div fxLayout="column" fxLayoutAlign="space-around start">
                       <div class="">
@@ -158,10 +401,10 @@
                       </div>
                     </div>
                   </div>
-              </div>
+              </div> -->
             
 
-              <div fxLayout="row" fxLayoutAlign="start start">
+              <!-- <div fxLayout="row" fxLayoutAlign="start start">
                 <div class="styleBox1" fxFlex="20" *ngIf="friendsList.length"
                 fxLayout.xs="row">
                 <div>
@@ -193,7 +436,7 @@
                   </div>
                 </div>
               </div>
-              </div>
+              </div> -->
           <!-- </div> -->
         </div>
 

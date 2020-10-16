@@ -299,19 +299,19 @@ export class SoapComponent implements OnInit, AfterViewInit {
       plan : [''],
       body : ['']
     })
-   }
-  ngAfterViewInit(): void {
-    this.newCoordinates = this.coordinates.map(element=>({...element, description: '', pain : ''}))
-    console.log(this.newCoordinates);
-    this.getClientData()
-    throw new Error("Method not implemented.");
-   
   }
+
 
   ngOnInit() {
-  // this.getClientData();
+    // this.getClientData();
+    this.newCoordinates = this.coordinates.map(element => ({ ...element, description: '', pain: '' }))
+    console.log(this.newCoordinates);
   }
-
+  ngAfterViewInit(): void {
+    this.getClientData()
+    // throw new Error("Method not implemented.");
+   
+  }
   getClientData(){
     this.service.get(`${CLIENT}/${this.clientId}`).subscribe(res => {
       console.log(res);

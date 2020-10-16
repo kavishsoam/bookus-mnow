@@ -54,7 +54,7 @@ h2 {
 .right {
     padding: 35px;
     height: 79vh;
-    
+
 
     @include media-breakpoint-down('xs') {
         height: 100%
@@ -149,27 +149,93 @@ h2 {
     height: 40px;
     overflow: hidden;
     position: relative;
-  }
-  .file-input-wrapper > input[type="file"] {
+}
+
+.file-input-wrapper>input[type="file"] {
     font-size: 200px;
     position: absolute;
     top: 0;
     right: 0;
     opacity: 0;
-  }
-  .file-input-wrapper > .btn-file-input {
+}
+
+.file-input-wrapper>.btn-file-input {
     display: inline-block;
     // width: 200px;
     // height: 40px;
     // color: lightblue;
     // background-color: lightpink;
-  }
-  .file-input-wrapper:hover > .btn-file-input {
-    // background-color: green;
-  }
+}
 
-  .imageStytle {
+.file-input-wrapper:hover>.btn-file-input {
+    // background-color: green;
+}
+
+.imageStytle {
     height: 130px;
     width: 150px;
     border-radius: 8px;
-  }
+}
+
+
+.head-img {
+    position: relative;
+    display: block;
+    width: 280px;
+    height: 200px;
+    border: 1px dashed #0770b7;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: center;
+}
+
+.head-input {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 100px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+::ng-deep .head-img img {
+    margin-top: 0 !important;
+}
+
+.dummu-image {
+    min-height: 250px;
+    margin: auto;
+}
+
+.select-photo {
+    font-size: 18px;
+    color: #3097d0;
+}
+
+.fa-camera {
+    color: #3097d0;
+    margin: 65px 0 5px;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.mb-2 {
+    margin: 20px 0;
+}
+
+image-cropper {
+    text-align: center !important;
+}
+
+mat-slider {
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}

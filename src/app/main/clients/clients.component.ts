@@ -1,3 +1,4 @@
+import { base64ToFile, Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
 import { Component, QueryList, ElementRef, ViewChildren, OnInit, AfterViewChecked, Renderer2, Inject, ChangeDetectorRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatPaginator, MatSort } from '@angular/material';
@@ -16,7 +17,9 @@ import { ApiService } from 'app/services/api.service';
 import { ExportService } from 'app/services/export.service';
 import { FamilyandfriendComponent } from './familyandfriend/familyandfriend.component';
 import { Translator } from 'app/services/translator';
+import { ImportClientsComponent } from './import-clients/import-clients.components';
 
+declare var $: any;
 interface Pokemon {
   value: string;
   viewValue: string;
@@ -135,8 +138,8 @@ export class ClientsComponent implements OnInit, AfterViewInit {
     }
   ];
   intakeList: any;
-  clientListColumn: string[] = ['profile','firstName', 'phone1', 'email',
-    'gender', 'clientIntakeForm'];
+  clientListColumn: string[] = ['firstName', 'phone1', 'email',
+    'gender', 'intake', 'soapCount'];
   dataSource = new MatTableDataSource(this.clientList);
   constructor(private _fuseConfigService: FuseConfigService,
     public router: Router,
@@ -193,6 +196,16 @@ export class ClientsComponent implements OnInit, AfterViewInit {
           this.getAllClients();
         }
       }
+    });
+  }
+  importClientPopup(intakedata): void {
+    const dialogRef = this.dialog.open(ImportClientsComponent, {
+      disableClose: false,
+      width: '60%',
+      autoFocus: false,
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
     });
   }
   intakeFormLists(id) {
@@ -270,7 +283,16 @@ export class AddNewClient implements OnInit, AfterViewChecked {
   message: string;
   imagePath: any;
   maxDate : any = new Date();
-  imgURL: string | ArrayBuffer;
+  // imgURL: string | ArrayBuffer;
+
+  public file;
+  public imgURL;
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  scale = 1;
+  showCropper = false;
+  transform: ImageTransform = {};
+
   constructor(
     public dialogRef: MatDialogRef<AddNewClient>,
     private cdRef: ChangeDetectorRef,
@@ -563,6 +585,7 @@ export class AddNewClient implements OnInit, AfterViewChecked {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+
   updateClient(data) {
     this._service.put(`${CLIENT}/${this._id}`, data).subscribe(res => {
       this._toast.add({ severity: 'success', summary: 'Service Message', detail: res.message });
@@ -587,6 +610,51 @@ export class AddNewClient implements OnInit, AfterViewChecked {
     if (!e) this.clientRegisterForm.controls.phone1.setErrors({ 'invalid': true });
     else this.clientRegisterForm.controls.phone1.setErrors(null);
     // when it return fasle => thats mean it has error.
+  }
+
+
+  changeImage(event) {
+    this.file = event.target.files[0];
+    console.log("file--", this.file);
+    // this.preview(event.target.files);
+    this.imageChangedEvent = event;
+  }
+
+  scaleZoom(input) {
+
+    this.scale = input.value;
+    this.transform = {
+      ...this.transform,
+      scale: this.scale
+    };
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+    this.file = new File([base64ToFile(event.base64)], this.file.name, { type: this.file.type });
+    console.log("file-------", this.file);
+  }
+
+  imageLoaded() {
+    this.showCropper = true;
+    console.log('Image loaded');
+  }
+
+  cropperReady(sourceImageDimensions: Dimensions) {
+    console.log('Cropper ready', sourceImageDimensions);
+  }
+
+  loadImageFailed() {
+    console.log('Load failed');
+  }
+
+  deletePhoto() {
+    this.imgURL = null;
+    this.imageChangedEvent = undefined;
+  }
+
+  upProfile() {
+    console.log(this.file);
   }
 }
 @Component({

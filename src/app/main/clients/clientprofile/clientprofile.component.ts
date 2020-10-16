@@ -13,6 +13,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
   MatTableDataSource,
+  Sort,
 } from "@angular/material";
 import { FuseConfigService } from "@fuse/services/config.service";
 import { AddNewClient, ClientIntakeForm } from "../clients.component";
@@ -92,6 +93,26 @@ export class ClientprofileComponent implements OnInit {
   staffDrop = new FormControl();
   serviceDrop = new FormControl();
   statusDrop = new FormControl();
+  moment = moment;
+
+  transactionHisroty = [
+    { date: '12 Feb - 6:00 PM', name: 'Relaxation Massage', type: 'Service', serveBy: 'Eilyn', price: 100 },
+    { date: '12 Feb - 6:00 PM', name: 'Massage Oil', type: 'Equipment', serveBy: 'Eilyn', price: 100 },
+    { date: '12 Feb - 6:00 PM', name: 'Relaxation Massage', type: 'Service', serveBy: 'Eilyn', price: 100 },
+    { date: '12 Feb - 6:00 PM', name: 'Relaxation Massage', type: 'Service', serveBy: 'Eilyn', price: 100 },
+    { date: '12 Feb - 6:00 PM', name: 'Massage Oil', type: 'Equipment', serveBy: 'Eilyn', price: 100 },
+    { date: '12 Feb - 6:00 PM', name: 'Massage Towel', type: 'Equipment', serveBy: 'Eilyn', price: 100 },
+    { date: '12 Feb - 6:00 PM', name: 'Relaxation Massage', type: 'Completed', serveBy: 'Eilyn', price: 100 },
+  ];
+
+  treamentNotes = [
+    { date: '12 Feb - 6:00 PM', noteBy: 'Mark', item: 'Deep Tissue Massage', decription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', soapNote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry' },
+    { date: '12 Feb - 6:00 PM', noteBy: 'Eilynnn', item: 'Deep Tissue Massage', decription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', soapNote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry' },
+    { date: '12 Feb - 6:00 PM', noteBy: 'Wendy', item: 'Deep Tissue Massage', decription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', soapNote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry' },
+    { date: '12 Feb - 6:00 PM', noteBy: 'Jacob', item: 'Remedial', decription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', soapNote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry' },
+  ];
+  sortedtransactionHisroty: any;
+  sortedtreamentNotes: any;
   toggleAnimate() {
     this.animate = !this.animate;
   }
@@ -320,6 +341,10 @@ export class ClientprofileComponent implements OnInit {
     this.getAllStaffLoc(locationId);
     this.getAppointmentByStatus();
     this.getAllStaffList();
+
+
+    this.sortedtransactionHisroty = this.transactionHisroty.slice();
+    this.sortedtreamentNotes = this.treamentNotes.slice();
   }
 
   getAppointmentByStatus() {
@@ -458,6 +483,9 @@ export class ClientprofileComponent implements OnInit {
   getOneClient() {
     this._service.get(`${CLIENT}/${this.id}`).subscribe((res) => {
       this.profileInfo = res[0];
+
+      // set verifiled user
+      this.profileInfo.isverifiled = this.profileInfo.firstName === "naina";
       this.setClientFormData();
       this.getAllFriendsList();
       let clone = _.cloneDeep(res);
@@ -647,4 +675,46 @@ export class ClientprofileComponent implements OnInit {
       this.imgURL = reader.result;
     };
   }
+  sortData(sort: Sort) {
+    const data = this.transactionHisroty.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedtransactionHisroty = data;
+      return;
+    }
+
+    this.sortedtransactionHisroty = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'date': return compare(a.date, b.date, isAsc);
+        case 'name': return compare(a.name, b.name, isAsc);
+        case 'type': return compare(a.type, b.type, isAsc);
+        case 'serveBy': return compare(a.serveBy, b.serveBy, isAsc);
+        case 'price': return compare(a.price, b.price, isAsc);
+        default: return 0;
+      }
+    });
+  }
+  sortTreatmentData(sort: Sort) {
+    const data = this.treamentNotes.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedtreamentNotes = data;
+      return;
+    }
+
+    this.sortedtreamentNotes = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'date': return compare(a.date, b.date, isAsc);
+        case 'noteBy': return compare(a.noteBy, b.noteBy, isAsc);
+        case 'item': return compare(a.item, b.item, isAsc);
+        case 'decription': return compare(a.decription, b.decription, isAsc);
+        case 'soapNote': return compare(a.soapNote, b.soapNote, isAsc);
+        default: return 0;
+      }
+    });
+  }
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

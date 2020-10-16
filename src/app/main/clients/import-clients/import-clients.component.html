@@ -1,0 +1,40 @@
+<p-toast></p-toast>
+<h2 mat-dialog-title align="center" class="font-bold">Import Clients To Bookups</h2>
+
+<mat-dialog-content>
+  <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="30px">
+    <div fxFlex="30" class="border-right p-10">
+      <div fxLayout="row" fxLayoutAlign="center center" class="img-div">
+        <img src="../../../../assets/images/default-image.jpg" />
+      </div>
+
+    </div>
+    <div fxFlex="70" fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="50px">
+      <div> Follow the simple instructions bellow to import client to Fresh partner account </div>
+      <div>
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="30px">
+          <div><span class="border-number">1</span></div>
+          <div> Download Your import spredsheet using the button bellow</div>
+        </div>
+
+      </div>
+      <div>
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="30px">
+          <div><span class="border-number">2</span></div>
+          <div>Copy and peast your cllient details in your spredsheet</div>
+        </div>
+
+      </div>
+      <div>
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="30px">
+          <div><span class="border-number">3</span></div>
+          <div>Email it back to us on simpleemail.com and we'll add the clinet in your
+            account!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Download Import File</button>
+</div>
