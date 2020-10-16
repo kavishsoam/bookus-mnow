@@ -9,6 +9,8 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
 import { SharedModule } from "primeng/components/common/shared";
 import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 import { FuseSharedModule } from '@fuse/shared.module';
+import { ImageCropperModule } from "ngx-image-cropper";
+import { MatSliderModule } from "@angular/material";
 
 @NgModule({
     imports : [
@@ -19,7 +21,9 @@ import { FuseSharedModule } from '@fuse/shared.module';
         Ng2TelInputModule,
         FuseProgressBarModule,
         FuseSidebarModule,
-        FuseSharedModule
+        FuseSharedModule,
+        ImageCropperModule,
+        MatSliderModule
         
     ],
     declarations : [

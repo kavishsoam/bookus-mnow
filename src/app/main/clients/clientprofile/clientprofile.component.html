@@ -14,13 +14,13 @@
             <!-- Left side block --->
         
             <div fxFlex="40" class="p-24" [ngClass.lg]="'border-right'" [ngClass.xl]="'border-right'">
-              <div fxLayout="row" fxLayoutAlign="space-around start">
+              <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center">
                 <!-- Profile block --->
                 <div fxFlex="40">
                   <div fxLayout="column" fxLayoutAlign="space-around center">
                     <div>
                       <img class="user_pro_img"
-                        src="{{profileInfo?.image[0] ? profileInfo?.image[0] :  'https://i.ibb.co/phhFBKX/profile.jpg'}}  "
+                        src="{{profileInfo?.image && profileInfo?.image[0] ? profileInfo?.image[0] :  'https://i.ibb.co/phhFBKX/profile.jpg'}}  "
                         alt="image">
         
                     </div>
@@ -140,26 +140,25 @@
             </div>
         
             <!-- Right side block --->
-            <div fxFlex="60" class="p-24">
-              <div fxLayout="column" fxLayoutAlign="space-between stretch" class="p-24" fxLayoutGap="20px">
+            <div fxFlex="60" class="p-24" style="width: 100%;">
+              <div fxFlex="100" fxLayout="column" fxLayoutAlign="space-around stretch" class="p-24" fxLayoutGap="10px">
                 <div>
-        
-                  <mat-grid-list cols="3" rowHeight="2:1">
-                    <mat-grid-tile>
-                      <div fxLayout="column" fxLayoutAlign="space-evenly center">
+                  <div fxLayout="row" fxLayoutAlign="center stretch" fxLayout.xs="column">
+                    <div fxFlex="100" class="border-div m-0">
+                      <div fxLayout="column" fxLayoutAlign="space-evenly center" class="min-h-100">
                         <div class="gridHeader">{{moment(profileInfo?.updatedAt).fromNow()}}</div>
                         <div class="blurText">{{profileInfo?.updatedAt | date : 'mediumDate'}}</div>
                         <div class="blurText">Last Visit</div>
                       </div>
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                      <div fxLayout="column" fxLayoutAlign="space-around center">
+                    </div>
+                    <div fxFlex="100" class="border-div m-0">
+                      <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
                         <div class="gridHeader">{{clientDetails?.totalSales}}</div>
                         <div class="blurText">Sales</div>
                       </div>
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                      <div fxLayout="column" fxLayoutAlign="space-around center">
+                    </div>
+                    <div fxFlex="100" class="border-div m-0">
+                      <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
                         <div class="gridHeader">
                           15 pts.
                         </div>
@@ -167,37 +166,40 @@
                           Localty Points
                         </div>
                       </div>
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                      <div fxLayout="column" fxLayoutAlign="space-around center">
-                        <div class="gridHeader">
-                          {{clientDetails?.allBookings}}
+                    </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="center stretch" fxLayout.xs="column">
+                      <div fxFlex="100" class="border-div m-0">
+                        <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
+                          <div class="gridHeader">
+                            {{clientDetails?.allBookings}}
+                          </div>
+                          <div class="blurText">
+                            Appointments
+                          </div>
                         </div>
-                        <div class="blurText">
-                          Appointments
+                      </div>
+          
+                      <div fxFlex="100" class="border-div m-0">
+                        <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
+                          <div class="gridHeader">{{clientDetails?.noShow}}</div>
+                          <div class="blurText">No Show</div>
                         </div>
                       </div>
-                    </mat-grid-tile>
-        
-                    <mat-grid-tile>
-                      <div fxLayout="column" fxLayoutAlign="space-around center">
-                        <div class="gridHeader">{{clientDetails?.noShow}}</div>
-                        <div class="blurText">No Show</div>
+                      <div fxFlex="100" class="border-div m-0">
+                        <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
+                          <div class="gridHeader">{{clientDetails?.cancelled}}</div>
+                          <div class="blurText">Cancellations</div>
+                        </div>
                       </div>
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                      <div fxLayout="column" fxLayoutAlign="space-around center">
-                        <div class="gridHeader">{{clientDetails?.cancelled}}</div>
-                        <div class="blurText">Cancellations</div>
-                      </div>
-                    </mat-grid-tile>
-                  </mat-grid-list>
-        
+          
+                  </div>
                 </div>
                 <div class="border-tab">
                   <mat-tab-group mat-align-tabs="start">
-                    <mat-tab label="Treatment History">
+                    <mat-tab label="Tarnsaction History">
                       <table matSort (matSortChange)="sortData($event)" class="transaction-table">
+                        <thead>
                         <tr>
                           <th mat-sort-header="date">Date</th>
                           <th mat-sort-header="name">Name</th>
@@ -206,18 +208,41 @@
                           <th mat-sort-header="price">Price</th>
                           <th></th>
                         </tr>
-        
+                      </thead>
+                      <tbody>
                         <tr *ngFor="let dessert of sortedtransactionHisroty">
                           <td>{{dessert.date}}</td>
                           <td>{{dessert.name}}</td>
                           <td>{{dessert.type}}</td>
                           <td>{{dessert.serveBy}}</td>
-                          <td>${{dessert.price}}</td>
+                          <td>{{dessert.price}}</td>
                           <td><i class="material-icons">content_copy</i></td>
                         </tr>
+                      </tbody>
                       </table>
-                    </mat-tab>
-                    <mat-tab label="Treatment Notes">Content 2</mat-tab>
+                      </mat-tab>
+                      <mat-tab label="Treatment Notes">
+                        <table matSort (matSortChange)="sortTreatmentData($event)" class="treatment-table">
+                          <thead>
+                            <tr>
+                              <th mat-sort-header="date" style="width: 20%">Date</th>
+                              <th mat-sort-header="noteBy" style="width: 10%">Note by</th>
+                              <th mat-sort-header="item" style="width: 20%">Item</th>
+                              <th mat-sort-header="decription" style="width: 30%">Description</th>
+                              <th mat-sort-header="soapNote" style="width: 20%">SOAP Note</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let dessert of sortedtreamentNotes">
+                              <td>{{dessert.date}}</td>
+                              <td>{{dessert.noteBy}}</td>
+                              <td>{{dessert.item}}</td>
+                              <td>${{dessert.decription}}</td>
+                              <td>${{dessert.soapNote}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </mat-tab>
         
                   </mat-tab-group>
         

@@ -524,7 +524,12 @@ mat-tab-group {
     vertical-align: middle;
 }
 
-.transaction-table {
+.min-h-100{
+    min-height: 100px;
+}
+
+.transaction-table,
+.treatment-table {
     font-family: Sarabun !important;
     width: 100%;
     font-size: 14px;
@@ -559,7 +564,8 @@ mat-tab-group {
     }
 
 
-    .transaction-table {
+    .transaction-table,
+    .treatment-table {
 
         /* Hide table headers (but not display: none;, for accessibility) */
         thead tr {
@@ -598,6 +604,9 @@ mat-tab-group {
         .text-center {
             text-align: left;
         }
+    }
+
+    .transaction-table {
 
         /*
 	Label the data
@@ -626,6 +635,34 @@ mat-tab-group {
         td:nth-of-type(6):before {
             content: "";
         }
+    }
+
+    .treatment-table {
+
+        /*
+	Label the data
+    */
+        td:nth-of-type(1):before {
+            content: 'Date';
+            ;
+        }
+
+        td:nth-of-type(2):before {
+            content: "Note by";
+        }
+
+        td:nth-of-type(3):before {
+            content: "Item";
+        }
+
+        td:nth-of-type(4):before {
+            content: "Description";
+        }
+
+        td:nth-of-type(5):before {
+            content: "SOAP Note";
+        }
+
     }
 
 }

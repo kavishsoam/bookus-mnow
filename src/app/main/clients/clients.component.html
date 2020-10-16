@@ -95,10 +95,10 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Name' | translate}}</th>
             <td mat-cell *matCellDef="let element">
               <div fxLayout="row" fxLayoutAlign="start center">
-                <div *ngIf="element.image.length">
+                <div *ngIf="element?.image?.length">
                   <img class="row-img" style="margin-right: 8px;" src="{{element?.image[0]}}">
                 </div>
-                <div *ngIf="!element.image.length">
+                <div *ngIf="!element?.image?.length">
                   <avatar [name]="element?.firstName" [size]="50" background="#8c92a0" [displayType]="'circle'"></avatar>
                 </div>
                 <div>{{element.firstName}} </div>

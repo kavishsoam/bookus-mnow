@@ -104,7 +104,15 @@ export class ClientprofileComponent implements OnInit {
     { date: '12 Feb - 6:00 PM', name: 'Massage Towel', type: 'Equipment', serveBy: 'Eilyn', price: 100 },
     { date: '12 Feb - 6:00 PM', name: 'Relaxation Massage', type: 'Completed', serveBy: 'Eilyn', price: 100 },
   ];
+
+  treamentNotes = [
+    { date: '12 Feb - 6:00 PM', noteBy: 'Mark', item: 'Deep Tissue Massage', decription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', soapNote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry' },
+    { date: '12 Feb - 6:00 PM', noteBy: 'Eilynnn', item: 'Deep Tissue Massage', decription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', soapNote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry' },
+    { date: '12 Feb - 6:00 PM', noteBy: 'Wendy', item: 'Deep Tissue Massage', decription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', soapNote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry' },
+    { date: '12 Feb - 6:00 PM', noteBy: 'Jacob', item: 'Remedial', decription: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', soapNote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry' },
+  ];
   sortedtransactionHisroty: any;
+  sortedtreamentNotes: any;
   toggleAnimate() {
     this.animate = !this.animate;
   }
@@ -336,6 +344,7 @@ export class ClientprofileComponent implements OnInit {
 
 
     this.sortedtransactionHisroty = this.transactionHisroty.slice();
+    this.sortedtreamentNotes = this.treamentNotes.slice();
   }
 
   getAppointmentByStatus() {
@@ -681,6 +690,25 @@ export class ClientprofileComponent implements OnInit {
         case 'type': return compare(a.type, b.type, isAsc);
         case 'serveBy': return compare(a.serveBy, b.serveBy, isAsc);
         case 'price': return compare(a.price, b.price, isAsc);
+        default: return 0;
+      }
+    });
+  }
+  sortTreatmentData(sort: Sort) {
+    const data = this.treamentNotes.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedtreamentNotes = data;
+      return;
+    }
+
+    this.sortedtreamentNotes = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'date': return compare(a.date, b.date, isAsc);
+        case 'noteBy': return compare(a.noteBy, b.noteBy, isAsc);
+        case 'item': return compare(a.item, b.item, isAsc);
+        case 'decription': return compare(a.decription, b.decription, isAsc);
+        case 'soapNote': return compare(a.soapNote, b.soapNote, isAsc);
         default: return 0;
       }
     });
