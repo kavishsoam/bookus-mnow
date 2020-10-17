@@ -4,28 +4,33 @@
     font-size: 16px;
     font-weight: 500;
     text-align: center;
+    padding: 10px;
 }
 
 /* Ripple effect */
 .rippleWorld {
     background-position: center;
     transition: background 0.8s;
-  }
-  .rippleWorld:hover {
+    border: 1px solid #aaa;
+    border-radius: 12px;
+}
+
+.rippleWorld:hover {
     background: white radial-gradient(circle, transparent 1%, white 1%) center/15000%;
-  }
-  .rippleWorld:active {
+}
+
+.rippleWorld:active {
     background-color: rgb(235, 229, 229);
     background-size: 100%;
     transition: background 0s;
-  }
+}
 
 .textwrap {
     width: 50px !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    
+
     // padding: 40px !important;
     // font-size: 1.3rem !important;
     // margin: 0 !important;
@@ -33,14 +38,14 @@
 }
 
 ::ng-deep .mat-tooltip {
-  font-size: 15px !important;
-  color: black !important;
-  background-color: rgb(170, 169, 169) !important;
+    font-size: 15px !important;
+    color: black !important;
+    background-color: rgb(170, 169, 169) !important;
 }
 
 .iconClass {
-  width: 10%;
-  height: 10%;
+    width: 10%;
+    height: 10%;
 }
 
 .newapp {
@@ -48,6 +53,7 @@
     margin: 0px 0px 25px 0px;
     padding: 24px 16px;
 }
+
 .search {
     font-size: 68px;
     height: 68px;
@@ -55,14 +61,22 @@
     margin-bottom: -16px;
     color: #67768C;
 }
+
 .check-out-button {
     background-color: #24334A !important;
     color: white !important;
     text-transform: uppercase;
 }
+
 .buttonAlign {
     position: absolute;
     bottom: 0;
+    width: 28vw;
+    padding-bottom: 20px;
+}
+.divAlign {
+    position: absolute;
+    bottom: 40pc;
     width: 28vw;
     padding-bottom: 20px;
 }
@@ -76,6 +90,7 @@
     padding: 5px 10px 10px 10px;
     margin-top: 5px
 }
+
 .header-data {
     color: #67768C;
     font-size: 14px;
@@ -83,6 +98,7 @@
     padding: 0px 10px 10px 10px;
     margin-bottom: 20px;
 }
+
 .heading2 {
     word-wrap: break-word;
     max-width: 100%;
@@ -96,6 +112,7 @@
     text-align: initial;
     white-space: pre-wrap
 }
+
 .contentdata {
     word-wrap: break-word;
     max-width: 100%;
@@ -106,6 +123,7 @@
     padding: 16px 16px 10px 16px;
     text-align: initial;
 }
+
 .noShow {
     padding-left: 16px;
     font-size: 18px;
@@ -129,15 +147,18 @@ h2 {
     font-family: Sarabun, sans-serif;
     -webkit-font-smoothing: antialiased;
 }
+
 .option {
     height: 5em !important;
     border-top: solid 0.5px #DEE3E7;
     border-bottom: solid 0.5px #DEE3E7;
 }
+
 .innerbody {
     border-bottom: 1px solid #dee3e6;
     border-top: 1px solid #dee3e6;
 }
+
 .buttons {
     margin-top: 20px;
 }
@@ -154,9 +175,11 @@ h2 {
 ::ng-deep .mat-card {
     margin-top: 20px;
 }
+
 ::ng-deep .mat-tab-body {
     min-height: 100%;
 }
+
 .online-booking-header {
     font-size: 15px;
 }
@@ -168,6 +191,7 @@ h2 {
     right: 10px;
     width: 98%;
 }
+
 .right {
     max-width: 450px;
     margin: 0 auto;
@@ -180,6 +204,7 @@ h2 {
     color: #67768C;
     font-size: 14px;
 }
+
 .line {
     text-decoration: line-through;
     color: #67768C;
@@ -201,35 +226,43 @@ a {
     padding: 16px 0 !important;
     text-align: center !important;
 }
+
 .newclient {
     border-top: 1px solid #EEF0F2 !important;
     border-bottom: 1px solid #EEF0F2 !important;
 }
+
 .clientList {
     height: 100%;
     overflow-y: scroll;
     list-style: none;
 }
+
 .client {
     padding-left: 20px;
 }
+
 .intakeFormClosed {
     pointer-events: none;
     cursor: default;
     color: grey !important;
 }
+
 ::ng-deep .mat-list .mat-list-item .mat-list-item-content:hover {
     cursor: pointer;
     background-color: none !important;
 }
+
 .saveButton {
     background-color: #24334A !important;
     color: white !important;
 }
+
 .deleteButton {
     background-color: #F74969 !important;
     color: white !important;
 }
+
 .heading {
     word-wrap: break-word;
     max-width: 100%;
@@ -243,6 +276,7 @@ a {
     text-align: initial;
     white-space: pre-wrap
 }
+
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-prefix {
     margin: 0 8px 0 4px;
 }
@@ -260,6 +294,7 @@ a {
     justify-content: flex-start;
     background-color: cream;
 }
+
 .v-stepper {
     position: relative;
     /*   visibility: visible; */
@@ -274,6 +309,7 @@ a {
     height: 25px;
     display: inline-block;
 }
+
 .step .line {
     top: 23px;
     left: 10px;
@@ -281,21 +317,26 @@ a {
     position: absolute;
     border-left: 3px solid gray;
 }
+
 .step.completed .circle {
     visibility: visible;
     background-color: rgb(6, 150, 215);
     border-color: rgb(6, 150, 215);
 }
+
 .step.completed .line {
     border-left: 3px solid rgb(6, 150, 215);
 }
+
 .step.active .circle {
     visibility: visible;
     border-color: rgb(6, 150, 215);
 }
+
 .step.empty .circle {
     visibility: hidden;
 }
+
 .step.empty .line {
     /*     visibility: hidden; */
     /*   height: 150%; */
@@ -308,31 +349,37 @@ a {
     z-index: -1;
     /* behind the circle to completely hide */
 }
+
 .content {
     width: 100%;
     margin-left: 20px;
     display: inline-block;
 }
+
 .app_no {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 16px
 }
+
 .pay-design {
     color: #67768c;
     font-size: 12px;
 }
+
 .price-display {
     border: 1px solid #DEE3E7;
     border-radius: 2px;
     height: 60px;
 }
+
 .price-design {
     font-size: 20px;
     color: #24334A;
     line-height: 33px;
 }
+
 .box-size {
     border-radius: 3px;
     height: 60px;
@@ -340,18 +387,22 @@ a {
     background-color: #24334A;
     color: white;
 }
+
 .backpay:hover {
     color: blue;
 }
+
 .hand {
     cursor: pointer;
 }
+
 .amountInput {
     text-align: left;
     text-align: initial;
     padding: 14px 0 !important;
     margin-left: 8px;
 }
+
 .symbol {
     position: static;
     left: auto;
@@ -364,10 +415,12 @@ a {
     /* width: auto; */
     padding: 0;
 }
+
 .invoiceContent1 {
     color: #67768C;
     font-size: 14px;
 }
+
 .invoiceContent2 {
     color: #24334A;
     font-size: 14px;
@@ -377,7 +430,7 @@ a {
     // text-align: right
 }
 
-.modifysize{
+.modifysize {
     width: 49px;
     height: 49px;
     font-size: 51px;
@@ -386,12 +439,12 @@ a {
 
 .email-select {
     font-size: 14px;
-color: #67768C;
+    color: #67768C;
 }
 
 .phone-select {
     font-size: 16px;
-color: #67768C;
+    color: #67768C;
 }
 
 .error-handle {
@@ -399,7 +452,7 @@ color: #67768C;
     font-size: 14px;
     text-align: center;
 }
-.block-pay{
-    cursor:not-allowed;
-}
 
+.block-pay {
+    cursor: not-allowed;
+}
