@@ -138,7 +138,7 @@ export class ClientsComponent implements OnInit, AfterViewInit {
     }
   ];
   intakeList: any;
-  clientListColumn: string[] = ['firstName', 'phone1', 'email',
+  clientListColumn: string[] = ['profile','firstName', 'phone1', 'email',
     'gender', 'intake', 'soapCount'];
   dataSource = new MatTableDataSource(this.clientList);
   constructor(private _fuseConfigService: FuseConfigService,
