@@ -1,7 +1,7 @@
 <div *ngIf="isView">
   <div fxLayout="row" fxLayoutAlign="center center" class="form rippleWorld" [ngClass]="!clientData?.walk-in"
     >
-    <div fxLayout="column" fxFlex="25">
+    <div fxLayout="column" fxLayoutAlign="center center" fxFlex="25">
       <avatar [size]="60"
         [name]="apt && apt.client && apt.client.firstName ? apt.client.firstName : (isInvoice && clientData ? clientData.firstName:'Walk' ) "
         [displayType]="'circle'"></avatar>
@@ -12,11 +12,12 @@
       {{!isInvoice && apt && apt.client && apt.client.lastName ? apt.client.lastName :(isInvoice && clientData ?
       clientData.lastName :'')}}
       <div class="email-select">{{(clientData && clientData.phone1) ? (clientData.phone1) : '' }}</div>
+      <div class="email-select">{{(clientData && clientData.email) ? (clientData.email) : '' }}</div>
+      <div class="email-select">
+        {{(clientData && clientData.gender ) + (clientData && clientData?.dob ? '| '+(clientData.dob | date) : '') }}</div>
     </div>
-    <div fxLayout="column" fxFlex="10">
-
-    </div>
-    <div fxLayout="column" fxFlex="5" fxFlexAlign="center" *ngIf="!isViewAppointment">
+   
+    <div fxLayout="column" fxFlex="15" fxFlexAlign="center" *ngIf="!isViewAppointment">
       <button type="button" *ngIf="apt && ((isInvoice && clientData)||apt.client)" mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
@@ -116,8 +117,9 @@
   </div>
   <div *ngIf="isInvoice && isView && !profile" class="pt-80" fxLayout="row" fxLayoutAlign="center center">
     <div fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
-      <mat-icon class="search">mobile_friendly</mat-icon>
-      <p> Full payment received on {{invoiceDate |date:'fullDate'}} </p>
+      <mat-icon class="search" style="color: darkturquoise;">check_circle_outline</mat-icon>
+      <h4 style="margin-top: 20px; font-weight: bold;">Completed</h4>
+      <p> Full payment received on {{invoiceDate |date:'fullDate'}} at {{invoiceData?.locationName}}</p>
     </div>
   </div>
   <div *ngIf=" isInvoice && !profile && !historyAppointment" style="text-align: center;">

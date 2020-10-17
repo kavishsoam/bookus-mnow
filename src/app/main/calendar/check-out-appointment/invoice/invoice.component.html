@@ -10,56 +10,54 @@
     </div>
   </div>
   <mat-dialog-content class="mat-typography">
-    <div fxLayout="row" class="innerbody" fxLayoutAlign="space-around">
+    <div fxLayout="row" fxLayout.lt-md="column" class="innerbody" fxLayoutAlign="space-around">
       <div fxLayout="column" class="left" fxFlex="70">
         <mat-card>
           <div fxLayout="row" style="margin-top: 10px" fxLayoutAlign="space-between center">
             <div fxLayout="column" fxLayoutAlign="start" fxFlex="100" style="text-align: center; margin-bottom: 50px">
               <div class="user_pro_img" fxFlex="100">
-                <img src="{{
-                    'data:image/jpg;base64,' + invoiceData?.businesslogo?.data
-                  }}" alt="" />
+                <!-- <img src="{{
+                  'data:image/jpg;base64,' + invoiceData?.businesslogo?.data
+                }}" alt="" /> -->
+                <img [src]="invoiceData?.businesslogo" alt="" >
               </div>
-              <div>
-                <h2 mat-dialog-title>{{ invoiceData?.businessName }}</h2>
-              </div>
+              
             </div>
             <div fxLayout="column" fxLayoutAlign="end" fxFlex="10">
               <mat-icon class="small-icon" *ngIf="!saveIcon" (click)="editClicked()">edit</mat-icon>
               <mat-icon class="small-icon" *ngIf="saveIcon" (click)="saveClicked()">save</mat-icon>
             </div>
           </div>
-          <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxLayout="row" fxLayoutAlign="space-between start">
             <div fxLayout="column" fxFlex="50">
-              <div class="" fxFlex="50" *ngIf="invoiceData.client == 'Walk-in'">
+              <div class="" fxFlex="50" *ngIf="invoiceData?.client == 'Walk-in'">
                 <div>
-                  <h4 style="padding-bottom: 0px; font-size: 12px; width: 60%">
-                    <b style="font-size: 18px">{{
+                  <h4 style="padding-bottom: 0px; font-weight: bold;">{{
                       invoiceData?.locationName
-                    }}</b><br />
-                    {{ invoiceData?.street }}
-                    {{ invoiceData?.city }}
-                    {{ invoiceData?.state }}<br />
-                    {{ invoiceData?.zip }}
-                  </h4>
+                    }}</h4>
+                    <p class="p0">{{ invoiceData?.street }}</p>
+                    <p class="p0">{{ invoiceData?.city }}</p>
+                    <p class="p0">{{ invoiceData?.state }}</p>
+                    <p class="p0">{{ invoiceData?.zip }}</p>
+                    <p class="p0">{{ 'http://www.samplewebsite.com' }}</p>
+                    <p class="p0">{{ '132456789101' }}</p>
                 </div>
                 <!-- <div>
                   <p *ngIf="invoiceData?.locationName" class="p0">{{invoiceData?.locationName}}</p>
                 </div> -->
               </div>
 
-              <div class="" fxFlex="50" *ngIf="invoiceData.client != 'Walk-in'">
+              <div class="" fxFlex="50" *ngIf="invoiceData?.client != 'Walk-in'">
                 <div>
-                  <h4 style="padding-bottom: 0px; font-size: 12px">
-                    <b style="font-size: 18px">{{
-                      invoiceData?.locationName
-                    }}</b>
-                    <br />
-                    {{ invoiceData?.street }}
-                    {{ invoiceData?.city }}
-                    {{ invoiceData?.state }}<br />
-                    {{ invoiceData?.zip }}
-                  </h4>
+                  <h4 style="padding-bottom: 0px; font-weight: bold;">{{
+                    invoiceData?.locationName
+                  }}</h4>
+                  <p class="p0">{{ invoiceData?.street }}</p>
+                  <p class="p0">{{ invoiceData?.city }}</p>
+                  <p class="p0">{{ invoiceData?.state }}</p>
+                  <p class="p0">{{ invoiceData?.zip }}</p>
+                  <p>{{ 'http://www.samplewebsite.com' }}</p>
+                  <p class="p0">{{ '132456789101' }}</p>
                 </div>
                 <!-- <div>
                   <p *ngIf="invoiceData?.locationName" class="p0">{{invoiceData?.locationName}}</p>
@@ -72,25 +70,21 @@
             <div fxLayout="column" fxFlex="50">
               <!-- <div class="row" > -->
               <div fxLayout="row">
-                <div fxLayout="column" fxFlex="50">
-                  <h4 style="padding-bottom: 0px">
-                    <strong> Invoice </strong>
+                <div fxLayout="column" fxFlex="100">
+                  <h4 class="mb-0">
+                    <strong> Tax Invoice #{{ invoiceData && invoiceData?.invoice }}</strong>
                   </h4>
                 </div>
-                <div fxLayout="column" fxFlex="50">
-                  <h4 style="padding-bottom: 0px">
-                    <strong>#{{ invoiceData && invoiceData?.invoice }}</strong>
-                  </h4>
-                </div>
+                
               </div>
-              <div *ngIf="invoiceData.invoiceDetails" fxLayout="row">
+              <div *ngIf="invoiceData?.invoiceDetails?.invoiceTitle" fxLayout="row">
                 <div fxLayout="column" fxFlex="50">
-                  <h4 style="padding-bottom: 0px">
+                  <h4 class="mb-0">
                     <strong>Invoice Title</strong>
                   </h4>
                 </div>
                 <div fxLayout="column" fxFlex="50">
-                  <h4 style="padding-bottom: 0px">
+                  <h4 class="mb-0">
                     <strong>{{
                       invoiceData?.invoiceDetails?.invoiceTitle
                     }}</strong>
@@ -138,7 +132,7 @@
 
               <div fxLayout="row">
                 <div fxLayout="column" fxFlex="50">
-                  <p class="p0"><strong>Provider Number</strong></p>
+                  <p class="p0"><strong>Provider</strong></p>
                 </div>
                 <div fxLayout="column" fxFlex="50">
                   <p class="p0">
@@ -146,7 +140,8 @@
                         invoiceData && invoiceData?.category == 'appointment'
                       ">
                       <span *ngFor="let control of provider.controls; index as i">
-                        <input class="input_class" [formControl]="provider.controls[i]"
+                        <input [ngClass]="{'input_class': !isEditProvider}" placeholder="Enter Provider Number"
+                          [formControl]="provider.controls[i]"
                           [readonly]="isEditProvider" /><br />
                         <!-- <span>
                           {{item?.staff}}<br>
@@ -168,31 +163,30 @@
 
           <ng-container *ngIf="invoiceData && invoiceData?.category == 'appointment'">
             <div fxLayout="row" style="margin-top: 20px" fxLayoutAlign="space-between center">
-              <div fxLayout="column" fxLayoutAlign="start" fxFlex="100" *ngIf="invoiceData.client != 'Walk-in'">
+              <div fxLayout="column" fxLayoutAlign="start" fxFlex="100" *ngIf="invoiceData?.client != 'Walk-in'">
                 <div class="item item-1" fxFlex="100">
-                  <h4 style="margin-bottom: 0px; font-size: 18px">
-                    Invoice to : {{ clientData?.firstName }}
-                    {{ clientData?.lastName }}
+                  <h4 class="font-bold mb-0">
+                    Invoice to :
                   </h4>
+                  <p class="p0"> {{ clientData?.firstName }}
+                    {{ clientData?.lastName }}</p>
                   <p class="p0">
-                    {{ clientData?.email }}
-                    {{ clientData?.address?.area }}
-                    {{ clientData?.address?.street }}
-                    {{ clientData?.address?.city }}
-                    {{ clientData?.address?.state }}
-                    {{ clientData?.address?.zip }}
-                    <br />
-                    {{ clientData?.address?.country }}
-                  </p>
+                    {{ clientData?.email }} </p>
+                    <p class="p0">{{ clientData?.address?.area }}</p>
+                    <p class="p0"> {{ clientData?.address?.street }} </p>
+                    <p class="p0">{{ clientData?.address?.city }}</p>
+                    <p class="p0">{{ clientData?.address?.state }}</p>
+                    <p class="p0">{{ clientData?.address?.zip }}</p>
+                    <p class="p0">{{ clientData?.address?.country }}</p>
                 </div>
               </div>
 
-              <div fxLayout="column" fxLayoutAlign="start" fxFlex="100" *ngIf="invoiceData.client == 'Walk-in'">
+              <div fxLayout="column" fxLayoutAlign="start" fxFlex="100" *ngIf="invoiceData?.client == 'Walk-in'">
                 <div class="item item-1" fxFlex="100">
-                  <h4 style="margin-bottom: 0px; font-size: 18px">
+                  <h4 class="font-bold mb-0">
                     Invoice to : Walk-In
                   </h4>
-                  <h4 style="margin-bottom: 0px; font-size: 18px">
+                  <h4 class="font-bold mb-0">
                     ABN no : 756295628
                   </h4>
                 </div>
@@ -200,10 +194,10 @@
             </div>
 
             <div fxLayout="row" style="margin-top: 10px" fxLayoutAlign="space-between center"
-              *ngIf="invoiceData.client != 'Walk-in'">
+              *ngIf="invoiceData?.client != 'Walk-in'">
               <div fxLayout="column" fxLayoutAlign="start" fxFlex="100">
                 <div class="item item-1" fxFlex="100">
-                  <h4 style="margin-bottom: 0px; font-size: 18px">Patient:</h4>
+                  <h4 class="font-bold mb-0">Patient:</h4>
                   <p class="p0">
                     {{ clientData?.firstName }} {{ clientData?.lastName }}
                   </p>
@@ -223,19 +217,21 @@
                 <div fxFlex="100">
                   <table>
                     <tr style="background-color: #eaf3fa">
-                      <th>Service</th>
-                      <th>Price</th>
-                      <th>Tax</th>
-                      <th>Total Price</th>
+                      <th class="text-center">Item</th>
+                      <th class="text-center">Type</th>
+                      <th class="text-center">Unit Price</th>
+                      <th class="text-center">Tax</th>
+                      <th class="text-center">Total Price</th>
                     </tr>
                     <tr *ngFor="let item of invoiceData?.appointment">
-                      <td>{{ item?.service }}</td>
-                      <td *ngIf="item.price && !item.special_price">
+                      <td class="text-center">{{ item?.service }}</td>
+                      <td class="text-center">{{ 'Service' }}</td>
+                      <td class="text-center" *ngIf="item.price && !item.special_price">
                         {{
                           item?.price | currency: currencyCode:"symbol-narrow"
                         }}
                       </td>
-                      <td *ngIf="item.special_price">
+                      <td class="text-center" *ngIf="item.special_price">
                         {{
                           item?.special_price
                             | currency: currencyCode:"symbol-narrow"
@@ -244,20 +240,21 @@
                         }}</s>)
                       </td>
                       <!-- //! TAX -  when tax included and no special_price -->
-                      <td *ngIf="
-                          invoiceData.taxRates.length &&
+                      <td class="text-center"
+                        *ngIf="
+                                                                                                                                                                                                                                                                                                                                                                    invoiceData?.taxRates.length &&
                           item.price &&
                           !item.special_price
                         ">
                         <span *ngIf="
-                            invoiceData.taxRates.length &&
+                            invoiceData?.taxRates.length &&
                             !invoiceData?.priceIncludetax
                           ">{{
                             (invoiceData?.taxRates[0]?.taxRate / 100) *
                               item?.price
                               | currency: currencyCode:"symbol-narrow"
                           }}(Excluded)</span><span *ngIf="
-                            invoiceData.taxRates.length &&
+                            invoiceData?.taxRates.length &&
                             invoiceData?.priceIncludetax
                           ">{{
                             ((invoiceData?.taxRates[0]?.taxRate / 100) *
@@ -267,18 +264,19 @@
                           }}(Included)</span>
                       </td>
                       <!-- //! TAX - when tax excluded and special price is present -->
-                      <td *ngIf="
-                          invoiceData.taxRates.length && item.special_price
+                      <td class="text-center"
+                        *ngIf="
+                                                                                                                                                                                                                                                                                                                                                                    invoiceData?.taxRates.length && item.special_price
                         ">
                         <span *ngIf="
-                            invoiceData.taxRates.length &&
+                            invoiceData?.taxRates.length &&
                             !invoiceData?.priceIncludetax
                           ">{{
                             (invoiceData?.taxRates[0]?.taxRate / 100) *
                               item?.special_price
                               | currency: currencyCode:"symbol-narrow"
                           }}(Excluded)</span><span *ngIf="
-                            invoiceData.taxRates.length &&
+                            invoiceData?.taxRates.length &&
                             invoiceData?.priceIncludetax
                           ">{{
                             ((invoiceData?.taxRates[0]?.taxRate / 100) *
@@ -288,9 +286,9 @@
                           }}(Included)</span>
                       </td>
                       <!-- //! TAX - when no tax is present neither excluded nor included -->
-                      <td *ngIf="!invoiceData.taxRates.length">{{ 0 }}%</td>
+                      <td class="text-center" *ngIf="!invoiceData?.taxRates.length">{{ 0 }}%</td>
                       <!-- //! when price and tax included -->
-                      <td *ngIf="
+                      <td class="text-center" *ngIf="
                           item.price &&
                           !item.special_price &&
                           !invoiceData?.priceIncludetax
@@ -302,7 +300,7 @@
                             | currency: currencyCode:"symbol-narrow"
                         }}
                       </td>
-                      <td *ngIf="
+                      <td class="text-center" *ngIf="
                           item.price &&
                           !item.special_price &&
                           invoiceData?.priceIncludetax
@@ -316,7 +314,7 @@
                         }}
                       </td>
                       <!-- //! when special_price and tax excluded -->
-                      <td *ngIf="
+                      <td class="text-center" *ngIf="
                           item.price &&
                           item.special_price &&
                           !invoiceData?.priceIncludetax
@@ -328,7 +326,7 @@
                             | currency: currencyCode:"symbol-narrow"
                         }}
                       </td>
-                      <td *ngIf="
+                      <td class="text-center" *ngIf="
                           item.price &&
                           item.special_price &&
                           invoiceData?.priceIncludetax
@@ -348,10 +346,10 @@
               </div>
             </div>
             <div fxLayout="row" fxLayoutAlign="space-between center">
-              <div fxLayout="column" fxFlex="70">
-                <div class="" fxFlex="50" *ngIf="invoiceData.appointment[0].notes != ''">
+              <div fxLayout="column" fxFlex="60">
+                <div class="" fxFlex="50" *ngIf="invoiceData?.appointment[0].notes != ''">
                   <div>
-                    <h4 style="padding-bottom: 0px">Note :</h4>
+                    <h4 class="mb-0">Notes :</h4>
                   </div>
                   <div>
                     <p class="p0">
@@ -360,8 +358,8 @@
                           let i = index
                         ">
                         <span *ngIf="i == 0">
-                          <input class="input_class" [value]="item.notes" [(ngModel)]="editedNote"
-                            [readonly]="noteEdit" />
+                          <textarea rows="3" [ngClass]="{'input_class': !isEditProvider}" placeholder="Enter Invoice Note" [value]="item.notes"
+                            [(ngModel)]="editedNote" [readonly]="noteEdit"></textarea>
                           <!-- {{item?.notes}} -->
                         </span>
                       </span>
@@ -369,9 +367,9 @@
                   </div>
                 </div>
 
-                <div class="" fxFlex="50" *ngIf="invoiceData.appointment[0].notes == ''">
+                <div class="" fxFlex="50" *ngIf="invoiceData?.appointment[0].notes == ''">
                   <div>
-                    <h4 style="padding-bottom: 0px">Note :</h4>
+                    <h4 class="mb-0">Notes :</h4>
                   </div>
                   <div>
                     <p class="p0">
@@ -380,8 +378,8 @@
                           let i = index
                         ">
                         <span *ngIf="i == 0">
-                          <input class="input_class" [value]="item.notes" [(ngModel)]="editedNote"
-                            [readonly]="noteEdit" />
+                          <textarea rows="3" style="width:100%" placeholder="Enter Invoice Note" [ngClass]="{'input_class': !isEditProvider}"
+                            [value]="item.notes" [(ngModel)]="editedNote" [readonly]="noteEdit"></textarea>
                           <!-- {{item?.notes}} -->
                         </span>
                       </span>
@@ -389,41 +387,41 @@
                   </div>
                 </div>
               </div>
-              <div fxLayout="column" fxFlex="30">
+              <div fxLayout="column" fxFlex="40">
                 <div fxLayout="row" style="text-align: right; margin-right: 5px">
-                  <div style="margin-right: 5px" fxLayout="column" fxFlex="70">
+                  <div style="margin-right: 5px" fxLayout="column" fxFlex="50">
                     <p class="p0">Tax</p>
                   </div>
-                  <div fxLayout="column" fxFlex="30">
-                    <p style="border: 1px solid #dddddd" class="p0" *ngIf="invoiceData.taxRates.length">
+                  <div fxLayout="column" fxFlex="50">
+                    <p style="border: 1px solid #dddddd" class="p-6 text-center m-0" *ngIf="invoiceData?.taxRates.length">
                       {{ invoiceData?.taxRates[0].name }}
                     </p>
-                    <!-- <p style="border: 1px solid #dddddd;" *ngIf="invoiceData.taxRates.length && !invoiceData?.priceIncludetax" class="p0">{{((invoiceData?.taxRates[0]?.taxRate/100) * invoiceData?.payment[0]?.amount) | currency: currencyCode}}</p>
-                    <p style="border: 1px solid #dddddd;" *ngIf="invoiceData.taxRates.length && invoiceData?.priceIncludetax" class="p0">{{((invoiceData?.taxRates[0]?.taxRate/100) * invoiceData?.payment[0]?.amount)/(1+ (invoiceData?.taxRates[0]?.taxRate/100)) | currency: currencyCode}}</p> -->
-                    <p style="border: 1px solid #dddddd" class="p0" *ngIf="!invoiceData.taxRates.length">
+                    <!-- <p style="border: 1px solid #dddddd;" *ngIf="invoiceData?.taxRates.length && !invoiceData?.priceIncludetax" class="p0">{{((invoiceData?.taxRates[0]?.taxRate/100) * invoiceData?.payment[0]?.amount) | currency: currencyCode}}</p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                    <p style="border: 1px solid #dddddd;" *ngIf="invoiceData?.taxRates.length && invoiceData?.priceIncludetax" class="p0">{{((invoiceData?.taxRates[0]?.taxRate/100) * invoiceData?.payment[0]?.amount)/(1+ (invoiceData?.taxRates[0]?.taxRate/100)) | currency: currencyCode}}</p> -->
+                    <p style="border: 1px solid #dddddd" class="p-6 text-center m-0" *ngIf="!invoiceData?.taxRates.length">
                       {{ 0 | currency: currencyCode:"symbol-narrow" }}
                     </p>
                   </div>
                 </div>
                 <div fxLayout="row" style="text-align: right; margin-right: 5px">
-                  <div style="margin-right: 5px" fxLayout="column" fxFlex="70">
+                  <div style="margin-right: 5px" fxLayout="column" fxFlex="50">
                     <p class="p0">Total Amount</p>
                   </div>
-                  <div fxLayout="column" fxFlex="30">
-                    <p style="border: 1px solid #dddddd" *ngIf="invoiceData?.payment.length == 1" class="p0">
+                  <div fxLayout="column" fxFlex="50">
+                    <p style="border: 1px solid #dddddd" *ngIf="invoiceData?.payment.length == 1" class="p-6 text-center m-0">
                       {{
                         invoiceData?.payment[0].amount
                           | currency: currencyCode:"symbol-narrow"
                       }}
                     </p>
-                    <p style="border: 1px solid #dddddd" *ngIf="invoiceData?.payment.length == 2" class="p0">
+                    <p style="border: 1px solid #dddddd" *ngIf="invoiceData?.payment.length == 2" class="p-6 text-center m-0">
                       {{
                         invoiceData?.payment[0].amount +
                           invoiceData?.payment[1].amount
                           | currency: currencyCode:"symbol-narrow"
                       }}
                     </p>
-                    <p style="border: 1px solid #dddddd" *ngIf="invoiceData?.payment.length == 3" class="p0">
+                    <p style="border: 1px solid #dddddd" *ngIf="invoiceData?.payment.length == 3" class="p-6 text-center m-0">
                       {{
                         invoiceData?.payment[0].amount +
                           invoiceData?.payment[1].amount +
@@ -431,7 +429,7 @@
                           | currency: currencyCode:"symbol-narrow"
                       }}
                     </p>
-                    <p style="border: 1px solid #dddddd" *ngIf="invoiceData?.payment.length == 4" class="p0">
+                    <p style="border: 1px solid #dddddd" *ngIf="invoiceData?.payment.length == 4" class="p-6 text-center m-0">
                       {{
                         invoiceData?.payment[0].amount +
                           invoiceData?.payment[1].amount +
@@ -443,11 +441,11 @@
                   </div>
                 </div>
                 <div fxLayout="row" style="text-align: right; margin-right: 5px">
-                  <div style="margin-right: 5px" fxLayout="column" fxFlex="70">
-                    <p class="p0">Outstanding Balance</p>
+                  <div style="margin-right: 5px" fxLayout="column" fxFlex="50">
+                    <p class="p0">Balance</p>
                   </div>
-                  <div fxLayout="column" fxFlex="30">
-                    <p style="border: 1px solid #dddddd" class="p0">
+                  <div fxLayout="column" fxFlex="50">
+                    <p style="border: 1px solid #dddddd" class="p-6 text-center m-0">
                       {{ 0 | currency: currencyCode:"symbol-narrow" }}
                     </p>
                   </div>
@@ -501,7 +499,7 @@
                           | currency: currencyCode:"symbol-narrow"
                       }}
                     </p>
-                    <p style="border: 1px solid #dddddd" *ngIf="invoiceData.payment.length > 1" class="p0">
+                    <p style="border: 1px solid #dddddd" *ngIf="invoiceData?.payment.length > 1" class="p0">
                       {{
                         invoiceData?.payment[1]?.amount
                           | currency: currencyCode:"symbol-narrow"
@@ -517,7 +515,7 @@
           <div fxLayout="row" style="margin-top: 10px" fxLayoutAlign="space-between center">
             <div fxLayout="column" fxLayoutAlign="start" fxFlex="70">
               <div class="item item-1" fxFlex="100">
-                <h4 style="margin-bottom: 0px; font-size: 18px">
+                <h4 class="mb-0">
                   Payment Details
                 </h4>
                 <p class="p0">
@@ -533,21 +531,21 @@
                       | currency: currencyCode:"symbol-narrow"
                   }}
                 </p>
-                <p *ngIf="invoiceData.payment.length > 1" class="p0">
+                <p *ngIf="invoiceData?.payment.length > 1" class="p0">
                   {{ invoiceData?.payment[1]?.name }} | Total
                   {{
                     invoiceData?.payment[1]?.amount
                       | currency: currencyCode:"symbol-narrow"
                   }}
                 </p>
-                <p *ngIf="invoiceData.payment.length > 2" class="p0">
+                <p *ngIf="invoiceData?.payment.length > 2" class="p0">
                   {{ invoiceData?.payment[2]?.name }} | Total
                   {{
                     invoiceData?.payment[2]?.amount
                       | currency: currencyCode:"symbol-narrow"
                   }}
                 </p>
-                <p *ngIf="invoiceData.payment.length > 3" class="p0">
+                <p *ngIf="invoiceData?.payment.length > 3" class="p0">
                   {{ invoiceData?.payment[3]?.name }} | Total
                   {{
                     invoiceData?.payment[3]?.amount
@@ -562,14 +560,14 @@
           </div>
 
           <!-- <div fxLayout="row" class="invoiceHeader" fxLayoutAlign="center start"> Invoice #
-            {{invoiceData && invoiceData.invoice}}
+            {{invoiceData && invoiceData?.invoice}}
            </div>
           <div fxLayout="row" class="currentDate" fxLayoutAlign="center start">
-            {{invoiceData && invoiceData.createdAt |
+            {{invoiceData && invoiceData?.createdAt |
             date:'fullDate'}}
           </div>
-          <div *ngIf="invoiceData && invoiceData.category == 'appointment'">
-            <div *ngFor="let apt of invoiceData && invoiceData.appointment">
+          <div *ngIf="invoiceData && invoiceData?.category == 'appointment'">
+            <div *ngFor="let apt of invoiceData && invoiceData?.appointment">
               <div fxLayout="row " class="invoiceDiv" fxLayoutAlign="space-around center">
                 <div fxFlex="80" class="headingService" fxLayoutAlign="start start"> {{apt["service Group"]}}</div>
                 <div fxFlex="20" class="headingService" fxLayoutAlign="end end">{{apt && apt.special_price ?
@@ -583,14 +581,14 @@
                   {{apt.staff}} {{apt["special Discount"] ? ", Special discount "+(apt["special Discount"]|
                   currency:currencyCode)+" off":''}}</div>
                 <div fxFlex="20" class="headingDescription specialPrice" fxLayoutAlign="end start">{{(apt &&
-                  apt.special_price) || (invoiceData && invoiceData.voucher) ?
+                  apt.special_price) || (invoiceData && invoiceData?.voucher) ?
                   (apt.price |
-                  currency:currencyCode) || (invoiceData.voucher[0].amount) : ''}}</div>
+                  currency:currencyCode) || (invoiceData?.voucher[0].amount) : ''}}</div>
               </div>
             </div>
           </div>
-          <div *ngIf="invoiceData && invoiceData.category == 'voucher'">
-            <div *ngFor="let item of invoiceData.voucher">
+          <div *ngIf="invoiceData && invoiceData?.category == 'voucher'">
+            <div *ngFor="let item of invoiceData?.voucher">
               <div fxLayout="row " class="invoiceDiv" fxLayoutAlign="space-around center">
                 <div fxFlex="80" class="headingService" fxLayoutAlign="start start"> {{item._type}}: {{ item._type ==
                   'Gift Voucher' ? (item.amount|
@@ -614,12 +612,12 @@
           <div fxLayout="row " class="invoiceDiv" fxLayoutAlign="space-around center">
             <div fxFlex="80" class="headingService" fxLayoutAlign="start start"> Total </div>
             <div fxFlex="20" class="headingService" fxLayoutAlign="end end">{{invoiceData &&
-              invoiceData.totalAmount|currency:currencyCode}}</div>
+              invoiceData?.totalAmount|currency:currencyCode}}</div>
           </div>
           <div fxLayout="row " class="invoiceDiv" fxLayoutAlign="space-around center">
             <div fxFlex="80" class="headingService" fxLayoutAlign="start start"> Tips </div>
             <div fxFlex="20" class="headingService" fxLayoutAlign="end end">{{invoiceData &&
-              invoiceData.tips|currency:currencyCode}}</div>
+              invoiceData?.tips|currency:currencyCode}}</div>
           </div>
           <div class="invoiceDiv">
             <div *ngFor="let payment of invoiceData?.payment">
@@ -644,7 +642,7 @@
       </div>
       <!-- /////////////////Right side//////////////////////////// -->
       <div class="right" fxLayout="column" fxFlex="30">
-        <app-client-info [isInvoice]="true" [isView]="true" [invoiceDate]="invoiceData && invoiceData.createdAt"
+        <app-client-info [isInvoice]="true" [isView]="true" [invoiceDate]="invoiceData && invoiceData?.createdAt"
           [invoiceData]="invoiceData" [apt]="data && data.apt ? data.apt : true" [clientData]="clientData"
           [appointment]="appointment" [clientDetails]="clientDetails" (view_Profile)="viewProfile()" [profile]="profile"
           [clientInvoices]="clientInvoices" (on_More_Option_Selected)="onMoreOptionSelected($event)"
