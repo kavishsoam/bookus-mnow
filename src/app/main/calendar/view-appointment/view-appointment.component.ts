@@ -311,8 +311,8 @@ export class ViewAppointmentComponent implements OnInit {
     if(invoiceData){
 
       const dialogRef = this.dialog.open(InvoiceComponent, {
-        width: "100vw",
-        height: "100vh",
+        width: "70vw",
+        height: "96vh",
         panelClass: 'pad-Mnow321',
         data: {
           invoiceId: invoiceData.invoice,
@@ -329,8 +329,8 @@ export class ViewAppointmentComponent implements OnInit {
 
     }else{
       const dialogRef = this.dialog.open(InvoiceComponent, {
-        width: "100vw",
-        height: "100vh",
+        width: "70vw",
+        height: "96vh",
         panelClass: 'pad-Mnow321',
         data: {
           invoiceId: this.apt.invoice,
