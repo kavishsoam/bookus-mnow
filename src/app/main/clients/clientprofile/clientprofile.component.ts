@@ -90,9 +90,10 @@ export class ClientprofileComponent implements OnInit {
   imagePath: any;
   imgURL: any;
   staffDropList: any = [];
-  staffDrop = new FormControl();
-  serviceDrop = new FormControl();
-  statusDrop = new FormControl();
+  staffDrop = new FormControl("");
+  serviceDrop = new FormControl("");
+  statusDrop = new FormControl("allStatus");
+  allDrop = new FormControl("");
   moment = moment;
 
   transactionHisroty = [
@@ -341,8 +342,6 @@ export class ClientprofileComponent implements OnInit {
     this.getAllStaffLoc(locationId);
     this.getAppointmentByStatus();
     this.getAllStaffList();
-
-
     this.sortedtransactionHisroty = this.transactionHisroty.slice();
     this.sortedtreamentNotes = this.treamentNotes.slice();
   }
@@ -358,10 +357,19 @@ export class ClientprofileComponent implements OnInit {
     });
   }
 
+  clearFiler() {
+    this.saleDateTimeRange = [];
+    this.staffDrop.setValue('');
+    this.serviceDrop.setValue('');
+    this.statusDrop.setValue('');
+    this.allDrop.setValue('');
+  }
+
   appointmentSearch() {
     this.spinner.show();
 
-    this.saleDateTimeRange[0] =
+    if (this.saleDateTimeRange && this.saleDateTimeRange.length > 1) {
+      this.saleDateTimeRange[0] =
       this.saleDateTimeRange && this.saleDateTimeRange[0]
         ? moment(this.saleDateTimeRange[0]).format("YYYY-MM-DD")
         : "";
@@ -369,6 +377,7 @@ export class ClientprofileComponent implements OnInit {
       this.saleDateTimeRange && this.saleDateTimeRange[0]
         ? moment(this.saleDateTimeRange[1]).format("YYYY-MM-DD")
         : "";
+    }   
 
     console.log(this.staffDrop.value);
     console.log(this.serviceDrop.value);
@@ -394,10 +403,10 @@ export class ClientprofileComponent implements OnInit {
     if (this.staffDrop.value) {
       form.staff = this.staffDrop.value;
     }
-    if (this.saleDateTimeRange[0]) {
+    if (this.saleDateTimeRange && this.saleDateTimeRange[0]) {
       form.startDate = this.saleDateTimeRange[0];
     }
-    if (this.saleDateTimeRange[1]) {
+    if (this.saleDateTimeRange && this.saleDateTimeRange[1]) {
       form.endDate = this.saleDateTimeRange[1];
     }
     if (this.id) {

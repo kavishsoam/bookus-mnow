@@ -1,9 +1,6 @@
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
 <p-toast [style]="{marginTop: '50px'}"></p-toast>
 
-
-
-
 <div class="page-layout blank textStyle">
   <div class="content p-50">
     <mat-tab-group class="background border-tab">
@@ -523,7 +520,15 @@
         <div class="content p-24">
           <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.gt-xs="row"
             fxLayoutAlign.gt-xs="space-between center">
-
+            
+            <div>
+              <mat-form-field class="noline">
+                <mat-select class="dropdown" [formControl]="allDrop">
+                  <mat-option value="">All</mat-option>
+                  <mat-option value="">Date Range</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
             <div fxLayout="70">
               <mat-form-field class="noline hello" [floatLabel]="'never'" style="width: 230px;">
                 <input class="dropdown" autocomplete="off" matInput placeholder="Select date range"
@@ -545,7 +550,7 @@
             <div>
               <mat-form-field class="noline">
                 <mat-select class="dropdown" [formControl]="serviceDrop">
-                  <mat-option>-- None --</mat-option>
+                  <mat-option value="">All Service</mat-option>
                   <mat-optgroup *ngFor="let group of serviceGroups" [label]="group.name" [disabled]="group.disabled">
                     <mat-option *ngFor="let service of group.service" [value]="service.value">
                       {{service.viewValue}}
@@ -558,6 +563,7 @@
             <div>
               <mat-form-field class="noline">
                 <mat-select class="dropdown" [formControl]="staffDrop">
+                  <mat-option value="">All Staffs</mat-option>
                   <mat-option *ngFor="let item of staffDropList" [value]="item._id">{{item.firstName + item.lastName}}
                   </mat-option>
                 </mat-select>
@@ -568,11 +574,8 @@
               <button mat-raised-button color="primary" (click)="appointmentSearch()">Search</button>
             </div>
             <div>
-              <button mat-raised-button>Clear</button>
+              <button mat-raised-button (click)="clearFiler()">Clear</button>
             </div>
-
-
-
 
             <!-- <div *ngIf="clientAppointmentList.length != 0" fxLayout="20">
             </div> -->
@@ -645,41 +648,7 @@
 
       </mat-tab>
       <mat-tab label="ACCOUNT">
-
-        <mat-tab-group mat-align-tabs="center" [selectedIndex]="selectedInd" style="background-color: white">
-          <mat-tab label="POINT LABEL">
-            <div class="margin-TL">
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <div class="borderStyle" fxFlex="80" style="padding: 0px;">
-                  <div fxLayout="row" fxLayoutAlign="space-around center">
-                    <div fxFlex="5">
-                      <mat-icon mat-list-icon>
-                        <avatar style="float: left" [size]="40" name="Test" [displayType]="'circle'"></avatar>
-                      </mat-icon>
-                    </div>
-                    <div fxFlex="45" style="float: left;    padding: 10px;">
-                      <h4 class="account-point-label" mat-line>test 01(123) 456-7890</h4>
-                      <p class="account-point-label" mat-line>tester3@parangat.com</p>
-                    </div>
-                    <div fxFlex="40">
-                      <button mat-raised-button color="primary"
-                        style="float: right; background-color: lightskyblue ;">10pts</button>
-                    </div>
-                  </div>
-                </div>
-                <div fxFlex="20" fxLayoutAlign="space-around center">
-                  <button mat-raised-button color="primary" style=" float:left; background-color: green">Create
-                    New</button>
-                </div>
-              </div>
-            </div>
-          </mat-tab>
-          <mat-tab label="MONEY">
-          </mat-tab>
-          <mat-tab label="TRANSACTION MONEY">
-          </mat-tab>
-        </mat-tab-group>
-
+        <app-account-tab [selectedInd]="selectedInd"></app-account-tab>
       </mat-tab>
       <mat-tab label="PRODUCTS">
 

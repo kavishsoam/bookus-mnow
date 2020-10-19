@@ -1,0 +1,43 @@
+.font-bold {
+    font-weight: bold;
+}
+
+.changeColor {
+    color: #039be5;
+}
+
+.changeBg {
+    background-color: #039be5 !important;
+}
+
+table {
+    width: 100%;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.margin-TL {
+    margin: 1%;
+}
+
+@media screen and (max-width: 450px),
+(min-device-width: 450px) and (max-device-width: 450px) {
+    .p-50 {
+        padding: 10px;
+    }
+
+    .p-24 {
+        padding: 0px !important;
+    }
+
+    .border-div {
+        margin: 0;
+    }
+
+    .margin-TL {
+        margin: 0;
+    }
+
+}

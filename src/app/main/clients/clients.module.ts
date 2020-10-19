@@ -1,3 +1,4 @@
+import { AccountTabComponent } from './clientprofile/account-tab/account-tab.component';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -80,7 +81,8 @@ const routes = [
         SoapComponent,
         BodyPointModalComponent,
         IouListComponent,
-        ImportClientsComponent
+        ImportClientsComponent,
+        AccountTabComponent
         // SignatureFieldComponent,
         
     ],
@@ -91,7 +93,8 @@ const routes = [
         FamilyandfriendComponent,
         BodyPointModalComponent,
         IouListComponent,
-        ImportClientsComponent
+        ImportClientsComponent,
+        AccountTabComponent
         // SignatureFieldComponent,
     ],
     entryComponents: [

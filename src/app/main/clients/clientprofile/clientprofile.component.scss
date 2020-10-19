@@ -442,8 +442,7 @@ mat-tab-group {
 }
 
 .margin-TL {
-    margin-top: 1%;
-    margin-left: 1%;
+    margin: 1%;
 }
 
 
@@ -524,7 +523,7 @@ mat-tab-group {
     vertical-align: middle;
 }
 
-.min-h-100{
+.min-h-100 {
     min-height: 100px;
 }
 
@@ -548,6 +547,11 @@ mat-tab-group {
     .border-div {
         margin: 0;
     }
+
+    .margin-TL {
+        margin: 0;
+    }
+
 }
 
 @media only screen and (max-width: 760px),
