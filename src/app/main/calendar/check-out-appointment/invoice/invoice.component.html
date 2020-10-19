@@ -23,10 +23,10 @@
               </div>
               
             </div>
-            <div fxLayout="column" fxLayoutAlign="end" fxFlex="10">
+            <!-- <div fxLayout="column" fxLayoutAlign="end" fxFlex="10">
               <mat-icon class="small-icon" *ngIf="!saveIcon" (click)="editClicked()">edit</mat-icon>
               <mat-icon class="small-icon" *ngIf="saveIcon" (click)="saveClicked()">save</mat-icon>
-            </div>
+            </div> -->
           </div>
           <div fxLayout="row" fxLayoutAlign="space-between start">
             <div fxLayout="column" fxFlex="50">
@@ -140,9 +140,9 @@
                         invoiceData && invoiceData?.category == 'appointment'
                       ">
                       <span *ngFor="let control of provider.controls; index as i">
-                        <input [ngClass]="{'input_class': !isEditProvider}" placeholder="Enter Provider Number"
+                        <input class="input_class" placeholder="Enter Provider Number"
                           [formControl]="provider.controls[i]"
-                          [readonly]="isEditProvider" /><br />
+                           /><br />
                         <!-- <span>
                           {{item?.staff}}<br>
                         </span> -->
@@ -216,7 +216,7 @@
                 </p>
                 <div fxFlex="100">
                   <table>
-                    <tr style="background-color: #eaf3fa">
+                    <tr style="background-color: #dddddd">
                       <th class="text-center">Item</th>
                       <th class="text-center">Type</th>
                       <th class="text-center">Unit Price</th>
@@ -358,8 +358,8 @@
                           let i = index
                         ">
                         <span *ngIf="i == 0">
-                          <textarea rows="3" [ngClass]="{'input_class': !isEditProvider}" placeholder="Enter Invoice Note" [value]="item.notes"
-                            [(ngModel)]="editedNote" [readonly]="noteEdit"></textarea>
+                          <textarea rows="3" class="input_class" placeholder="Enter Invoice Note" [value]="item.notes"
+                            [(ngModel)]="editedNote"></textarea>
                           <!-- {{item?.notes}} -->
                         </span>
                       </span>
@@ -378,8 +378,8 @@
                           let i = index
                         ">
                         <span *ngIf="i == 0">
-                          <textarea rows="3" style="width:100%" placeholder="Enter Invoice Note" [ngClass]="{'input_class': !isEditProvider}"
-                            [value]="item.notes" [(ngModel)]="editedNote" [readonly]="noteEdit"></textarea>
+                          <textarea rows="3" style="width:100%" placeholder="Enter Invoice Note" class="input_class" [value]="item.notes"
+                            [(ngModel)]="editedNote"></textarea>
                           <!-- {{item?.notes}} -->
                         </span>
                       </span>
@@ -388,7 +388,7 @@
                 </div>
               </div>
               <div fxLayout="column" fxFlex="40">
-                <div fxLayout="row" style="text-align: right; margin-right: 5px">
+                <div fxLayout="row" style="text-align: right; margin-top: 10px">
                   <div style="margin-right: 5px" fxLayout="column" fxFlex="50">
                     <p class="p0">Tax</p>
                   </div>
@@ -403,7 +403,7 @@
                     </p>
                   </div>
                 </div>
-                <div fxLayout="row" style="text-align: right; margin-right: 5px">
+                <div fxLayout="row" style="text-align: right;">
                   <div style="margin-right: 5px" fxLayout="column" fxFlex="50">
                     <p class="p0">Total Amount</p>
                   </div>
@@ -440,7 +440,7 @@
                     </p>
                   </div>
                 </div>
-                <div fxLayout="row" style="text-align: right; margin-right: 5px">
+                <div fxLayout="row" style="text-align: right;">
                   <div style="margin-right: 5px" fxLayout="column" fxFlex="50">
                     <p class="p0">Balance</p>
                   </div>
@@ -515,15 +515,14 @@
           <div fxLayout="row" style="margin-top: 10px" fxLayoutAlign="space-between center">
             <div fxLayout="column" fxLayoutAlign="start" fxFlex="70">
               <div class="item item-1" fxFlex="100">
-                <h4 class="mb-0">
-                  Payment Details
-                </h4>
+              
                 <p class="p0">
                   <strong>
-                    {{
-                      invoiceData && invoiceData?.createdAt | date: "longDate"
-                    }}</strong>
+                    Payment Details</strong>
                 </p>
+                <h4 class="mb-0">
+                  {{invoiceData && invoiceData?.createdAt | date: "longDate"}}
+                </h4>
                 <p class="p0">
                   {{ invoiceData?.payment[0]?.name }} | Total
                   {{
@@ -555,7 +554,7 @@
               </div>
             </div>
             <div class="column" fxLayoutAlign="end" fxFlex="30">
-              <h4>Currency used in this invoice : {{ currencyCode }}</h4>
+              <!-- <h4>Currency used in this invoice : {{ currencyCode }}</h4> -->
             </div>
           </div>
 

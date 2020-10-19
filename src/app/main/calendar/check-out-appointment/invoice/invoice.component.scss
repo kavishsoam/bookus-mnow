@@ -161,9 +161,13 @@ table {
     width: 100%;
 }
 
+tr {
+    border: 1px solid #dddddd;
+}
+
 td,
 th {
-    border: 1px solid #dddddd;
+
     text-align: left;
     padding: 8px;
 }
@@ -200,14 +204,17 @@ tr:nth-child(even) {
 }
 
 .input_class {
-
     background-position: bottom 5px center;
     background-size: calc(100% - 10px) 2px;
     background-repeat: no-repeat;
     background-color: #fcfcfc;
-    border: 1px solid;
-    border-radius: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
     padding: 10px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
 }
 
 .mb-0 {
@@ -221,6 +228,7 @@ tr:nth-child(even) {
 .text-center {
     text-align: center;
 }
-.p-6{
+
+.p-6 {
     padding: 6px;
 }

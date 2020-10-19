@@ -1,16 +1,19 @@
 <!-- <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner> -->
-<div >
-
-  <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 3%">
+<div style="margin-top: 3%">
+  <p class="text-start" style="margin: 0; text-align: left;">Send invoice</p>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    
     <div fxFlex="60">
-      <p class="text-start" style="margin: 0; text-align: left;">Send invoice</p>
-      <mat-form-field class="example-full-width" appearance="outline">
+      <input class="input_class" type="text" matInput placeholder="" [(ngModel)]="email" #voucherValuex="ngModel"
+        [ngModelOptions]="{standalone: true}">
+      
+      <!-- <mat-form-field class="example-full-width" appearance="outline">
         <mat-label> Email</mat-label>
         <input type="text" matInput placeholder="" [(ngModel)]="email" #voucherValuex="ngModel"
           [ngModelOptions]="{standalone: true}">
-      </mat-form-field>
+      </mat-form-field> -->
     </div>
-    <div fxFlex="40">
+    <div fxFlex="40" style="text-align: left; padding-left: 6px;">
       <button mat-raised-button (click)="sendInvoice()">Send  </button>
     </div>
   </div>

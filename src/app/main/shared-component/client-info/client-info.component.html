@@ -117,9 +117,12 @@
   </div>
   <div *ngIf="isInvoice && isView && !profile" class="pt-80" fxLayout="row" fxLayoutAlign="center center">
     <div fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
-      <mat-icon class="search" style="color: darkturquoise;">check_circle_outline</mat-icon>
+      <!-- <mat-icon class="search" style="color: darkturquoise;">check_circle_outline</mat-icon> -->
+      <img src="../../../../assets/images/avatars/invoice_completed.png" style="width: 74px;" />
       <h4 style="margin-top: 20px; font-weight: bold;">Completed</h4>
-      <p> Full payment received on {{invoiceDate |date:'fullDate'}} at {{invoiceData?.locationName}}</p>
+      <p style="text-align: center"> Full payment received on {{invoiceDate |date:'fullDate'}} at
+        {{invoiceData?.locationName}} by {{'yuteng Zhang (M)'}}
+      </p>
     </div>
   </div>
   <div *ngIf=" isInvoice && !profile && !historyAppointment" style="text-align: center;">
