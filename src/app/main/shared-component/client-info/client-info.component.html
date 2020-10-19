@@ -14,7 +14,8 @@
       <div class="email-select">{{(clientData && clientData.phone1) ? (clientData.phone1) : '' }}</div>
       <div class="email-select">{{(clientData && clientData.email) ? (clientData.email) : '' }}</div>
       <div class="email-select">
-        {{(clientData && clientData.gender ) + (clientData && clientData?.dob ? '| '+(clientData.dob | date) : '') }}</div>
+        {{(clientData && clientData.gender ? clientData.gender : '' ) + (clientData && clientData?.dob ? '| '+(clientData.dob | date) : '') }}
+        </div>
     </div>
    
     <div fxLayout="column" fxFlex="15" fxFlexAlign="center" *ngIf="!isViewAppointment">
