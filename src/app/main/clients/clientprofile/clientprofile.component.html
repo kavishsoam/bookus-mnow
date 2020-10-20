@@ -520,15 +520,7 @@
         <div class="content p-24">
           <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.gt-xs="row"
             fxLayoutAlign.gt-xs="space-between center">
-            
-            <div>
-              <mat-form-field class="noline">
-                <mat-select class="dropdown" [formControl]="allDrop">
-                  <mat-option value="">All</mat-option>
-                  <mat-option value="">Date Range</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
+
             <div fxLayout="70">
               <mat-form-field class="noline hello" [floatLabel]="'never'" style="width: 230px;">
                 <input class="dropdown" autocomplete="off" matInput placeholder="Select date range"
@@ -550,7 +542,7 @@
             <div>
               <mat-form-field class="noline">
                 <mat-select class="dropdown" [formControl]="serviceDrop">
-                  <mat-option value="">All Service</mat-option>
+                  <mat-option>-- None --</mat-option>
                   <mat-optgroup *ngFor="let group of serviceGroups" [label]="group.name" [disabled]="group.disabled">
                     <mat-option *ngFor="let service of group.service" [value]="service.value">
                       {{service.viewValue}}
@@ -563,7 +555,6 @@
             <div>
               <mat-form-field class="noline">
                 <mat-select class="dropdown" [formControl]="staffDrop">
-                  <mat-option value="">All Staffs</mat-option>
                   <mat-option *ngFor="let item of staffDropList" [value]="item._id">{{item.firstName + item.lastName}}
                   </mat-option>
                 </mat-select>
@@ -574,8 +565,10 @@
               <button mat-raised-button color="primary" (click)="appointmentSearch()">Search</button>
             </div>
             <div>
-              <button mat-raised-button (click)="clearFiler()">Clear</button>
+              <button mat-raised-button>Clear</button>
             </div>
+
+
 
             <!-- <div *ngIf="clientAppointmentList.length != 0" fxLayout="20">
             </div> -->

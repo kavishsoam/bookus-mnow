@@ -1,9 +1,23 @@
+.account {
+    font-family: Sarabun !important;
+}
+
 .font-bold {
     font-weight: bold;
 }
 
+.font-24 {
+    font-size: 24px;
+}
+
 .changeColor {
     color: #039be5;
+}
+
+.main-btn {
+    padding: 4px 20px;
+    width: 100%;
+    color: white !important
 }
 
 .changeBg {
@@ -12,6 +26,7 @@
 
 table {
     width: 100%;
+    font-family: Sarabun !important;
 }
 
 th.mat-sort-header-sorted {
@@ -20,6 +35,18 @@ th.mat-sort-header-sorted {
 
 .margin-TL {
     margin: 1%;
+}
+
+.new-btn-span {
+    font-size: 36px;
+    display: inline-block;
+}
+
+.new-btn {
+    font-size: 16px;
+    margin-top: 15px;
+    margin-left: 6px;
+    display: inline-block;
 }
 
 @media screen and (max-width: 450px),

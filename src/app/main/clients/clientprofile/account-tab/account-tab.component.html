@@ -1,10 +1,11 @@
-<div fxLayout="row" fxLayoutAlign="start center">
+<div fxLayout="row" fxLayoutAlign="start center" class="account">
   <div fxFlex="100">
-    <mat-tab-group mat-align-tabs="left" [selectedIndex]="selectedInd" style="background-color: white">
+    <mat-tab-group mat-align-tabs="left" [selectedIndex]="selectedInd" style="background-color: white"
+      (selectedTabChange)="onTabGroupSelect($event)">
       <mat-tab label="POINT LABEL">
         <div class="margin-TL">
           <div fxLayout="row" fxLayoutAlign="start center">
-            <div fxFlex.xl="10" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="50" fxFlex.xs="100">
+            <div fxFlex.xl="15" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="50" fxFlex.xs="100">
               <mat-form-field appearance="outline" style="width: 100%;">
                 <mat-label>Location</mat-label>
                 <mat-select class="dropdown">
@@ -43,11 +44,11 @@
             <div fxFlex.xl="80" fxFlex.lg="80" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
               <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
                 <div fxFlex="15">
-                  <button mat-raised-button style="padding: 20px;width: 100%; color: white" class="changeBg"><span
-                      style="font-size: 36px;">336</span><span> pts</span></button>
+                  <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">336</span><span class="new-btn">
+                      pts</span></button>
                 </div>
                 <div fxFlex="45">
-                  <p class="font-bold">Janet Napoles</p>
+                  <p class="font-bold m-0 font-24">Janet Napoles</p>
                   <div>As of Wednesday, October 13, 2020 - 7:13 PM</div>
                 </div>
                 <div fxFlex="40" style="text-align: right;">
@@ -56,7 +57,7 @@
               </div>
 
               <div fxLayout="row" fxLayoutAlign="space-around center">
-                <div fxFlex="100">
+                <div fxFlex="100" *ngIf="selectedIndex === 0">
                   <p>Point history</p>
                   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
@@ -103,7 +104,7 @@
       <mat-tab label="MEMBERSHIP">
         <div class="margin-TL">
           <div fxLayout="row" fxLayoutAlign="start center">
-            <div fxFlex.xl="10" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="50" fxFlex.xs="100">
+            <div fxFlex.xl="15" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="50" fxFlex.xs="100">
               <mat-form-field appearance="outline" style="width: 100%;">
                 <mat-label>Location</mat-label>
                 <mat-select class="dropdown">
@@ -122,11 +123,11 @@
             <div fxFlex.xl="80" fxFlex.lg="80" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
               <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
                 <div fxFlex="15">
-                  <button mat-raised-button style="padding: 20px;width: 100%; color: white" class="changeBg"><span
-                      style="font-size: 36px;">336</span><span> Membership</span></button>
+                  <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">336</span><span class="new-btn">
+                      Membership</span></button>
                 </div>
                 <div fxFlex="45">
-                  <p class="font-bold">Janet Napoles</p>
+                  <p class="font-bold m-0 font-24">Janet Napoles</p>
                   <div>As of Wednesday, October 13, 2020 - 7:13 PM</div>
                 </div>
                 <div fxFlex="40" style="text-align: right;">
@@ -135,7 +136,7 @@
               </div>
 
               <div fxLayout="row" fxLayoutAlign="space-around center">
-                <div fxFlex="100">
+                <div fxFlex="100" *ngIf="selectedIndex === 1">
                   <p>Membership history</p>
                   <table mat-table [dataSource]="dataSource2" matSort class="mat-elevation-z8">
 
@@ -182,7 +183,7 @@
       <mat-tab label="GIFTCARD">
         <div class="margin-TL">
           <div fxLayout="row" fxLayoutAlign="start center">
-            <div fxFlex.xl="10" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="50" fxFlex.xs="100">
+            <div fxFlex.xl="15" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="50" fxFlex.xs="100">
               <mat-form-field appearance="outline" style="width: 100%;">
                 <mat-label>Location</mat-label>
                 <mat-select class="dropdown">
@@ -201,55 +202,61 @@
             <div fxFlex.xl="80" fxFlex.lg="80" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
               <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
                 <div fxFlex="15">
-                  <button mat-raised-button style="padding: 20px;width: 100%; color: white" class="changeBg"><span
-                      style="font-size: 36px;">2 / 3</span><span> Active GC</span></button>
+                  <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">2 </span><span class="new-btn">/ 3 Active
+                      GC</span></button>
                 </div>
                 <div fxFlex="45">
-                  <p class="font-bold">Janet Napoles</p>
+                  <p class="font-bold m-0 font-24">Janet Napoles</p>
                   <div>As of Wednesday, October 13, 2020 - 7:13 PM</div>
                 </div>
                 <div fxFlex="40" style="text-align: right;">
-                  <button mat-raised-button color="primary">Add Membership</button>
+                  <button mat-raised-button color="primary">Add Gift Card</button>
                 </div>
               </div>
 
               <div fxLayout="row" fxLayoutAlign="space-around center">
-                <div fxFlex="100">
+                <div fxFlex="100" *ngIf="selectedIndex === 2">
                   <p>Gift Card Purchased history</p>
-                  <table mat-table [dataSource]="dataSource2" matSort class="mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSource3" matSort class="mat-elevation-z8">
 
                     <!-- register Column -->
-                    <ng-container matColumnDef="register">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Registered </th>
-                      <td mat-cell *matCellDef="let element"> {{element.register}} </td>
+                    <ng-container matColumnDef="date">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Purchased Date </th>
+                      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
                     </ng-container>
 
                     <!-- expire Column -->
-                    <ng-container matColumnDef="expire">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Expire on</th>
-                      <td mat-cell *matCellDef="let element"> {{element.expire}} </td>
+                    <ng-container matColumnDef="order">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Order Number </th>
+                      <td mat-cell *matCellDef="let element"> {{element.order}} </td>
                     </ng-container>
 
                     <!-- class Column -->
-                    <ng-container matColumnDef="class">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Class Name</th>
-                      <td mat-cell *matCellDef="let element"> {{element.class}} </td>
+                    <ng-container matColumnDef="activeBy">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Activated by </th>
+                      <td mat-cell *matCellDef="let element"> {{element.activeBy}} </td>
                     </ng-container>
 
                     <!-- schedule Column -->
-                    <ng-container matColumnDef="schedule">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Schedule </th>
-                      <td mat-cell *matCellDef="let element"> {{element.schedule}} </td>
+                    <ng-container matColumnDef="status">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
                     </ng-container>
-
+                    
                     <!-- fee Column -->
-                    <ng-container matColumnDef="fee">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fee </th>
-                      <td mat-cell *matCellDef="let element"> ${{element.fee}} </td>
+                    <ng-container matColumnDef="value">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Value </th>
+                      <td mat-cell *matCellDef="let element"> ${{element.value}} </td>
                     </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+                   
+                    <!-- fee Column -->
+                    <ng-container matColumnDef="remainingValue">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Remaining Value </th>
+                      <td mat-cell *matCellDef="let element"> ${{element.remainingValue}} </td>
+                    </ng-container>
+                    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
                   </table>
                 </div>
 
@@ -259,10 +266,250 @@
         </div>
       </mat-tab>
       <mat-tab label="MONEY">
+        <div class="margin-TL">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex.xl="15" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="50" fxFlex.xs="100">
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Location</mat-label>
+                <mat-select class="dropdown">
+                  <mat-option value="">
+                    {{'Thai Massage Centere'}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+        
+            </div>
+          </div>
+          <div fxLayout=" row" fxLayoutAlign="space-around center">
+        
+            <div fxFlex.xl="80" fxFlex.lg="80" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
+              <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                <div fxFlex="15">
+                  <button mat-raised-button class="main-btn changeBg" style="padding: 10px"><span
+                      class="new-btn-span">$75.76</span><span class="new-btn"></span></button>
+                </div>
+                <div fxFlex="45">
+                  <p class="font-bold m-0 font-24">Janet Napoles</p>
+                  <div>As of Wednesday, October 13, 2020 - 7:13 PM</div>
+                </div>
+                <div fxFlex="40" style="text-align: right;">
+                  <button mat-raised-button color="primary">Add money</button>
+                </div>
+              </div>
+        
+              <div fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="100" *ngIf="selectedIndex === 3">
+                  <p>Cash in history</p>
+                  <table mat-table [dataSource]="dataSource4" matSort class="mat-elevation-z8">
+        
+                    <!-- register Column -->
+                    <ng-container matColumnDef="date">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cash in Date </th>
+                      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                    </ng-container>
+        
+                    <!-- expire Column -->
+                    <ng-container matColumnDef="transaction_number">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Number </th>
+                      <td mat-cell *matCellDef="let element"> {{element.transaction_number}} </td>
+                    </ng-container>
+        
+                    <!-- class Column -->
+                    <ng-container matColumnDef="addedBy">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Added by </th>
+                      <td mat-cell *matCellDef="let element"> {{element.addedBy}} </td>
+                    </ng-container>
+        
+                    <!-- schedule Column -->
+                    <ng-container matColumnDef="via">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Via </th>
+                      <td mat-cell *matCellDef="let element"> {{element.via}} </td>
+                    </ng-container>
+        
+                    <!-- fee Column -->
+                    <ng-container matColumnDef="total">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+                      <td mat-cell *matCellDef="let element"> ${{element.total}} </td>
+                    </ng-container>
+        
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns4"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
+                  </table>
+                </div>
+        
+              </div>
+            </div>
+          </div>
+        </div>
       </mat-tab>
       <mat-tab label="TRANSACTION MONEY">
+        <div class="margin-TL">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex.xl="15" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="50" fxFlex.xs="100">
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Location</mat-label>
+                <mat-select class="dropdown">
+                  <mat-option value="">
+                    {{'Thai Massage Centere'}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+        
+            </div>
+          </div>
+          <div fxLayout=" row" fxLayoutAlign="space-around center">
+        
+            <div fxFlex.xl="80" fxFlex.lg="80" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
+              <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                <div fxFlex="16">
+                  <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">$9,324</span><span
+                      class="new-btn">spent</span></button>
+                </div>
+                <div fxFlex="45">
+                  <p class="font-bold m-0 font-24">Janet Napoles</p>
+                  <div>As of Wednesday, October 13, 2020 - 7:13 PM</div>
+                </div>
+        
+                <div fxFlex="40">
+                </div>
+              </div>
+        
+              <div fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="100" *ngIf="selectedIndex === 4">
+                  <p>Transaction history</p>
+                  <table mat-table [dataSource]="dataSource5" matSort class="mat-elevation-z8">
+        
+                    <!-- register Column -->
+                    <ng-container matColumnDef="date">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                    </ng-container>
+        
+                    <!-- expire Column -->
+                    <ng-container matColumnDef="item_name">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Item name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.item_name}} </td>
+                    </ng-container>
+        
+                    <!-- class Column -->
+                    <ng-container matColumnDef="servedBy">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Served by </th>
+                      <td mat-cell *matCellDef="let element"> {{element.servedBy}} </td>
+                    </ng-container>
+        
+                    <!-- schedule Column -->
+                    <ng-container matColumnDef="type">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                    </ng-container>
+        
+                    <!-- fee Column -->
+                    <ng-container matColumnDef="discount">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Discount </th>
+                      <td mat-cell *matCellDef="let element"> ${{element.discount}} </td>
+                    </ng-container>
+        
+        
+                    <!-- fee Column -->
+                    <ng-container matColumnDef="amount">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+                      <td mat-cell *matCellDef="let element"> ${{element.amount}} </td>
+                    </ng-container>
+        
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns5"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns5;"></tr>
+                  </table>
+                </div>
+        
+              </div>
+            </div>
+          </div>
+        </div>
       </mat-tab>
       <mat-tab label="SHOP CRADIT">
+        <div class="margin-TL">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex.xl="15" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="50" fxFlex.xs="100">
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Location</mat-label>
+                <mat-select class="dropdown">
+                  <mat-option value="">
+                    {{'Thai Massage Centere'}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+        
+            </div>
+          </div>
+          <div fxLayout=" row" fxLayoutAlign="space-around center">
+        
+            <div fxFlex.xl="80" fxFlex.lg="80" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
+              <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                <div fxFlex="16">
+                  <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">$76</span><span
+                      class="new-btn">credit</span></button>
+                </div>
+                <div fxFlex="45">
+                  <p class="font-bold m-0 font-24">Janet Napoles</p>
+                  <div>As of Wednesday, October 13, 2020 - 7:13 PM</div>
+                </div>
+        
+                <div fxFlex="40" style="text-align: right;">
+                  <button mat-raised-button color="primary">Add Credit</button>
+                </div>
+              </div>
+        
+              <div fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="100" *ngIf="selectedIndex === 5">
+                  <p>Cradit earned history</p>
+                  <table mat-table [dataSource]="dataSource6" matSort class="mat-elevation-z8">
+        
+                    <!-- register Column -->
+                    <ng-container matColumnDef="date">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                    </ng-container>
+        
+                    <!-- expire Column -->
+                    <ng-container matColumnDef="event">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Event name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.event}} </td>
+                    </ng-container>
+        
+                    <!-- class Column -->
+                    <ng-container matColumnDef="addedBy">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Added by </th>
+                      <td mat-cell *matCellDef="let element"> {{element.addedBy}} </td>
+                    </ng-container>
+        
+                    <!-- schedule Column -->
+                    <ng-container matColumnDef="type">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                    </ng-container>
+        
+                    <!-- fee Column -->
+                    <ng-container matColumnDef="earn">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Earned </th>
+                      <td mat-cell *matCellDef="let element"> ${{element.earn}} </td>
+                    </ng-container>
+        
+        
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns6"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns6;"></tr>
+                  </table>
+                </div>
+        
+              </div>
+            </div>
+          </div>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </div>
