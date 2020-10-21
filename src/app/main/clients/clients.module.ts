@@ -29,6 +29,7 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import { IouListComponent } from "./iou-list/iou-list.component";
 import { MatBadgeModule } from '@angular/material/badge';
 import { ImportClientsComponent } from "./import-clients/import-clients.components";
+import { ProductsTabComponent } from './clientprofile/products-tab/products-tab.component';
 
 
 
@@ -82,7 +83,8 @@ const routes = [
         BodyPointModalComponent,
         IouListComponent,
         ImportClientsComponent,
-        AccountTabComponent
+        AccountTabComponent,
+        ProductsTabComponent
         // SignatureFieldComponent,
         
     ],
@@ -94,7 +96,8 @@ const routes = [
         BodyPointModalComponent,
         IouListComponent,
         ImportClientsComponent,
-        AccountTabComponent
+        AccountTabComponent,
+        ProductsTabComponent
         // SignatureFieldComponent,
     ],
     entryComponents: [

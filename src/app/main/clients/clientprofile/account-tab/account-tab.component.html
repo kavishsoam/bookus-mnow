@@ -42,24 +42,29 @@
               New</button>
           </div> -->
             <div fxFlex.xl="80" fxFlex.lg="80" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
-              <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-                <div fxFlex="15">
-                  <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">336</span><span class="new-btn">
+              <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                <div fxFlex="80">
+                  <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">336</span><span class="new-btn">
                       pts</span></button>
-                </div>
-                <div fxFlex="45">
-                  <p class="font-bold m-0 font-24">Janet Napoles</p>
-                  <div>As of Wednesday, October 13, 2020 - 7:13 PM</div>
-                </div>
-                <div fxFlex="40" style="text-align: right;">
+                      <div [ngClass.sm]="'text-center'" [ngClass.xs]="'text-center'">
+                        <p class="font-bold m-0 font-24">Janet Napoles</p>
+                        <div class="opp-05">As of Wednesday, October 13, 2020 - 7:13 PM</div>
+                      </div>
+                  </div>
+                  
+                  </div>
+                  <div fxFlex="20" style="text-align: right;">
                   <button mat-raised-button color="primary">Add Points</button>
                 </div>
               </div>
+            <div fxLayout="row" fxLayoutAlign="start center">
+                                <p>Point history</p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around center">
 
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <div fxFlex="100" *ngIf="selectedIndex === 0">
-                  <p>Point history</p>
-                  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+                  <div class="table-container mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource" matSort class="POINT-LABEL">
 
                     <!-- date Column -->
                     <ng-container matColumnDef="date">
@@ -91,11 +96,11 @@
                       <td mat-cell *matCellDef="let element"> {{element.ponit}} pts</td>
                     </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   </table>
-                </div>
-
+                  </div>
+                
               </div>
             </div>
           </div>
@@ -115,30 +120,31 @@
               </mat-form-field>
             </div>
             <div>
-
             </div>
           </div>
           <div fxLayout=" row" fxLayoutAlign="space-around center">
-
             <div fxFlex.xl="80" fxFlex.lg="80" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
-              <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-                <div fxFlex="15">
-                  <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">336</span><span class="new-btn">
+              <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                <div fxFlex="80">
+                  <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">336</span><span class="new-btn">
                       Membership</span></button>
-                </div>
-                <div fxFlex="45">
-                  <p class="font-bold m-0 font-24">Janet Napoles</p>
-                  <div>As of Wednesday, October 13, 2020 - 7:13 PM</div>
-                </div>
-                <div fxFlex="40" style="text-align: right;">
+                      <div [ngClass.sm]="'text-center'" [ngClass.xs]="'text-center'">
+                        <p class="font-bold m-0 font-24">Janet Napoles</p>
+                        <div class="opp-05">As of Wednesday, October 13, 2020 - 7:13 PM</div>
+                      </div>
+                  </div>
+                  </div>
+                  <div fxFlex="20" style="text-align: right;">
                   <button mat-raised-button color="primary">Add Membership</button>
                 </div>
               </div>
-
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <div fxFlex="100" *ngIf="selectedIndex === 1">
-                  <p>Membership history</p>
-                  <table mat-table [dataSource]="dataSource2" matSort class="mat-elevation-z8">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <p>Membership history</p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+              <div class="table-container mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource2" matSort class="MEMBERSHIP">
 
                     <!-- register Column -->
                     <ng-container matColumnDef="register">
@@ -170,9 +176,10 @@
                       <td mat-cell *matCellDef="let element"> ${{element.fee}} </td>
                     </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
                   </table>
+                
                 </div>
 
               </div>
@@ -200,24 +207,28 @@
           <div fxLayout=" row" fxLayoutAlign="space-around center">
 
             <div fxFlex.xl="80" fxFlex.lg="80" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
-              <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-                <div fxFlex="15">
-                  <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">2 </span><span class="new-btn">/ 3 Active
+              <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                <div fxFlex="80">
+                  <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">2 </span><span class="new-btn">/ 3 Active
                       GC</span></button>
-                </div>
-                <div fxFlex="45">
-                  <p class="font-bold m-0 font-24">Janet Napoles</p>
-                  <div>As of Wednesday, October 13, 2020 - 7:13 PM</div>
-                </div>
-                <div fxFlex="40" style="text-align: right;">
+                      <div [ngClass.sm]="'text-center'" [ngClass.xs]="'text-center'">
+                        <p class="font-bold m-0 font-24">Janet Napoles</p>
+                        <div class="opp-05">As of Wednesday, October 13, 2020 - 7:13 PM</div>
+                        </div>
+                        </div>
+                        </div>
+                        <div fxFlex="20" style="text-align: right;">
                   <button mat-raised-button color="primary">Add Gift Card</button>
                 </div>
               </div>
-
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <div fxFlex="100" *ngIf="selectedIndex === 2">
-                  <p>Gift Card Purchased history</p>
-                  <table mat-table [dataSource]="dataSource3" matSort class="mat-elevation-z8">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <p>Gift Card Purchased history</p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+            
+              <div class="table-container mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource3" matSort class="GIFTCARD">
 
                     <!-- register Column -->
                     <ng-container matColumnDef="date">
@@ -255,10 +266,11 @@
                       <td mat-cell *matCellDef="let element"> ${{element.remainingValue}} </td>
                     </ng-container>
                     
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns3; sticky: true"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
                   </table>
                 </div>
+                
 
               </div>
             </div>
@@ -285,25 +297,29 @@
           <div fxLayout=" row" fxLayoutAlign="space-around center">
         
             <div fxFlex.xl="80" fxFlex.lg="80" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
-              <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-                <div fxFlex="15">
-                  <button mat-raised-button class="main-btn changeBg" style="padding: 10px"><span
+              <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                <div fxFlex="80">
+                  <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <button mat-raised-button class="main-btn changeBg" style="padding: 10px"><span
                       class="new-btn-span">$75.76</span><span class="new-btn"></span></button>
+                      <div [ngClass.sm]="'text-center'" [ngClass.xs]="'text-center'">
+                        <p class="font-bold m-0 font-24">Janet Napoles</p>
+                        <div class="opp-05">As of Wednesday, October 13, 2020 - 7:13 PM</div>
+                      </div>
+                  </div>
+                  
                 </div>
-                <div fxFlex="45">
-                  <p class="font-bold m-0 font-24">Janet Napoles</p>
-                  <div>As of Wednesday, October 13, 2020 - 7:13 PM</div>
-                </div>
-                <div fxFlex="40" style="text-align: right;">
+                <div fxFlex="20" style="text-align: right;">
                   <button mat-raised-button color="primary">Add money</button>
                 </div>
               </div>
-        
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <div fxFlex="100" *ngIf="selectedIndex === 3">
-                  <p>Cash in history</p>
-                  <table mat-table [dataSource]="dataSource4" matSort class="mat-elevation-z8">
-        
+            <div fxLayout="row" fxLayoutAlign="start center">
+                                <p>Cash in history</p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+
+                  <div class="table-container mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource4" matSort class="MONEY">
                     <!-- register Column -->
                     <ng-container matColumnDef="date">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Cash in Date </th>
@@ -334,9 +350,10 @@
                       <td mat-cell *matCellDef="let element"> ${{element.total}} </td>
                     </ng-container>
         
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns4"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns4; sticky: true"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
                   </table>
+                
                 </div>
         
               </div>
@@ -364,24 +381,27 @@
           <div fxLayout=" row" fxLayoutAlign="space-around center">
         
             <div fxFlex.xl="80" fxFlex.lg="80" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
-              <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-                <div fxFlex="16">
-                  <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">$9,324</span><span
+              <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                <div fxFlex="80">
+                  <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">$9,324</span><span
                       class="new-btn">spent</span></button>
+                      <div [ngClass.sm]="'text-center'" [ngClass.xs]="'text-center'">
+                        <p class="font-bold m-0 font-24">Janet Napoles</p>
+                        <div class="opp-05">As of Wednesday, October 13, 2020 - 7:13 PM</div>
+                      </div>
+                  </div>
+                  
                 </div>
-                <div fxFlex="45">
-                  <p class="font-bold m-0 font-24">Janet Napoles</p>
-                  <div>As of Wednesday, October 13, 2020 - 7:13 PM</div>
-                </div>
-        
-                <div fxFlex="40">
+                <div fxFlex="20">
                 </div>
               </div>
-        
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <div fxFlex="100" *ngIf="selectedIndex === 4">
-                  <p>Transaction history</p>
-                  <table mat-table [dataSource]="dataSource5" matSort class="mat-elevation-z8">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <p>Transaction history</p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+              <div class="table-container mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource5" matSort class="TRANSACTIONMONEY">
         
                     <!-- register Column -->
                     <ng-container matColumnDef="date">
@@ -420,10 +440,11 @@
                       <td mat-cell *matCellDef="let element"> ${{element.amount}} </td>
                     </ng-container>
         
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns5"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns5; sticky: true"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns5;"></tr>
                   </table>
                 </div>
+                
         
               </div>
             </div>
@@ -450,25 +471,29 @@
           <div fxLayout=" row" fxLayoutAlign="space-around center">
         
             <div fxFlex.xl="80" fxFlex.lg="80" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100">
-              <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-                <div fxFlex="16">
-                  <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">$76</span><span
-                      class="new-btn">credit</span></button>
+              <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                <div fxFlex="80">
+                  <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <button mat-raised-button class="main-btn changeBg"><span class="new-btn-span">$76</span><span
+                      class="new-btn">Credits</span></button>
+                      <div [ngClass.sm]="'text-center'" [ngClass.xs]="'text-center'">
+                        <p class="font-bold m-0 font-24">Janet Napoles</p>
+                  <div class="opp-05">As of Wednesday, October 13, 2020 - 7:13 PM</div>
+                      </div>
+                  </div>
+                  
                 </div>
-                <div fxFlex="45">
-                  <p class="font-bold m-0 font-24">Janet Napoles</p>
-                  <div>As of Wednesday, October 13, 2020 - 7:13 PM</div>
-                </div>
-        
-                <div fxFlex="40" style="text-align: right;">
+                <div fxFlex="20" style="text-align: right;">
                   <button mat-raised-button color="primary">Add Credit</button>
                 </div>
               </div>
-        
-              <div fxLayout="row" fxLayoutAlign="space-around center">
-                <div fxFlex="100" *ngIf="selectedIndex === 5">
-                  <p>Cradit earned history</p>
-                  <table mat-table [dataSource]="dataSource6" matSort class="mat-elevation-z8">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <p>Cradit earned history</p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+            
+              <div class="table-container mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource6" matSort class="SHOPCRADIT">
         
                     <!-- register Column -->
                     <ng-container matColumnDef="date">
@@ -501,9 +526,10 @@
                     </ng-container>
         
         
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns6"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns6; sticky: true"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns6;"></tr>
                   </table>
+              
                 </div>
         
               </div>

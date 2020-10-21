@@ -1,0 +1,205 @@
+.account {
+    font-family: Sarabun !important;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.font-24 {
+    font-size: 24px;
+}
+
+.changeColor {
+    color: #039be5;
+}
+
+.main-btn {
+    padding: 4px 20px;
+    width: 100%;
+    color: white !important
+}
+
+.changeBg {
+    background-color: #039be5 !important;
+}
+
+
+::ng-deep table {
+    width: 100%;
+    font-family: Sarabun !important;
+
+
+    th.mat-header-cell,
+    td.mat-cell {
+        padding: 14px;
+    }
+
+    th.mat-sort-header-sorted {
+        color: black;
+    }
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.margin-TL {
+    margin: 1%;
+}
+
+.new-btn-span {
+    font-size: 36px;
+    display: inline-block;
+}
+
+.new-btn {
+    font-size: 16px;
+    margin-top: 15px;
+    margin-left: 6px;
+    display: inline-block;
+}
+
+@media screen and (max-width: 450px),
+(min-device-width: 450px) and (max-device-width: 450px) {
+    .p-50 {
+        padding: 10px;
+    }
+
+    .p-24 {
+        padding: 0px !important;
+    }
+
+    .border-div {
+        margin: 0;
+    }
+
+    .margin-TL {
+        margin: 0;
+    }
+
+}
+
+
+@media only screen and (max-width: 760px),
+(min-device-width: 760px) and (max-device-width: 760px) {
+
+    /* Force table to not be like tables anymore */
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+
+    ::ng-deep table.products {
+        tbody {
+            display: block;
+        }
+
+        td.mat-cell:first-of-type,
+        td.mat-footer-cell:first-of-type,
+        th.mat-header-cell:first-of-type {
+            padding-left: 0;
+        }
+
+        /* Hide table headers (but not display: none;, for accessibility) */
+        thead {
+            display: none;
+        }
+
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        tr {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            height: auto !important;
+        }
+
+        td {
+            /* Behave  like a "row" */
+            border: none;
+            // border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+
+        td.mat-cell {
+            border-bottom-width: 0;
+            border-bottom-style: none;
+            padding: 5px 0;
+        }
+
+        td:before {
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            font-weight: bold;
+            float: left;
+        }
+
+        .text-center {
+            text-align: left;
+        }
+
+        td.mat-cell:last-of-type,
+        td.mat-footer-cell:last-of-type,
+        th.mat-header-cell:last-of-type {
+            padding-right: 0;
+        }
+
+    }
+
+
+
+    .products {
+
+        /*
+	Label the data
+    */
+        td:nth-of-type(1):before {
+            content: 'Date';
+        }
+
+        td:nth-of-type(2):before {
+            content: "Product Name";
+        }
+
+        td:nth-of-type(3):before {
+            content: "Paid by";
+        }
+
+        td:nth-of-type(4):before {
+            content: "Quantity";
+        }
+
+        td:nth-of-type(5):before {
+            content: "Discount";
+        }
+
+        td:nth-of-type(6):before {
+            content: "Tax";
+        }
+
+        td:nth-of-type(7):before {
+            content: "Price";
+        }
+
+        td:nth-of-type(8):before {
+            content: "Total";
+        }
+
+    }
+
+}

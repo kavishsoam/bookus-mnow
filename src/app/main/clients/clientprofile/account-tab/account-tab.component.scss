@@ -10,27 +10,48 @@
     font-size: 24px;
 }
 
+.opp-05 {
+    opacity: 0.5;
+}
+
 .changeColor {
     color: #039be5;
 }
 
 .main-btn {
     padding: 4px 20px;
-    width: 100%;
+    width: auto;
+    min-width: 190px;
     color: white !important
+}
+
+.table-container {
+    height: 400px;
+    overflow: auto;
+    width: 100%;
+}
+
+mat-tab-group {
+    min-height: 77vh;
 }
 
 .changeBg {
     background-color: #039be5 !important;
 }
 
-table {
+::ng-deep table {
     width: 100%;
     font-family: Sarabun !important;
-}
 
-th.mat-sort-header-sorted {
-    color: black;
+
+    th.mat-header-cell,
+    td.mat-cell {
+        padding: 14px;
+    }
+
+    th.mat-sort-header-sorted {
+        color: black;
+    }
 }
 
 .margin-TL {
@@ -47,6 +68,10 @@ th.mat-sort-header-sorted {
     margin-top: 15px;
     margin-left: 6px;
     display: inline-block;
+}
+
+.text-center {
+    text-align: center;
 }
 
 @media screen and (max-width: 450px),
@@ -66,5 +91,282 @@ th.mat-sort-header-sorted {
     .margin-TL {
         margin: 0;
     }
+
+}
+
+@media only screen and (max-width: 760px),
+(min-device-width: 760px) and (max-device-width: 760px) {
+
+    .table-container {
+        height: auto;
+        overflow: auto;
+        width: 100%;
+    }
+
+    .opp-05 {
+        font-size: 15px;
+    }
+
+    /* Force table to not be like tables anymore */
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+
+    ::ng-deep table.POINT-LABEL,
+    ::ng-deep table.GIFTCARD,
+    ::ng-deep table.MONEY,
+    ::ng-deep table.TRANSACTIONMONEY,
+    ::ng-deep table.SHOPCRADIT,
+    ::ng-deep table.MEMBERSHIP {
+        tbody {
+            display: block;
+        }
+
+        td.mat-cell:first-of-type,
+        td.mat-footer-cell:first-of-type,
+        th.mat-header-cell:first-of-type {
+            padding-left: 0;
+        }
+
+        /* Hide table headers (but not display: none;, for accessibility) */
+        thead {
+            display: none;
+        }
+
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        tr {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            height: auto !important;
+        }
+
+        td {
+            /* Behave  like a "row" */
+            border: none;
+            // border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+
+        td.mat-cell {
+            border-bottom-width: 0;
+            border-bottom-style: none;
+            padding: 5px 0;
+        }
+
+        td:before {
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            font-weight: bold;
+            float: left;
+        }
+
+        .text-center {
+            text-align: left;
+        }
+
+        td.mat-cell:last-of-type,
+        td.mat-footer-cell:last-of-type,
+        th.mat-header-cell:last-of-type {
+            padding-right: 0;
+        }
+
+    }
+
+
+
+    .POINT-LABEL {
+
+        /*
+	Label the data
+    */
+        td:nth-of-type(1):before {
+            content: ' Date';
+            ;
+        }
+
+        td:nth-of-type(2):before {
+            content: " Name";
+        }
+
+        td:nth-of-type(3):before {
+            content: " Type";
+        }
+
+        td:nth-of-type(4):before {
+            content: " Serve by";
+        }
+
+        td:nth-of-type(5):before {
+            content: " Ponit Earned";
+        }
+
+    }
+
+    .MEMBERSHIP {
+
+        /*
+	Label the data
+    */
+        td:nth-of-type(1):before {
+            content: ' Registered';
+            ;
+        }
+
+        td:nth-of-type(2):before {
+            content: " Expire on";
+        }
+
+        td:nth-of-type(3):before {
+            content: " Class Name";
+        }
+
+        td:nth-of-type(4):before {
+            content: " Schedule";
+        }
+
+        td:nth-of-type(5):before {
+            content: " Fee";
+        }
+
+    }
+
+    .GIFTCARD {
+
+        /*
+	Label the data
+    */
+        td:nth-of-type(1):before {
+            content: ' Purchased Date';
+            ;
+        }
+
+        td:nth-of-type(2):before {
+            content: " Order Number";
+        }
+
+        td:nth-of-type(3):before {
+            content: " Activated by";
+        }
+
+        td:nth-of-type(4):before {
+            content: " Status";
+        }
+
+        td:nth-of-type(5):before {
+            content: " Value";
+        }
+
+        td:nth-of-type(6):before {
+            content: " Remaining Value";
+        }
+
+    }
+
+    .MONEY {
+
+        /*
+	Label the data
+    */
+        td:nth-of-type(1):before {
+            content: ' Cash in Date';
+            ;
+        }
+
+        td:nth-of-type(2):before {
+            content: " Transaction Number";
+        }
+
+        td:nth-of-type(3):before {
+            content: " Added by";
+        }
+
+        td:nth-of-type(4):before {
+            content: " Via";
+        }
+
+        td:nth-of-type(5):before {
+            content: " Total";
+        }
+
+    }
+
+    .TRANSACTIONMONEY {
+
+        /*
+	Label the data
+    */
+        td:nth-of-type(1):before {
+            content: 'Date';
+            ;
+        }
+
+        td:nth-of-type(2):before {
+            content: "Item name";
+        }
+
+        td:nth-of-type(3):before {
+            content: "Served by";
+        }
+
+        td:nth-of-type(4):before {
+            content: "Type";
+        }
+
+        td:nth-of-type(5):before {
+            content: "Discount";
+        }
+
+        td:nth-of-type(6):before {
+            content: "Amount";
+        }
+
+    }
+
+    .SHOPCRADIT {
+
+        /*
+	Label the data
+    */
+        td:nth-of-type(1):before {
+            content: 'Date';
+            ;
+        }
+
+        td:nth-of-type(2):before {
+            content: "Event name";
+        }
+
+        td:nth-of-type(3):before {
+            content: "Added by";
+        }
+
+        td:nth-of-type(4):before {
+            content: "Type";
+        }
+
+        td:nth-of-type(5):before {
+            content: "Earned";
+        }
+
+    }
+
+
 
 }
