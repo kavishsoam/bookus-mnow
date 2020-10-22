@@ -89,7 +89,7 @@ mat-tab-group {
     }
 
     .margin-TL {
-        margin: 0;
+        margin: 10px 15px;
     }
 
 }
@@ -101,6 +101,10 @@ mat-tab-group {
         height: auto;
         overflow: auto;
         width: 100%;
+    }
+
+    .mat-elevation-z8 {
+        box-shadow: none !important;
     }
 
     .opp-05 {
