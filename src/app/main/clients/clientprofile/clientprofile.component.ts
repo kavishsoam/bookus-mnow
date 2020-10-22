@@ -304,6 +304,23 @@ export class ClientprofileComponent implements OnInit {
       address: "",
       apartmentNo: "",
     });
+
+    moment.updateLocale("en", {
+      relativeTime: {
+        s: "seconds",
+        m: "a min",
+        mm: "%d mins",
+        h: "an hour",
+        hh: "%d hrs",
+        d: "a day",
+        dd: "%d days",
+        M: "a month",
+        MM: "%d months",
+        y: "a year",
+        yy: "%d years"
+      }
+    });
+
   }
 
   clientListColumn: string[] = [

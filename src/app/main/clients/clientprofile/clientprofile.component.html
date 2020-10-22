@@ -138,23 +138,23 @@
         
             <!-- Right side block --->
             <div fxFlex="60" class="p-24" style="width: 100%;">
-              <div fxFlex="100" fxLayout="column" fxLayoutAlign="space-around stretch" class="p-24" fxLayoutGap="10px">
+              <div fxFlex="100" fxLayout="column" fxLayoutAlign="space-around stretch" fxLayoutGap="10px">
                 <div>
-                  <div fxLayout="row" fxLayoutAlign="center stretch" fxLayout.xs="column">
-                    <div fxFlex="100" class="border-div m-0">
+                  <div fxLayout="row" fxLayoutAlign="center stretch">
+                    <div fxFlex="100" class="border-block m-0">
                       <div fxLayout="column" fxLayoutAlign="space-evenly center" class="min-h-100">
-                        <div class="gridHeader">{{moment(profileInfo?.updatedAt).fromNow()}}</div>
+                        <div class="gridHeader">{{moment(profileInfo?.updatedAt).fromNow(true)}}</div>
                         <div class="blurText">{{profileInfo?.updatedAt | date : 'mediumDate'}}</div>
                         <div class="blurText">Last Visit</div>
                       </div>
                     </div>
-                    <div fxFlex="100" class="border-div m-0">
+                    <div fxFlex="100" class="border-block m-0">
                       <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
                         <div class="gridHeader">{{clientDetails?.totalSales}}</div>
                         <div class="blurText">Sales</div>
                       </div>
                     </div>
-                    <div fxFlex="100" class="border-div m-0">
+                    <div fxFlex="100" class="border-block m-0">
                       <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
                         <div class="gridHeader">
                           15 pts.
@@ -165,8 +165,8 @@
                       </div>
                     </div>
                     </div>
-                    <div fxLayout="row" fxLayoutAlign="center stretch" fxLayout.xs="column">
-                      <div fxFlex="100" class="border-div m-0">
+                    <div fxLayout="row" fxLayoutAlign="center stretch">
+                      <div fxFlex="100" class="border-block m-0">
                         <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
                           <div class="gridHeader">
                             {{clientDetails?.allBookings}}
@@ -177,13 +177,13 @@
                         </div>
                       </div>
           
-                      <div fxFlex="100" class="border-div m-0">
+                      <div fxFlex="100" class="border-block m-0">
                         <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
                           <div class="gridHeader">{{clientDetails?.noShow}}</div>
                           <div class="blurText">No Show</div>
                         </div>
                       </div>
-                      <div fxFlex="100" class="border-div m-0">
+                      <div fxFlex="100" class="border-block m-0">
                         <div fxLayout="column" fxLayoutAlign="space-around center" class="min-h-100">
                           <div class="gridHeader">{{clientDetails?.cancelled}}</div>
                           <div class="blurText">Cancellations</div>

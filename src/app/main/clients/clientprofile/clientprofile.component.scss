@@ -519,6 +519,13 @@ mat-tab-group {
     -o-border-radius: 10px;
 }
 
+.border-block {
+    border: 1px solid #c8c8c8;
+    margin: 7px !important;
+    border-radius: 10px;
+    box-shadow: 1px 2px #c8c8c8;
+}
+
 .v-align-middle {
     vertical-align: middle;
 }
@@ -540,10 +547,6 @@ mat-tab-group {
         padding: 10px;
     }
 
-    .p-24 {
-        padding: 10px !important;
-    }
-
     .border-div {
         margin: 0;
     }
@@ -556,6 +559,18 @@ mat-tab-group {
 
 @media only screen and (max-width: 760px),
 (min-device-width: 760px) and (max-device-width: 760px) {
+
+    .p-24 {
+        padding: 10px !important;
+    }
+
+    .border-block {
+        margin: 3px !important;
+    }
+
+    .blurText {
+        font-size: 12px;
+    }
 
     /* Force table to not be like tables anymore */
     table,
