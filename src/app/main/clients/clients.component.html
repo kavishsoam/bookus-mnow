@@ -90,11 +90,11 @@
         <button mat-raised-button (click)="addClient()" color="primary">{{'New client' | translate}}</button>
       </div>
       <div class="filters" *ngIf="clientList.length > 0" fxLayout="column" fxLayoutAlign="start stretch">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 client-list" matSort>
           <ng-container matColumnDef="profile">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element" style="width: 10px;">
-              <div *ngIf="element && element.image && element.image.length && element.image != null">
+              <div *ngIf="element && element.image && element.image.length && element.image != null" style="width: 50px;">
                 <img class="row-img" src="{{element?.image[0]}}">
               </div>
               <div *ngIf="!element.image || !element.image.length || element.image == null || element.image == undefined">
@@ -143,9 +143,10 @@
             </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="clientListColumn"></tr>
-          <tr mat-row style="cursor: pointer;height: 70px !important;" *matRowDef="let row; columns: clientListColumn;"
-            (click)=editClient(row)>
-          </tr>
+          <tr mat-row class="client-table-row" style="cursor: pointer;height: 70px;"
+            *matRowDef="let row; columns: clientListColumn;"
+                                          (click)=editClient(row)>
+                                        </tr>
         </table>
         <mat-paginator class="mat-elevation-z8-page" [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
         </mat-paginator>
