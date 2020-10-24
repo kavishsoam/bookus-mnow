@@ -2,6 +2,8 @@
   <div *ngIf="!displayDelete">
     <p-toast></p-toast>
     <div fxLayout="column" class="header" fxLayoutAlign="start center">
+
+
       <div fxLayout="row">
         <h2 mat-dialog-title>{{data.header}}</h2> <button mat-button mat-dialog-close class="crossButton">
           <mat-icon class="crossButton" mat-dialog-close>close</mat-icon>
@@ -12,7 +14,7 @@
       <mat-dialog-content class="content">
         <div fxLayout="row" class="innerbody" fxLayoutAlign="space-around">
           <div fxLayout="column" fxFlex="100" class="center">
-            <mat-tab-group style="height:80vh !important">
+            <mat-tab-group>
               <div class="page-layout blank">
                 <mat-tab label="DETAILS">
                   <ng-template matTabContent>
@@ -361,7 +363,7 @@
                   </ng-template>
                 </mat-tab>
                 <mat-tab *ngIf="calendarBooking" label="SERVICES">
-                  <ng-template matTabContent>
+                  <!-- <ng-template matTabContent>
                     <div fxLayout="column" fxLayoutAlign="space-between" fx class="pt-20" class="pl-20  p-12"
                       fxLayoutGap="5px">
                       <mat-checkbox #select_all_ser [checked]="checkAll_ser" [disabled]="disabledForPast"
@@ -371,6 +373,132 @@
                       <mat-checkbox *ngFor="let item of serviceList" [checked]="item.selected"
                         [disabled]="disabledForPast" (change)="serviceModify(item)" value="item">{{item.name}}
                       </mat-checkbox>
+                    </div>
+                  </ng-template> -->
+                  <ng-template matTabContent>
+                    <div fxLayout="row" class="pt-20" fxLayout.sm="column" fxLayout.xs="column">
+                      <div fxLayout="column" fxFlex="100" fxLayoutGap="30px">
+                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                          <div>
+                            <mat-form-field appearance="outline">
+                              <mat-label>Location</mat-label>
+                              <mat-select class="dropdow" value="">
+                                <mat-option value="">
+                                  {{'Thai Massage Center'}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                  
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                  
+                          <fieldset style="border-color: #ffffff; width: 100%;font-size: 16px;">
+                            <legend style="border-color: #ebecee;color: grey;" align="left">Total Commission</legend>
+                            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+                              <div fxFlex="33">
+                                <mat-form-field appearance="outline" class="width-100">
+                                  <mat-label>Service commission</mat-label>
+                                  <input matInput numbersOnly placeholder="10" style="text-align: center;">
+                                  <span matSuffix>%&nbsp;</span>
+                                </mat-form-field>
+                              </div>
+                              <div fxFlex="33">
+                                <mat-form-field appearance="outline" class="width-100">
+                                  <mat-label>Hourly Pay</mat-label>
+                                  <input matInput numbersOnly placeholder="10" style="text-align: center;">
+                                  <span matPrefix>$&nbsp;</span>
+                                </mat-form-field>
+                              </div>
+                              <div fxFlex="33">
+                                <mat-form-field appearance="outline" class="width-100">
+                                  <mat-label>Hourly Commission</mat-label>
+                                  <input matInput numbersOnly placeholder="10" style="text-align: center;">
+                                  <span matPrefix>$&nbsp;</span>
+                                </mat-form-field>
+                              </div>
+                            </div>
+                          </fieldset>
+                  
+                        </div>
+                        <div fxLayout="row" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column"
+                          fxLayoutAlign="space-between start" fxLayoutGap="30px">
+                          <div fxFlex="60" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100" class="width-100">
+                            <fieldset style="border-color: #ffffff; width: 100%;font-size: 16px;">
+                              <legend style="border-color: #ebecee;color: grey;" align="left">Services</legend>
+                              <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+                                <div class="mat-table">
+                                  <div class="mat-header-row">
+                                    <div class="mat-header-cell" style="width: 55%;">Service</div>
+                                    <div class="mat-header-cell" style="width: 20%;">Duration</div>
+                                    <div class="mat-header-cell" style="width: 10%;">Cost</div>
+                                    <div class="mat-header-cell" style="width: 15%;">Avialble</div>
+                                  </div>
+                                  <div class="mat-row">
+                  
+                                    <mat-accordion class="example-headers-align fixed-div" multi>
+                                      <mat-expansion-panel [expanded]="true" *ngFor="let item of serviceListArray">
+                                        <mat-expansion-panel-header>
+                                          <mat-panel-title>
+                                            {{item.serviceGroup}}
+                                          </mat-panel-title>
+                  
+                                        </mat-expansion-panel-header>
+                                        <div class="mat-row" [ngClass]="{'active-row': selectedService === itm}"
+                                          *ngFor="let itm of item.services" (click)="setSelectedService(itm)">
+                                          <div class="mat-cell" style="width: 55%;">{{itm.name}}</div>
+                                          <div class="mat-cell" style="width: 20%;">{{itm.duration}}</div>
+                                          <div class="mat-cell" style="width: 10%;">{{itm.price}}</div>
+                                          <div class="mat-cell" style="width: 15%;">
+                                            <mat-slide-toggle></mat-slide-toggle>
+                                          </div>
+                                        </div>
+                                      </mat-expansion-panel>
+                                    </mat-accordion>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                          </div>
+                          <div fxFlex="40" fxFlex.md="100" fxFlex.sm="100" fxFlex.xs="100" class="width-100">
+                            <fieldset style="border-color: #ffffff; width: 100%;font-size: 16px;">
+                              <legend style="border-color: #ebecee;color: grey;" align="left">Commission</legend>
+                              <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+                                <div>
+                                  <h4 style="text-align: center; margin: 0;">{{selectedService?.name}} - {{selectedService?.duration}}
+                                  </h4>
+                                  <h4 style="text-align: center; margin: 0;">${{selectedService?.price || '-'}}</h4>
+                                </div>
+                                <div>
+                                  <mat-form-field appearance="outline">
+                                    <mat-label>Service commission</mat-label>
+                                    <input matInput numbersOnly placeholder="10" style="text-align: center;">
+                                    <span matSuffix>%&nbsp;</span>
+                                  </mat-form-field>
+                                </div>
+                                <div>
+                                  <mat-form-field appearance="outline">
+                                    <mat-label>Hourly Pay</mat-label>
+                                    <input matInput numbersOnly placeholder="10" style="text-align: center;">
+                                    <span matPrefix>$&nbsp;</span>
+                                  </mat-form-field>
+                                </div>
+                                <div>
+                                  <mat-form-field appearance="outline">
+                                    <mat-label>Hourly Commission</mat-label>
+                                    <input matInput numbersOnly placeholder="10" style="text-align: center;">
+                                    <span matPrefix>$&nbsp;</span>
+                                  </mat-form-field>
+                                </div>
+                                <div fxFlex fxLayoutAlign="space-around center" fxLayoutGap="10px">
+                                  <button mat-raised-button type="button">Edit</button>
+                                  <button mat-raised-button type="button">Save</button>
+                                </div>
+                              </div>
+                            </fieldset>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </ng-template>
                 </mat-tab>
@@ -504,7 +632,7 @@
       </mat-dialog-content>
       <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="buttons">
         <button *ngIf="data.header != 'New Staff'" [disabled]="disabledForPast" mat-raised-button color="warn"
-          type="button" class="ml-12" (click)="deleteStaff()">Delete</button>
+          type="button" (click)="deleteStaff()">Delete</button>
         <div fxLayout="row" fxFlex="1 1 auto"></div>
         <button mat-raised-button type="button" [disabled]="disabledForPast" mat-dialog-close
           (click)=" onNoClick()">Cancel</button>
@@ -513,7 +641,7 @@
           color="primary" type="submit" class="mr-12">Save
         </button>
         <button style="margin-left: 10px" *ngIf="!staffProfileForm.active" [disabled]="disabledForPast"
-          [promiseBtn]="loader" mat-raised-button color="primary" type="submit" class="mr-12">Save
+          [promiseBtn]="loader" mat-raised-button color="primary" type="submit">Save
         </button>
       </div>
     </form>

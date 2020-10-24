@@ -109,6 +109,8 @@ export class staffEditorProfile implements OnInit {
     public dialog: MatDialog
   ) {}
   serviceList: any = [];
+  serviceListArray: any = [];
+  selectedService: any;
   locationList: any = [];
   selected_serviceList: any = [];
   selected_locationList: any = [];
@@ -117,6 +119,7 @@ export class staffEditorProfile implements OnInit {
   ngOnInit() {
     this.getCategoryList();
     this.getAllService();
+    this.getAllServiceList();
     this.getAllLocation();
     this.countryStr = localStorage.getItem("CountryCode")
       ? localStorage.getItem("CountryCode")
@@ -433,6 +436,33 @@ export class staffEditorProfile implements OnInit {
       },
       (err) => {}
     );
+  }
+  getAllServiceList() {
+    let data = [];
+    this._service.get("services/pricing_list").subscribe(
+      (res) => {
+        // console.log(res);
+        // res.result.forEach((ele) => {
+        //   let innerData = [];
+        //   ele.services.forEach((element) => {
+        //     innerData.push({ value: element._id, viewValue: element.name });
+        //     // data.service.push({ value : element._id, viewValue : element.name })
+        //   });
+        //   data.push({ name: ele.serviceGroup, service: innerData });
+        //   // data['service'].push(innerData);
+        // });
+        // console.log(data);
+        this.serviceListArray = res.result;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    // this.serviceGroups = data;
+  }
+
+  setSelectedService(item) {
+    this.selectedService = item;
   }
   getAllLocation() {
     this._service.get(`${LOCATION}?list=true`).subscribe(

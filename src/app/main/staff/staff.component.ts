@@ -72,6 +72,7 @@ export class StaffComponent implements OnInit {
   commissionList: any = [];
   commissionListCpy: any = [];
   selectedStaff: any = "";
+  selectedService: any;
   displayedColumnsStaff: string[] = [
     "Name",
     "Mobile",
@@ -328,8 +329,8 @@ export class StaffComponent implements OnInit {
     }
 
     const dialogRef = this.dialog.open(staffEditorProfile, {
-      width: "100vw",
-      height: "100vh",
+      width: "94vw",
+      height: "98vh",
       panelClass: "pad-Mnow321",
       data: data,
       autoFocus: false,

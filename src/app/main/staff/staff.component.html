@@ -368,8 +368,8 @@
               </ng-container>
               <ng-container matColumnDef="notes">
                 <th mat-header-cell *matHeaderCellDef> {{'Appointments' | translate}} </th>
-                <td mat-cell *matCellDef="let element"> {{element.calendarBooking ? 'Calendar bookings enabled' : 'Calendar
-              bookings disabled'}}</td>
+                <td mat-cell *matCellDef="let element">
+                  {{element.calendarBooking ? 'Calendar bookings enabled' : 'Calendar bookings disabled'}}</td>
               </ng-container>
               <ng-container matColumnDef="phone">
                 <th mat-header-cell *matHeaderCellDef> {{'Phone Number' | translate}} </th>
