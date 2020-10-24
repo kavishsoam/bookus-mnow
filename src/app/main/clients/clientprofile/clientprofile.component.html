@@ -45,8 +45,8 @@
                     <div><i class="material-icons yellow-text"
                         *ngFor="let dummy of ' '.repeat(profileInfo?.rating.star).split(''), let x = index">star</i>
                       <i class="material-icons yellow-text" *ngIf="profileInfo?.rating.star  % 1 !== 0">star_half</i>
-                      <span *ngIf="profileInfo?.rating.star === 0"></span><i class="material-icons"
-                        *ngFor="let dummy of ' '.repeat(5).split(''), let x = index">star</i>
+                      <span *ngIf="profileInfo?.rating.star === 0"><i class="material-icons"
+                          *ngFor="let dummy of ' '.repeat(5).split(''), let x = index">star</i></span>
                     </div>
                     <div>
                       <h3 class="changeColor">{{profileInfo?.email}}</h3>

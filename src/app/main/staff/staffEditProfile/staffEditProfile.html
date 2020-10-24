@@ -640,7 +640,7 @@
           [disabled]="staffProfileForm.invalid && !phone_invalid" [promiseBtn]="loader" mat-raised-button
           color="primary" type="submit" class="mr-12">Save
         </button>
-        <button style="margin-left: 10px" *ngIf="!staffProfileForm.active" [disabled]="disabledForPast"
+        <button *ngIf="!staffProfileForm.active" [disabled]="disabledForPast"
           [promiseBtn]="loader" mat-raised-button color="primary" type="submit">Save
         </button>
       </div>
