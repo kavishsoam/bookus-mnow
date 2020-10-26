@@ -113,4 +113,8 @@ export class CalendarSettingModalComponent implements OnInit {
   return   moment(time).add(2, 'hours').toDate(); 
   }
 
+  onClick(){
+    this.dialogRef.close()
+  }
+
 }

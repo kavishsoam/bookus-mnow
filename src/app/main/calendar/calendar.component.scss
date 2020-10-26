@@ -1076,3 +1076,177 @@ textarea.e-input,
   width: 100%;
   height: auto;
 }
+
+.calender-section {
+  margin-bottom: 50px;
+}
+.row {
+  display: flex;
+}
+.mat-dialog-container {
+  padding: 15px 24px 24px;
+}
+@media (max-width: 1199px) {
+  .filters {
+    .dropdown  {
+      width: 70%;
+      margin-left: 20px;
+    }
+  }
+  mat-select#mat-select-1 {
+      margin-left: 18px !important;
+  }
+  ::ng-deep .e-header-popup.e-lib.e-popup.e-control.e-popup-open {
+    top: 22% !important;
+  }
+  ::ng-deep  span.e-btn-icon.e-icon-add.e-icons.e-icon-left {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .filters {
+    .dropdown  {
+      width: 52%;
+      margin-left: 7px;
+    }
+  }
+  .settingButton {
+    margin-left: 202px;
+    min-width: 30px !important;
+    padding: 0 7px !important;
+    z-index: 999999 !important;
+    span {
+      .mat-icon {
+        font-size: 21px;
+      }
+    }
+  }
+  .location{
+    z-index: 9;
+}
+  .e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn {
+    width: 160px;
+  }
+  body .e-day .e-btn, body .e-today .e-btn, body .e-week .e-btn {
+      min-width: 70px !important;
+      padding: 0 5px !important;
+  }
+  
+  .e-toolbar-item.e-date-range.e-overflow-show {
+    max-width: 200px !important;
+  }
+  ::ng-deep  button#e-tbr-btn_5, ::ng-deep  button#e-tbr-btn_6 {
+    margin: 0 !important;
+    width: 100px !important;
+  }
+  .e-toolbar .e-toolbar-items.e-tbar-pos .e-toolbar-left {
+    z-index: 999 !important;
+  }
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 0 !important;
+    margin-top: -3px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1024px) {
+  .settingButton {
+    margin-left: 270px;
+    min-width: 30px;
+    padding: 0 7px;
+    span {
+      .mat-icon {
+        font-size: 21px;
+      }
+    }
+  }
+  .e-toolbar .e-toolbar-items.e-tbar-pos .e-toolbar-left {
+    z-index: 999 !important;
+  }
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 0 !important;
+    margin-top: -3px;
+  }
+  ::ng-deep  button#e-tbr-btn_5, ::ng-deep  button#e-tbr-btn_6 {
+    margin: 0 !important;
+    width: 100px !important;
+  }
+  .location {
+    z-index: 9;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .location{
+    position: static !important;
+    width: 100%;
+  }
+  .setting[_ngcontent-c22] {
+      position: static !important;
+      width: 100%;
+  }
+  .filters .ng-tns-c22-4 {
+    display: block !important;
+    padding-bottom: 20px;
+  }
+  .mat-form-field-appearance-legacy .mat-form-field-wrapper , .mat-form-field-flex ,
+  .mat-form-field.mat-form-field-type-mat-select .mat-form-field-infix
+  {
+      display: block !important;
+      width: 100% !important;
+      position: static;
+  }
+  .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+      padding-bottom: 0 !important;
+  }
+  .mat-form-field-appearance-legacy .mat-form-field-infix {
+      padding: 0 !important;
+  }
+  .settingButton {
+    margin-left: 0 !important;
+    min-width: 50px !important;
+    padding: 6px 14px !important;
+    float: right !important;
+    height: 38px !important;
+  }
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix {
+      padding: 0 !important;
+  }
+  .filters input {
+      width: 82% !important;
+  }
+  .filters .dropdown {
+    width: 100%;
+    margin-left: 0px;
+  }
+  ::ng-deep .e-toolbar .e-toolbar-items.e-tbar-pos .e-toolbar-left {
+    width: 100% !important;
+  }
+  mat-select#mat-select-1 {
+    min-width: 100%;
+  }
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+      padding-bottom: 0;
+  }
+  .e-toolbar .e-toolbar-items.e-tbar-pos .e-toolbar-left {
+    z-index: 999 !important;
+  }
+  ::ng-deep .e-toolbar .e-toolbar-pop .e-toolbar-item .e-tbar-btn.e-btn {
+    margin: 0 !important;
+    width: 107px !important;
+  }
+  input#mat-input-0 {
+    height: 1px;
+    padding: 0 !important;
+  }
+  ::ng-deep .e-toolbar-right {
+    position: absolute;
+    right: 18px !important;
+  }
+  ::ng-deep button#e-tbr-btn_4 {
+    width: 50px !important;
+    min-width: 50px !important;
+  }
+  ::ng-deep .e-schedule .e-schedule-toolbar .e-toolbar-items .e-toolbar-item.e-date-range .e-tbar-btn .e-tbar-btn-text {
+    font-size: 15px;
+  }
+}

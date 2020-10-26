@@ -5,7 +5,7 @@
     <p>Click the calendar to add blocked time</p>
     <button (click)="closeReschedule()" class="bannerClose" aria-label="Add event">
       <mat-icon>close</mat-icon>
-    </button>
+    </button>    
   </div>
   <div class="banner" *ngIf="reschedule || rebook || clientAppointment">
     <p>Click the calendar to choose a new date and time</p>
@@ -31,7 +31,6 @@
               <ejs-datepicker format='MMMM dd,yyyy' width="50px" [(value)]="selectedDate"
                 (change)="onDateChange($event)" [showClearButton]="false" [allowEdit]="false">
               </ejs-datepicker>
-              <!-- strictMode="false" allowEdit="false" readonly="false" showClearButton="false"  -->
             </div>
           </div>
         </div>
@@ -76,6 +75,7 @@
   <!-- xxx xxx -->
   <div [hidden]="!calendar || collection.length == 0" *ngIf="allServiceList.length != 0"
     onscroll="ejsScrolled('$event')">
+    <div class="calender-section">
     <div *ngIf="workingStaffCheck">
       <ejs-schedule #scheduleObj [group]="group" [(selectedDate)]="selectedDate" [workHours]="workHours"
         [eventSettings]="eventSettings" [(currentView)]="viewSet" [startHour]="startHour" [endHour]="endHour"
@@ -205,6 +205,7 @@
         </e-resources>
       </ejs-schedule>
     </div>
+  </div>
   </div>
   <div *ngIf="allServiceList.length == 0" class="text-center py-3 p-4">
     <div class="emptyicons">

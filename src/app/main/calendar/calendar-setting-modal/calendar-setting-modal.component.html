@@ -1,7 +1,12 @@
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="line-scale-pulse-out"></ngx-spinner>
 <div class="page-layout blank" [hidden]="!calendarSettings">
   <p-toast [style]="{marginTop: '50px'}"></p-toast>
-  <h1 mat-dialog-title>Calendar Settings</h1>
+  <h1 mat-dialog-title> 
+    <span class="modal_title">Calendar Settings</span> 
+    <span class="close">
+      <i class="fa fa-close" (click)="onClick()"></i> 
+    </span>
+  </h1>
   <form [formGroup]="calendarSettingsForm" (ngSubmit)="updateCalendarSettings(calendarSettingsForm)">
     <div fxLayout="row" fxLayoutAlign="start center" class="pt-20 pl-20">
 
@@ -60,6 +65,7 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="start center" class=" pl-20">
       <button mat-raised-button color="primary" >Save Changes</button>
+      <button mat-raised-button class="btn_cancel" (click)="onClick()">Cancel</button>
     </div>
   </form>
 </div>
